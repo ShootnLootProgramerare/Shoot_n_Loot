@@ -7,5 +7,8 @@ namespace Shoot__n_Loot
 {
     class Player : GameObject
     {
+        public Player()
+        {
+        }
     }
 }
