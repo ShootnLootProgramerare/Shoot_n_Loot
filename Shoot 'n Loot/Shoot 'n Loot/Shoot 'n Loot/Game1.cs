@@ -82,9 +82,9 @@ namespace Shoot__n_Loot
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
+            spriteBatch.Begin();
 
-            // TODO: Add your drawing code here
-
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
