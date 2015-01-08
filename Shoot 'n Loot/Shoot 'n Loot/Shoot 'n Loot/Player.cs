@@ -10,7 +10,7 @@ namespace Shoot__n_Loot
     {
         public Player()
         {
-            Sprite = new Sprite(Textures.player, new Vector2(100), new Vector2(100));
+            Sprite = new Sprite(Textures.player, new Vector2(100), new Vector2(100), 2, new Point(16, 16), 5f / 60);
         }
     }
 }

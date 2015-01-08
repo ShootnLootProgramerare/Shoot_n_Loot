@@ -46,7 +46,7 @@ namespace Shoot__n_Loot
         /// <param name="frames">the number of frames on the spritesheet. should be placed in a horizontal line.</param>
         /// <param name="frameSize">the size of one frame on the spritesheet, in pixels.</param>
         /// <param name="animSpeed">decides how often to switch frame. n / 60 will switch n times per second.</param>
-        public Sprite(Texture2D texture, Vector2 position, Vector2 size, byte frames, Point? frameSize, float animSpeed) : this(texture, position, size, frames, frameSize, animSpeed, Color.White, 0, new Vector2(frameSize.X, frameSize.Y) / 2, SpriteEffects.None, .5f) { }
+        public Sprite(Texture2D texture, Vector2 position, Vector2 size, byte frames, Point? frameSize, float animSpeed) : this(texture, position, size, frames, frameSize, animSpeed, Color.White, 0, null, SpriteEffects.None, .5f) { }
 
         /// <summary>
         /// creates a rotated sprite.
@@ -56,7 +56,7 @@ namespace Shoot__n_Loot
         /// <param name="size">the size in pixels to be drawn on screen</param>
         /// <param name="rotation"></param>
         /// <param name="origin"></param>
-        public Sprite(Texture2D texture, Vector2 position, Vector2 size, float rotation, Vector2? origin) : this(texture, position, size, 1, null, 0) { }
+        public Sprite(Texture2D texture, Vector2 position, Vector2 size, float rotation, Vector2? origin) : this(texture, position, size, 1, null, 0, rotation, origin) { }
 
         /// <summary>
         /// creates a rotated and animated sprite.
