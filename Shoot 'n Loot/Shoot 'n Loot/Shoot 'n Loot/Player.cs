@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,8 @@ namespace Shoot__n_Loot
     {
         public Player()
         {
+            Position = new Vector2(100);
+            Sprite = new Sprite(Textures.player, Position);
         }
     }
 }
