@@ -35,6 +35,7 @@ namespace Shoot__n_Loot
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            Input.Initialize();
             base.Initialize();
         }
 
@@ -67,7 +68,8 @@ namespace Shoot__n_Loot
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
+            Input.Update();
+            player.Update();
             base.Update(gameTime);
         }
 

@@ -1,0 +1,38 @@
+﻿using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Shoot__n_Loot
+{
+    class Input
+    {
+        public static KeyboardState newKs, oldKs;
+        public static MouseState newMs, oldMs;
+
+        public static void Initialize()
+        {
+            newKs = oldKs = Keyboard.GetState();
+            newMs = oldMs = Mouse.GetState();
+        }
+
+        public static void Update()
+        {
+            oldKs = newKs;
+            oldMs = newMs;
+            newKs = Keyboard.GetState();
+            newMs = Mouse.GetState();
+        }
+
+        public static bool KeyWasJustPressed(Keys key)
+        {
+            return newKs.IsKeyDown(key) && oldKs.IsKeyUp(key);
+        }
+
+        public static bool LeftClickWasJustPressed()
+        {
+            return newMs.LeftButton == ButtonState.Pressed && oldMs.LeftButton == ButtonState.Released;
+        }
+    }
+}

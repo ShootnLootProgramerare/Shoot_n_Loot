@@ -120,7 +120,6 @@ namespace Shoot__n_Loot
                 }
             }
             spriteBatch.Draw(texture, Position, sourceRectangle, Color, Rotation, Origin, scale, SpriteEffects, LayerDepth);
-            spriteBatch.DrawString(Textures.font, scale.ToString(), new Vector2(110), Color.Black);
         }
     }
 }
