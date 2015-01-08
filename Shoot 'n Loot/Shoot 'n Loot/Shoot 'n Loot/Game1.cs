@@ -18,6 +18,7 @@ namespace Shoot__n_Loot
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Player player;
 
         public Game1()
         {
@@ -34,7 +35,6 @@ namespace Shoot__n_Loot
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -46,7 +46,9 @@ namespace Shoot__n_Loot
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            //Textures.player = Content.Load<Texture2D>("player");
+            Textures.Load(Content);
+            player = new Player();
         }
 
         /// <summary>
@@ -77,6 +79,8 @@ namespace Shoot__n_Loot
         {
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
+
+            player.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);

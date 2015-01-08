@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿//Created by Johannes Larsson 2015-01-07
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -28,83 +30,97 @@ namespace Shoot__n_Loot
         float frameCounter;
 
         /// <summary>
-        /// creates a sprite with the size of the texture that will not animate.
+        /// creates a non-animated sprite.
         /// </summary>
-        /// <param name="texture"></param>
+        /// <param name="texture">the spritesheet to be used.</param>
         /// <param name="position"></param>
-        public Sprite(Texture2D texture, Vector2 position)
-        {
-            this.texture = texture;
-            this.Position = position;
-            Size = new Vector2(texture.Width, texture.Height);
-            Origin = Size / 2;
-            AnimationSpeed = 0;
-            Color = Color.White;
-            Rotation = 0;
-            SpriteEffects = Microsoft.Xna.Framework.Graphics.SpriteEffects.None;
-            LayerDepth = .5f;
-            Frames = 1;
-            Frame = 0;
-            FrameSize = new Point((int)Size.X, (int)Size.Y);
-        }
+        /// <param name="size">the size in pixels to be drawn on screen</param>
+        public Sprite(Texture2D texture, Vector2 position, Vector2 size) : this(texture, position, size, 1, null, 0) { }
 
         /// <summary>
-        /// creates a sprite with the specified size that animates with the specified parameters.
+        /// creates an animated sprite.
         /// </summary>
-        /// <param name="texture"></param>
+        /// <param name="texture">the spritesheet to be used.</param>
         /// <param name="position"></param>
-        /// <param name="size"></param>
-        /// <param name="frameSize">The size of a frame on the spritesheet</param>
-        /// <param name="frames">the number of frames on the spritesheet</param>
-        /// <param name="animSpeed">n / 60 will switch frame n times per second.</param>
-        public Sprite(Texture2D texture, Vector2 position, Vector2 size, Point frameSize, byte frames, float animSpeed)
+        /// <param name="size">the size in pixels to be drawn on screen</param>
+        /// <param name="frames">the number of frames on the spritesheet. should be placed in a horizontal line.</param>
+        /// <param name="frameSize">the size of one frame on the spritesheet, in pixels.</param>
+        /// <param name="animSpeed">decides how often to switch frame. n / 60 will switch n times per second.</param>
+        public Sprite(Texture2D texture, Vector2 position, Vector2 size, byte frames, Point? frameSize, float animSpeed) : this(texture, position, size, frames, frameSize, animSpeed, Color.White, 0, new Vector2(frameSize.X, frameSize.Y) / 2, SpriteEffects.None, .5f) { }
+
+        /// <summary>
+        /// creates a rotated sprite.
+        /// </summary>
+        /// <param name="texture">the spritesheet to be used.</param>
+        /// <param name="position"></param>
+        /// <param name="size">the size in pixels to be drawn on screen</param>
+        /// <param name="rotation"></param>
+        /// <param name="origin"></param>
+        public Sprite(Texture2D texture, Vector2 position, Vector2 size, float rotation, Vector2? origin) : this(texture, position, size, 1, null, 0) { }
+
+        /// <summary>
+        /// creates a rotated and animated sprite.
+        /// </summary>
+        /// <param name="texture">the spritesheet to be used.</param>
+        /// <param name="position"></param>
+        /// <param name="size">the size in pixels to be drawn on screen</param>
+        /// <param name="frames">the number of frames on the spritesheet. should be placed in a horizontal line.</param>
+        /// <param name="frameSize">the size of one frame on the spritesheet, in pixels.</param>
+        /// <param name="animSpeed">decides how often to switch frame. n / 60 will switch n times per second.</param>
+        /// <param name="rotation"></param>
+        /// <param name="origin"></param>
+        public Sprite(Texture2D texture, Vector2 position, Vector2 size, byte frames, Point? frameSize, float animSpeed, float rotation, Vector2? origin) : this(texture, position, size, frames, frameSize, animSpeed, Color.White, rotation, origin, SpriteEffects.None, .5f) { }
+
+        /// <summary>
+        /// makes a sprite with every value set.
+        /// </summary>
+        /// <param name="texture">the spritesheet to be used.</param>
+        /// <param name="position"></param>
+        /// <param name="size">the size in pixels to be drawn on screen</param>
+        /// <param name="origin"></param>
+        /// <param name="animSpeed">decides how often to switch frame. n / 60 will switch n times per second.</param>
+        /// <param name="color"></param>
+        /// <param name="rotation"></param>
+        /// <param name="effects"></param>
+        /// <param name="layerDepth"></param>
+        /// <param name="frames">the number of frames on the spritesheet. should be placed in a horizontal line.</param>
+        /// <param name="frameSize">the size of one frame on the spritesheet, in pixels.</param>
+        public Sprite(Texture2D texture, Vector2 position, Vector2 size, byte frames, Point? frameSize, float animSpeed, Color color, float rotation, Vector2? origin, SpriteEffects effects, float layerDepth)
         {
             this.texture = texture;
             this.Position = position;
-            this.Size = size;
-            this.Frames = frames;
-            this.FrameSize = frameSize;
-            this.AnimationSpeed = animSpeed;
-            Color = Color.White;
-            Rotation = 0;
-            SpriteEffects = Microsoft.Xna.Framework.Graphics.SpriteEffects.None;
-            LayerDepth = .5f;
-            Origin = Size / 2;
-            Frame = 0;
-        }
 
-        public Sprite(Texture2D texture, Vector2 position, Vector2 size) : this(texture, position, new Vector2(texture.Width, texture.Height), new Vector2(texture.Width, texture.Height) / 2, 0, Color.White, 0, SpriteEffects.None, .5f, 1, new Point(texture.Width, texture.Height))
-        {
-        }
+            if(frameSize != null) this.FrameSize = (Point)frameSize;
+            else new Point(texture.Width, texture.Height);
 
-        public Sprite(Texture2D texture, Vector2 position, Vector2 size, Vector2 origin, float animSpeed, Color color, float rotation, SpriteEffects effects, float layerDepth, byte frames, Point frameSize)
-        {
-            this.texture = texture;
-            this.Position = position;
             this.Size = size;
-            this.Origin = origin;
+
+            if (origin != null) this.Origin = (Vector2)origin;
+            else Origin = new Vector2(FrameSize.X, FrameSize.Y) / 2;
+
             this.AnimationSpeed = animSpeed;
             this.Color = color;
             this.Rotation = rotation;
             this.SpriteEffects = effects;
             this.LayerDepth = layerDepth;
             this.Frames = frames;
-            this.FrameSize = frameSize;
             this.Frame = 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if(Frames > 1)
+            if(Frames >= 1)
             {
                 frameCounter += AnimationSpeed;
                 if(frameCounter >= 1)
                 {
                     frameCounter = 0;
                     Frame++;
+                    if (Frame >= Frames) Frame = 0;
                 }
             }
             spriteBatch.Draw(texture, Position, sourceRectangle, Color, Rotation, Origin, scale, SpriteEffects, LayerDepth);
+            spriteBatch.DrawString(Textures.font, scale.ToString(), new Vector2(110), Color.Black);
         }
     }
 }

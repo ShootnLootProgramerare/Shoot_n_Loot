@@ -14,10 +14,17 @@ namespace Shoot__n_Loot
         public Vector2 Center { get { return Position + Size / 2; } }
         public Rectangle Hitbox { get { return new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y); } }
         
-        protected Sprite Sprite { get; protected set; }
+        protected Sprite Sprite { get; set; }
 
-        public abstract void Update();
+        /// <summary>
+        /// should be overridden by child object
+        /// </summary>
+        public void Update() { }
 
+        /// <summary>
+        /// draws the sprite. override and draw sprite manually or call base.Draw
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             Sprite.Draw(spriteBatch);
