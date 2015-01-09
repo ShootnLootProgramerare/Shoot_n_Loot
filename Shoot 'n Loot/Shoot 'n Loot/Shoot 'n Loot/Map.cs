@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,11 @@ namespace Shoot__n_Loot
 {
     class Map
     {
-        public const byte width = 32, height = 32;
+        public const byte width = 2, height = 2;
 
         public static Chunk[,] chunks { get; set; }
 
-        public static void Initialize(Texture2D map)
+        public static void Initialize()
         {
             chunks = new Chunk[width, height];
 
@@ -21,9 +22,16 @@ namespace Shoot__n_Loot
             {
                 for (int h = 0; h < height; h++)
                 {
-                    //chunks[w, h] = new Chunk()
+                    if(TextureManager.chunks[w, h] != null) chunks[w, h] = new Chunk(TextureManager.chunks[w, h], Chunk.totalSize * new Vector2(w, h));
+                    else chunks[w, h] = new Chunk(TextureManager.chunks[0, 0], Chunk.totalSize * new Vector2(w, h));
                 }
             }
+        }
+
+        public static void Draw(SpriteBatch spriteBatch)
+        {
+            foreach(Chunk c in chunks)
+            { c.Draw(spriteBatch); }
         }
     }
 }

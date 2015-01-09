@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -24,9 +26,13 @@ namespace Shoot__n_Loot
 
             #region map
             chunks = new Texture2D[Map.width, Map.height];
-            for (int i = 0; i < 0; i++)
+            DirectoryInfo d = new DirectoryInfo(content.RootDirectory + "/map");
+            FileInfo[] f = d.GetFiles();
+            foreach(FileInfo fi in f)
             {
-                
+                int chunkX = int.Parse(fi.Name.Substring(0, 2)),
+                    chunkY = int.Parse(fi.Name.Substring(2, 2));
+                chunks[chunkX, chunkY] = content.Load<Texture2D>("map/" + fi.Name.Substring(0, 4));
             }
             #endregion
         }

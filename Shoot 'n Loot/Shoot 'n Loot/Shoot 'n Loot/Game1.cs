@@ -51,6 +51,7 @@ namespace Shoot__n_Loot
             //Textures.player = Content.Load<Texture2D>("player");
             TextureManager.Load(Content);
             player = new Player();
+            Map.Initialize();
             c = new Chunk(Content.Load<Texture2D>("map/0101"), Vector2.Zero);
         }
 
@@ -84,7 +85,8 @@ namespace Shoot__n_Loot
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
 
-            c.Draw(spriteBatch);
+            //c.Draw(spriteBatch);
+            Map.Draw(spriteBatch);
             player.Draw(spriteBatch);
 
             spriteBatch.End();
