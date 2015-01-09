@@ -16,14 +16,17 @@ namespace Shoot__n_Loot
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        public static Point ScreenSize { get { return new Point(1200, 750); } }
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player player;
-        Chunk c;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = ScreenSize.X;
+            graphics.PreferredBackBufferHeight = ScreenSize.Y;
             Content.RootDirectory = "Content";
         }
 
@@ -37,6 +40,8 @@ namespace Shoot__n_Loot
         {
             // TODO: Add your initialization logic here
             Input.Initialize();
+            Camera.FollowSpeed = .3f;
+            Camera.Origin = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height) / 2;
             base.Initialize();
         }
 
@@ -52,7 +57,6 @@ namespace Shoot__n_Loot
             TextureManager.Load(Content);
             player = new Player();
             Map.Initialize();
-            c = new Chunk(Content.Load<Texture2D>("map/0101"), Vector2.Zero);
         }
 
         /// <summary>
@@ -73,6 +77,7 @@ namespace Shoot__n_Loot
         {
             Input.Update();
             player.Update();
+            Camera.Follow(player.Position);
             base.Update(gameTime);
         }
 
@@ -83,9 +88,8 @@ namespace Shoot__n_Loot
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, Camera.Transform);
 
-            //c.Draw(spriteBatch);
             Map.Draw(spriteBatch);
             player.Draw(spriteBatch);
 

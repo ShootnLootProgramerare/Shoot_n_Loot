@@ -32,7 +32,7 @@ namespace Shoot__n_Loot
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.tiles[(int)Type], Hitbox, Color.White); //TODO: use a spritesheet instead
+            spriteBatch.Draw(TextureManager.tiles[(int)Type], Hitbox, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 1); //TODO: use a spritesheet instead
         }
     }
 }

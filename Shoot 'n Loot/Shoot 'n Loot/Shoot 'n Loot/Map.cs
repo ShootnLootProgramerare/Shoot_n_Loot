@@ -10,14 +10,14 @@ namespace Shoot__n_Loot
 {
     class Map
     {
-        public const byte width = 2, height = 2;
+        public const byte width = 8, height = 8;
 
         public static Chunk[,] chunks { get; set; }
 
         public static void Initialize()
         {
             chunks = new Chunk[width, height];
-
+            //might want to load a single texture and split it later
             for(int w = 0; w < width; w++)
             {
                 for (int h = 0; h < height; h++)
