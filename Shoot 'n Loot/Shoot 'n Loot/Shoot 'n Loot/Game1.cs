@@ -19,6 +19,7 @@ namespace Shoot__n_Loot
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player player;
+        Chunk c;
 
         public Game1()
         {
@@ -48,8 +49,9 @@ namespace Shoot__n_Loot
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             //Textures.player = Content.Load<Texture2D>("player");
-            Textures.Load(Content);
+            TextureManager.Load(Content);
             player = new Player();
+            c = new Chunk(Content.Load<Texture2D>("map/0101"), Vector2.Zero);
         }
 
         /// <summary>
@@ -82,6 +84,7 @@ namespace Shoot__n_Loot
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
 
+            c.Draw(spriteBatch);
             player.Draw(spriteBatch);
 
             spriteBatch.End();

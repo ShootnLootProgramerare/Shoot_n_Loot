@@ -16,7 +16,7 @@ namespace Shoot__n_Loot
 
         public Player()
         {
-            Sprite = new Sprite(Textures.player, new Vector2(100), new Vector2(100), 2, new Point(16, 16), 0);
+            Sprite = new Sprite(TextureManager.player, new Vector2(100), new Vector2(48), 2, new Point(16, 16), 0);
         }
 
         new public void Update()
