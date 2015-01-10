@@ -17,12 +17,8 @@ namespace Shoot__n_Loot
 
         public bool IsAnimated { get { return Frames > 1; } }
 
-        private byte framesSinceUpdate;
-
         public TileProperties(byte textureIndex, bool walkable, byte frames, byte animSpeed)
         {
-            framesSinceUpdate = 0;
-
             this.Frames = frames;
             this.FramesPerFrame = animSpeed;
             this.TextureIndex = textureIndex;

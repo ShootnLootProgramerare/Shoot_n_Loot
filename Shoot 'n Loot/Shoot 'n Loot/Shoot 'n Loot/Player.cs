@@ -14,9 +14,11 @@ namespace Shoot__n_Loot
 
         Vector2 velocity;
 
+        Rectangle Feet { get { return new Rectangle(Hitbox.X, Hitbox.Y + (int)(Hitbox.Height * .75f), Hitbox.Width, (int)(Hitbox.Height * .25f)); } }
+
         public Player()
         {
-            Sprite = new Sprite(TextureManager.player, new Vector2(100), new Vector2(48), 2, new Point(16, 16), 0);
+            Sprite = new Sprite(TextureManager.player, new Vector2(100), new Vector2(40), 2, new Point(16, 16), 0);
         }
 
         new public void Update()
@@ -34,7 +36,24 @@ namespace Shoot__n_Loot
             if (Input.newKs.IsKeyDown(Keys.S)) acceleration.Y += 1;
             velocity += acceleration * accelerationMult;
             velocity *= friction;
-            Position += velocity;
+            if (Math.Abs(velocity.X) < .05) velocity.X = 0;
+            if (Math.Abs(velocity.Y) < .05) velocity.Y = 0;
+
+            List<Tile> solidTiles = CloseSolidTiles;
+            Move(velocity.X, 0);
+            int x = velocity.X.CompareTo(0);
+            while (IsCollidingWithAny(solidTiles, Feet))
+            {
+                Move(-x, 0);
+                velocity.X = 0;
+            }
+            Move(0, velocity.Y);
+            int y = velocity.Y.CompareTo(0);
+            while (IsCollidingWithAny(solidTiles, Feet))
+            {
+                Move(0, -y);
+                velocity.Y = 0;
+            }
         }
 
         void Animate()
@@ -62,6 +81,12 @@ namespace Shoot__n_Loot
                 Sprite.AnimationSpeed = 0;
                 Sprite.Frame = 0;
             }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            spriteBatch.DrawString(TextureManager.font, velocity.ToString(), Position, Color.Black);
         }
     }
 }

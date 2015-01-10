@@ -22,6 +22,7 @@ namespace Shoot__n_Loot
         public byte Frames { get; set; }
         public byte Frame { get; set; }
         public Point FrameSize { get; set; }
+        public Rectangle Area { get { return new Rectangle((int)Position.X - (int)(Origin.X * scale.X), (int)Position.Y - (int)(Origin.Y * scale.Y), (int)Size.X, (int)Size.Y); } }
 
         Vector2 size;
         Vector2 scale;

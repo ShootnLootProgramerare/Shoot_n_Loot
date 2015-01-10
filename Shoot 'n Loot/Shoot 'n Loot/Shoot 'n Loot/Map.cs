@@ -10,7 +10,7 @@ namespace Shoot__n_Loot
 {
     class Map
     {
-        public const byte width = 8, height = 8; //number of chunks. width * Tile.size should equal the width of the map texture, same for height.
+        public const byte width = 16, height = 16; //number of chunks. width * Tile.size should equal the width of the map texture, same for height.
 
         public static Chunk[,] chunks { get; set; }
 
@@ -51,16 +51,23 @@ namespace Shoot__n_Loot
             return c;
         }
 
+        public static List<Chunk> VisibleChunks
+        {
+            get
+            {
+                List<Chunk> c = new List<Chunk>();
+                foreach(Chunk ch in chunks) if(Camera.AreaIsVisible(ch.position, Chunk.sizePx, Chunk.sizePx)) c.Add(ch);
+                return c;
+            }
+        }
+
         public static void Draw(SpriteBatch spriteBatch)
         {
             int drawn = 0;
-            foreach(Chunk c in chunks)
+            foreach(Chunk c in VisibleChunks)
             {
-                if (Camera.AreaIsVisible(c.position, new Vector2(Chunk.sizePx)))
-                {
-                    c.Draw(spriteBatch); //check which chunks are visible
-                    drawn++;
-                }
+                c.Draw(spriteBatch);
+                drawn++;
             }
             spriteBatch.DrawString(TextureManager.font, drawn.ToString(), new Vector2(10) + Camera.Position, Color.Black);
         }

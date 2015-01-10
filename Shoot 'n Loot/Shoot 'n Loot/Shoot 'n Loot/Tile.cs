@@ -9,11 +9,11 @@ namespace Shoot__n_Loot
 {
     class Tile
     {
-        public static TileProperties[] TilePrefabs = new TileProperties[] { new TileProperties(0, true), new TileProperties(1, true, 2, 30), new TileProperties(2, true) };
+        public static TileProperties[] TilePrefabs = new TileProperties[] { new TileProperties(0, true), new TileProperties(1, false, 2, 30), new TileProperties(2, false) };
 
         public enum TileType { Grass = 0, Sea = 1, Wood = 2 }
 
-        public const byte size = 32;
+        public const byte size = 48;
         
         public Vector2 Position { get; private set; }
         public TileType Type;

@@ -10,7 +10,7 @@ namespace Shoot__n_Loot
     class Chunk
     {
         static Color[] tileTypes = new Color[] { Color.Green, Color.Blue, new Color(1f, .5f, 0, 1f) };
-        public const byte size = 32;
+        public const byte size = 16;
         public static short sizePx { get { return size * Tile.size; } }
 
         public Tile[,] Tiles;
@@ -39,6 +39,16 @@ namespace Shoot__n_Loot
                     Tiles[x ,y] = new Tile(position + new Vector2(x, y) * Tile.size, type);
                 }
             }
+        }
+
+        public List<Tile> NonWalkableTiles()
+        {
+            List<Tile> tiles = new List<Tile>();
+            foreach (Tile t in Tiles)
+	        {
+		        if(!t.Properties.IsWalkable) tiles.Add(t);
+	        }
+            return tiles;
         }
 
         public void Draw(SpriteBatch spriteBatch)
