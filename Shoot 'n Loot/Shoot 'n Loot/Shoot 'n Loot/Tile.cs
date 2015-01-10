@@ -9,30 +9,32 @@ namespace Shoot__n_Loot
 {
     class Tile
     {
-        public enum TileType { Grass = 0, Sea = 1, Wood = 2 } //numbers must correspond to the right texture in Textures.tiles
+        public static TileProperties[] TilePrefabs = new TileProperties[] { new TileProperties(0, true), new TileProperties(1, true, 2, 30), new TileProperties(2, true) };
+
+        public enum TileType { Grass = 0, Sea = 1, Wood = 2 }
 
         public const byte size = 32;
         
         public Vector2 Position { get; private set; }
-        public TileType Type { get; private set; }
+        public TileType Type;
 
+        public TileProperties Properties { get { return TilePrefabs[(int)Type]; } }
         public Rectangle Hitbox { get { return new Rectangle((int)Position.X, (int)Position.Y, size, size); } }
 
-        public Tile(Vector2 position, TileType type)
-        {
-            this.Position = position;
-            this.Type = type;
-        }
+        byte frame, animCounter;
 
         public Tile(Vector2 position, byte type)
         {
+            frame = 0;
+            animCounter = 0;
             this.Position = position;
-            this.Type = (TileType) type;
+            this.Type = (TileType)type;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.tiles, Hitbox, new Rectangle(1, 1 + (int)Type * 34, 32, 32), Color.White, 0, Vector2.Zero, SpriteEffects.None, 1); //TODO: use a spritesheet instead
+            if (Properties.IsAnimated) Properties.Animate(ref frame, ref animCounter);
+            spriteBatch.Draw(TextureManager.tiles, Hitbox, new Rectangle(1 + frame * 34, 1 + Properties.TextureIndex * 34, 32, 32), Color.White, 0, Vector2.Zero, SpriteEffects.None, 1); //TODO: use a spritesheet instead
         }
     }
 }
