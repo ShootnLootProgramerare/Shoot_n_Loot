@@ -9,7 +9,7 @@ namespace Shoot__n_Loot
 {
     class Chunk
     {
-        static Color[] tileTypes = new Color[] { Color.Green, Color.Blue };
+        static Color[] tileTypes = new Color[] { Color.Green, Color.Blue, new Color(1f, .5f, 0, 1f) };
         public const byte size = 32;
         public static short sizePx { get { return size * Tile.size; } }
 

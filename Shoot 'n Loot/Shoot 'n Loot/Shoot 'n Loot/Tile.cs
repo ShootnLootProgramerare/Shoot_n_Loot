@@ -9,7 +9,7 @@ namespace Shoot__n_Loot
 {
     class Tile
     {
-        public enum TileType { Grass = 0, Sea = 1 } //numbers must correspond to the right texture in Textures.tiles
+        public enum TileType { Grass = 0, Sea = 1, Wood = 2 } //numbers must correspond to the right texture in Textures.tiles
 
         public const byte size = 32;
         
@@ -32,7 +32,7 @@ namespace Shoot__n_Loot
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.tiles[(int)Type], Hitbox, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 1); //TODO: use a spritesheet instead
+            spriteBatch.Draw(TextureManager.tiles, Hitbox, new Rectangle(1, 1 + (int)Type * 34, 32, 32), Color.White, 0, Vector2.Zero, SpriteEffects.None, 1); //TODO: use a spritesheet instead
         }
     }
 }
