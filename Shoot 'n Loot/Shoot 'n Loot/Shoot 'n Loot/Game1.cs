@@ -41,7 +41,8 @@ namespace Shoot__n_Loot
             // TODO: Add your initialization logic here
             Input.Initialize();
             Camera.FollowSpeed = .3f;
-            Camera.Origin = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height) / 2;
+            Camera.Scale = 1;
+            Camera.Origin = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height) / (2 * Camera.Scale);
             base.Initialize();
         }
 

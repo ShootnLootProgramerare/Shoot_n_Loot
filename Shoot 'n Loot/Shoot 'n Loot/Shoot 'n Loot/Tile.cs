@@ -11,7 +11,7 @@ namespace Shoot__n_Loot
     {
         public enum TileType { Grass = 0, Sea = 1 } //numbers must correspond to the right texture in Textures.tiles
 
-        public const byte size = 16;
+        public const byte size = 32;
         
         public Vector2 Position { get; private set; }
         public TileType Type { get; private set; }
