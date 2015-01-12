@@ -63,13 +63,11 @@ namespace Shoot__n_Loot
 
         public static void Draw(SpriteBatch spriteBatch)
         {
-            int drawn = 0;
             foreach(Chunk c in VisibleChunks)
             {
                 c.Draw(spriteBatch);
                 drawn++;
             }
-            spriteBatch.DrawString(TextureManager.font, drawn.ToString(), new Vector2(10) + Camera.Position, Color.Black);
         }
     }
 }
