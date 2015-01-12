@@ -66,7 +66,6 @@ namespace Shoot__n_Loot
             foreach(Chunk c in VisibleChunks)
             {
                 c.Draw(spriteBatch);
-                drawn++;
             }
         }
     }
