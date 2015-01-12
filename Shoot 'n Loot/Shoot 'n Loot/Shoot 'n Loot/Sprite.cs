@@ -108,6 +108,18 @@ namespace Shoot__n_Loot
             this.Frame = 0;
         }
 
+        /// <summary>
+        /// sets a new texture but keeps all other settings
+        /// </summary>
+        /// <param name="texture"></param>
+        /// <param name="frames"></param>
+        public void SetTexture(Texture2D texture, byte frames, Point frameSize)
+        {
+            this.texture = texture;
+            this.Frames = frames;
+            this.FrameSize = frameSize;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             if(Frames >= 1)

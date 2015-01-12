@@ -10,7 +10,7 @@ namespace Shoot__n_Loot
 {
     class Map
     {
-        public const byte width = 16, height = 16; //number of chunks. width * Tile.size should equal the width of the map texture, same for height.
+        public const byte width = 16, height = 16; //number of chunks. width * Tile.size * chunk.size should equal the width of the map texture, same for height.
 
         public static Chunk[,] chunks { get; set; }
 
@@ -66,7 +66,6 @@ namespace Shoot__n_Loot
             foreach(Chunk c in VisibleChunks)
             {
                 c.Draw(spriteBatch);
-                drawn++;
             }
         }
     }

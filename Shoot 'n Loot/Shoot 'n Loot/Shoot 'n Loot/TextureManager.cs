@@ -12,13 +12,17 @@ namespace Shoot__n_Loot
     class TextureManager
     {
         public static Texture2D
-            player,
+            playerHorizontal,
+            playerUp,
+            playerDown,
             map,
             tiles;
 
         public static void Load(ContentManager content)
         {
-            player = content.Load<Texture2D>("player");
+            playerHorizontal = content.Load<Texture2D>("player/horizontal");
+            playerUp = content.Load<Texture2D>("player/up");
+            playerDown = content.Load<Texture2D>("player/down");
             font = content.Load<SpriteFont>("font");
             tiles = content.Load<Texture2D>("tiles");
             map = content.Load<Texture2D>("map");
