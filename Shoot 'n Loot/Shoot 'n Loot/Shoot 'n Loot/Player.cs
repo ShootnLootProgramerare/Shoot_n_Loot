@@ -18,11 +18,7 @@ namespace Shoot__n_Loot
 
         public Player()
         {
-<<<<<<< HEAD
-            Sprite = new Sprite(TextureManager.playerHorizontal, new Vector2(100), new Vector2(40), 2, new Point(16, 16), 0);
-=======
             Sprite = new Sprite(TextureManager.playerHorizontal, new Vector2(500), new Vector2(50), 2, new Point(16, 16), 0);
->>>>>>> origin/master
         }
 
         new public void Update()

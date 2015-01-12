@@ -42,6 +42,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="player\down.png">
+      <Name>down</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="font.spritefont">
       <Name>font</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -77,19 +84,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <Compile Include="player\down.png">
-      <Name>down</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="player\up.png">
-      <Name>up</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="player\horizontal.png">
       <Name>horizontal</Name>
       <Importer>TextureImporter</Importer>
@@ -97,14 +91,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="enemies\enemy1.png">
-      <Name>enemy1</Name>
+    <Compile Include="player\up.png">
+      <Name>up</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-=======
-    <Folder Include="Enemies\" />
->>>>>>> origin/master
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
