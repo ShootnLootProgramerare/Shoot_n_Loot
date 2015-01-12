@@ -29,9 +29,15 @@ namespace Shoot__n_Loot
             font = content.Load<SpriteFont>("font");
             tiles = content.Load<Texture2D>("tiles");
             map = content.Load<Texture2D>("map");
+<<<<<<< HEAD
             enemy1 = content.Load<Texture2D>("enemies/enemy1");
             //enemy2 = content.Load<Texture2D>("enemy2");
             //enemy3 = content.Load<Texture2D>("enemy3");
+=======
+            enemy1 = content.Load<Texture2D>("enemy1");
+            enemy2 = content.Load<Texture2D>("enemy2");
+            enemy3 = content.Load<Texture2D>("enemy3");
+>>>>>>> origin/master
         }
 
         public static SpriteFont font;
