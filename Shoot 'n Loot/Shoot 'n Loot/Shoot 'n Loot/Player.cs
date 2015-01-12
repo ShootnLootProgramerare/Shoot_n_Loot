@@ -14,11 +14,11 @@ namespace Shoot__n_Loot
 
         Vector2 velocity;
 
-        Rectangle Feet { get { return new Rectangle(Hitbox.X, Hitbox.Y + (int)(Hitbox.Height * .75f), Hitbox.Width, (int)(Hitbox.Height * .25f)); } }
+        Rectangle Feet { get { return new Rectangle(Hitbox.X + 8, Hitbox.Y + (int)(Hitbox.Height * .75f), Hitbox.Width - 16, (int)(Hitbox.Height * .25f)); } }
 
         public Player()
         {
-            Sprite = new Sprite(TextureManager.player, new Vector2(100), new Vector2(40), 2, new Point(16, 16), 0);
+            Sprite = new Sprite(TextureManager.playerHorizontal, new Vector2(500), new Vector2(50), 2, new Point(16, 16), 0);
         }
 
         new public void Update()
@@ -64,22 +64,21 @@ namespace Shoot__n_Loot
                 if (Math.Abs(velocity.X) > Math.Abs(velocity.Y))
                 {
                     //left and right movement
+                    Sprite.SetTexture(TextureManager.playerHorizontal, 2, new Point(16, 16));
                     if (velocity.X > 0) Sprite.SpriteEffects = SpriteEffects.None; //maybe should be seperate sprites?
                     else if (velocity.X < 0) Sprite.SpriteEffects = SpriteEffects.FlipHorizontally;
                 }
                 else
                 {
-                    Sprite.AnimationSpeed = 0;
-                    /*
-                    if (velocity.Y > 0) set sprite to moving down
-                    else if (velocity.Y < 0) set sprite to moving up
-                     */
+                    //Sprite.AnimationSpeed = 0;
+                    if (velocity.Y > 0) Sprite.SetTexture(TextureManager.playerDown, 3, new Point(16, 16));
+                    else if (velocity.Y < 0) Sprite.SetTexture(TextureManager.playerUp, 2, new Point(16, 16));
                 }
             }
             else
             {
                 Sprite.AnimationSpeed = 0;
-                Sprite.Frame = 0;
+                Sprite.Frame = 2;
             }
         }
 
