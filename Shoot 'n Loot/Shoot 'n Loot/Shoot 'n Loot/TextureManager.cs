@@ -14,7 +14,10 @@ namespace Shoot__n_Loot
         public static Texture2D
             player,
             map,
-            tiles;
+            tiles,
+            enemy1,
+            enemy2,
+            enemy3;
 
         public static void Load(ContentManager content)
         {
@@ -22,6 +25,9 @@ namespace Shoot__n_Loot
             font = content.Load<SpriteFont>("font");
             tiles = content.Load<Texture2D>("tiles");
             map = content.Load<Texture2D>("map");
+            enemy1 = content.Load<Texture2D>("enemy1");
+            enemy2 = content.Load<Texture2D>("enemy2");
+            enemy3 = content.Load<Texture2D>("enemy3");
         }
 
         public static SpriteFont font;
