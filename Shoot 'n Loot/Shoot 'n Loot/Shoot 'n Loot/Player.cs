@@ -86,7 +86,6 @@ namespace Shoot__n_Loot
         public void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            spriteBatch.DrawString(TextureManager.font, velocity.ToString(), Position, Color.Black);
         }
     }
 }
