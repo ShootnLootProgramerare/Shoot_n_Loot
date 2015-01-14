@@ -99,7 +99,7 @@ namespace Shoot__n_Loot
                 //check ammo etc
                 if (true)
                 {
-                    Vector2 v = new Vector2(Input.newMs.X, Input.newMs.Y) - Center;
+                    Vector2 v = Input.MousePosition - Center;
                     Bullets.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center));
                 }
             }
@@ -109,6 +109,7 @@ namespace Shoot__n_Loot
         {
             foreach (Bullet b in Bullets) b.Draw(spriteBatch);
             base.Draw(spriteBatch);
+            spriteBatch.DrawString(TextureManager.font, ":::", Input.MousePosition - Center, Color.Red);
         }
     }
 }

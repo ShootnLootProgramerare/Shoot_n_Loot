@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace Shoot__n_Loot
     {
         public static KeyboardState newKs, oldKs;
         public static MouseState newMs, oldMs;
+
+        public static Vector2 MousePosition { get { return new Vector2(newMs.X, newMs.Y) + Camera.Position - Camera.Origin; } }
 
         public static void Initialize()
         {

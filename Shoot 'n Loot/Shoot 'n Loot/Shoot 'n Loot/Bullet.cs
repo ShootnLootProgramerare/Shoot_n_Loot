@@ -8,8 +8,8 @@ namespace Shoot__n_Loot
 {
     class Bullet : GameObject
     {
-        const float speed = 3;
-        const float w = 10, h = 10;
+        const float speed = 15;
+        const float w = 6, h = 3;
 
         Vector2 velocity;
         
