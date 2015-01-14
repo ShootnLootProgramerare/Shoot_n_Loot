@@ -21,9 +21,28 @@ namespace Shoot__n_Loot
             Dead = false;
         }
 
-        new public void Update()
+        public void Update()
         {
             Position += velocity;
+
+            List<GameObject> objects = new List<GameObject>();
+            foreach (Enemy e in Game1.enemies) objects.Add((GameObject)e);
+
+            foreach(GameObject g in objects)
+            {
+                if (Hitbox.Intersects(g.Hitbox))
+                {
+                    if (g.CanDie) g.Dead = true;
+                    this.Dead = true;
+                }
+            }
+            foreach(Tile t in CloseSolidTiles)
+            {
+                if (Hitbox.Intersects(t.Hitbox))
+                {
+                    this.Dead = true;
+                }
+            }
             if (!Camera.AreaIsVisible(Hitbox)) Dead = true;
         }
     }

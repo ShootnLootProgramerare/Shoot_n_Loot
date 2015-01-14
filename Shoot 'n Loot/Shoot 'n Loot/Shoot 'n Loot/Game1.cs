@@ -18,6 +18,8 @@ namespace Shoot__n_Loot
     {
         public static Point ScreenSize { get { return new Point(1200, 750); } }
 
+        internal static List<Enemy> enemies;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player player;
@@ -44,6 +46,7 @@ namespace Shoot__n_Loot
             // TODO: Add your initialization logic here
             Input.Initialize();
             Camera.FollowSpeed = .3f;
+            enemies = new List<Enemy>();
             Camera.Scale = 1;
             Camera.Origin = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height) / (2 * Camera.Scale);
 
@@ -63,6 +66,7 @@ namespace Shoot__n_Loot
             TextureManager.Load(Content);
             player = new Player();
             enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.enemy1);
+            enemies.Add(enemy);
             Map.Initialize();
         }
 
@@ -84,7 +88,7 @@ namespace Shoot__n_Loot
         {
             Input.Update();
             player.Update();
-            enemy.Update();
+            foreach (Enemy e in enemies) e.Update();
             Camera.Follow(player.Position);
             base.Update(gameTime);
         }
@@ -100,7 +104,7 @@ namespace Shoot__n_Loot
 
             Map.Draw(spriteBatch);
             player.Draw(spriteBatch);
-            enemy.Draw(spriteBatch);
+            foreach (Enemy e in enemies) e.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);

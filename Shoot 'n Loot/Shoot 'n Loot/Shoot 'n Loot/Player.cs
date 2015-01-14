@@ -14,7 +14,7 @@ namespace Shoot__n_Loot
 
         Vector2 velocity;
 
-        Rectangle Feet { get { return new Rectangle(Hitbox.X + 8, Hitbox.Y + (int)(Hitbox.Height * .75f), Hitbox.Width - 16, (int)(Hitbox.Height * .25f)); } }
+        Rectangle Hitbox { get { return new Rectangle(base.Hitbox.X + 8, base.Hitbox.Y + (int)(base.Hitbox.Height * .75f), base.Hitbox.Width - 16, (int)(base.Hitbox.Height * .25f)); } }
 
         public List<Bullet> Bullets { get; set; }
 
@@ -29,6 +29,7 @@ namespace Shoot__n_Loot
             Move();
             Animate();
             Shoot();
+            UpdateBullets();
         }
 
         void Move()
@@ -46,14 +47,14 @@ namespace Shoot__n_Loot
             List<Tile> solidTiles = CloseSolidTiles;
             Move(velocity.X, 0);
             int x = velocity.X.CompareTo(0);
-            while (IsCollidingWithAny(solidTiles, Feet))
+            while (IsCollidingWithAny(solidTiles, Hitbox))
             {
                 Move(-x, 0);
                 velocity.X = 0;
             }
             Move(0, velocity.Y);
             int y = velocity.Y.CompareTo(0);
-            while (IsCollidingWithAny(solidTiles, Feet))
+            while (IsCollidingWithAny(solidTiles, Hitbox))
             {
                 Move(0, -y);
                 velocity.Y = 0;
@@ -88,12 +89,6 @@ namespace Shoot__n_Loot
 
         void Shoot()
         {
-            for (int i = Bullets.Count - 1; i >= 0; i--)
-            {
-                if (Bullets[i].Dead) Bullets.RemoveAt(i);
-                else Bullets[i].Update();
-            }
-
             if (Input.LeftClickWasJustPressed())
             {
                 //check ammo etc
@@ -102,6 +97,17 @@ namespace Shoot__n_Loot
                     Vector2 v = Input.MousePosition - Center;
                     Bullets.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center));
                 }
+            }
+        }
+
+        void UpdateBullets()
+        {
+            List<GameObject> objects = new List<GameObject>(); //get enemies, solid items etc
+
+            for (int i = Bullets.Count - 1; i >= 0; i--)
+            {
+                if (Bullets[i].Dead) Bullets.RemoveAt(i);
+                else Bullets[i].Update();
             }
         }
 

@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Shoot__n_Loot
 {
-    class Enemy: GameObject
+    internal class Enemy: GameObject
     {
         public enum EnemyType { enemy1, enemy2, enemy3 };
 

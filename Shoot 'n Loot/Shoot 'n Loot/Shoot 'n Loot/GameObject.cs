@@ -14,6 +14,7 @@ namespace Shoot__n_Loot
         public Vector2 Center { get { return new Vector2(Hitbox.Center.X, Hitbox.Center.Y); } }
         public Rectangle Hitbox { get { return Sprite.Area; } }
         public bool Dead { get; set; }
+        public bool CanDie { get; set; }
         
         protected Sprite Sprite { get; set; }
 
