@@ -14,19 +14,25 @@ namespace Shoot__n_Loot
         public byte Frames { get; private set; }
         public byte FramesPerFrame { get; private set; }
         public bool IsWalkable { get; private set; }
+        public bool ObstructsBullets { get; private set; }
 
         public bool IsAnimated { get { return Frames > 1; } }
 
-        public TileProperties(byte textureIndex, bool walkable, byte frames, byte animSpeed)
+        public TileProperties(byte textureIndex, bool walkable, bool obstructsBullets, byte frames, byte animSpeed)
         {
             this.Frames = frames;
             this.FramesPerFrame = animSpeed;
             this.TextureIndex = textureIndex;
             this.IsWalkable = walkable;
+            this.ObstructsBullets = obstructsBullets;
         }
 
         public TileProperties(byte textureIndex, bool walkable)
-            : this(textureIndex, walkable, 1, 0)
+            : this(textureIndex, walkable, !walkable, 1, 0)
+        { }
+
+        public TileProperties(byte textureIndex, bool walkable, bool obstructsBullets)
+            : this(textureIndex, walkable, obstructsBullets, 1, 0)
         { }
 
         public void Animate(ref byte frame, ref byte counter)

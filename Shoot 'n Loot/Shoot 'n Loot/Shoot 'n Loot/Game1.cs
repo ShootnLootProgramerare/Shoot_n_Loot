@@ -88,7 +88,11 @@ namespace Shoot__n_Loot
         {
             Input.Update();
             player.Update();
-            foreach (Enemy e in enemies) e.Update();
+            for (int i = enemies.Count - 1; i >= 0; i--)
+            {
+                if (enemies[i].Dead) enemies.RemoveAt(i);
+                else enemies[i].Update();
+            }
             Camera.Follow(player.Position);
             base.Update(gameTime);
         }
