@@ -24,7 +24,7 @@ namespace Shoot__n_Loot
         new public void Update()
         {
             Position += velocity;
-            //if (!Camera.AreaIsVisible(Hitbox)) Dead = true;
+            if (!Camera.AreaIsVisible(Hitbox)) Dead = true;
         }
     }
 }

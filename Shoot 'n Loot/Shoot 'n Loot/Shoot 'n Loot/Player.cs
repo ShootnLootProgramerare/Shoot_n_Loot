@@ -109,7 +109,6 @@ namespace Shoot__n_Loot
         {
             foreach (Bullet b in Bullets) b.Draw(spriteBatch);
             base.Draw(spriteBatch);
-            spriteBatch.DrawString(TextureManager.font, ":::", Input.MousePosition - Center, Color.Red);
         }
     }
 }
