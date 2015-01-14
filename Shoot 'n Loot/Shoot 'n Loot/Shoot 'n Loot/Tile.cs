@@ -16,7 +16,7 @@ namespace Shoot__n_Loot
         public const byte size = 48;
         
         public Vector2 Position { get; private set; }
-        public TileType Type;
+        public TileType Type { get; private set; }
 
         public TileProperties Properties { get { return TilePrefabs[(int)Type]; } }
         public Rectangle Hitbox { get { return new Rectangle((int)Position.X, (int)Position.Y, size, size); } }
