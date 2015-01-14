@@ -22,6 +22,8 @@ namespace Shoot__n_Loot
         SpriteBatch spriteBatch;
         Player player;
 
+        Enemy enemy;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -44,6 +46,8 @@ namespace Shoot__n_Loot
             Camera.FollowSpeed = .3f;
             Camera.Scale = 1;
             Camera.Origin = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height) / (2 * Camera.Scale);
+
+
             base.Initialize();
         }
 
@@ -58,6 +62,7 @@ namespace Shoot__n_Loot
             //Textures.player = Content.Load<Texture2D>("player");
             TextureManager.Load(Content);
             player = new Player();
+            enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.enemy1);
             Map.Initialize();
         }
 
@@ -79,6 +84,7 @@ namespace Shoot__n_Loot
         {
             Input.Update();
             player.Update();
+            enemy.Update();
             Camera.Follow(player.Position);
             base.Update(gameTime);
         }
@@ -94,6 +100,7 @@ namespace Shoot__n_Loot
 
             Map.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            enemy.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);

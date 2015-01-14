@@ -13,24 +13,40 @@ namespace Shoot__n_Loot
 {
     class Enemy: GameObject
     {
-        enum EnemyType { enemy1, enemy2, enemy3 };
-        EnemyType enemyType = new EnemyType();
+        public enum EnemyType { enemy1, enemy2, enemy3 };
 
-        public Enemy(Vector2 position)
+        public int HP { get; set; }
+        public int Damage { get; set; }
+        public float Speed { get; set; }
+        public EnemyType enemyType { get; set; }
+
+        public Enemy(Vector2 position, EnemyType enemytype)
         {
+            this.enemyType = enemytype;
+
             Sprite = new Sprite(TextureManager.enemy1, position, new Vector2(50));
-            Sprite = new Sprite(TextureManager.enemy2, position, new Vector2(50));
-            Sprite = new Sprite(TextureManager.enemy3, position, new Vector2(50));
+
+            if (enemyType == EnemyType.enemy1) { this.HP = 32; this.Damage = 8; this.Speed = 1.2f; }
+            if (enemyType == EnemyType.enemy2) { this.HP = 48; this.Damage = 2; this.Speed = 0.8f; }
+            if (enemyType == EnemyType.enemy3) { this.HP = 12; this.Damage = 12; this.Speed = 2.4f; }
         }
 
         public void Update()
         {
-            
-        }
+            if (enemyType == EnemyType.enemy1)
+            {
+                this.Position += new Vector2((float)Math.Cos(this.Speed), (float)  Math.Sin(this.Speed));
+            }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
+            if (enemyType == EnemyType.enemy2)
+            {
+
+            }
+
+            if (enemyType == EnemyType.enemy3)
+            {
+
+            }
         }
     }
 }
