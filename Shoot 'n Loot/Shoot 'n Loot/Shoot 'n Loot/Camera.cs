@@ -33,5 +33,10 @@ namespace Shoot__n_Loot
         {
             return AreaIsVisible(position.X, position.Y, w, h);
         }
+
+        public static bool AreaIsVisible(Rectangle area)
+        {
+            return AreaIsVisible(area.X, area.Y, area.Width, area.Height);
+        }
     }
 }

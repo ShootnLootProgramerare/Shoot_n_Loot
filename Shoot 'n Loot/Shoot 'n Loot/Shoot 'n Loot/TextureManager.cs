@@ -19,7 +19,8 @@ namespace Shoot__n_Loot
             tiles,
             enemy1,
             enemy2,
-            enemy3;
+            enemy3,
+            bullet;
 
         public static void Load(ContentManager content)
         {
@@ -32,6 +33,7 @@ namespace Shoot__n_Loot
             enemy1 = content.Load<Texture2D>("enemies/enemy1");
             enemy2 = content.Load<Texture2D>("enemies/enemy2");
             enemy3 = content.Load<Texture2D>("enemies/enemy3");
+            bullet = content.Load<Texture2D>("bullet");
         }
 
         public static SpriteFont font;
