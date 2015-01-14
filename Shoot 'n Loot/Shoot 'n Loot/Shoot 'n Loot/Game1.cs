@@ -28,6 +28,7 @@ namespace Shoot__n_Loot
             graphics.PreferredBackBufferWidth = ScreenSize.X;
             graphics.PreferredBackBufferHeight = ScreenSize.Y;
             Content.RootDirectory = "Content";
+            IsMouseVisible = true;
         }
 
         /// <summary>

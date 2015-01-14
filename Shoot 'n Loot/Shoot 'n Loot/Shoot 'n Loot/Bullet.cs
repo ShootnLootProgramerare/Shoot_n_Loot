@@ -9,7 +9,7 @@ namespace Shoot__n_Loot
     class Bullet : GameObject
     {
         const float speed = 3;
-        const float w = 3, h = 6;
+        const float w = 10, h = 10;
 
         Vector2 velocity;
         
@@ -17,12 +17,14 @@ namespace Shoot__n_Loot
         {
             velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * speed;
             Sprite = new Sprite(TextureManager.bullet, position, new Vector2(w, h), angle, null);
+            Sprite.LayerDepth = 0;
+            Dead = false;
         }
 
-        public void Update()
+        new public void Update()
         {
             Position += velocity;
-            if (!Camera.AreaIsVisible(Hitbox)) Dead = true;
+            //if (!Camera.AreaIsVisible(Hitbox)) Dead = true;
         }
     }
 }

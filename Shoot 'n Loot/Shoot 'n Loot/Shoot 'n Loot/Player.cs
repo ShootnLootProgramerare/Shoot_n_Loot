@@ -16,15 +16,19 @@ namespace Shoot__n_Loot
 
         Rectangle Feet { get { return new Rectangle(Hitbox.X + 8, Hitbox.Y + (int)(Hitbox.Height * .75f), Hitbox.Width - 16, (int)(Hitbox.Height * .25f)); } }
 
+        public List<Bullet> Bullets { get; set; }
+
         public Player()
         {
             Sprite = new Sprite(TextureManager.playerHorizontal, new Vector2(500), new Vector2(50), 2, new Point(16, 16), 0);
+            Bullets = new List<Bullet>();
         }
 
         new public void Update()
         {
             Move();
             Animate();
+            Shoot();
         }
 
         void Move()
@@ -82,8 +86,28 @@ namespace Shoot__n_Loot
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        void Shoot()
         {
+            for (int i = Bullets.Count - 1; i >= 0; i--)
+            {
+                if (Bullets[i].Dead) Bullets.RemoveAt(i);
+                else Bullets[i].Update();
+            }
+
+            if (Input.LeftClickWasJustPressed())
+            {
+                //check ammo etc
+                if (true)
+                {
+                    Vector2 v = new Vector2(Input.newMs.X, Input.newMs.Y) - Center;
+                    Bullets.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center));
+                }
+            }
+        }
+
+        new public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (Bullet b in Bullets) b.Draw(spriteBatch);
             base.Draw(spriteBatch);
         }
     }

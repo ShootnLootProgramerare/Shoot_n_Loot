@@ -92,7 +92,7 @@ namespace Shoot__n_Loot
             this.Position = position;
 
             if(frameSize != null) this.FrameSize = (Point)frameSize;
-            else new Point(texture.Width, texture.Height);
+            else FrameSize = new Point(texture.Width, texture.Height);
 
             this.Size = size;
 
