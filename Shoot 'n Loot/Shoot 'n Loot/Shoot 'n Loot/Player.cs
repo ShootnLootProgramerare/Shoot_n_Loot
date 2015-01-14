@@ -10,7 +10,7 @@ namespace Shoot__n_Loot
 {
     class Player : GameObject
     {
-        private const float accelerationMult = 1, friction = .87f;
+        private const float accelerationMult = .7f, friction = .87f;
 
         Vector2 velocity;
 
