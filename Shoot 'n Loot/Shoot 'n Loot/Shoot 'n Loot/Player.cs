@@ -29,7 +29,6 @@ namespace Shoot__n_Loot
             Move();
             Animate();
             Shoot();
-            UpdateBullets();
         }
 
         void Move()
@@ -96,17 +95,6 @@ namespace Shoot__n_Loot
                     Vector2 v = Input.MousePosition - Center;
                     Game1.objects.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center));
                 }
-            }
-        }
-
-        void UpdateBullets()
-        {
-            List<GameObject> objects = new List<GameObject>(); //get enemies, solid items etc
-
-            for (int i = Bullets.Count - 1; i >= 0; i--)
-            {
-                if (Bullets[i].Dead) Bullets.RemoveAt(i);
-                else Bullets[i].Update();
             }
         }
 
