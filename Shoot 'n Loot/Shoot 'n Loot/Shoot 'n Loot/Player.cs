@@ -20,7 +20,7 @@ namespace Shoot__n_Loot
 
         public Player()
         {
-            Sprite = new Sprite(TextureManager.playerHorizontal, new Vector2(500), new Vector2(50), 2, new Point(16, 16), 0);
+            Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(50), 4, new Point(50, 50), 0);
             Bullets = new List<Bullet>();
         }
 
@@ -69,21 +69,20 @@ namespace Shoot__n_Loot
                 if (Math.Abs(velocity.X) > Math.Abs(velocity.Y))
                 {
                     //left and right movement
-                    Sprite.SetTexture(TextureManager.playerHorizontal, 2, new Point(16, 16));
-                    if (velocity.X > 0) Sprite.SpriteEffects = SpriteEffects.None; //maybe should be seperate sprites?
-                    else if (velocity.X < 0) Sprite.SpriteEffects = SpriteEffects.FlipHorizontally;
+                    if (velocity.X > 0) Sprite.SetTexture(TextureManager.playerRight, 4, new Point(50, 50));
+                    else if (velocity.X < 0) Sprite.SetTexture(TextureManager.playerLeft, 4, new Point(50, 50));
                 }
                 else
                 {
                     //Sprite.AnimationSpeed = 0;
-                    if (velocity.Y > 0) Sprite.SetTexture(TextureManager.playerDown, 3, new Point(16, 16));
-                    else if (velocity.Y < 0) Sprite.SetTexture(TextureManager.playerUp, 2, new Point(16, 16));
+                    if (velocity.Y > 0) Sprite.SetTexture(TextureManager.playerDown, 4, new Point(50, 50));
+                    else if (velocity.Y < 0) Sprite.SetTexture(TextureManager.playerUp, 4, new Point(50, 50));
                 }
             }
             else
             {
                 Sprite.AnimationSpeed = 0;
-                Sprite.Frame = 2;
+                Sprite.Frame = 0;
             }
         }
 
