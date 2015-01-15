@@ -20,19 +20,22 @@ namespace Shoot__n_Loot
             Sprite.LayerDepth = 0;
         }
 
-        new public void Update()
+        public override void Update()
         {
             Position += velocity;
 
-            List<GameObject> objects = new List<GameObject>();
-            foreach (Enemy e in Game1.enemies) objects.Add((GameObject)e);
+            //List<GameObject> objects = new List<GameObject>();
+            //foreach (Enemy e in Game1.enemies) objects.Add((GameObject)e);
 
-            foreach(GameObject g in objects)
+            foreach(GameObject g in Game1.objects)
             {
-                if (Hitbox.Intersects(g.Hitbox))
+                if (g.ObstructsBullets)
                 {
-                    g.Health -= 1; //this should have a damage property
-                    this.Dead = true;
+                    if (Hitbox.Intersects(g.Hitbox))
+                    {
+                        g.Health -= 1; //this should have a damage property
+                        this.Dead = true;
+                    }
                 }
             }
             foreach(Tile t in CloseSolidTiles)

@@ -94,7 +94,7 @@ namespace Shoot__n_Loot
                 if (true)
                 {
                     Vector2 v = Input.MousePosition - Center;
-                    Bullets.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center));
+                    Game1.objects.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center));
                 }
             }
         }

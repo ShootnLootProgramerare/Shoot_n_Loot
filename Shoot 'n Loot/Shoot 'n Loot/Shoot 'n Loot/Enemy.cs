@@ -30,10 +30,11 @@ namespace Shoot__n_Loot
             if (enemyType == EnemyType.enemy3) { this.Health = 12; this.Damage = 12; this.Speed = 2.4f; }
 
             CanDie = true; //testing purposes, remove and use as example if you want
+            ObstructsBullets = true;
             Health = 2;
         }
 
-        public void Update()
+        public override void Update()
         {
             if (enemyType == EnemyType.enemy1)
             {

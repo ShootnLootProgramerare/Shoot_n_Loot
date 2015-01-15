@@ -18,13 +18,14 @@ namespace Shoot__n_Loot
         public bool Dead { get; set; }
         public float Health { get { return health; } set { health = value; if (health <= 0 && CanDie) Dead = true; } }
         public bool CanDie { get; set; }
+        public bool ObstructsBullets { get; set; }
         
         protected Sprite Sprite { get; set; }
 
         /// <summary>
         /// should be overridden by child object
         /// </summary>
-        public void Update() { }
+        public virtual void Update() { Position += new Vector2(1, 0); }
 
         /// <summary>
         /// draws the sprite. override and draw sprite manually or call base.Draw

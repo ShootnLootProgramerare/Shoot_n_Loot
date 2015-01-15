@@ -20,6 +20,8 @@ namespace Shoot__n_Loot
 
         internal static List<Enemy> enemies;
 
+        internal static List<GameObject> objects;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player player;
@@ -47,6 +49,7 @@ namespace Shoot__n_Loot
             Input.Initialize();
             Camera.FollowSpeed = .3f;
             enemies = new List<Enemy>();
+            objects = new List<GameObject>();
             Camera.Scale = 1;
             Camera.Origin = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height) / (2 * Camera.Scale);
 
@@ -66,7 +69,7 @@ namespace Shoot__n_Loot
             TextureManager.Load(Content);
             player = new Player();
             enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.enemy1);
-            enemies.Add(enemy);
+            objects.Add(enemy);
             Map.Initialize();
         }
 
@@ -88,10 +91,10 @@ namespace Shoot__n_Loot
         {
             Input.Update();
             player.Update();
-            for (int i = enemies.Count - 1; i >= 0; i--)
+            for (int i = objects.Count - 1; i >= 0; i--)
             {
-                if (enemies[i].Dead) enemies.RemoveAt(i);
-                else enemies[i].Update();
+                if (objects[i].Dead) objects.RemoveAt(i);
+                else objects[i].Update();
             }
             Camera.Follow(player.Position);
             base.Update(gameTime);
@@ -108,7 +111,7 @@ namespace Shoot__n_Loot
 
             Map.Draw(spriteBatch);
             player.Draw(spriteBatch);
-            foreach (Enemy e in enemies) e.Draw(spriteBatch);
+            foreach (GameObject o in objects) o.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);
