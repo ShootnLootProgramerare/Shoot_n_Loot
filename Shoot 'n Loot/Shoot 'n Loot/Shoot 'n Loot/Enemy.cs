@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using System.Diagnostics;
 
 namespace Shoot__n_Loot
 {
@@ -56,6 +55,7 @@ namespace Shoot__n_Loot
         protected override void OnDestroy()
         {
             //create particles, spawn dropped items etc
+            Game1.objectsToAdd.Add(new Enemy(new Vector2(300), EnemyType.enemy1));
         }
     }
 }

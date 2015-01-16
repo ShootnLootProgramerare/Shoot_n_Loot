@@ -12,9 +12,7 @@ namespace Shoot__n_Loot
     {
         private const float accelerationMult = .7f, friction = .87f;
 
-        Vector2 velocity;
-
-        Rectangle Hitbox { get { return new Rectangle(base.Hitbox.X + 8, base.Hitbox.Y + (int)(base.Hitbox.Height * .75f), base.Hitbox.Width - 16, (int)(base.Hitbox.Height * .25f)); } }
+        public override Rectangle Hitbox { get { return new Rectangle(base.Hitbox.X + 8, base.Hitbox.Y + (int)(base.Hitbox.Height * .75f), base.Hitbox.Width - 16, (int)(base.Hitbox.Height * .25f)); } }
 
         public List<Bullet> Bullets { get; set; }
 
@@ -38,44 +36,30 @@ namespace Shoot__n_Loot
             if (Input.newKs.IsKeyDown(Keys.D)) acceleration.X += 1;
             if (Input.newKs.IsKeyDown(Keys.W)) acceleration.Y -= 1;
             if (Input.newKs.IsKeyDown(Keys.S)) acceleration.Y += 1;
-            velocity += acceleration * accelerationMult;
-            velocity *= friction;
-            if (Math.Abs(velocity.X) < .05) velocity.X = 0;
-            if (Math.Abs(velocity.Y) < .05) velocity.Y = 0;
+            Velocity += acceleration * accelerationMult;
+            Velocity *= friction;
+            if (Math.Abs(Velocity.X) < .05) Velocity = new Vector2(0, Velocity.Y);
+            if (Math.Abs(Velocity.Y) < .05) Velocity = new Vector2(Velocity.X, 0);
 
-            List<Tile> solidTiles = CloseSolidTiles;
-            Move(velocity.X, 0);
-            int x = velocity.X.CompareTo(0);
-            while (IsCollidingWithAny(solidTiles, Hitbox))
-            {
-                Move(-x, 0);
-                velocity.X = 0;
-            }
-            Move(0, velocity.Y);
-            int y = velocity.Y.CompareTo(0);
-            while (IsCollidingWithAny(solidTiles, Hitbox))
-            {
-                Move(0, -y);
-                velocity.Y = 0;
-            }
+            MoveWithTileCollision();
         }
 
         void Animate()
         {
-            if (velocity.LengthSquared() > .3f)
+            if (Velocity.LengthSquared() > .3f)
             {
                 Sprite.AnimationSpeed = 9f / 60;
-                if (Math.Abs(velocity.X) > Math.Abs(velocity.Y))
+                if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
                 {
                     //left and right movement
-                    if (velocity.X > 0) Sprite.SetTexture(TextureManager.playerRight, 4, new Point(50, 50));
-                    else if (velocity.X < 0) Sprite.SetTexture(TextureManager.playerLeft, 4, new Point(50, 50));
+                    if (Velocity.X > 0) Sprite.SetTexture(TextureManager.playerRight, 4, new Point(50, 50));
+                    else if (Velocity.X < 0) Sprite.SetTexture(TextureManager.playerLeft, 4, new Point(50, 50));
                 }
                 else
                 {
                     //Sprite.AnimationSpeed = 0;
-                    if (velocity.Y > 0) Sprite.SetTexture(TextureManager.playerDown, 4, new Point(50, 50));
-                    else if (velocity.Y < 0) Sprite.SetTexture(TextureManager.playerUp, 4, new Point(50, 50));
+                    if (Velocity.Y > 0) Sprite.SetTexture(TextureManager.playerDown, 4, new Point(50, 50));
+                    else if (Velocity.Y < 0) Sprite.SetTexture(TextureManager.playerUp, 4, new Point(50, 50));
                 }
             }
             else
