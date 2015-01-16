@@ -93,16 +93,16 @@ namespace Shoot__n_Loot
 
 
         /// <summary>
-        /// checks each tile in the specified list and if the specified rectangle collides with any of them, true is returned, otherwise false.
+        /// checks each tile in the specified list and if the this.Hitbox collides with any of them, true is returned, otherwise false.
         /// </summary>
         /// <param name="tiles"></param>
         /// <param name="rectangle"></param>
         /// <returns></returns>
-        protected bool IsCollidingWithAny(List<Tile> tiles, Rectangle rectangle)
+        protected bool IsCollidingWithAny(List<Tile> tiles)
         {
             foreach (Tile t in tiles)
             {
-                if (t.Hitbox.Intersects(rectangle)) return true;
+                if (t.Hitbox.Intersects(Hitbox)) return true;
             }
             return false;
         } 
@@ -115,14 +115,14 @@ namespace Shoot__n_Loot
             List<Tile> solidTiles = CloseSolidTiles;
             Move(Velocity.X, 0);
             int x = Velocity.X.CompareTo(0);
-            while (IsCollidingWithAny(solidTiles, Hitbox))
+            while (IsCollidingWithAny(solidTiles))
             {
                 Move(-x, 0);
                 Velocity = new Vector2(0, Velocity.Y);
             }
             Move(0, Velocity.Y);
             int y = Velocity.Y.CompareTo(0);
-            while (IsCollidingWithAny(solidTiles, Hitbox))
+            while (IsCollidingWithAny(solidTiles))
             {
                 Move(0, -y);
                 Velocity = new Vector2(Velocity.X, 0);

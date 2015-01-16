@@ -22,7 +22,7 @@ namespace Shoot__n_Loot
             Bullets = new List<Bullet>();
         }
 
-        new public void Update()
+        public override void Update()
         {
             Move();
             Animate();
@@ -36,6 +36,7 @@ namespace Shoot__n_Loot
             if (Input.newKs.IsKeyDown(Keys.D)) acceleration.X += 1;
             if (Input.newKs.IsKeyDown(Keys.W)) acceleration.Y -= 1;
             if (Input.newKs.IsKeyDown(Keys.S)) acceleration.Y += 1;
+            if(acceleration != Vector2.Zero) acceleration.Normalize();
             Velocity += acceleration * accelerationMult;
             Velocity *= friction;
             if (Math.Abs(Velocity.X) < .05) Velocity = new Vector2(0, Velocity.Y);
@@ -85,6 +86,7 @@ namespace Shoot__n_Loot
         new public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Bullet b in Bullets) b.Draw(spriteBatch);
+            spriteBatch.DrawString(TextureManager.font, Velocity.Length().ToString(), Center, Color.Black);
             base.Draw(spriteBatch);
         }
     }
