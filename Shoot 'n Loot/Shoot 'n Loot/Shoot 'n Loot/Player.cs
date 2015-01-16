@@ -12,24 +12,21 @@ namespace Shoot__n_Loot
     {
         private const float accelerationMult = .7f, friction = .87f;
 
-        Vector2 velocity;
-
-        Rectangle Hitbox { get { return new Rectangle(base.Hitbox.X + 8, base.Hitbox.Y + (int)(base.Hitbox.Height * .75f), base.Hitbox.Width - 16, (int)(base.Hitbox.Height * .25f)); } }
+        public override Rectangle Hitbox { get { return new Rectangle(base.Hitbox.X + 8, base.Hitbox.Y + (int)(base.Hitbox.Height * .75f), base.Hitbox.Width - 16, (int)(base.Hitbox.Height * .25f)); } }
 
         public List<Bullet> Bullets { get; set; }
 
         public Player()
         {
-            Sprite = new Sprite(TextureManager.playerHorizontal, new Vector2(500), new Vector2(50), 2, new Point(16, 16), 0);
+            Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(50), 4, new Point(50, 50), 0);
             Bullets = new List<Bullet>();
         }
 
-        new public void Update()
+        public override void Update()
         {
             Move();
             Animate();
             Shoot();
-            UpdateBullets();
         }
 
         void Move()
@@ -39,51 +36,37 @@ namespace Shoot__n_Loot
             if (Input.newKs.IsKeyDown(Keys.D)) acceleration.X += 1;
             if (Input.newKs.IsKeyDown(Keys.W)) acceleration.Y -= 1;
             if (Input.newKs.IsKeyDown(Keys.S)) acceleration.Y += 1;
-            velocity += acceleration * accelerationMult;
-            velocity *= friction;
-            if (Math.Abs(velocity.X) < .05) velocity.X = 0;
-            if (Math.Abs(velocity.Y) < .05) velocity.Y = 0;
+            if(acceleration != Vector2.Zero) acceleration.Normalize();
+            Velocity += acceleration * accelerationMult;
+            Velocity *= friction;
+            if (Math.Abs(Velocity.X) < .05) Velocity = new Vector2(0, Velocity.Y);
+            if (Math.Abs(Velocity.Y) < .05) Velocity = new Vector2(Velocity.X, 0);
 
-            List<Tile> solidTiles = CloseSolidTiles;
-            Move(velocity.X, 0);
-            int x = velocity.X.CompareTo(0);
-            while (IsCollidingWithAny(solidTiles, Hitbox))
-            {
-                Move(-x, 0);
-                velocity.X = 0;
-            }
-            Move(0, velocity.Y);
-            int y = velocity.Y.CompareTo(0);
-            while (IsCollidingWithAny(solidTiles, Hitbox))
-            {
-                Move(0, -y);
-                velocity.Y = 0;
-            }
+            MoveWithTileCollision();
         }
 
         void Animate()
         {
-            if (velocity.LengthSquared() > .3f)
+            if (Velocity.LengthSquared() > .3f)
             {
                 Sprite.AnimationSpeed = 9f / 60;
-                if (Math.Abs(velocity.X) > Math.Abs(velocity.Y))
+                if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
                 {
                     //left and right movement
-                    Sprite.SetTexture(TextureManager.playerHorizontal, 2, new Point(16, 16));
-                    if (velocity.X > 0) Sprite.SpriteEffects = SpriteEffects.None; //maybe should be seperate sprites?
-                    else if (velocity.X < 0) Sprite.SpriteEffects = SpriteEffects.FlipHorizontally;
+                    if (Velocity.X > 0) Sprite.SetTexture(TextureManager.playerRight, 4, new Point(50, 50));
+                    else if (Velocity.X < 0) Sprite.SetTexture(TextureManager.playerLeft, 4, new Point(50, 50));
                 }
                 else
                 {
                     //Sprite.AnimationSpeed = 0;
-                    if (velocity.Y > 0) Sprite.SetTexture(TextureManager.playerDown, 3, new Point(16, 16));
-                    else if (velocity.Y < 0) Sprite.SetTexture(TextureManager.playerUp, 2, new Point(16, 16));
+                    if (Velocity.Y > 0) Sprite.SetTexture(TextureManager.playerDown, 4, new Point(50, 50));
+                    else if (Velocity.Y < 0) Sprite.SetTexture(TextureManager.playerUp, 4, new Point(50, 50));
                 }
             }
             else
             {
                 Sprite.AnimationSpeed = 0;
-                Sprite.Frame = 2;
+                Sprite.Frame = 0;
             }
         }
 
@@ -95,25 +78,15 @@ namespace Shoot__n_Loot
                 if (true)
                 {
                     Vector2 v = Input.MousePosition - Center;
-                    Bullets.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center));
+                    Game1.objects.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center));
                 }
-            }
-        }
-
-        void UpdateBullets()
-        {
-            List<GameObject> objects = new List<GameObject>(); //get enemies, solid items etc
-
-            for (int i = Bullets.Count - 1; i >= 0; i--)
-            {
-                if (Bullets[i].Dead) Bullets.RemoveAt(i);
-                else Bullets[i].Update();
             }
         }
 
         new public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Bullet b in Bullets) b.Draw(spriteBatch);
+            spriteBatch.DrawString(TextureManager.font, Velocity.Length().ToString(), Center, Color.Black);
             base.Draw(spriteBatch);
         }
     }

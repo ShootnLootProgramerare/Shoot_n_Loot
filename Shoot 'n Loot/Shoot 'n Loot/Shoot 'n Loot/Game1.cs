@@ -18,7 +18,8 @@ namespace Shoot__n_Loot
     {
         public static Point ScreenSize { get { return new Point(1200, 750); } }
 
-        internal static List<Enemy> enemies;
+        internal static List<GameObject> objects, 
+            objectsToAdd; //all objects in this list are moved to the main list at the beginning of each frame, to avoid breaking the foreach loops
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -46,7 +47,8 @@ namespace Shoot__n_Loot
             // TODO: Add your initialization logic here
             Input.Initialize();
             Camera.FollowSpeed = .3f;
-            enemies = new List<Enemy>();
+            objects = new List<GameObject>();
+            objectsToAdd = new List<GameObject>();
             Camera.Scale = 1;
             Camera.Origin = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height) / (2 * Camera.Scale);
 
@@ -66,7 +68,7 @@ namespace Shoot__n_Loot
             TextureManager.Load(Content);
             player = new Player();
             enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.enemy1);
-            enemies.Add(enemy);
+            objects.Add(enemy);
             Map.Initialize();
         }
 
@@ -87,8 +89,20 @@ namespace Shoot__n_Loot
         protected override void Update(GameTime gameTime)
         {
             Input.Update();
+
+            foreach (GameObject g in objectsToAdd) objects.Add(g);
+            objectsToAdd.Clear();
+
             player.Update();
+<<<<<<< HEAD
             foreach (Enemy e in enemies) e.Update(player.Position);
+=======
+            for (int i = objects.Count - 1; i >= 0; i--)
+            {
+                if (objects[i].Dead) objects.RemoveAt(i);
+                else objects[i].Update();
+            }
+>>>>>>> origin/master
             Camera.Follow(player.Position);
             base.Update(gameTime);
         }
@@ -104,7 +118,7 @@ namespace Shoot__n_Loot
 
             Map.Draw(spriteBatch);
             player.Draw(spriteBatch);
-            foreach (Enemy e in enemies) e.Draw(spriteBatch);
+            foreach (GameObject o in objects) o.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);

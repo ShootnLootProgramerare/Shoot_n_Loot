@@ -24,6 +24,8 @@ namespace Shoot__n_Loot
         public Point FrameSize { get; set; }
         public Rectangle Area { get { return new Rectangle((int)Position.X - (int)(Origin.X * scale.X), (int)Position.Y - (int)(Origin.Y * scale.Y), (int)Size.X, (int)Size.Y); } }
 
+        public Vector2 Scale { get { return scale; } }
+
         Vector2 size;
         Vector2 scale;
         Texture2D texture;

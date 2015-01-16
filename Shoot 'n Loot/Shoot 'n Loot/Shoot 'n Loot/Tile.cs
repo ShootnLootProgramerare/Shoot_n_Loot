@@ -9,14 +9,14 @@ namespace Shoot__n_Loot
 {
     class Tile
     {
-        public static TileProperties[] TilePrefabs = new TileProperties[] { new TileProperties(0, true), new TileProperties(1, false, 2, 30), new TileProperties(2, false) };
+        public static TileProperties[] TilePrefabs = new TileProperties[] { new TileProperties(0, true), new TileProperties(1, false, false, 2, 30), new TileProperties(2, false) };
 
         public enum TileType { Grass = 0, Sea = 1, Wood = 2 }
 
         public const byte size = 48;
         
         public Vector2 Position { get; private set; }
-        public TileType Type;
+        public TileType Type { get; private set; }
 
         public TileProperties Properties { get { return TilePrefabs[(int)Type]; } }
         public Rectangle Hitbox { get { return new Rectangle((int)Position.X, (int)Position.Y, size, size); } }

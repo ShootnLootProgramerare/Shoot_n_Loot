@@ -18,29 +18,34 @@ namespace Shoot__n_Loot
             velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * speed;
             Sprite = new Sprite(TextureManager.bullet, position, new Vector2(w, h), angle, null);
             Sprite.LayerDepth = 0;
-            Dead = false;
         }
 
-        public void Update()
+        public override void Update()
         {
             Position += velocity;
 
-            List<GameObject> objects = new List<GameObject>();
-            foreach (Enemy e in Game1.enemies) objects.Add((GameObject)e);
+            //List<GameObject> objects = new List<GameObject>();
+            //foreach (Enemy e in Game1.enemies) objects.Add((GameObject)e);
 
-            foreach(GameObject g in objects)
+            foreach(GameObject g in Game1.objects)
             {
-                if (Hitbox.Intersects(g.Hitbox))
+                if (g.ObstructsBullets)
                 {
-                    if (g.CanDie) g.Dead = true;
-                    this.Dead = true;
+                    if (Hitbox.Intersects(g.Hitbox))
+                    {
+                        g.Health -= 1; //this should have a damage property
+                        this.Dead = true;
+                    }
                 }
             }
             foreach(Tile t in CloseSolidTiles)
             {
-                if (Hitbox.Intersects(t.Hitbox))
+                if (t.Properties.ObstructsBullets)
                 {
-                    this.Dead = true;
+                    if (Hitbox.Intersects(t.Hitbox))
+                    {
+                        this.Dead = true;
+                    }
                 }
             }
             if (!Camera.AreaIsVisible(Hitbox)) Dead = true;
