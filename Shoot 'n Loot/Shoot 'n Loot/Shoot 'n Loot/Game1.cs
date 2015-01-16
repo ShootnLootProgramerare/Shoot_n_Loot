@@ -94,15 +94,11 @@ namespace Shoot__n_Loot
             objectsToAdd.Clear();
 
             player.Update();
-<<<<<<< HEAD
-            foreach (Enemy e in enemies) e.Update(player.Position);
-=======
             for (int i = objects.Count - 1; i >= 0; i--)
             {
                 if (objects[i].Dead) objects.RemoveAt(i);
                 else objects[i].Update();
             }
->>>>>>> origin/master
             Camera.Follow(player.Position);
             base.Update(gameTime);
         }
