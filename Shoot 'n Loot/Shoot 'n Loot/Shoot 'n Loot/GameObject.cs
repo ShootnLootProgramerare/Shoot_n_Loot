@@ -16,7 +16,7 @@ namespace Shoot__n_Loot
         public Vector2 Center { get { return new Vector2(Hitbox.Center.X, Hitbox.Center.Y); } }
         public Rectangle Hitbox { get { return Sprite.Area; } }
         public bool Dead { get; set; }
-        public float Health { get { return health; } set { health = value; if (health <= 0 && CanDie) Dead = true; } }
+        public float Health { get { return health; } set { health = value; if (health <= 0 && CanDie) { Dead = true; OnDestroy(); } } }
         public bool CanDie { get; set; }
         public bool ObstructsBullets { get; set; }
         
@@ -68,6 +68,8 @@ namespace Shoot__n_Loot
                 return solidTiles;
             }
         }
+
+        protected virtual void OnDestroy() { }
 
         protected bool IsCollidingWithAny(List<Tile> tiles, Rectangle rectangle)
         {
