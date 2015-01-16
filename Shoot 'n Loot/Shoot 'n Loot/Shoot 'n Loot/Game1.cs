@@ -88,7 +88,7 @@ namespace Shoot__n_Loot
         {
             Input.Update();
             player.Update();
-            foreach (Enemy e in enemies) e.Update();
+            foreach (Enemy e in enemies) e.Update(player.Position);
             Camera.Follow(player.Position);
             base.Update(gameTime);
         }

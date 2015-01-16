@@ -15,9 +15,9 @@ namespace Shoot__n_Loot
     {
         public enum EnemyType { enemy1, enemy2, enemy3 };
 
-        public int HP { get; set; }
-        public int Damage { get; set; }
-        public float Speed { get; set; }
+        public int HP { get; private set; }
+        public int Damage { get; private set; }
+        public float Speed { get; private set; }
         public EnemyType enemyType { get; set; }
 
         public Enemy(Vector2 position, EnemyType enemytype)
@@ -31,11 +31,11 @@ namespace Shoot__n_Loot
             if (enemyType == EnemyType.enemy3) { this.HP = 12; this.Damage = 12; this.Speed = 2.4f; }
         }
 
-        public void Update()
+        public void Update(Vector2 position)
         {
             if (enemyType == EnemyType.enemy1)
             {
-                this.Position += new Vector2((float)Math.Cos(this.Speed), (float)  Math.Sin(this.Speed));
+                this.Position = new Vector2((float)Math.Cos(position.X), (float)  Math.Sin(position.Y));
             }
 
             if (enemyType == EnemyType.enemy2)
