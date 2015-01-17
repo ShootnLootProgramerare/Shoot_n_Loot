@@ -65,7 +65,7 @@ namespace Shoot__n_Loot
         /// draws the sprite. override and draw sprite manually or call base.Draw
         /// </summary>
         /// <param name="spriteBatch"></param>
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             Sprite.Draw(spriteBatch);
         }

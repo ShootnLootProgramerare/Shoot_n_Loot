@@ -81,12 +81,5 @@ namespace Shoot__n_Loot
                 }
             }
         }
-
-        new public void Draw(SpriteBatch spriteBatch)
-        {
-            foreach (Bullet b in Bullets) b.Draw(spriteBatch);
-            spriteBatch.DrawString(TextureManager.font, Velocity.Length().ToString(), Center, Color.Black);
-            base.Draw(spriteBatch);
-        }
     }
 }
