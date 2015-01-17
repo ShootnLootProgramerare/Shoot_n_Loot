@@ -42,7 +42,7 @@ namespace Shoot__n_Loot
             if (Math.Abs(Velocity.X) < .05) Velocity = new Vector2(0, Velocity.Y);
             if (Math.Abs(Velocity.Y) < .05) Velocity = new Vector2(Velocity.X, 0);
 
-            MoveWithTileCollision();
+            Move(true);
         }
 
         void Animate()
@@ -58,7 +58,6 @@ namespace Shoot__n_Loot
                 }
                 else
                 {
-                    //Sprite.AnimationSpeed = 0;
                     if (Velocity.Y > 0) Sprite.SetTexture(TextureManager.playerDown, 4, new Point(50, 50));
                     else if (Velocity.Y < 0) Sprite.SetTexture(TextureManager.playerUp, 4, new Point(50, 50));
                 }
@@ -78,7 +77,7 @@ namespace Shoot__n_Loot
                 if (true)
                 {
                     Vector2 v = Input.MousePosition - Center;
-                    Game1.objects.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center));
+                    Game1.objects.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center - new Vector2(0, 15)));
                 }
             }
         }

@@ -17,13 +17,14 @@ namespace Shoot__n_Loot
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         public static Point ScreenSize { get { return new Point(1200, 750); } }
+        internal static Player player;
 
         internal static List<GameObject> objects, 
             objectsToAdd; //all objects in this list are moved to the main list at the beginning of each frame, to avoid breaking the foreach loops
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Player player;
+        //Player player;
 
         Enemy enemy;
 
@@ -69,6 +70,7 @@ namespace Shoot__n_Loot
             player = new Player();
             enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.enemy1);
             objects.Add(enemy);
+            objects.Add(player);
             Map.Initialize();
         }
 
@@ -93,7 +95,7 @@ namespace Shoot__n_Loot
             foreach (GameObject g in objectsToAdd) objects.Add(g);
             objectsToAdd.Clear();
 
-            player.Update();
+            //player.Update();
             for (int i = objects.Count - 1; i >= 0; i--)
             {
                 if (objects[i].Dead) objects.RemoveAt(i);
@@ -113,7 +115,7 @@ namespace Shoot__n_Loot
             spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, Camera.Transform);
 
             Map.Draw(spriteBatch);
-            player.Draw(spriteBatch);
+            //player.Draw(spriteBatch);
             foreach (GameObject o in objects) o.Draw(spriteBatch);
 
             spriteBatch.End();

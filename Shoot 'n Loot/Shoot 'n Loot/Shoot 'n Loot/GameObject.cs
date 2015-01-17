@@ -15,14 +15,19 @@ namespace Shoot__n_Loot
         public Vector2 Size { get { return Sprite.Size; } protected set { Sprite.Size = value; } }
         public Vector2 Center { get { return new Vector2(Hitbox.Center.X, Hitbox.Center.Y); } }
         public virtual Rectangle Hitbox { get { return Sprite.Area; } }
+        
         public bool Dead { get; set; }
         public float Health { get { return health; } set { health = value; if (health <= 0 && CanDie) { Dead = true; OnDestroy(); } } }
         public bool CanDie { get; set; }
+        
         public bool ObstructsBullets { get; set; }
 
         protected Vector2 Velocity { get; set; }
         
         protected Sprite Sprite { get; set; }
+
+        protected bool CollidedOnX { get; private set; }
+        protected bool CollidedOnY { get; private set; }
 
 
         /// <summary>
@@ -81,9 +86,19 @@ namespace Shoot__n_Loot
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void Move(float x, float y)
+        protected void Move(float x, float y)
         {
             Position += new Vector2(x, y);
+        }
+
+        /// <summary>
+        /// move using this.velocity, colliding with tiles if specified. CollidedOnX and CollidedOnY specify if the path was open.
+        /// </summary>
+        /// <param name="tileColission"></param>
+        protected void Move(bool tileColission)
+        {
+            if (tileColission) MoveWithTileCollision();
+            else Move(Velocity.X, Velocity.Y);
         }
 
         /// <summary>
@@ -110,22 +125,28 @@ namespace Shoot__n_Loot
         /// <summary>
         /// moves the object on the map using this.Velocity, colliding with tiles and setting the velocity to 0 in the necessary axees if it hits something. Uses this.hitbox, which can be overridden.
         /// </summary>
-        protected void MoveWithTileCollision()
+        private void MoveWithTileCollision()
         {
+            CollidedOnX = CollidedOnY = false;
+
             List<Tile> solidTiles = CloseSolidTiles;
+
             Move(Velocity.X, 0);
             int x = Velocity.X.CompareTo(0);
             while (IsCollidingWithAny(solidTiles))
             {
                 Move(-x, 0);
                 Velocity = new Vector2(0, Velocity.Y);
+                CollidedOnX = true;
             }
+
             Move(0, Velocity.Y);
             int y = Velocity.Y.CompareTo(0);
             while (IsCollidingWithAny(solidTiles))
             {
                 Move(0, -y);
                 Velocity = new Vector2(Velocity.X, 0);
+                CollidedOnY = true;
             }
         }
     }
