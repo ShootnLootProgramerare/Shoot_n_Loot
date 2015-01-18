@@ -71,6 +71,7 @@ namespace Shoot__n_Loot
             enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.enemy1);
             objects.Add(enemy);
             objects.Add(player);
+            objects.Add(new DroppedItem(new Sprite(TextureManager.enemy1, new Vector2(700), new Vector2(20)), new InventoryItem()));
             Map.Initialize();
         }
 
