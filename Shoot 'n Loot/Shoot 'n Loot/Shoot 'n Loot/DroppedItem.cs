@@ -19,6 +19,7 @@ namespace Shoot__n_Loot
         public DroppedItem(Sprite sprite, InventoryItem item)
         {
             this.Sprite = sprite;
+            this.inventoryItem = item;
         }
     }
 }
