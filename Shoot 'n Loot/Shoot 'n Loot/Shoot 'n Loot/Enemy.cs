@@ -36,15 +36,14 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            Move(true);
-
-            Vector2 d = Game1.player.Position - Position;
-            d.Normalize();
-            Velocity = d * 2;
 
             if (enemyType == EnemyType.enemy1)
             {
-                //this.Position += new Vector2((float)Math.Cos(this.Speed), (float)  Math.Sin(this.Speed));
+                Move(true);
+
+                Vector2 d = Game1.player.Position - Position;
+                d.Normalize();
+                Velocity = d * 2;
             }
 
             if (enemyType == EnemyType.enemy2)
