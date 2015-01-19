@@ -23,7 +23,9 @@ namespace Shoot__n_Loot
         {
             this.enemyType = enemytype;
 
-            Sprite = new Sprite(TextureManager.enemy1, position, new Vector2(50));
+            if (enemyType == EnemyType.enemy1) { Sprite = new Sprite(TextureManager.enemy1, position, new Vector2(50)); }
+            if (enemyType == EnemyType.enemy2) { Sprite = new Sprite(TextureManager.enemy2, position, new Vector2(50)); }
+            if (enemyType == EnemyType.enemy3) { Sprite = new Sprite(TextureManager.enemy3, position, new Vector2(50)); }
 
             if (enemyType == EnemyType.enemy1) { this.Health = 32; this.Damage = 8; this.Speed = 1.2f; }
             if (enemyType == EnemyType.enemy2) { this.Health = 48; this.Damage = 2; this.Speed = 0.8f; }
@@ -39,16 +41,30 @@ namespace Shoot__n_Loot
 
             if (enemyType == EnemyType.enemy1)
             {
-                Move(true);
 
-                Vector2 d = Game1.player.Position - Position;
-                d.Normalize();
-                Velocity = d * 2;
+                if (DistanceSquared(Game1.player.Center) < 250000)
+                {
+                    Move(true);
+
+                    Vector2 d = Game1.player.Position - Position;
+                    d.Normalize();
+                    Velocity = d * 3;
+                }
             }
 
             if (enemyType == EnemyType.enemy2)
             {
+                for (int i = 0; i < Game1.objects.Count; i++)
+                {
+                    if (DistanceSquared(Game1.objects[i].Position) < 1000)
+                    {
+                        Move(true);
 
+                        Vector2 d = Game1.player.Position - Position;
+                        d.Normalize();
+                        Velocity = d;
+                    }
+                }
             }
 
             if (enemyType == EnemyType.enemy3)

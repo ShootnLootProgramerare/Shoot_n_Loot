@@ -18,6 +18,7 @@ namespace Shoot__n_Loot
     {
         public static Point ScreenSize { get { return new Point(1200, 750); } }
         internal static Player player;
+        internal static Enemy enemy;
 
         internal static List<GameObject> objects, 
             objectsToAdd; //all objects in this list are moved to the main list at the beginning of each frame, to avoid breaking the foreach loops
@@ -26,8 +27,8 @@ namespace Shoot__n_Loot
         SpriteBatch spriteBatch;
         //Player player;
 
-        Enemy enemy;
 
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -70,6 +71,7 @@ namespace Shoot__n_Loot
             player = new Player();
             enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.enemy1);
             objects.Add(enemy);
+            objects.Add(new Enemy(new Vector2(1000, 1000), Enemy.EnemyType.enemy2));
             objects.Add(player);
             objects.Add(new DroppedItem(new Sprite(TextureManager.enemy1, new Vector2(700), new Vector2(20)), new InventoryItem()));
             Map.Initialize();
