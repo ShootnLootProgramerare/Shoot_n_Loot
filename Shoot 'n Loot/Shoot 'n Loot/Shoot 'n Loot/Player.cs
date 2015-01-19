@@ -14,12 +14,13 @@ namespace Shoot__n_Loot
 
         public override Rectangle Hitbox { get { return new Rectangle(base.Hitbox.X + 8, base.Hitbox.Y + (int)(base.Hitbox.Height * .75f), base.Hitbox.Width - 16, (int)(base.Hitbox.Height * .25f)); } }
 
-        public List<Bullet> Bullets { get; set; }
+        public Inventory Inventory { get; set; }
 
         public Player()
         {
             Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(50), 4, new Point(50, 50), 0);
-            Bullets = new List<Bullet>();
+            Inventory = new Inventory(10, 4, 10);
+            Inventory.Add(new Item(2, 2, 1, new Sprite(TextureManager.enemy1, Vector2.Zero, new Vector2(10))));
         }
 
         public override void Update()
@@ -80,6 +81,12 @@ namespace Shoot__n_Loot
                     Game1.objects.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center - new Vector2(0, 15)));
                 }
             }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            Inventory.Draw(spriteBatch);
+            base.Draw(spriteBatch);
         }
     }
 }

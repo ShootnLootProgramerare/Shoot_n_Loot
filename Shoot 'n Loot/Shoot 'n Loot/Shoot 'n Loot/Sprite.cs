@@ -23,12 +23,12 @@ namespace Shoot__n_Loot
         public byte Frame { get; set; }
         public Point FrameSize { get; set; }
         public Rectangle Area { get { return new Rectangle((int)Position.X - (int)(Origin.X * scale.X), (int)Position.Y - (int)(Origin.Y * scale.Y), (int)Size.X, (int)Size.Y); } }
+        public Texture2D Texture { get; private set; }
 
         public Vector2 Scale { get { return scale; } }
 
         Vector2 size;
         Vector2 scale;
-        Texture2D texture;
         Rectangle sourceRectangle { get { return new Rectangle(FrameSize.X * Frame, 0, FrameSize.X, FrameSize.Y); } }
         float frameCounter;
 
@@ -90,7 +90,7 @@ namespace Shoot__n_Loot
         /// <param name="frameSize">the size of one frame on the spritesheet, in pixels.</param>
         public Sprite(Texture2D texture, Vector2 position, Vector2 size, byte frames, Point? frameSize, float animSpeed, Color color, float rotation, Vector2? origin, SpriteEffects effects, float layerDepth)
         {
-            this.texture = texture;
+            this.Texture = texture;
             this.Position = position;
 
             if(frameSize != null) this.FrameSize = (Point)frameSize;
@@ -117,7 +117,7 @@ namespace Shoot__n_Loot
         /// <param name="frames"></param>
         public void SetTexture(Texture2D texture, byte frames, Point frameSize)
         {
-            this.texture = texture;
+            this.Texture = texture;
             this.Frames = frames;
             this.FrameSize = frameSize;
         }
@@ -134,7 +134,7 @@ namespace Shoot__n_Loot
                     if (Frame >= Frames) Frame = 0;
                 }
             }
-            spriteBatch.Draw(texture, Position, sourceRectangle, Color, Rotation, Origin, scale, SpriteEffects, LayerDepth);
+            spriteBatch.Draw(Texture, Position, sourceRectangle, Color, Rotation, Origin, scale, SpriteEffects, LayerDepth);
         }
     }
 }

@@ -21,5 +21,13 @@ namespace Shoot__n_Loot
             this.Sprite = sprite;
             this.inventoryItem = item;
         }
+
+        public override void Update()
+        {
+            if(Game1.player.Hitbox.Intersects(Hitbox) && Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.E))
+            {
+                //if(Game1.player.Inventory.Fits(this)) Game1.player.Inventory.Add(this);
+            }
+        }
     }
 }
