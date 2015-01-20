@@ -20,7 +20,7 @@ namespace Shoot__n_Loot
         {
             Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(50), 4, new Point(50, 50), 0);
             Inventory = new Inventory(10, 4, 10);
-            Inventory.Add(new Item(2, 2, 1, new Sprite(TextureManager.enemy1, Vector2.Zero, new Vector2(10))));
+            Inventory.Add(new Item(3, 2, 1, new Sprite(TextureManager.enemy1, Vector2.Zero, new Vector2(10))));
         }
 
         public override void Update()

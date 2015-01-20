@@ -77,6 +77,7 @@ namespace Shoot__n_Loot
         {
             //create particles, spawn dropped items etc
             Game1.objectsToAdd.Add(new Enemy(new Vector2(400), EnemyType.enemy1));
+            Game1.player.Inventory.Add(new Item(1, 2, 1, new Sprite(TextureManager.bullet, Vector2.Zero, new Vector2(10))));
         }
     }
 }

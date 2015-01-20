@@ -69,17 +69,17 @@ namespace Shoot__n_Loot
             Point p = new Point(-1, -1);
 
             bool fits = true;
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < this.width - width + 1; x++)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < this.height - width + 1; y++)
                 {
                     if (slots[x, y] == null)
                     {
                         fits = true;
                         p = new Point(x, y);
-                        for (int xi = x; xi < width && xi < width; xi++)
+                        for (int xi = x; xi < this.width && xi < width + x; xi++)
                         {
-                            for (int yi = y; yi < height && yi < height; yi++)
+                            for (int yi = y; yi < this.height && yi < height + y; yi++)
                             {
                                 if (slots[xi, yi] != null)
                                 {
@@ -88,6 +88,7 @@ namespace Shoot__n_Loot
                             }
                         }
                     }
+                    if (fits) return p;
                 }
             }
             if (fits) return p;
@@ -96,11 +97,16 @@ namespace Shoot__n_Loot
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            List<Item> drawnItems = new List<Item>(); //keep track of duplicates and dont draw them
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    if (slots[x, y] != null) slots[x, y].DrawInInventory(new Rectangle(x * DRAWNSIZE, y * DRAWNSIZE, DRAWNSIZE, DRAWNSIZE), spriteBatch);
+                    if (slots[x, y] != null && !drawnItems.Contains(slots[x, y]))
+                    {
+                        slots[x, y].DrawInInventory(new Rectangle(x * DRAWNSIZE + (int)Camera.TotalOffset.X, y * DRAWNSIZE + (int)Camera.TotalOffset.Y, DRAWNSIZE, DRAWNSIZE), spriteBatch);
+                        drawnItems.Add(slots[x, y]);
+                    }
                 }
             }
         }

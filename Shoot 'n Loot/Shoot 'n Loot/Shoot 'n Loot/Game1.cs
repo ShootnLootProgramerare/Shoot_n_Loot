@@ -95,16 +95,16 @@ namespace Shoot__n_Loot
         {
             Input.Update();
 
+            Camera.Follow(player.Position);
+
             foreach (GameObject g in objectsToAdd) objects.Add(g);
             objectsToAdd.Clear();
 
-            //player.Update();
             for (int i = objects.Count - 1; i >= 0; i--)
             {
                 if (objects[i].Dead) objects.RemoveAt(i);
                 else objects[i].Update();
             }
-            Camera.Follow(player.Position);
             base.Update(gameTime);
         }
 
@@ -118,7 +118,6 @@ namespace Shoot__n_Loot
             spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, Camera.Transform);
 
             Map.Draw(spriteBatch);
-            //player.Draw(spriteBatch);
             foreach (GameObject o in objects) o.Draw(spriteBatch);
 
             spriteBatch.End();

@@ -29,9 +29,15 @@ namespace Shoot__n_Loot
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position">width and height will be multiplied by the size automatically</param>
+        /// <param name="spriteBatch"></param>
         public void DrawInInventory(Rectangle position, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite.Texture, position, Color.White);
+            spriteBatch.Draw(Sprite.Texture, new Rectangle(position.X, position.Y, position.Width * Width, position.Height * Height), Color.White);
+            spriteBatch.DrawString(TextureManager.font, position.ToString(), Game1.player.Center + new Vector2(0, position.Y + position.X), Color.Black);
         }
     }
 }
