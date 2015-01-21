@@ -109,6 +109,7 @@ namespace Shoot__n_Loot
             this.LayerDepth = layerDepth;
             this.Frames = frames;
             this.Frame = 0;
+            this.Alpha = 1;
         }
 
         /// <summary>
