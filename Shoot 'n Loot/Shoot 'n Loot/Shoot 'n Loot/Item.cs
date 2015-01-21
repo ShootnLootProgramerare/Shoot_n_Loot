@@ -25,7 +25,11 @@ namespace Shoot__n_Loot
         {
             if (Game1.player.Hitbox.Intersects(Hitbox) && Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.E))
             {
-                //if(Game1.player.Inventory.Fits(this)) Game1.player.Inventory.Add(this);
+                if (Game1.player.Inventory.Fits(this))
+                {
+                    Game1.player.Inventory.Add(this);
+                    Game1.objectsToRemove.Add(this);
+                }
             }
         }
 

@@ -21,7 +21,7 @@ namespace Shoot__n_Loot
         internal static Enemy enemy;
 
         internal static List<GameObject> objects, 
-            objectsToAdd; //all objects in this list are moved to the main list at the beginning of each frame, to avoid breaking the foreach loops
+            objectsToAdd, objectsToRemove; //all objects in this list are moved to the main list at the beginning of each frame, to avoid breaking the foreach loops
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -51,6 +51,7 @@ namespace Shoot__n_Loot
             Camera.FollowSpeed = .3f;
             objects = new List<GameObject>();
             objectsToAdd = new List<GameObject>();
+            objectsToRemove = new List<GameObject>();
             Camera.Scale = 1;
             Camera.Origin = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height) / (2 * Camera.Scale);
 
@@ -98,6 +99,9 @@ namespace Shoot__n_Loot
 
             foreach (GameObject g in objectsToAdd) objects.Add(g);
             objectsToAdd.Clear();
+
+            foreach (GameObject g in objectsToRemove) objects.Remove(g);
+            objectsToRemove.Clear();
 
             for (int i = objects.Count - 1; i >= 0; i--)
             {
