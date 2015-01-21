@@ -10,7 +10,8 @@ namespace Shoot__n_Loot
     {
         public House()
         {
-            Sprite = new Sprite(TextureManager.house, new Vector2(1000, 1000), new Vector2(200));
+            Sprite = new Sprite(TextureManager.house, new Vector2(48 * 20) - new Vector2(0, 48 * 5), new Vector2(48 * 5));
+            Sprite.Origin = Vector2.Zero;
         }
 
         public override void Update()

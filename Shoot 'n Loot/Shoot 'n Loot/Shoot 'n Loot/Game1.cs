@@ -66,14 +66,13 @@ namespace Shoot__n_Loot
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            //Textures.player = Content.Load<Texture2D>("player");
             TextureManager.Load(Content);
             player = new Player();
             enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.enemy1);
             objects.Add(enemy);
             objects.Add(new Enemy(new Vector2(1000, 1000), Enemy.EnemyType.enemy2));
             objects.Add(player);
-            objects.Add(new DroppedItem(new Sprite(TextureManager.enemy1, new Vector2(700), new Vector2(20)), new InventoryItem()));
+            objects.Add(new House());
             Map.Initialize();
         }
 
