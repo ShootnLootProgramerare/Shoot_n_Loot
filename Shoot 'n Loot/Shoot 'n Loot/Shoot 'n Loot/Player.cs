@@ -85,7 +85,7 @@ namespace Shoot__n_Loot
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Inventory.Draw(spriteBatch);
+            //Inventory.Draw(spriteBatch);
             base.Draw(spriteBatch);
         }
     }

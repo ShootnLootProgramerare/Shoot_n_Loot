@@ -16,7 +16,7 @@ namespace Shoot__n_Loot
         byte width, height;
         float maxWeight;
 
-        float Weight
+        public float Weight
         {
             get
             {
@@ -41,11 +41,7 @@ namespace Shoot__n_Loot
 
         public bool Fits(Item item)
         {
-            if (Weight + item.Weight > maxWeight) return false;
-
-            if (SlotThatFits(item.Width, item.Height) == new Point(-1, -1)) return false;
-
-            return true;
+            return Weight + item.Weight < maxWeight && SlotThatFits(item.Width, item.Height) != new Point(-1, -1);
         }
 
         public void Add(Item item)
@@ -69,30 +65,31 @@ namespace Shoot__n_Loot
             Point p = new Point(-1, -1);
 
             bool fits = true;
-            for (int x = 0; x < this.width - width + 1; x++)
+            for (int x = 0; x < this.width; x++)
             {
-                for (int y = 0; y < this.height - width + 1; y++)
+                for (int y = 0; y < this.height; y++)
                 {
                     if (slots[x, y] == null)
                     {
                         fits = true;
                         p = new Point(x, y);
-                        for (int xi = x; xi < this.width && xi < width + x; xi++)
+                        for (int xi = 0; xi < width; xi++)
                         {
-                            for (int yi = y; yi < this.height && yi < height + y; yi++)
+                            for (int yi = 0; yi < height; yi++)
                             {
-                                if (slots[xi, yi] != null)
+
+                                if (slots[xi + x, yi + y] != null)
                                 {
                                     fits = false;
                                 }
                             }
                         }
                     }
+                    else fits = false;
                     if (fits) return p;
                 }
             }
-            if (fits) return p;
-            else return new Point(-1, -1);
+            return new Point(-1, -1);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -107,6 +104,7 @@ namespace Shoot__n_Loot
                         slots[x, y].DrawInInventory(new Rectangle(x * DRAWNSIZE + (int)Camera.TotalOffset.X, y * DRAWNSIZE + (int)Camera.TotalOffset.Y, DRAWNSIZE, DRAWNSIZE), spriteBatch);
                         drawnItems.Add(slots[x, y]);
                     }
+                    else if(!drawnItems.Contains(slots[x, y])) spriteBatch.Draw(TextureManager.enemy2, new Rectangle(x * DRAWNSIZE + (int)Camera.TotalOffset.X, y * DRAWNSIZE + (int)Camera.TotalOffset.Y, DRAWNSIZE, DRAWNSIZE), Color.White);
                 }
             }
         }
