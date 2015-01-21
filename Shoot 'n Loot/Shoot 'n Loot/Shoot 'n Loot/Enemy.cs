@@ -54,16 +54,21 @@ namespace Shoot__n_Loot
 
             if (enemyType == EnemyType.enemy2)
             {
-                for (int i = 0; i < Game1.objects.Count; i++)
+                if (DistanceSquared(Game1.player.Center) < 80000)
                 {
-                    if (DistanceSquared(Game1.objects[i].Position) < 1000)
-                    {
-                        Move(true);
+                    Move(true);
 
-                        Vector2 d = Game1.player.Position - Position;
-                        d.Normalize();
-                        Velocity = d;
-                    }
+                    Vector2 d = Game1.player.Position - Position;
+                    d.Normalize();
+                    Velocity = d * 4;
+                }
+                else if (DistanceSquared(Game1.player.Center) < 1000000)
+                {
+                    Move(true);
+
+                    Vector2 d = Game1.player.Position - Position;
+                    d.Normalize();
+                    Velocity = d;
                 }
             }
 
