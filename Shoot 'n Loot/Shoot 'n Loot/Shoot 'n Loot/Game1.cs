@@ -17,6 +17,7 @@ namespace Shoot__n_Loot
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         public static Point ScreenSize { get { return new Point(1200, 750); } }
+        public static Random R;
         internal static Player player;
         internal static Enemy enemy;
 
@@ -54,7 +55,7 @@ namespace Shoot__n_Loot
             objectsToRemove = new List<GameObject>();
             Camera.Scale = 1;
             Camera.Origin = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height) / (2 * Camera.Scale);
-
+            R = new Random();
 
             base.Initialize();
         }
