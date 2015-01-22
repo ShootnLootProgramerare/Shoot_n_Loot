@@ -16,6 +16,8 @@ namespace Shoot__n_Loot
 
         public Inventory Inventory { get; set; }
 
+        bool inventoryVisible;
+
         public Player()
         {
             Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(50), 4, new Point(50, 50), 0);
@@ -28,6 +30,7 @@ namespace Shoot__n_Loot
             Move();
             Animate();
             Shoot();
+            UpdateInventory();
         }
 
         void Move()
@@ -83,9 +86,14 @@ namespace Shoot__n_Loot
             }
         }
 
+        void UpdateInventory()
+        {
+            if (Input.KeyWasJustPressed(Keys.I)) inventoryVisible = !inventoryVisible;
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //Inventory.Draw(spriteBatch);
+            if (inventoryVisible) Inventory.Draw(spriteBatch, new Point(Game1.ScreenSize.X / 2, Game1.ScreenSize.Y / 2));
             base.Draw(spriteBatch);
         }
     }

@@ -77,7 +77,6 @@ namespace Shoot__n_Loot
                         {
                             for (int yi = 0; yi < height; yi++)
                             {
-
                                 if (slots[xi + x, yi + y] != null)
                                 {
                                     fits = false;
@@ -92,19 +91,24 @@ namespace Shoot__n_Loot
             return new Point(-1, -1);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Point center)
         {
+            Point offset = new Point(center.X - (width * DRAWNSIZE) / 2, center.Y - (height * DRAWNSIZE) / 2);
             List<Item> drawnItems = new List<Item>(); //keep track of duplicates and dont draw them
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
+                    Rectangle t = new Rectangle(x * DRAWNSIZE + (int)Camera.TotalOffset.X + offset.X, y * DRAWNSIZE + (int)Camera.TotalOffset.Y + offset.Y, DRAWNSIZE, DRAWNSIZE);
+
+                    spriteBatch.Draw(TextureManager.inventorySlot, t, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, .6f);
+
                     if (slots[x, y] != null && !drawnItems.Contains(slots[x, y]))
                     {
-                        slots[x, y].DrawInInventory(new Rectangle(x * DRAWNSIZE + (int)Camera.TotalOffset.X, y * DRAWNSIZE + (int)Camera.TotalOffset.Y, DRAWNSIZE, DRAWNSIZE), spriteBatch);
+                        slots[x, y].DrawInInventory(t, spriteBatch);
                         drawnItems.Add(slots[x, y]);
                     }
-                    else if(!drawnItems.Contains(slots[x, y])) spriteBatch.Draw(TextureManager.enemy2, new Rectangle(x * DRAWNSIZE + (int)Camera.TotalOffset.X, y * DRAWNSIZE + (int)Camera.TotalOffset.Y, DRAWNSIZE, DRAWNSIZE), Color.White);
+                    //else if(!drawnItems.Contains(slots[x, y])) spriteBatch.Draw(TextureManager.enemy2, new Rectangle(x * DRAWNSIZE + (int)Camera.TotalOffset.X, y * DRAWNSIZE + (int)Camera.TotalOffset.Y, DRAWNSIZE, DRAWNSIZE), Color.White);
                 }
             }
         }
