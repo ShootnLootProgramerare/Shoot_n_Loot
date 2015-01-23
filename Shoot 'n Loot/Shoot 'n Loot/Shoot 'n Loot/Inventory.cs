@@ -21,7 +21,7 @@ namespace Shoot__n_Loot
             get
             {
                 List<Item> items = new List<Item>();
-                foreach (Item i in slots) if (i != null) items.Add(i);
+                foreach (Item i in Slots) if (i != null) items.Add(i);
                 items = items.Distinct().ToList();
                 float w = 0;
                 foreach (Item i in items) w += i.Weight;
@@ -29,14 +29,14 @@ namespace Shoot__n_Loot
             }
         }
 
-        Item[,] slots;
+        Item[,] Slots { get; private set; }
 
         public Inventory(byte width, byte height, float maxWeight)
         {
             this.width = width;
             this.height = height;
             this.maxWeight = maxWeight;
-            slots = new Item[width, height];
+            Slots = new Item[width, height];
         }
 
         public bool Fits(Item item)
@@ -49,13 +49,24 @@ namespace Shoot__n_Loot
             Point p = SlotThatFits(item.Width, item.Height);
             if (p == new Point(-1, -1)) return;
 
-            slots[p.X, p.Y] = item;
+            Slots[p.X, p.Y] = item;
 
             for (int x = 0; x < item.Width; x++)
             {
                 for (int y = 0; y < item.Height; y++)
                 {
-                    slots[x + p.X, y + p.Y] = item;
+                    Slots[x + p.X, y + p.Y] = item;
+                }
+            }
+        }
+
+        public void Remove(Item item)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    if (Slots[x, y] == item) Slots[x, y] = null;
                 }
             }
         }
@@ -69,7 +80,7 @@ namespace Shoot__n_Loot
             {
                 for (int y = 0; y < this.height; y++)
                 {
-                    if (slots[x, y] == null)
+                    if (Slots[x, y] == null)
                     {
                         fits = true;
                         p = new Point(x, y);
@@ -77,7 +88,7 @@ namespace Shoot__n_Loot
                         {
                             for (int yi = 0; yi < height; yi++)
                             {
-                                if (slots[xi + x, yi + y] != null)
+                                if (Slots[xi + x, yi + y] != null)
                                 {
                                     fits = false;
                                 }
@@ -103,10 +114,10 @@ namespace Shoot__n_Loot
 
                     spriteBatch.Draw(TextureManager.inventorySlot, t, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, .6f);
 
-                    if (slots[x, y] != null && !drawnItems.Contains(slots[x, y]))
+                    if (Slots[x, y] != null && !drawnItems.Contains(Slots[x, y]))
                     {
-                        slots[x, y].DrawInInventory(t, spriteBatch);
-                        drawnItems.Add(slots[x, y]);
+                        Slots[x, y].DrawInInventory(t, spriteBatch);
+                        drawnItems.Add(Slots[x, y]);
                     }
                     //else if(!drawnItems.Contains(slots[x, y])) spriteBatch.Draw(TextureManager.enemy2, new Rectangle(x * DRAWNSIZE + (int)Camera.TotalOffset.X, y * DRAWNSIZE + (int)Camera.TotalOffset.Y, DRAWNSIZE, DRAWNSIZE), Color.White);
                 }
