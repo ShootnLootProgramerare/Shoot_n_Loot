@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bullet.cs" />
+    <Compile Include="BulletProperties.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Chunk.cs" />
     <Compile Include="Enemy.cs" />
@@ -126,6 +127,8 @@
     <Compile Include="TextureManager.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="TileProperties.cs" />
+    <Compile Include="Weapon.cs" />
+    <Compile Include="WeaponPart.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

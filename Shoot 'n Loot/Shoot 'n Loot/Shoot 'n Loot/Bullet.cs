@@ -12,12 +12,15 @@ namespace Shoot__n_Loot
         const float w = 6, h = 3;
 
         Vector2 velocity;
+
+        public BulletProperties Properties { get; private set; }
         
-        public Bullet(float angle, Vector2 position)
+        public Bullet(float angle, Vector2 position, BulletProperties properties)
         {
             velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * speed;
             Sprite = new Sprite(TextureManager.bullet, position, new Vector2(w, h), angle, null);
             Sprite.LayerDepth = 0;
+            this.Properties = properties;
         }
 
         public override void Update()
