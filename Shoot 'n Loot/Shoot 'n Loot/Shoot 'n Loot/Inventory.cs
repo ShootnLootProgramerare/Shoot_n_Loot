@@ -29,7 +29,7 @@ namespace Shoot__n_Loot
             }
         }
 
-        Item[,] Slots { get; private set; }
+        Item[,] Slots { get; set; }
 
         public Inventory(byte width, byte height, float maxWeight)
         {
