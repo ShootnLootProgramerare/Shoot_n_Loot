@@ -11,6 +11,9 @@ namespace Shoot__n_Loot
     {
         private float health;
 
+        public const string TYPE = "GameObject";
+        public virtual string Type { get { return TYPE;  } }
+
         public Vector2 Position { get { return Sprite.Position; } protected set { Sprite.Position = value; } }
         public Vector2 Size { get { return Sprite.Size; } protected set { Sprite.Size = value; } }
         public Vector2 Center { get { return new Vector2(Hitbox.Center.X, Hitbox.Center.Y); } }
