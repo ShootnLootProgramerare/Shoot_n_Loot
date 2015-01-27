@@ -13,6 +13,10 @@ namespace Shoot__n_Loot
         const float baseBulletSpeed = 10;
         const byte baseReloadTime = 60;
 
+        enum AmmoType { Light, Medium, Heavy }
+
+        AmmoType currentAmmoType;
+
         public Item item;
 
         private float bulletDamage
@@ -113,15 +117,15 @@ namespace Shoot__n_Loot
             return new Bullet(angle, position, BulletProperties);
         }
 
-        public void StartReload()
+        public void StartReload(Inventory bulletContainer)
         {
+            //find and remove ammo
             reloadTimer = 1;
         }
 
-
-        public void Reload()
+        private void Reload()
         {
-
+            //ammo = maxAmmo etc
         }
 
         public void Update()
