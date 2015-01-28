@@ -16,7 +16,7 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            if (Hitbox.Intersects(GameScene.player.Hitbox))
+            if (Hitbox.Intersects(Game1.gameScene.player.Hitbox))
             {
                 if (Sprite.Alpha > 0) Sprite.Alpha -= .05f;
             }

@@ -9,20 +9,14 @@ namespace Shoot__n_Loot
 {
     class GameScene : Scene
     {
-        public static Player player;
-        internal static Enemy enemy;
-
+        public  Player player;
+        
         public GameScene()
-        {
-            Initialize();
-        }
-
-        public override void Initialize()
         {
             base.Initialize();
 
             player = new Player();
-            enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.enemy1);
+            Enemy enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.enemy1);
             objects.Add(enemy);
             objects.Add(new Enemy(new Vector2(1000, 1000), Enemy.EnemyType.enemy2));
             objects.Add(player);

@@ -21,6 +21,7 @@ namespace Shoot__n_Loot
 
         internal static Scene currentScene;
 
+        internal static MainMenuScene mainMenuScene;
         internal static GameScene gameScene;
  //all objects in this list are moved to the main list at the beginning of each frame, to avoid breaking the foreach loops
 
@@ -68,7 +69,8 @@ namespace Shoot__n_Loot
             TextureManager.Load(Content);
 
             gameScene = new GameScene();
-            currentScene = gameScene;
+            mainMenuScene = new MainMenuScene();
+            currentScene = mainMenuScene;
         }
 
         /// <summary>

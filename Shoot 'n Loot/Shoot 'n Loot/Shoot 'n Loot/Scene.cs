@@ -8,8 +8,8 @@ namespace Shoot__n_Loot
 {
     class Scene
     {
-        internal static List<GameObject> objects;
-        private static List<GameObject> objectsToAdd, objectsToRemove;
+        public List<GameObject> objects;
+        private List<GameObject> objectsToAdd, objectsToRemove;
 
         public Scene()
         {
@@ -43,12 +43,12 @@ namespace Shoot__n_Loot
             foreach (GameObject o in objects) o.Draw(spriteBatch);
         }
 
-        public static void AddObject(GameObject o)
+        public void AddObject(GameObject o)
         {
             objectsToAdd.Add(o);
         }
 
-        public static void RemoveObject(GameObject o)
+        public void RemoveObject(GameObject o)
         {
             objectsToRemove.Add(o);
         }
