@@ -18,7 +18,8 @@ namespace Shoot__n_Loot
 
         public static void Follow(Vector2 target)
         {
-            Position += (target - Position) * FollowSpeed;
+            Vector2 d = (target - Position) * FollowSpeed;
+            Position += new Vector2((int)d.X, (int)d.Y);
         }
 
         public static bool AreaIsVisible(Vector2 position, Vector2 size)

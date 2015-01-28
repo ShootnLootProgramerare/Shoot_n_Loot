@@ -12,7 +12,7 @@ namespace Shoot__n_Loot
     {
         private const float accelerationMult = .7f, friction = .87f;
 
-        public override Rectangle Hitbox { get { return new Rectangle(base.Hitbox.X + 8, base.Hitbox.Y + (int)(base.Hitbox.Height * .75f), base.Hitbox.Width - 16, (int)(base.Hitbox.Height * .25f)); } }
+        public override Rectangle Hitbox { get { return new Rectangle(base.Hitbox.X + base.Hitbox.Width / 4, base.Hitbox.Y + (int)(base.Hitbox.Height * .75f), base.Hitbox.Width / 2, (int)(base.Hitbox.Height * .25f)); } }
 
         public Inventory Inventory { get; set; }
 
@@ -20,7 +20,7 @@ namespace Shoot__n_Loot
 
         public Player()
         {
-            Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(50), 4, new Point(50, 50), 0);
+            Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(100), 4, new Point(50, 50), 0);
             Inventory = new Inventory(10, 4, 10);
             Inventory.Add(new Item(3, 2, 1, new Sprite(TextureManager.enemy1, Vector2.Zero, new Vector2(10))));
         }
@@ -81,7 +81,7 @@ namespace Shoot__n_Loot
                 if (true)
                 {
                     Vector2 v = Input.MousePosition - Center;
-                    Game1.objects.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center - new Vector2(0, 15)));
+                    //Game1.objects.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center - new Vector2(0, 15)));
                 }
             }
         }

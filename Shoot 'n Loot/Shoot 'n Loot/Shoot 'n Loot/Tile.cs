@@ -34,7 +34,7 @@ namespace Shoot__n_Loot
         public void Draw(SpriteBatch spriteBatch)
         {
             if (Properties.IsAnimated) Properties.Animate(ref frame, ref animCounter);
-            spriteBatch.Draw(TextureManager.tiles, Hitbox, new Rectangle(1 + frame * 34, 1 + Properties.TextureIndex * 34, 32, 32), Color.White, 0, Vector2.Zero, SpriteEffects.None, 1); //TODO: use a spritesheet instead
+            spriteBatch.Draw(TextureManager.tiles, Hitbox, new Rectangle(frame * 48, Properties.TextureIndex * 48, 48, 48), Color.White, 0, Vector2.Zero, SpriteEffects.None, 1); //TODO: use a spritesheet instead
         }
     }
 }
