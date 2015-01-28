@@ -30,7 +30,7 @@ namespace Shoot__n_Loot
             //List<GameObject> objects = new List<GameObject>();
             //foreach (Enemy e in Game1.enemies) objects.Add((GameObject)e);
 
-            foreach(GameObject g in Game1.objects)
+            foreach(GameObject g in GameScene.objects)
             {
                 if (g.ObstructsBullets)
                 {

@@ -23,12 +23,12 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            if (Game1.player.Hitbox.Intersects(Hitbox) && Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.E))
+            if (GameScene.player.Hitbox.Intersects(Hitbox) && Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.E))
             {
-                if (Game1.player.Inventory.Fits(this))
+                if (GameScene.player.Inventory.Fits(this))
                 {
-                    Game1.player.Inventory.Add(this);
-                    Game1.objectsToRemove.Add(this);
+                    GameScene.player.Inventory.Add(this);
+                    GameScene.RemoveObject(this);
                 }
             }
         }

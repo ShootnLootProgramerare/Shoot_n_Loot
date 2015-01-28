@@ -45,11 +45,11 @@ namespace Shoot__n_Loot
             if (enemyType == EnemyType.enemy1)
             {
 
-                if (DistanceSquared(Game1.player.Center) < 250000)
+                if (DistanceSquared(GameScene.player.Center) < 250000)
                 {
                     Move(true);
 
-                    Vector2 d = Game1.player.Position - Position;
+                    Vector2 d = GameScene.player.Position - Position;
                     d.Normalize();
                     Velocity = d * 3;
                 }
@@ -57,19 +57,19 @@ namespace Shoot__n_Loot
 
             if (enemyType == EnemyType.enemy2)
             {
-                if (DistanceSquared(Game1.player.Center) < 80000)
+                if (DistanceSquared(GameScene.player.Center) < 80000)
                 {
                     Move(true);
 
-                    Vector2 d = Game1.player.Position - Position;
+                    Vector2 d = GameScene.player.Position - Position;
                     d.Normalize();
                     Velocity = d * 4;
                 }
-                else if (DistanceSquared(Game1.player.Center) < 1000000)
+                else if (DistanceSquared(GameScene.player.Center) < 1000000)
                 {
                     Move(true);
 
-                    Vector2 d = Game1.player.Position - Position;
+                    Vector2 d = GameScene.player.Position - Position;
                     d.Normalize();
                     Velocity = d;
                 }
@@ -84,8 +84,8 @@ namespace Shoot__n_Loot
         protected override void OnDestroy()
         {
             //create particles, spawn dropped items etc
-            Game1.objectsToAdd.Add(new Enemy(new Vector2(400), EnemyType.enemy1));
-            Game1.objectsToAdd.Add(new Item(1, 2, .1f, new Sprite(TextureManager.enemy1, Position, new Vector2(10))));
+            GameScene.AddObject(new Enemy(new Vector2(400), EnemyType.enemy1));
+            GameScene.AddObject(new Item(1, 2, .1f, new Sprite(TextureManager.enemy1, Position, new Vector2(10))));
         }
     }
 }

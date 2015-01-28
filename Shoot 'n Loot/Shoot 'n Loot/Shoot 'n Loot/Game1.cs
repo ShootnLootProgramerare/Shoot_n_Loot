@@ -18,11 +18,11 @@ namespace Shoot__n_Loot
     {
         public static Point ScreenSize { get { return new Point(1200, 750); } }
         public static Random random;
-        internal static Player player;
-        internal static Enemy enemy;
 
-        internal static List<GameObject> objects, 
-            objectsToAdd, objectsToRemove; //all objects in this list are moved to the main list at the beginning of each frame, to avoid breaking the foreach loops
+        internal static Scene currentScene;
+
+        internal static GameScene gameScene;
+ //all objects in this list are moved to the main list at the beginning of each frame, to avoid breaking the foreach loops
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -50,9 +50,6 @@ namespace Shoot__n_Loot
             // TODO: Add your initialization logic here
             Input.Initialize();
             Camera.FollowSpeed = .3f;
-            objects = new List<GameObject>();
-            objectsToAdd = new List<GameObject>();
-            objectsToRemove = new List<GameObject>();
             Camera.Scale = 1;
             Camera.Origin = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height) / (2 * Camera.Scale);
             random = new Random();
@@ -69,14 +66,9 @@ namespace Shoot__n_Loot
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.Load(Content);
-            player = new Player();
-            enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.enemy1);
-            objects.Add(enemy);
-            objects.Add(new Enemy(new Vector2(1000, 1000), Enemy.EnemyType.enemy2));
-            objects.Add(player);
-            objects.Add(new House());
-            objects.Add(new Item(1, 1, 1, new Sprite(TextureManager.enemy1, new Vector2(1000), new Vector2(40))));
-            Map.Initialize();
+
+            gameScene = new GameScene();
+            currentScene = gameScene;
         }
 
         /// <summary>
@@ -97,19 +89,8 @@ namespace Shoot__n_Loot
         {
             Input.Update();
 
-            Camera.Follow(player.Position);
+            currentScene.Update();
 
-            foreach (GameObject g in objectsToAdd) objects.Add(g);
-            objectsToAdd.Clear();
-
-            foreach (GameObject g in objectsToRemove) objects.Remove(g);
-            objectsToRemove.Clear();
-
-            for (int i = objects.Count - 1; i >= 0; i--)
-            {
-                if (objects[i].Dead) objects.RemoveAt(i);
-                else objects[i].Update();
-            }
             base.Update(gameTime);
         }
 
@@ -122,8 +103,7 @@ namespace Shoot__n_Loot
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, Camera.Transform);
 
-            Map.Draw(spriteBatch);
-            foreach (GameObject o in objects) o.Draw(spriteBatch);
+            currentScene.Draw(spriteBatch); 
 
             spriteBatch.End();
             base.Draw(gameTime);
