@@ -16,7 +16,7 @@ namespace Shoot__n_Loot
         public const string TYPE = "Enemy";
         public override string Type { get { return TYPE; } }
 
-        public enum EnemyType { enemy1, enemy2, enemy3 };
+        public enum EnemyType { Fisherman, enemy2, enemy3 };
 
         public int Damage { get; set; }
         public float Speed { get; set; }
@@ -26,11 +26,11 @@ namespace Shoot__n_Loot
         {
             this.enemyType = enemytype;
 
-            if (enemyType == EnemyType.enemy1) { Sprite = new Sprite(TextureManager.enemy1, position, new Vector2(50)); }
+            if (enemyType == EnemyType.Fisherman) { Sprite = new Sprite(TextureManager.enemy1, position, new Vector2(50)); }
             if (enemyType == EnemyType.enemy2) { Sprite = new Sprite(TextureManager.enemy2, position, new Vector2(50)); }
             if (enemyType == EnemyType.enemy3) { Sprite = new Sprite(TextureManager.enemy3, position, new Vector2(50)); }
 
-            if (enemyType == EnemyType.enemy1) { this.Health = 32; this.Damage = 8; this.Speed = 1.2f; }
+            if (enemyType == EnemyType.Fisherman) { this.Health = 32; this.Damage = 8; this.Speed = 1.2f; }
             if (enemyType == EnemyType.enemy2) { this.Health = 48; this.Damage = 2; this.Speed = 0.8f; }
             if (enemyType == EnemyType.enemy3) { this.Health = 12; this.Damage = 12; this.Speed = 2.4f; }
 
@@ -41,8 +41,9 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
+            Animate();
 
-            if (enemyType == EnemyType.enemy1)
+            if (enemyType == EnemyType.Fisherman)
             {
 
                 if (DistanceSquared(Game1.gameScene.player.Center) < 250000)
@@ -81,10 +82,34 @@ namespace Shoot__n_Loot
             }
         }
 
+        private void Animate()
+        {
+            if (Velocity.LengthSquared() > .3f)
+            {
+                Sprite.AnimationSpeed = 9f / 60;
+                if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
+                {
+                    //left and right movement
+                    if (Velocity.X > 0) Sprite.SetTexture(TextureManager.fishermanRight, 4, new Point(100, 50));
+                    else if (Velocity.X < 0) Sprite.SetTexture(TextureManager.fishermanLeft, 4, new Point(100, 50));
+                }
+                else
+                {
+                    if (Velocity.Y > 0) Sprite.SetTexture(TextureManager.fishermanDown, 4, new Point(100, 50));
+                    else if (Velocity.Y < 0) Sprite.SetTexture(TextureManager.fishermanUp, 4, new Point(100, 50));
+                }
+            }
+            else
+            {
+                Sprite.AnimationSpeed = 0;
+                Sprite.Frame = 0;
+            }
+        }
+
         protected override void OnDestroy()
         {
             //create particles, spawn dropped items etc
-            Game1.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.enemy1));
+            Game1.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.Fisherman));
             Game1.gameScene.AddObject(new Item(1, 2, .1f, new Sprite(TextureManager.enemy1, Position, new Vector2(10))));
         }
     }

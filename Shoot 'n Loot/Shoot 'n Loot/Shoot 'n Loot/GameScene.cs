@@ -16,7 +16,7 @@ namespace Shoot__n_Loot
             base.Initialize();
 
             player = new Player();
-            Enemy enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.enemy1);
+            Enemy enemy = new Enemy(new Vector2(100, 100), Enemy.EnemyType.Fisherman);
             objects.Add(enemy);
             objects.Add(new Enemy(new Vector2(1000, 1000), Enemy.EnemyType.enemy2));
             objects.Add(player);
