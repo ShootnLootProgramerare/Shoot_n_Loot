@@ -27,7 +27,7 @@ namespace Shoot__n_Loot
         {
             get
             {
-                return new BulletProperties(bulletDamage, bulletSpeed, );
+                return new BulletProperties(bulletDamage, bulletSpeed, range);
             }
         }
 
@@ -43,6 +43,7 @@ namespace Shoot__n_Loot
 
         private byte reloadTimer;
         private byte shootTimer;
+        private byte ammo;
 
         private List<WeaponPart> parts;
 
@@ -142,24 +143,27 @@ namespace Shoot__n_Loot
         /// returns bulletproperties if you can shoot, otherwise null
         /// </summary>
         /// <returns></returns>
-        public BulletProperties TryShoot()
+        public void TryShoot(Vector2 position, float angle, Scene scene)
         {
-            //check if necessary parts are present
-            if (shootTimer == 0) return BulletProperties;
-            else return null;
+            //TODO: check if necessary parts are present
+            if (true)//(shootTimer == 0)
+            {
+                scene.AddObject(new Bullet(angle, position, BulletProperties));
+                ammo--;
+            }
         }
 
         public void Update()
         {
             if (reloadTimer > 0) reloadTimer++;
-            if(reloadTimer >= ReloadTime)
+            if(reloadTimer >= reloadTime)
             {
                 reloadTimer = 0;
                 Reload();
             }
 
             if (shootTimer > 0) shootTimer++;
-            if (shootTimer >= ShootTime) shootTimer = 0;
+            if (shootTimer >= shootTime) shootTimer = 0;
         }
     }
 }

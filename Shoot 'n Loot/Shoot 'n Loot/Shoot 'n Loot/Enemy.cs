@@ -110,7 +110,7 @@ namespace Shoot__n_Loot
         {
             //create particles, spawn dropped items etc
             Game1.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.Fisherman));
-            Game1.gameScene.AddObject(new Item(1, 2, .1f, new Sprite(TextureManager.enemy1, Position, new Vector2(10))));
+            Game1.gameScene.AddObject(new Item(1, 1, .1f, new Sprite(TextureManager.medicineItem, Position, new Vector2(16))));
         }
     }
 }

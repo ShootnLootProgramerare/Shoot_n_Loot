@@ -48,7 +48,6 @@ namespace Shoot__n_Loot
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             Input.Initialize();
             Camera.FollowSpeed = .3f;
             Camera.Scale = 1;
@@ -79,7 +78,7 @@ namespace Shoot__n_Loot
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+
         }
 
         /// <summary>

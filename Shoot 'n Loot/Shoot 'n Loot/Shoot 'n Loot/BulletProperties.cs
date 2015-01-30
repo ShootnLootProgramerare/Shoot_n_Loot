@@ -10,12 +10,13 @@ namespace Shoot__n_Loot
     {
         public float Damage { get; private set; }
         public float Speed { get; private set; }
-        public int maxRange { get; private set; }
+        public int MaxRange { get; private set; }
 
-        public BulletProperties(float damage, float speed)
+        public BulletProperties(float damage, float speed, int maxRange)
         {
             this.Damage = damage;
             this.Speed = speed;
+            this.MaxRange = maxRange;
         }
 
         public Bullet GetBullet(Vector2 position, float angle)

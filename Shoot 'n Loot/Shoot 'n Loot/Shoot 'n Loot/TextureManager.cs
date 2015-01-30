@@ -31,7 +31,9 @@ namespace Shoot__n_Loot
 
             bullet, 
             house,
-            inventorySlot;
+            inventorySlot,
+
+            medicineItem;
 
         public static SpriteFont font;
 
@@ -58,6 +60,8 @@ namespace Shoot__n_Loot
             bullet = content.Load<Texture2D>("bullet");
             house = content.Load<Texture2D>("house");
             inventorySlot = content.Load<Texture2D>("inventorySlot");
+
+            medicineItem = content.Load<Texture2D>("items/pill");
         }
     }
 }

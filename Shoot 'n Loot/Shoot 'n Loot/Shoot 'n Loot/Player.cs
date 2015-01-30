@@ -16,6 +16,7 @@ namespace Shoot__n_Loot
 
         public Inventory Inventory { get; set; }
 
+        Weapon weapon;
         bool inventoryVisible;
 
         public Player()
@@ -23,6 +24,7 @@ namespace Shoot__n_Loot
             Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(100), 4, new Point(50, 50), 0);
             Inventory = new Inventory(10, 4, 10);
             Inventory.Add(new Item(3, 2, 1, new Sprite(TextureManager.enemy1, Vector2.Zero, new Vector2(10))));
+            weapon = new Weapon();
         }
 
         public override void Update()
@@ -81,7 +83,7 @@ namespace Shoot__n_Loot
                 if (true)
                 {
                     Vector2 v = Input.MousePosition - Center;
-                    //Game1.objects.Add(new Bullet((float)Math.Atan2(v.Y, v.X), this.Center - new Vector2(0, 15)));
+                    weapon.TryShoot(Center, (float)Math.Atan2(v.Y, v.X), Game1.gameScene);
                 }
             }
         }
