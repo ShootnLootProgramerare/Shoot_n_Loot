@@ -15,12 +15,13 @@ namespace Shoot__n_Loot
         public float BulletSpeedMod { get; private set; }
         public float ShootSpeedMod { get; private set; }
         public float ReloadSpeedMod { get; private set; }
-        public byte MagSizeMod { get; private set; }
+        public float RangeMod { get; private set; }
+        public sbyte MagSizeMod { get; private set; }
         public bool MakesAuto { get; private set; }
         public Weapon.AmmoType[] AcceptableAmmo { get; private set; }
         //maybe armor penetration?
 
-        public WeaponPart(PartType type, float damageMod, float speedMod, byte magSizeMod, bool makesAuto, float reloadSpeedMod, Weapon.AmmoType[] acceptableAmmo)
+        public WeaponPart(PartType type, float damageMod, float speedMod, sbyte magSizeMod, bool makesAuto, float reloadSpeedMod, float rangeMod, Weapon.AmmoType[] acceptableAmmo)
         {
             this.Type = type;
             this.DamageMod = damageMod;
