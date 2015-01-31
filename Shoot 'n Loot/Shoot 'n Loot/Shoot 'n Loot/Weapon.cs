@@ -43,7 +43,8 @@ namespace Shoot__n_Loot
 
         private byte reloadTimer;
         private byte shootTimer;
-        private byte ammo;
+        
+        public byte Ammo { get; private set; }
 
         private List<WeaponPart> parts;
 
@@ -55,6 +56,7 @@ namespace Shoot__n_Loot
             parts = new List<WeaponPart>();
             reloadTimer = 0;
             shootTimer = 0;
+            CalculateValues();
         }
 
 
@@ -64,6 +66,8 @@ namespace Shoot__n_Loot
             if (ContainsType(part.Type)) return false;
 
             parts.Add(part);
+
+            CalculateValues();
 
             return true;
         }
@@ -77,6 +81,7 @@ namespace Shoot__n_Loot
         public void RemovePart(WeaponPart p)
         {
             parts.Remove(p);
+            CalculateValues();
         }
 
 
@@ -92,7 +97,8 @@ namespace Shoot__n_Loot
                 if (p.Type == type)
                 {
                     parts.Remove(p);
-                    return p;                
+                    CalculateValues();
+                    return p;
                 }
             }
             return null;
@@ -131,12 +137,14 @@ namespace Shoot__n_Loot
         private void Reload()
         {
             //ammo = maxAmmo etc
+            Ammo = magSize;
         }
 
         public void StartReload(Inventory bulletContainer)
         {
             //find and remove ammo
             reloadTimer = 1;
+            Ammo = 0; //TODO: drop old ammo on ground or return to inventory?
         }
         
         /// <summary>
@@ -146,10 +154,10 @@ namespace Shoot__n_Loot
         public void TryShoot(Vector2 position, float angle, Scene scene)
         {
             //TODO: check if necessary parts are present
-            if (true)//(shootTimer == 0)
+            if (shootTimer == 0 && Ammo > 0)
             {
                 scene.AddObject(new Bullet(angle, position, BulletProperties));
-                ammo--;
+                Ammo--;
             }
         }
 

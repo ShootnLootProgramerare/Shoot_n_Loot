@@ -25,6 +25,7 @@ namespace Shoot__n_Loot
             Inventory = new Inventory(10, 4, 10);
             Inventory.Add(new Item(3, 2, 1, new Sprite(TextureManager.enemy1, Vector2.Zero, new Vector2(10))));
             weapon = new Weapon();
+            weapon.AddPart(new WeaponPart(WeaponPart.PartType.Mag, 1, 1, 10, false, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium }));
         }
 
         public override void Update()
@@ -33,6 +34,7 @@ namespace Shoot__n_Loot
             Animate();
             Shoot();
             UpdateInventory();
+            weapon.Update();
         }
 
         void Move()
@@ -86,6 +88,7 @@ namespace Shoot__n_Loot
                     weapon.TryShoot(Center, (float)Math.Atan2(v.Y, v.X), Game1.gameScene);
                 }
             }
+            if (Input.KeyWasJustPressed(Keys.R)) weapon.StartReload(Inventory);
         }
 
         void UpdateInventory()
@@ -96,6 +99,9 @@ namespace Shoot__n_Loot
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (inventoryVisible) Inventory.Draw(spriteBatch, new Point(Game1.ScreenSize.X / 2, Game1.ScreenSize.Y / 2));
+
+            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString(), Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
+
             base.Draw(spriteBatch);
         }
     }
