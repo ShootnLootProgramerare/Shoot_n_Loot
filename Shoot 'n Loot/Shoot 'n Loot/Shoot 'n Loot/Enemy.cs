@@ -13,7 +13,7 @@ namespace Shoot__n_Loot
 {
     internal class Enemy : GameObject
     {
-        public const string TYPE = "Enemy";
+        new public const string TYPE = "Enemy";
         public override string Type { get { return TYPE; } }
 
         public enum EnemyType { Fisherman, enemy2, enemy3 };
@@ -26,7 +26,7 @@ namespace Shoot__n_Loot
         {
             this.enemyType = enemytype;
 
-            if (enemyType == EnemyType.Fisherman) { Sprite = new Sprite(TextureManager.enemy1, position, new Vector2(50)); }
+            if (enemyType == EnemyType.Fisherman) { Sprite = new Sprite(TextureManager.enemy1, position, new Vector2(200, 100), 4, new Point(200, 100), 0); }
             if (enemyType == EnemyType.enemy2) { Sprite = new Sprite(TextureManager.enemy2, position, new Vector2(50)); }
             if (enemyType == EnemyType.enemy3) { Sprite = new Sprite(TextureManager.enemy3, position, new Vector2(50)); }
 
@@ -90,13 +90,13 @@ namespace Shoot__n_Loot
                 if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
                 {
                     //left and right movement
-                    if (Velocity.X > 0) Sprite.SetTexture(TextureManager.fishermanRight, 4, new Point(100, 50));
-                    else if (Velocity.X < 0) Sprite.SetTexture(TextureManager.fishermanLeft, 4, new Point(100, 50));
+                    if (Velocity.X > 0) Sprite.SetTexture(TextureManager.fishermanWalkRight, 4, new Point(200, 100));
+                    else if (Velocity.X < 0) Sprite.SetTexture(TextureManager.fishermanWalkLeft, 4, new Point(200, 100));
                 }
                 else
                 {
-                    if (Velocity.Y > 0) Sprite.SetTexture(TextureManager.fishermanDown, 4, new Point(100, 50));
-                    else if (Velocity.Y < 0) Sprite.SetTexture(TextureManager.fishermanUp, 4, new Point(100, 50));
+                    if (Velocity.Y > 0) Sprite.SetTexture(TextureManager.fishermanWalkDown, 4, new Point(200, 100));
+                    else if (Velocity.Y < 0) Sprite.SetTexture(TextureManager.fishermanWalkUp, 4, new Point(200, 100));
                 }
             }
             else

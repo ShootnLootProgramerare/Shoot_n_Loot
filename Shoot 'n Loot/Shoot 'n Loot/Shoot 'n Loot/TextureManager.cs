@@ -24,10 +24,10 @@ namespace Shoot__n_Loot
             enemy2,
             enemy3,
 
-            fishermanLeft,
-            fishermanRight,
-            fishermanUp,
-            fishermanDown,
+            fishermanWalkLeft,
+            fishermanWalkRight,
+            fishermanWalkUp,
+            fishermanWalkDown,
 
             bullet, 
             house,
@@ -52,10 +52,10 @@ namespace Shoot__n_Loot
             enemy2 = content.Load<Texture2D>("enemies/enemy2");
             enemy3 = content.Load<Texture2D>("enemies/enemy3");
 
-            fishermanDown = content.Load<Texture2D>("enemies/fishermanDown");
-            fishermanUp = content.Load<Texture2D>("enemies/fishermanUp");
-            fishermanLeft= content.Load<Texture2D>("enemies/fishermanLeft");
-            fishermanRight = content.Load<Texture2D>("enemies/fishermanRight");
+            fishermanWalkDown = content.Load<Texture2D>("enemies/fisherman/walk/Down");
+            fishermanWalkUp = content.Load<Texture2D>("enemies/fisherman/walk/Up");
+            fishermanWalkLeft= content.Load<Texture2D>("enemies/fisherman/walk/Left");
+            fishermanWalkRight = content.Load<Texture2D>("enemies/fisherman/walk/Right");
 
             bullet = content.Load<Texture2D>("bullet");
             house = content.Load<Texture2D>("house");
