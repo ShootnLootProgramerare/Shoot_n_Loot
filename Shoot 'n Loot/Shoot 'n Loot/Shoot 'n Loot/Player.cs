@@ -21,7 +21,7 @@ namespace Shoot__n_Loot
 
         public Player()
         {
-            Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(100), 4, new Point(50, 50), 0);
+            Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(100), 4, new Point(100, 100), 0);
             Inventory = new Inventory(10, 4, 10);
             Inventory.Add(new Item(3, 2, 1, new Sprite(TextureManager.enemy1, Vector2.Zero, new Vector2(10))));
             weapon = new Weapon();
@@ -61,13 +61,13 @@ namespace Shoot__n_Loot
                 if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
                 {
                     //left and right movement
-                    if (Velocity.X > 0) Sprite.SetTexture(TextureManager.playerRight, 4, new Point(50, 50));
-                    else if (Velocity.X < 0) Sprite.SetTexture(TextureManager.playerLeft, 4, new Point(50, 50));
+                    if (Velocity.X > 0) Sprite.SetTexture(TextureManager.playerRight, 4, new Point(100, 100));
+                    else if (Velocity.X < 0) Sprite.SetTexture(TextureManager.playerLeft, 4, new Point(100, 100));
                 }
                 else
                 {
-                    if (Velocity.Y > 0) Sprite.SetTexture(TextureManager.playerDown, 4, new Point(50, 50));
-                    else if (Velocity.Y < 0) Sprite.SetTexture(TextureManager.playerUp, 4, new Point(50, 50));
+                    if (Velocity.Y > 0) Sprite.SetTexture(TextureManager.playerDown, 4, new Point(100, 100));
+                    else if (Velocity.Y < 0) Sprite.SetTexture(TextureManager.playerUp, 4, new Point(100, 100));
                 }
             }
             else
