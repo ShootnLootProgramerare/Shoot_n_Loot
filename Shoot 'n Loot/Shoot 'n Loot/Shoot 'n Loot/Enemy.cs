@@ -13,6 +13,7 @@ namespace Shoot__n_Loot
 {
     internal class Enemy : GameObject
     {
+        enum Direction { Up = 0, Down = 1, Left = 2, Right = 3} //number corresponds to index in array in texturemanager
         new public const string TYPE = "Enemy";
         public override string Type { get { return TYPE; } }
 
@@ -21,6 +22,10 @@ namespace Shoot__n_Loot
         public int Damage { get; set; }
         public float Speed { get; set; }
         public EnemyType enemyType { get; set; }
+
+        bool attacking;
+
+        Direction direction;
 
         public Enemy(Vector2 position, EnemyType enemytype)
         {
@@ -58,14 +63,19 @@ namespace Shoot__n_Loot
 
             if (enemyType == EnemyType.enemy2)
             {
-                if (DistanceSquared(Game1.gameScene.player.Center) < 40000)
+                if(attacking)
                 {
-
+                    Attacking();
+                    return;
+                }
+                else if (DistanceSquared(Game1.gameScene.player.Center) < 40000)
+                {
+                    Velocity = Vector2.Zero;
+                    attacking = true;
                 }
                 else if (DistanceSquared(Game1.gameScene.player.Center) < 80000)
                 {
                     Move(true);
-
                     Vector2 d = Game1.gameScene.player.Position - Position;
                     d.Normalize();
                     Velocity = d * 4;
@@ -73,7 +83,7 @@ namespace Shoot__n_Loot
                 else if (DistanceSquared(Game1.gameScene.player.Center) < 1000000)
                 {
                     Move(true);
-
+                    attacking = false;
                     Vector2 d = Game1.gameScene.player.Position - Position;
                     d.Normalize();
                     Velocity = d;
@@ -86,6 +96,16 @@ namespace Shoot__n_Loot
             }
         }
 
+        private void Attacking()
+        {
+            if (Sprite.EndOfAnim)
+            {
+                attacking = false;
+
+                if (DistanceSquared(Game1.gameScene.player.Center) < 40000) Game1.gameScene.player.Health -= Damage;
+            }
+        }
+
         private void Animate()
         {
             if (Velocity.LengthSquared() > .3f)
@@ -94,20 +114,27 @@ namespace Shoot__n_Loot
                 if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
                 {
                     //left and right movement
-                    if (Velocity.X > 0) Sprite.SetTexture(TextureManager.fishermanWalkRight, 4, new Point(200, 100));
-                    else if (Velocity.X < 0) Sprite.SetTexture(TextureManager.fishermanWalkLeft, 4, new Point(200, 100));
+                    if (Velocity.X > 0) direction = Direction.Right;
+                    else if (Velocity.X < 0) direction = Direction.Left;
                 }
                 else
                 {
-                    if (Velocity.Y > 0) Sprite.SetTexture(TextureManager.fishermanWalkDown, 4, new Point(200, 100));
-                    else if (Velocity.Y < 0) Sprite.SetTexture(TextureManager.fishermanWalkUp, 4, new Point(200, 100));
+                    if (Velocity.Y > 0) direction = Direction.Down;
+                    else if (Velocity.Y < 0) direction = Direction.Up;
                 }
             }
-            else
+            else if (!attacking)
             {
                 Sprite.AnimationSpeed = 0;
                 Sprite.Frame = 0;
             }
+
+            if (attacking)
+            {
+                Sprite.SetTexture(TextureManager.fishermanAttack[(int)direction], 7, new Point(100, 50));
+                Sprite.AnimationSpeed = 6f / 60;
+            }
+            else Sprite.SetTexture(TextureManager.fishermanWalk[(int)direction], 4, new Point(200, 100));
         }
 
         protected override void OnDestroy()

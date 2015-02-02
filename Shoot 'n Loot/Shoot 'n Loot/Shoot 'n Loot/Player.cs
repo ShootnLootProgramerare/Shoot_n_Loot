@@ -26,6 +26,8 @@ namespace Shoot__n_Loot
             Inventory.Add(new Item(3, 2, 1, new Sprite(TextureManager.enemy1, Vector2.Zero, new Vector2(10))));
             weapon = new Weapon();
             weapon.AddPart(new WeaponPart(WeaponPart.PartType.Mag, 1, 1, 10, false, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium }));
+            Health = 100;
+            CanDie = true;
         }
 
         public override void Update()
@@ -100,7 +102,7 @@ namespace Shoot__n_Loot
         {
             if (inventoryVisible) Inventory.Draw(spriteBatch, new Point(Game1.ScreenSize.X / 2, Game1.ScreenSize.Y / 2));
 
-            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString(), Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
+            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
 
             base.Draw(spriteBatch);
         }

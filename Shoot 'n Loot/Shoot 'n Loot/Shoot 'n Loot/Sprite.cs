@@ -25,6 +25,7 @@ namespace Shoot__n_Loot
         public Rectangle Area { get { return new Rectangle((int)Position.X - (int)(Origin.X * scale.X), (int)Position.Y - (int)(Origin.Y * scale.Y), (int)Size.X, (int)Size.Y); } }
         public Texture2D Texture { get; private set; }
         public float Alpha { get; set; }
+        public bool EndOfAnim { get { return Frame == Frames - 1 && frameCounter > 1 - AnimationSpeed * 1.05f; } }
 
         public Vector2 Scale { get { return scale; } }
 
