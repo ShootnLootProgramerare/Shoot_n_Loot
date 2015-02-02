@@ -58,7 +58,11 @@ namespace Shoot__n_Loot
 
             if (enemyType == EnemyType.enemy2)
             {
-                if (DistanceSquared(Game1.gameScene.player.Center) < 80000)
+                if (DistanceSquared(Game1.gameScene.player.Center) < 40000)
+                {
+
+                }
+                else if (DistanceSquared(Game1.gameScene.player.Center) < 80000)
                 {
                     Move(true);
 
