@@ -50,8 +50,17 @@ namespace Shoot__n_Loot
 
             if (enemyType == EnemyType.Fisherman)
             {
-
-                if (DistanceSquared(Game1.gameScene.player.Center) < 250000)
+                if (attacking)
+                {
+                    Attacking();
+                    return;
+                }
+                else if (DistanceSquared(Game1.gameScene.player.Center) < 40000)
+                {
+                    Velocity = Vector2.Zero;
+                    attacking = true;
+                }
+                else if (DistanceSquared(Game1.gameScene.player.Center) < 250000)
                 {
                     Move(true);
 
@@ -131,7 +140,7 @@ namespace Shoot__n_Loot
 
             if (attacking)
             {
-                Sprite.SetTexture(TextureManager.fishermanAttack[(int)direction], 7, new Point(100, 50));
+                Sprite.SetTexture(TextureManager.fishermanAttack[(int)direction], 7, new Point(200, 100));
                 Sprite.AnimationSpeed = 6f / 60;
             }
             else Sprite.SetTexture(TextureManager.fishermanWalk[(int)direction], 4, new Point(200, 100));
