@@ -23,7 +23,7 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            if (Game1.gameScene.player.Hitbox.Intersects(Hitbox) && Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.E))
+            if (Game1.gameScene.player.MapCollider.Intersects(MapCollider) && Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.E))
             {
                 if (Game1.gameScene.player.Inventory.Fits(this))
                 {

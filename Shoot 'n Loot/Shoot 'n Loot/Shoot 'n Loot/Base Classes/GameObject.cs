@@ -16,8 +16,9 @@ namespace Shoot__n_Loot
 
         public Vector2 Position { get { return Sprite.Position; } protected set { Sprite.Position = value; } }
         public Vector2 Size { get { return Sprite.Size; } protected set { Sprite.Size = value; } }
-        public Vector2 Center { get { return new Vector2(Hitbox.Center.X, Hitbox.Center.Y); } }
-        public virtual Rectangle Hitbox { get { return Sprite.Area; } }
+        public Vector2 Center { get { return new Vector2(MapCollider.Center.X, MapCollider.Center.Y); } }
+        public virtual Rectangle MapCollider { get { return Sprite.Area; } }
+        public virtual Rectangle BulletCollider { get { return Sprite.Area; } }
         
         public bool Dead { get; set; }
         public float Health { get { return health; } set { health = value; if (health <= 0 && CanDie) { Dead = true; OnDestroy(); } } }
@@ -120,7 +121,7 @@ namespace Shoot__n_Loot
         {
             foreach (Tile t in tiles)
             {
-                if (t.Hitbox.Intersects(Hitbox)) return true;
+                if (t.Hitbox.Intersects(MapCollider)) return true;
             }
             return false;
         } 

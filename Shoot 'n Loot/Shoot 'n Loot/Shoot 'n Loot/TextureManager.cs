@@ -24,15 +24,6 @@ namespace Shoot__n_Loot
             enemy2,
             enemy3,
 
-            fishermanWalkLeft,
-            fishermanWalkRight,
-            fishermanWalkUp,
-            fishermanWalkDown,
-            fishermanAttackUp,
-            fishermanAttackDown,
-            fishermanAttackLeft,
-            fishermanAttackRight,
-
             bullet, 
             house,
             inventorySlot,

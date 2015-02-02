@@ -17,14 +17,15 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            if (Input.newMs.LeftButton == ButtonState.Pressed) Game1.currentScene = Game1.gameScene;
+            if (Input.newKs.IsKeyDown(Keys.Enter)) Game1.currentScene = Game1.gameScene;
 
             base.Update();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(TextureManager.font, "Leftclick to go to game", Vector2.Zero, Color.White);
+            string s = "Press Enter";
+            spriteBatch.DrawString(TextureManager.font, s, Vector2.Zero - TextureManager.font.MeasureString(s) / 2, Color.Black);
             base.Draw(spriteBatch);
         }
     }

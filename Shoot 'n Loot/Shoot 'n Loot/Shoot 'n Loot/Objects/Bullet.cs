@@ -34,7 +34,7 @@ namespace Shoot__n_Loot
             {
                 if (g.ObstructsBullets)
                 {
-                    if (Hitbox.Intersects(g.Hitbox))
+                    if (MapCollider.Intersects(g.BulletCollider))
                     {
                         g.Health -= 1; //this should have a damage property
                         this.Dead = true;
@@ -45,13 +45,13 @@ namespace Shoot__n_Loot
             {
                 if (t.Properties.ObstructsBullets)
                 {
-                    if (Hitbox.Intersects(t.Hitbox))
+                    if (MapCollider.Intersects(t.Hitbox))
                     {
                         this.Dead = true;
                     }
                 }
             }
-            if (!Camera.AreaIsVisible(Hitbox)) Dead = true;
+            if (!Camera.AreaIsVisible(MapCollider)) Dead = true;
         }
     }
 }
