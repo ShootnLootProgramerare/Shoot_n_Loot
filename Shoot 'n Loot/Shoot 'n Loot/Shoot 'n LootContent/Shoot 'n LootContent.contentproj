@@ -49,7 +49,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="map.png">
+    <Compile Include="map\map.png">
       <Name>map</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -198,6 +198,13 @@
     </Compile>
     <Compile Include="enemies\fisherman\attack\up.png">
       <Name>up</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="map\spawndata.png">
+      <Name>spawndata</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
