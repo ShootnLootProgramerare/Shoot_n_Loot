@@ -12,7 +12,7 @@ namespace Shoot__n_Loot
     {
         private const float accelerationMult = .7f, friction = .87f;
 
-        public override Rectangle MapCollider { get { return new Rectangle(base.MapCollider.X + base.MapCollider.Width / 4, base.MapCollider.Y + (int)(base.MapCollider.Height * .75f), base.MapCollider.Width / 2, (int)(base.MapCollider.Height * .25f)); } }
+        public override Rectangle MapCollider { get { return new Rectangle(base.MapCollider.X + (int)(base.MapCollider.Width * .375f), base.MapCollider.Y + (int)(base.MapCollider.Height * .75f), (int)(base.MapCollider.Width / 4), (int)(base.MapCollider.Height * .25f)); } }
 
         public Inventory Inventory { get; set; }
 
