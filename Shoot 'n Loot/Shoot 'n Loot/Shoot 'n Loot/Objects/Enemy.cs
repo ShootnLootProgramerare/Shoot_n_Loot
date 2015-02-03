@@ -174,7 +174,7 @@ namespace Shoot__n_Loot
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.house, MapCollider, Color.White * .5f);
+            //spriteBatch.Draw(TextureManager.house, MapCollider, Color.White * .5f);
             base.Draw(spriteBatch);
         }
     }
