@@ -18,6 +18,7 @@ namespace Shoot__n_Loot
             playerDown,
 
             map,
+            spawnData,
             tiles,
 
             enemy1,
@@ -45,7 +46,8 @@ namespace Shoot__n_Loot
 
             font = content.Load<SpriteFont>("font");
             tiles = content.Load<Texture2D>("tiles");
-            map = content.Load<Texture2D>("map");
+            map = content.Load<Texture2D>("map/map");
+            spawnData = content.Load<Texture2D>("map/spawnData");
 
             enemy1 = content.Load<Texture2D>("enemies/enemy1");
             enemy2 = content.Load<Texture2D>("enemies/enemy2");

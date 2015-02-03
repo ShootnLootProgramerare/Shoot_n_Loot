@@ -10,7 +10,7 @@ namespace Shoot__n_Loot
 {
     class Map
     {
-        public const byte width = 16, height = 16; //number of chunks. width * Tile.size * chunk.size should equal the width of the map texture, same for height.
+        public const byte width = 16, height = 16, maxZombies = 10; //number of chunks. width * Tile.size * chunk.size should equal the width of the map texture, same for height.
 
         public static Chunk[,] chunks { get; set; }
 
@@ -18,22 +18,14 @@ namespace Shoot__n_Loot
         {
             chunks = new Chunk[width, height];
 
-            Color[] colors1D = new Color[TextureManager.map.Width * TextureManager.map.Height];
-            TextureManager.map.GetData(colors1D);
-            Color[,] mapData = new Color[TextureManager.map.Width, TextureManager.map.Height];
-            for (int x = 0; x < TextureManager.map.Width; x++)
-            {
-                for (int y = 0; y < TextureManager.map.Height; y++)
-                {
-                    mapData[x, y] = colors1D[x + y * TextureManager.map.Width];
-                }
-            }
+            Color[,] mapData = loadTexture(TextureManager.map);
+            Color[,] spawnData = loadTexture(TextureManager.spawnData);            
 
             for(int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    chunks[x, y] = new Chunk(Chunk.sizePx * new Vector2(x, y), subChunk(mapData, x * Chunk.size, y * Chunk.size, Chunk.size, Chunk.size));
+                    chunks[x, y] = new Chunk(Chunk.sizePx * new Vector2(x, y), subChunk(mapData, x * Chunk.size, y * Chunk.size, Chunk.size, Chunk.size), spawnData[x, y]);
                 }
             }
         }
@@ -51,12 +43,27 @@ namespace Shoot__n_Loot
             return c;
         }
 
+        static Color[,] loadTexture(Texture2D texture)
+        {
+            Color[] colors1D = new Color[TextureManager.map.Width * TextureManager.map.Height];
+            TextureManager.map.GetData(colors1D);
+            Color[,] data = new Color[TextureManager.map.Width, TextureManager.map.Height];
+            for (int x = 0; x < TextureManager.map.Width; x++)
+            {
+                for (int y = 0; y < TextureManager.map.Height; y++)
+                {
+                    data[x, y] = colors1D[x + y * TextureManager.map.Width];
+                }
+            }
+            return data;
+        }
+
         public static List<Chunk> VisibleChunks
         {
             get
             {
                 List<Chunk> c = new List<Chunk>();
-                foreach(Chunk ch in chunks) if(Camera.AreaIsVisible(ch.position, Chunk.sizePx, Chunk.sizePx)) c.Add(ch);
+                foreach(Chunk ch in chunks) if(Camera.AreaIsVisible(ch.Position, Chunk.sizePx, Chunk.sizePx)) c.Add(ch);
                 return c;
             }
         }
