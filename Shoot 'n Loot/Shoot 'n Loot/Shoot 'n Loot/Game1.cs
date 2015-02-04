@@ -54,6 +54,9 @@ namespace Shoot__n_Loot
             Camera.Origin = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height) / (2 * Camera.Scale);
             random = new Random();
 
+            Music music = new Music(Content.Load<Song>("track1"));
+            music.Initialize();
+
             base.Initialize();
         }
 

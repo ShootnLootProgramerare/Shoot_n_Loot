@@ -108,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Music.cs" />
     <Compile Include="Objects\Bullet.cs" />
     <Compile Include="Weapon\BulletProperties.cs" />
     <Compile Include="Camera.cs" />
