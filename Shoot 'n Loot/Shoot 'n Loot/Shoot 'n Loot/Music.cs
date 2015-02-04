@@ -22,6 +22,7 @@ namespace Shoot__n_Loot
 
         public void Initialize()
         {
+            MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(CurrentTrack);
         }
     }
