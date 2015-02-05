@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,8 @@ namespace Shoot__n_Loot
         public override void Update()
         {
             Camera.Follow(player.Position);
+
+            if (Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.Escape)) SceneManager.currentScene = SceneManager.pauseScene;
 
             foreach (Chunk c in Map.chunks)
             {

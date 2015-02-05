@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,8 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            if (Input.newKs.IsKeyDown(Keys.Enter)) Game1.currentScene = Game1.gameScene;
-            else if (Input.KeyWasJustPressed(Keys.Escape)) Game1.currentScene = Game1.aboutScene;
+            if (Input.newKs.IsKeyDown(Keys.Enter)) SceneManager.currentScene = SceneManager.gameScene;
+            else if (Input.KeyWasJustPressed(Keys.Escape)) SceneManager.currentScene = SceneManager.aboutScene;
 
             base.Update();
         }

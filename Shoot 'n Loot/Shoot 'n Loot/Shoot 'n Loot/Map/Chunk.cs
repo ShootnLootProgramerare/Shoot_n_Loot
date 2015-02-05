@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -64,7 +65,7 @@ namespace Shoot__n_Loot
         {
             const float SPAWNRATE = .00001f;
 
-            if (Game1.random.Next(255) < spawnData.A * SPAWNRATE && Game1.gameScene.NoOfZombies() < Map.maxZombies)
+            if (Game1.random.Next(255) < spawnData.A * SPAWNRATE && SceneManager.gameScene.NoOfZombies() < Map.maxZombies)
             {
                 int r = Game1.random.Next(spawnData.R + spawnData.G + spawnData.B);
 

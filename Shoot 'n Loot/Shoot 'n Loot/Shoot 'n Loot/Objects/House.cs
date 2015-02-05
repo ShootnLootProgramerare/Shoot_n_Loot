@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            if (MapCollider.Intersects(Game1.gameScene.player.MapCollider))
+            if (MapCollider.Intersects(SceneManager.gameScene.player.MapCollider))
             {
                 if (Sprite.Alpha > 0) Sprite.Alpha -= .05f;
             }

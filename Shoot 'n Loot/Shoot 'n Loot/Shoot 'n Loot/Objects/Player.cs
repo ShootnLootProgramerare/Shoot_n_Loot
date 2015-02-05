@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,7 +88,7 @@ namespace Shoot__n_Loot
                 if (true)
                 {
                     Vector2 v = Input.MousePosition - Center;
-                    weapon.TryShoot(Center, (float)Math.Atan2(v.Y, v.X), Game1.gameScene);
+                    weapon.TryShoot(Center, (float)Math.Atan2(v.Y, v.X), SceneManager.gameScene);
                 }
             }
             if (Input.KeyWasJustPressed(Keys.R)) weapon.StartReload(Inventory);

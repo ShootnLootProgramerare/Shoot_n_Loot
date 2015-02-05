@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +24,12 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            if (Game1.gameScene.player.MapCollider.Intersects(MapCollider) && Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.E))
+            if (SceneManager.gameScene.player.MapCollider.Intersects(MapCollider) && Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.E))
             {
-                if (Game1.gameScene.player.Inventory.Fits(this))
+                if (SceneManager.gameScene.player.Inventory.Fits(this))
                 {
-                    Game1.gameScene.player.Inventory.Add(this);
-                    Game1.gameScene.RemoveObject(this);
+                    SceneManager.gameScene.player.Inventory.Add(this);
+                    SceneManager.gameScene.RemoveObject(this);
                 }
             }
         }

@@ -19,7 +19,7 @@ namespace Shoot__n_Loot.Scenes
 
         public override void Update()
         {
-            if (Input.KeyWasJustPressed(Keys.Escape)) Game1.currentScene = Game1.mainMenuScene;
+            if (Input.KeyWasJustPressed(Keys.Escape)) SceneManager.currentScene = SceneManager.mainMenuScene;
 
             base.Update();
         }

@@ -19,19 +19,9 @@ namespace Shoot__n_Loot
     {
         public static Point ScreenSize { get { return new Point(1200, 750); } }
         public static Random random;
-
-        internal static Scene currentScene;
-
-        internal static MainMenuScene mainMenuScene;
-        internal static GameScene gameScene;
-        internal static AboutScene aboutScene;
- //all objects in this list are moved to the main list at the beginning of each frame, to avoid breaking the foreach loops
-
+        
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        //Player player;
-
-
         
         public Game1()
         {
@@ -71,11 +61,7 @@ namespace Shoot__n_Loot
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.Load(Content);
-
-            gameScene = new GameScene();
-            mainMenuScene = new MainMenuScene();
-            aboutScene = new AboutScene();
-            currentScene = mainMenuScene;
+            SceneManager.LoadAll();
         }
 
         /// <summary>
@@ -96,7 +82,7 @@ namespace Shoot__n_Loot
         {
             Input.Update();
 
-            currentScene.Update();
+            SceneManager.currentScene.Update();
 
             base.Update(gameTime);
         }
@@ -110,7 +96,7 @@ namespace Shoot__n_Loot
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, Camera.Transform);
 
-            currentScene.Draw(spriteBatch); 
+            SceneManager.currentScene.Draw(spriteBatch); 
 
             spriteBatch.End();
             base.Draw(gameTime);

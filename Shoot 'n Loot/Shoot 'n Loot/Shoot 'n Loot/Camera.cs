@@ -13,8 +13,9 @@ namespace Shoot__n_Loot
         public static Vector2 Position { get; set; }
         public static Vector2 Origin { get; set; }
         public static float FollowSpeed { get; set; }
+        public static Vector2 Center { get { return Position + Origin / 2; } }
 
-        public static Vector2 TotalOffset { get { return Position - Origin; } }
+        public static Vector2 TotalOffset { get { return Position; } }
 
         public static void Follow(Vector2 target)
         {

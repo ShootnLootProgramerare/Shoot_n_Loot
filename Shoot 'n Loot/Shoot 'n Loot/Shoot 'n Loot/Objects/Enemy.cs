@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Shoot__n_Loot.Scenes;
 
 namespace Shoot__n_Loot
 {
@@ -74,14 +75,14 @@ namespace Shoot__n_Loot
                     Attacking();
                     return;
                 }
-                else if (DistanceSquared(Game1.gameScene.player.Center) < Math.Pow(range, 2))
+                else if (DistanceSquared(SceneManager.gameScene.player.Center) < Math.Pow(range, 2))
                 {
                     Velocity = Vector2.Zero;
                     attacking = true;
                 }
-                else if (DistanceSquared(Game1.gameScene.player.Center) < 250000)
+                else if (DistanceSquared(SceneManager.gameScene.player.Center) < 250000)
                 {
-                    Vector2 d = Game1.gameScene.player.Position - Position;
+                    Vector2 d = SceneManager.gameScene.player.Position - Position;
                     d.Normalize();
                     Velocity = d * 3;
 
@@ -96,23 +97,23 @@ namespace Shoot__n_Loot
                     Attacking();
                     return;
                 }
-                else if (DistanceSquared(Game1.gameScene.player.Center) < Math.Pow(range, 2))
+                else if (DistanceSquared(SceneManager.gameScene.player.Center) < Math.Pow(range, 2))
                 {
                     Velocity = Vector2.Zero;
                     attacking = true;
                 }
-                else if (DistanceSquared(Game1.gameScene.player.Center) < 80000)
+                else if (DistanceSquared(SceneManager.gameScene.player.Center) < 80000)
                 {
                     Move(true);
-                    Vector2 d = Game1.gameScene.player.Position - Position;
+                    Vector2 d = SceneManager.gameScene.player.Position - Position;
                     d.Normalize();
                     Velocity = d * 4;
                 }
-                else if (DistanceSquared(Game1.gameScene.player.Center) < 1000000)
+                else if (DistanceSquared(SceneManager.gameScene.player.Center) < 1000000)
                 {
                     Move(true);
                     attacking = false;
-                    Vector2 d = Game1.gameScene.player.Position - Position;
+                    Vector2 d = SceneManager.gameScene.player.Position - Position;
                     d.Normalize();
                     Velocity = d;
                 }
@@ -130,7 +131,7 @@ namespace Shoot__n_Loot
             {
                 attacking = false;
 
-                if (DistanceSquared(Game1.gameScene.player.Center) < 40000) Game1.gameScene.player.Health -= Damage;
+                if (DistanceSquared(SceneManager.gameScene.player.Center) < 40000) SceneManager.gameScene.player.Health -= Damage;
             }
         }
 
@@ -168,8 +169,8 @@ namespace Shoot__n_Loot
         protected override void OnDestroy()
         {
             //create particles, spawn dropped items etc
-            Game1.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.Fisherman));
-            Game1.gameScene.AddObject(new Item(1, 1, .1f, new Sprite(TextureManager.medicineItem, Position, new Vector2(16))));
+            SceneManager.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.Fisherman));
+            SceneManager.gameScene.AddObject(new Item(1, 1, .1f, new Sprite(TextureManager.medicineItem, Position, new Vector2(16))));
         }
 
         public override void Draw(SpriteBatch spriteBatch)
