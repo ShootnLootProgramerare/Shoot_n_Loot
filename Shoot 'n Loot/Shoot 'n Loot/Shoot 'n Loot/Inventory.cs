@@ -102,6 +102,12 @@ namespace Shoot__n_Loot
             return new Point(-1, -1);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        /// <param name="center">Relative to the center of the screen. Note that it will automatically adjust for camera position!</param>
         public void Draw(SpriteBatch spriteBatch, Point center)
         {
             Point offset = new Point(center.X - (width * DRAWNSIZE) / 2, center.Y - (height * DRAWNSIZE) / 2);

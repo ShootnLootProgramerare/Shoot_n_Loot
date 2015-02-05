@@ -101,7 +101,7 @@ namespace Shoot__n_Loot
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (inventoryVisible) Inventory.Draw(spriteBatch, new Point(Game1.ScreenSize.X / 2, Game1.ScreenSize.Y / 2));
+            if (inventoryVisible) Inventory.Draw(spriteBatch, new Point(0, 0));
 
             spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
 
