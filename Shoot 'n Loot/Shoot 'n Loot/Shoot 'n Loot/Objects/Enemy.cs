@@ -159,7 +159,7 @@ namespace Shoot__n_Loot
 
             if (attacking)
             {
-                Sprite.SetTexture(TextureManager.fishermanAttack[(int)direction], 7, new Point(200, 100));
+                Sprite.SetTexture(TextureManager.fishermanAttack[(int)direction], 5, new Point(200, 100));
                 Sprite.AnimationSpeed = 6f / 60;
             }
             else Sprite.SetTexture(TextureManager.fishermanWalk[(int)direction], 4, new Point(200, 100));
