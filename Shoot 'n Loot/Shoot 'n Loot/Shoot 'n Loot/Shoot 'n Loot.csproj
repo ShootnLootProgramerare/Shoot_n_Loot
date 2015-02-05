@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="Music.cs" />
     <Compile Include="Objects\Bullet.cs" />
+    <Compile Include="Scenes\AboutScene.cs" />
     <Compile Include="Weapon\BulletProperties.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Map\Chunk.cs" />

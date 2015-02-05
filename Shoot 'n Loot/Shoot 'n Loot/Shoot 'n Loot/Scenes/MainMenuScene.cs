@@ -18,13 +18,14 @@ namespace Shoot__n_Loot
         public override void Update()
         {
             if (Input.newKs.IsKeyDown(Keys.Enter)) Game1.currentScene = Game1.gameScene;
+            else if (Input.KeyWasJustPressed(Keys.Escape)) Game1.currentScene = Game1.aboutScene;
 
             base.Update();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            string s = "Press Enter";
+            string s = "Press Enter for game or Escape for info";
             spriteBatch.DrawString(TextureManager.font, s, Vector2.Zero - TextureManager.font.MeasureString(s) / 2, Color.Black);
             base.Draw(spriteBatch);
         }

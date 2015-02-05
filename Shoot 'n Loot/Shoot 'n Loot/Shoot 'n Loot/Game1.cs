@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Shoot__n_Loot.Scenes;
 
 namespace Shoot__n_Loot
 {
@@ -23,6 +24,7 @@ namespace Shoot__n_Loot
 
         internal static MainMenuScene mainMenuScene;
         internal static GameScene gameScene;
+        internal static AboutScene aboutScene;
  //all objects in this list are moved to the main list at the beginning of each frame, to avoid breaking the foreach loops
 
         GraphicsDeviceManager graphics;
@@ -72,6 +74,7 @@ namespace Shoot__n_Loot
 
             gameScene = new GameScene();
             mainMenuScene = new MainMenuScene();
+            aboutScene = new AboutScene();
             currentScene = mainMenuScene;
         }
 
