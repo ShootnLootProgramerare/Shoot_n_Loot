@@ -41,7 +41,7 @@ namespace Shoot__n_Loot
         /// <param name="spriteBatch"></param>
         public void DrawInInventory(Rectangle position, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite.Texture, new Rectangle(position.X, position.Y, position.Width * Width, position.Height * Height), Color.White);
+            spriteBatch.Draw(Sprite.Texture, new Rectangle(position.X, position.Y, position.Width * Width, position.Height * Height), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
         }
     }
 }

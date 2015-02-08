@@ -118,7 +118,7 @@ namespace Shoot__n_Loot
                 {
                     Rectangle t = new Rectangle(x * DRAWNSIZE + (int)Camera.TotalOffset.X + offset.X, y * DRAWNSIZE + (int)Camera.TotalOffset.Y + offset.Y, DRAWNSIZE, DRAWNSIZE);
 
-                    spriteBatch.Draw(TextureManager.inventorySlot, t, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, .6f);
+                    spriteBatch.Draw(TextureManager.inventorySlot, t, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, .001f);
 
                     if (Slots[x, y] != null && !drawnItems.Contains(Slots[x, y]))
                     {
