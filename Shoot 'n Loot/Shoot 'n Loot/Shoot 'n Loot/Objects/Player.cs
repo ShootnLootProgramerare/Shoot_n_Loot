@@ -34,7 +34,7 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            if (!inventoryVisible)
+            if (!inventoryVisible && !customizing)
             {
                 Move();
                 Shoot();
@@ -44,11 +44,15 @@ namespace Shoot__n_Loot
             else if (customizing)
             {
                 weapon.CustomizingUpdate();
+                Sprite.Frame = 0;
+                Sprite.AnimationSpeed = 0;
             }
             else
             {
-                UpdateInventory();
             }
+
+            if (Input.KeyWasJustPressed(Keys.I) && !customizing) inventoryVisible = !inventoryVisible;
+            if (Input.KeyWasJustPressed(Keys.U) && !inventoryVisible) customizing = !customizing;
         }
 
         void Move()
@@ -106,14 +110,11 @@ namespace Shoot__n_Loot
             if (Input.KeyWasJustPressed(Keys.R)) weapon.StartReload(Inventory);
         }
 
-        void UpdateInventory()
-        {
-            if (Input.KeyWasJustPressed(Keys.I)) inventoryVisible = !inventoryVisible;
-        }
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (inventoryVisible) Inventory.Draw(spriteBatch, new Point(0, 0));
+
+            if (customizing) weapon.DrawCustomization(spriteBatch);
 
             spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
 
