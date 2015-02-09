@@ -113,7 +113,7 @@
     <Compile Include="Scenes\AboutScene.cs" />
     <Compile Include="Scenes\PauseScene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
-    <Compile Include="Weapon\BulletProperties.cs" />
+    <Compile Include="WeaponClasses\BulletProperties.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Map\Chunk.cs" />
     <Compile Include="Objects\Enemy.cs" />
@@ -134,8 +134,9 @@
     <Compile Include="TextureManager.cs" />
     <Compile Include="Map\Tile.cs" />
     <Compile Include="Map\TileProperties.cs" />
-    <Compile Include="Weapon\Weapon.cs" />
-    <Compile Include="Weapon\WeaponPart.cs" />
+    <Compile Include="WeaponClasses\CustomizationSlot.cs" />
+    <Compile Include="WeaponClasses\Weapon.cs" />
+    <Compile Include="WeaponClasses\WeaponPart.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
