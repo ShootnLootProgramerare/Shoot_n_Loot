@@ -158,13 +158,14 @@ namespace Shoot__n_Loot
             {
                 scene.AddObject(new Bullet(angle, position, BulletProperties));
                 Ammo--;
+                shootTimer = 1;
             }
         }
 
-        public void Update()
+        public void ShootingUpdate()
         {
             if (reloadTimer > 0) reloadTimer++;
-            if(reloadTimer >= reloadTime)
+            if (reloadTimer >= reloadTime)
             {
                 reloadTimer = 0;
                 Reload();
@@ -172,6 +173,11 @@ namespace Shoot__n_Loot
 
             if (shootTimer > 0) shootTimer++;
             if (shootTimer >= shootTime) shootTimer = 0;
+        }
+
+        public void CustomizingUpdate()
+        {
+
         }
     }
 }

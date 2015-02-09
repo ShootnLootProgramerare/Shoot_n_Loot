@@ -46,18 +46,19 @@ namespace Shoot__n_Loot
                     this.Health = 32; 
                     this.Damage = 8; 
                     this.Speed = 1.2f;
-                    this.range = 100;
+                    this.range = 90;
                     break;
                 case EnemyType.enemy2:
                     this.Health = 48; 
                     this.Damage = 2; 
                     this.Speed = 0.8f;
-                    this.range = 150;
+                    this.range = 90;
                     break;
                 case EnemyType.enemy3:
                     this.Health = 12; 
                     this.Damage = 12; 
                     this.Speed = 2.4f;
+                    this.range = 90;
                     break;
             }
 

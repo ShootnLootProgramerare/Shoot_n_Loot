@@ -19,6 +19,7 @@ namespace Shoot__n_Loot
 
         Weapon weapon;
         bool inventoryVisible;
+        bool customizing;
 
         public Player()
         {
@@ -33,11 +34,21 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            Move();
-            Animate();
-            Shoot();
-            UpdateInventory();
-            weapon.Update();
+            if (!inventoryVisible)
+            {
+                Move();
+                Shoot();
+                weapon.ShootingUpdate();
+                Animate();
+            }
+            else if (customizing)
+            {
+                weapon.CustomizingUpdate();
+            }
+            else
+            {
+                UpdateInventory();
+            }
         }
 
         void Move()
@@ -82,13 +93,14 @@ namespace Shoot__n_Loot
 
         void Shoot()
         {
-            if (Input.LeftClickWasJustPressed())
+            if (Input.newMs.LeftButton == ButtonState.Pressed && (Input.oldMs.LeftButton == ButtonState.Pressed || weapon.IsAuto))
             {
                 //check ammo etc
                 if (true)
                 {
-                    Vector2 v = Input.MousePosition - Center;
-                    weapon.TryShoot(Center, (float)Math.Atan2(v.Y, v.X), SceneManager.gameScene);
+                    Vector2 offset = new Vector2(0, -30);
+                    Vector2 v = Input.MousePosition - Center - offset;
+                    weapon.TryShoot(Center + offset, (float)Math.Atan2(v.Y, v.X), SceneManager.gameScene);
                 }
             }
             if (Input.KeyWasJustPressed(Keys.R)) weapon.StartReload(Inventory);
