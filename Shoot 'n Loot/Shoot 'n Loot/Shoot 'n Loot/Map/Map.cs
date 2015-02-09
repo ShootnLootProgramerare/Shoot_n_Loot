@@ -45,14 +45,14 @@ namespace Shoot__n_Loot
 
         static Color[,] loadTexture(Texture2D texture)
         {
-            Color[] colors1D = new Color[TextureManager.map.Width * TextureManager.map.Height];
-            TextureManager.map.GetData(colors1D);
-            Color[,] data = new Color[TextureManager.map.Width, TextureManager.map.Height];
-            for (int x = 0; x < TextureManager.map.Width; x++)
+            Color[] colors1D = new Color[texture.Width * texture.Height];
+            texture.GetData(colors1D);
+            Color[,] data = new Color[texture.Width, texture.Height];
+            for (int x = 0; x < texture.Width; x++)
             {
-                for (int y = 0; y < TextureManager.map.Height; y++)
+                for (int y = 0; y < texture.Height; y++)
                 {
-                    data[x, y] = colors1D[x + y * TextureManager.map.Width];
+                    data[x, y] = colors1D[x + y * texture.Width];
                 }
             }
             return data;

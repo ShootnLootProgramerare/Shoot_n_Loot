@@ -140,7 +140,6 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
-    <Content Include="house_tile3.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shoot 'n LootContent\Shoot 'n LootContent.contentproj">
