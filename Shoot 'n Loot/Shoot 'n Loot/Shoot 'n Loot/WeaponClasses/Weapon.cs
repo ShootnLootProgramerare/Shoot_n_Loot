@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Shoot__n_Loot.Scenes;
 using Shoot__n_Loot.WeaponClasses;
 using System;
 using System.Collections.Generic;
@@ -181,6 +182,19 @@ namespace Shoot__n_Loot
             barrelSlot = new CustomizationSlot(new Rectangle(800, 100, 200, 50), WeaponPart.PartType.Barrel),
             baseSlot = new CustomizationSlot(new Rectangle(200, 100, 200, 100), WeaponPart.PartType.Base),
             magSlot = new CustomizationSlot(new Rectangle(200, 230, 100, 150), WeaponPart.PartType.Mag);
+
+        WeaponPart draggedItem;
+        Inventory unusedParts 
+        { 
+            get
+            {
+                Inventory i = new Inventory(10, 10, 100000);
+                
+                //waponparts need to be a seperate inventory
+
+                return i;
+            }
+        }
 
         public void CustomizingUpdate()
         {

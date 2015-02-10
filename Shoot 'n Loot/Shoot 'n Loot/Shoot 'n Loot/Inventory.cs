@@ -31,6 +31,8 @@ namespace Shoot__n_Loot
 
         Item[,] Slots { get; set; }
 
+        public List<Item> Items { get { List<Item> i = new List<Item>(); foreach (Item p in Slots) if (p != null) i.Add(p); return i; } }
+
         public Inventory(byte width, byte height, float maxWeight)
         {
             this.width = width;
