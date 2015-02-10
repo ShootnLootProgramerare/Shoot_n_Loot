@@ -150,7 +150,7 @@ namespace Shoot__n_Loot
         }
         
         /// <summary>
-        /// returns bulletproperties if you can shoot, otherwise null
+        /// checks if the weapon can shoot and if so adds a bullet
         /// </summary>
         /// <returns></returns>
         public void TryShoot(Vector2 position, float angle, Scene scene)
