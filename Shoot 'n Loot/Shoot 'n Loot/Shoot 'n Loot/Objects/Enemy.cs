@@ -43,19 +43,19 @@ namespace Shoot__n_Loot
             switch (enemytype)
             {
                 case EnemyType.Fisherman:
-                    this.Health = 32; 
+                    this.MaxHealth = 32; 
                     this.Damage = 8; 
                     this.Speed = 1.2f;
                     this.range = 90;
                     break;
                 case EnemyType.enemy2:
-                    this.Health = 48; 
+                    this.MaxHealth = 48; 
                     this.Damage = 2; 
                     this.Speed = 0.8f;
                     this.range = 90;
                     break;
                 case EnemyType.enemy3:
-                    this.Health = 12; 
+                    this.MaxHealth = 12; 
                     this.Damage = 12; 
                     this.Speed = 2.4f;
                     this.range = 90;
@@ -172,7 +172,7 @@ namespace Shoot__n_Loot
         {
             //create particles, spawn dropped items etc
             SceneManager.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.Fisherman));
-            SceneManager.gameScene.AddObject(new Item(1, 1, .1f, new Sprite(TextureManager.medicineItem, Position, new Vector2(16))));
+            //SceneManager.gameScene.AddObject(new Item(1, 1, .1f, new Sprite(TextureManager.medicineItem, Position, new Vector2(16))));
         }
 
         public override void Draw(SpriteBatch spriteBatch)

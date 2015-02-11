@@ -10,6 +10,7 @@ namespace Shoot__n_Loot
     class GameObject
     {
         private float health;
+        private float maxHealth;
 
         public const string TYPE = "GameObject";
         public virtual string Type { get { return TYPE;  } }
@@ -22,6 +23,7 @@ namespace Shoot__n_Loot
         
         public bool Dead { get; set; }
         public float Health { get { return health; } set { health = value; if (health <= 0 && CanDie) { Dead = true; OnDestroy(); } } }
+        public float MaxHealth { get { return maxHealth; } set { maxHealth = health = value; } }
         public bool CanDie { get; set; }
         
         public bool ObstructsBullets { get; set; }
