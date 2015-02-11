@@ -36,7 +36,6 @@ namespace Shoot__n_Loot
         {
             if (!inventoryVisible && !customizing)
             {
-                Move();
                 Shoot();
                 weapon.ShootingUpdate();
                 Animate();
@@ -50,6 +49,8 @@ namespace Shoot__n_Loot
             else
             {
             }
+
+            Move();
 
             if (Input.KeyWasJustPressed(Keys.I) && !customizing) inventoryVisible = !inventoryVisible;
             if (Input.KeyWasJustPressed(Keys.U) && !inventoryVisible) customizing = !customizing;
