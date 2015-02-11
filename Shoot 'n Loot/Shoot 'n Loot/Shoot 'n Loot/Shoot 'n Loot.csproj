@@ -135,6 +135,7 @@
     <Compile Include="Map\Tile.cs" />
     <Compile Include="Map\TileProperties.cs" />
     <Compile Include="WeaponClasses\CustomizationSlot.cs" />
+    <Compile Include="WeaponClasses\Items.cs" />
     <Compile Include="WeaponClasses\Weapon.cs" />
     <Compile Include="WeaponClasses\WeaponPart.cs" />
   </ItemGroup>

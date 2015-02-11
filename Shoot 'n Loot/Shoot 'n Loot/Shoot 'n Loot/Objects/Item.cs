@@ -10,16 +10,33 @@ namespace Shoot__n_Loot
 {
     class Item : GameObject
     {
+        public delegate void OnConsume(Player player);
+
         public byte Width { get; private set; }
         public byte Height { get; private set; }
         public float Weight { get; private set; }
 
-        public Item(byte width, byte height, float weight, Sprite sprite)
+        public bool IsConsumable { get { return Consume != null; } }
+        public bool IsWeaponPart { get { return WeaponPart != null; } }
+
+        public WeaponPart WeaponPart { get; private set; }
+
+        public OnConsume Consume;
+
+        public Item(byte width, byte height, byte weight, Sprite sprite) : this(width, height, weight, sprite, null, null) { }
+
+        public Item(byte width, byte height, float weight, Sprite sprite, OnConsume o) : this(width, height, weight, sprite, o, null) { }
+
+        public Item(byte width, byte height, float weight, Sprite sprite, WeaponPart part) : this(width, height, weight, sprite, null, part) { }
+
+        public Item(byte width, byte height, float weight, Sprite sprite, OnConsume o, WeaponPart weaponPart)
         {
             this.Width = width;
             this.Height = height;
             this.Weight = weight;
             this.Sprite = sprite;
+            this.Consume = o;
+            this.WeaponPart = weaponPart;
         }
 
         public override void Update()

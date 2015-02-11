@@ -179,9 +179,9 @@ namespace Shoot__n_Loot
         }
 
         CustomizationSlot 
-            barrelSlot = new CustomizationSlot(new Rectangle(800, 100, 200, 50), WeaponPart.PartType.Barrel),
-            baseSlot = new CustomizationSlot(new Rectangle(200, 100, 200, 100), WeaponPart.PartType.Base),
-            magSlot = new CustomizationSlot(new Rectangle(200, 230, 100, 150), WeaponPart.PartType.Mag);
+            barrelSlot = new CustomizationSlot(new Rectangle(800, 100, 100, 100), WeaponPart.PartType.Barrel),
+            baseSlot = new CustomizationSlot(new Rectangle(200, 100, 100, 100), WeaponPart.PartType.Base),
+            magSlot = new CustomizationSlot(new Rectangle(200, 230, 100, 100), WeaponPart.PartType.Mag);
 
         WeaponPart draggedItem;
         Inventory unusedParts 
@@ -191,6 +191,7 @@ namespace Shoot__n_Loot
                 Inventory i = new Inventory(10, 10, 100000);
                 
                 //waponparts need to be a seperate inventory
+                //go through all slots and get all items that arent null
 
                 return i;
             }
@@ -198,7 +199,9 @@ namespace Shoot__n_Loot
 
         public void CustomizingUpdate()
         {
-
+            //dra items från alla weaponparts
+            //om p[ en legit slot n'r man sl'pper s't det d'r och returnera gammalt till ;verblivna
+            //annars l'gg tillbaka till 'verblivna
         }
 
         public void DrawCustomization(SpriteBatch spriteBatch)

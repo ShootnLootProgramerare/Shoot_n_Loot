@@ -1,0 +1,3 @@
+items har en bool isWeaponPart
+alla weaponParts finns i ett array nånstans
+om itemet är en weaponpart refererar den till en weaponPart i arrayet
