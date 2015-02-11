@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Shoot__n_Loot.Scenes;
+using Shoot__n_Loot.WeaponClasses;
+using System.Diagnostics;
 
 namespace Shoot__n_Loot
 {
@@ -43,19 +45,19 @@ namespace Shoot__n_Loot
             switch (enemytype)
             {
                 case EnemyType.Fisherman:
-                    this.MaxHealth = 32; 
+                    this.MaxHealth = 3; 
                     this.Damage = 8; 
                     this.Speed = 1.2f;
                     this.range = 90;
                     break;
                 case EnemyType.enemy2:
-                    this.MaxHealth = 48; 
+                    this.MaxHealth = 4; 
                     this.Damage = 2; 
                     this.Speed = 0.8f;
                     this.range = 90;
                     break;
                 case EnemyType.enemy3:
-                    this.MaxHealth = 12; 
+                    this.MaxHealth = 6; 
                     this.Damage = 12; 
                     this.Speed = 2.4f;
                     this.range = 90;
@@ -172,7 +174,9 @@ namespace Shoot__n_Loot
         {
             //create particles, spawn dropped items etc
             SceneManager.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.Fisherman));
-            //SceneManager.gameScene.AddObject(new Item(1, 1, .1f, new Sprite(TextureManager.medicineItem, Position, new Vector2(16))));
+            GameObject i = Items.RandomItem(Position);
+            SceneManager.gameScene.AddObject(i);
+            Debug.WriteLine("enemy died");
         }
 
         public override void Draw(SpriteBatch spriteBatch)

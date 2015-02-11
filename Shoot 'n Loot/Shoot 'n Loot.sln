@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shoot 'n Loot", "Shoot 'n Loot\Shoot 'n Loot\Shoot 'n Loot.csproj", "{7140BCCD-10F1-4420-B9FA-867A7DB83F90}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Shoot 'n LootContent", "Shoot 'n Loot\Shoot 'n LootContent\Shoot 'n LootContent.contentproj", "{9744A882-8B7A-438C-8C36-4868B2019C7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shoot 'n LootContent", "Shoot 'n Loot\Shoot 'n LootContent\Shoot 'n LootContent.contentproj", "{9744A882-8B7A-438C-8C36-4868B2019C7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

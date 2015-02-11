@@ -15,7 +15,7 @@ namespace Shoot__n_Loot
         public const string TYPE = "GameObject";
         public virtual string Type { get { return TYPE;  } }
 
-        public Vector2 Position { get { return Sprite.Position; } protected set { Sprite.Position = value; } }
+        public Vector2 Position { get { return Sprite.Position; } set { Sprite.Position = value; } }
         public Vector2 Size { get { return Sprite.Size; } protected set { Sprite.Size = value; } }
         public Vector2 Center { get { return new Vector2(MapCollider.Center.X, MapCollider.Center.Y); } }
         public virtual Rectangle MapCollider { get { return Sprite.Area; } }
@@ -73,7 +73,7 @@ namespace Shoot__n_Loot
         /// <param name="spriteBatch"></param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            Sprite.LayerDepth = .99f - (Position.Y / (Map.height * Chunk.sizePx)); //draws things closer to camera on top
+            Sprite.LayerDepth = .9999f - ((float)Sprite.Area.Bottom / (Map.height * Chunk.sizePx)); //draws things closer to camera on top
             Sprite.Draw(spriteBatch);
         }
 

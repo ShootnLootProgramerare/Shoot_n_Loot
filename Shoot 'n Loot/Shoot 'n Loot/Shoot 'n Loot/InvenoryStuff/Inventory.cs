@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Shoot__n_Loot.InvenoryStuff;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,59 +22,66 @@ namespace Shoot__n_Loot
             get
             {
                 List<Item> items = new List<Item>();
-                foreach (Item i in Slots) if (i != null) items.Add(i);
+                foreach (Item i in Items) if (i != null) items.Add(i);
                 items = items.Distinct().ToList();
                 float w = 0;
-                foreach (Item i in items) w += i.Weight;
+                foreach (Item i in items) w += i.Properties.Weight;
                 return w;
             }
         }
 
-        Item[,] Slots { get; set; }
+        ItemSlot[,] Slots { get; set; }
 
-        public List<Item> Items { get { List<Item> i = new List<Item>(); foreach (Item p in Slots) if (p != null) i.Add(p); return i; } }
+        public List<Item> Items { get { List<Item> i = new List<Item>(); foreach (ItemSlot s in Slots) if (s.Item != null) for (int j = 0; j < s.StackSize; j++) i.Add(s.Item); return i; } }
 
         public Inventory(byte width, byte height, float maxWeight)
         {
             this.width = width;
             this.height = height;
             this.maxWeight = maxWeight;
-            Slots = new Item[width, height];
-        }
-
-        public bool Fits(Item item)
-        {
-            return Weight + item.Weight < maxWeight && SlotThatFits(item.Width, item.Height) != new Point(-1, -1);
-        }
-
-        public void Add(Item item)
-        {
-            Point p = SlotThatFits(item.Width, item.Height);
-            if (p == new Point(-1, -1)) return;
-
-            Slots[p.X, p.Y] = item;
-
-            for (int x = 0; x < item.Width; x++)
+            Slots = new ItemSlot[width, height];
+            for(int x = 0; x < width; x++)
             {
-                for (int y = 0; y < item.Height; y++)
+                for (int y = 0; y < height; y++)
                 {
-                    Slots[x + p.X, y + p.Y] = item;
+                    Slots[x, y] = new ItemSlot();
                 }
             }
         }
 
-        public void Remove(Item item)
+        public bool Fits(Item item)
+        {
+            return Weight + item.Properties.Weight <= maxWeight && SlotThatFits(item) != new Point(-1, -1);
+        }
+
+        public void Add(Item item)
+        {
+            Point p = SlotThatFits(item);
+            if (p == new Point(-1, -1)) return;
+
+            //Slots[p.X, p.Y].Add(item);
+
+            for (int x = 0; x < item.Properties.Width; x++)
+            {
+                for (int y = 0; y < item.Properties.Height; y++)
+                {
+                    Slots[x + p.X, y + p.Y].Add(item);
+                }
+            }
+        }
+
+        public void Remove(Item item, byte num)
         {
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    if (Slots[x, y] == item) Slots[x, y] = null;
+                    if (Slots[x, y].Item == item) Slots[x, y].Remove(num);
                 }
             }
         }
 
-        Point SlotThatFits(byte width, byte height)
+        Point SlotThatFits(Item i)
         {
             Point p = new Point(-1, -1);
 
@@ -82,15 +90,15 @@ namespace Shoot__n_Loot
             {
                 for (int y = 0; y < this.height; y++)
                 {
-                    if (Slots[x, y] == null)
+                    if (Slots[x, y].CanContain(i))
                     {
                         fits = true;
                         p = new Point(x, y);
-                        for (int xi = 0; xi < width; xi++)
+                        for (int xi = 0; xi < width && xi + x < this.width; xi++)
                         {
-                            for (int yi = 0; yi < height; yi++)
+                            for (int yi = 0; yi < height && yi + y < this.height; yi++) //checking if out of bounds here might cause issues
                             {
-                                if (Slots[xi + x, yi + y] != null)
+                                if (!Slots[xi + x, yi + y].CanContain(i))
                                 {
                                     fits = false;
                                 }
@@ -109,7 +117,7 @@ namespace Shoot__n_Loot
         /// 
         /// </summary>
         /// <param name="spriteBatch"></param>
-        /// <param name="center">Relative to the center of the screen. Note that it will automatically adjust for camera position!</param>
+        /// <param name="center">center of the inventory relative to the center of the screen. Note that it will automatically adjust for camera position!</param>
         public void Draw(SpriteBatch spriteBatch, Point center)
         {
             Point offset = new Point(center.X - (width * DRAWNSIZE) / 2, center.Y - (height * DRAWNSIZE) / 2);
@@ -122,14 +130,16 @@ namespace Shoot__n_Loot
 
                     spriteBatch.Draw(TextureManager.inventorySlot, t, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, .001f);
 
-                    if (Slots[x, y] != null && !drawnItems.Contains(Slots[x, y]))
+                    if (Slots[x, y].Item != null && !drawnItems.Contains(Slots[x, y].Item))
                     {
-                        Slots[x, y].DrawInInventory(t, spriteBatch);
-                        drawnItems.Add(Slots[x, y]);
+                        Slots[x, y].Draw(spriteBatch, t);
+                        drawnItems.Add(Slots[x, y].Item);
                     }
                     //else if(!drawnItems.Contains(slots[x, y])) spriteBatch.Draw(TextureManager.enemy2, new Rectangle(x * DRAWNSIZE + (int)Camera.TotalOffset.X, y * DRAWNSIZE + (int)Camera.TotalOffset.Y, DRAWNSIZE, DRAWNSIZE), Color.White);
                 }
             }
+            string s =  Weight + "/" + maxWeight + " kg";
+            spriteBatch.DrawString(TextureManager.font, s, Camera.Center + new Vector2(0, 100) - TextureManager.font.MeasureString(s) / 2, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
         }
     }
 }

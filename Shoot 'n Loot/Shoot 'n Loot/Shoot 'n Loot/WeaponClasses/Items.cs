@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Shoot__n_Loot.InvenoryStuff;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +9,22 @@ namespace Shoot__n_Loot.WeaponClasses
 {
     static class Items
     {
-        public static Item[] items = new Item[]
+        public static Item RandomItem(Vector2 position)
         {
-            new Item(1, 1, 1, new Sprite(TextureManager.medicineItem, Vector2.Zero, new Vector2(50)))
+            Item i = new Item(properties[Game1.random.Next(properties.Length)], position);
+            i.Position = position;
+            return i;
+        }
+
+        public static ItemProperties[] properties = new ItemProperties[]
+        {
+            new ItemProperties(1, 1, 1, TextureManager.enemy1, 1),
+            new ItemProperties(2, 1, 1, TextureManager.medicineItem, 10)
         } ;
 
-        Item.OnConsume healht1(Player p)
+        static void healht1(Player p)
         {
             p.Health += 1;
-            return null;
         }
     }
 }

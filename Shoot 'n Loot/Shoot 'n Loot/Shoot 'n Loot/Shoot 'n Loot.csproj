@@ -108,9 +108,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InvenoryStuff\ItemProperties.cs" />
+    <Compile Include="InvenoryStuff\ItemSlot.cs" />
     <Compile Include="Music.cs" />
     <Compile Include="Objects\Bullet.cs" />
-    <Compile Include="Objects\HPBar.cs" />
     <Compile Include="Scenes\AboutScene.cs" />
     <Compile Include="Scenes\PauseScene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
@@ -122,8 +123,8 @@
     <Compile Include="Scenes\GameScene.cs" />
     <Compile Include="Objects\House.cs" />
     <Compile Include="Input.cs" />
-    <Compile Include="Inventory.cs" />
-    <Compile Include="Objects\Item.cs" />
+    <Compile Include="InvenoryStuff\Inventory.cs" />
+    <Compile Include="InvenoryStuff\Item.cs" />
     <Compile Include="Scenes\MainMenuScene.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Objects\Player.cs" />

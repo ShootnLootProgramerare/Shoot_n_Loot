@@ -25,7 +25,6 @@ namespace Shoot__n_Loot
         {
             Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(100), 4, new Point(100, 100), 0);
             Inventory = new Inventory(10, 4, 10);
-            //Inventory.Add(new Item(3, 2, 1, new Sprite(TextureManager.enemy1, Vector2.Zero, new Vector2(10)), null));
             weapon = new Weapon();
             weapon.AddPart(new WeaponPart(WeaponPart.PartType.Mag, 1, 1, 10, true, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium }));
             this.MaxHealth = 100;
