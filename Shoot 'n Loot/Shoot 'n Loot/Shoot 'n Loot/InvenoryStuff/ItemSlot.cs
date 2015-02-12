@@ -32,7 +32,6 @@ namespace Shoot__n_Loot.InvenoryStuff
 
         public bool CanContain(Item i)
         {
-            if (Item != null) Debug.WriteLine("this slot can contain " + (Item.Properties.MaxStack - StackSize) + " more items");
             if (Item == null) return true;
             else return (Item.Properties == i.Properties && StackSize < i.Properties.MaxStack);
         }
