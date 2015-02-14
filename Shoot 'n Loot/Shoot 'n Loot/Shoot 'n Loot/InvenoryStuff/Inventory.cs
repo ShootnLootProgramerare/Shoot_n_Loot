@@ -14,7 +14,9 @@ namespace Shoot__n_Loot
     {
         const byte DRAWNSIZE = 32;
 
-        byte width, height;
+        public byte Width { get; private set; }
+        public byte Height { get; private set; }
+        
         float maxWeight;
 
         public float Weight
@@ -30,14 +32,14 @@ namespace Shoot__n_Loot
             }
         }
 
-        ItemSlot[,] Slots { get; set; }
+        public ItemSlot[,] Slots { get; set; }
 
         public List<Item> Items { get { List<Item> i = new List<Item>(); foreach (ItemSlot s in Slots) if (s.Item != null) for (int j = 0; j < s.StackSize; j++) i.Add(s.Item); return i; } }
 
         public Inventory(byte width, byte height, float maxWeight)
         {
-            this.width = width;
-            this.height = height;
+            this.Width = width;
+            this.Height = height;
             this.maxWeight = maxWeight;
             Slots = new ItemSlot[width, height];
             for(int x = 0; x < width; x++)
@@ -72,9 +74,9 @@ namespace Shoot__n_Loot
 
         public void Remove(Item item, byte num)
         {
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < Width; x++)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < Height; y++)
                 {
                     if (Slots[x, y].Item == item) Slots[x, y].Remove(num);
                 }
@@ -86,17 +88,17 @@ namespace Shoot__n_Loot
             Point p = new Point(-1, -1);
 
             bool fits = true;
-            for (int x = 0; x < this.width; x++)
+            for (int x = 0; x < this.Width; x++)
             {
-                for (int y = 0; y < this.height; y++)
+                for (int y = 0; y < this.Height; y++)
                 {
                     if (Slots[x, y].CanContain(i))
                     {
                         fits = true;
                         p = new Point(x, y);
-                        for (int xi = 0; xi < width && xi + x < this.width; xi++)
+                        for (int xi = 0; xi < Width && xi + x < this.Width; xi++)
                         {
-                            for (int yi = 0; yi < height && yi + y < this.height; yi++) //checking if out of bounds here might cause issues
+                            for (int yi = 0; yi < Height && yi + y < this.Height; yi++) //checking if out of bounds here might cause issues
                             {
                                 if (!Slots[xi + x, yi + y].CanContain(i))
                                 {
@@ -112,6 +114,11 @@ namespace Shoot__n_Loot
             return new Point(-1, -1);
         }
 
+        public static Rectangle PositionForItem(int x, int y, Point offset)
+        {
+            return new Rectangle(x * DRAWNSIZE + (int)Camera.Center.X + offset.X, y * DRAWNSIZE + (int)Camera.Center.Y + offset.Y, DRAWNSIZE, DRAWNSIZE);
+        }
+
 
         /// <summary>
         /// 
@@ -120,13 +127,13 @@ namespace Shoot__n_Loot
         /// <param name="center">center of the inventory relative to the center of the screen. Note that it will automatically adjust for camera position!</param>
         public void Draw(SpriteBatch spriteBatch, Point center)
         {
-            Point offset = new Point(center.X - (width * DRAWNSIZE) / 2, center.Y - (height * DRAWNSIZE) / 2);
+            Point offset = new Point(center.X - (Width * DRAWNSIZE) / 2, center.Y - (Height * DRAWNSIZE) / 2);
             List<Item> drawnItems = new List<Item>(); //keep track of duplicates and dont draw them
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < Width; x++)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < Height; y++)
                 {
-                    Rectangle t = new Rectangle(x * DRAWNSIZE + (int)Camera.Center.X + offset.X, y * DRAWNSIZE + (int)Camera.Center.Y + offset.Y, DRAWNSIZE, DRAWNSIZE);
+                    Rectangle t = PositionForItem(x, y, offset);
 
                     spriteBatch.Draw(TextureManager.inventorySlot, t, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, .001f);
 
@@ -139,7 +146,7 @@ namespace Shoot__n_Loot
                 }
             }
             string s =  Weight + "/" + maxWeight + " kg";
-            spriteBatch.DrawString(TextureManager.font, s, Camera.Center + new Vector2(0, 100) - TextureManager.font.MeasureString(s) / 2, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.DrawString(TextureManager.font, s, Camera.Center + new Vector2(center.X, center.Y) + new Vector2(0, 100) - TextureManager.font.MeasureString(s) / 2, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
         }
     }
 }

@@ -21,6 +21,8 @@ namespace Shoot__n_Loot
         bool inventoryVisible;
         bool customizing;
 
+        private Point CUSTOMIZINGINVENTORYOFFSET { get { return new Point(0, 100); } }
+
         public Player()
         {
             Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(100), 4, new Point(100, 100), 0);
@@ -41,7 +43,7 @@ namespace Shoot__n_Loot
             }
             else if (customizing)
             {
-                weapon.CustomizingUpdate();
+                weapon.CustomizingUpdate(Inventory, CUSTOMIZINGINVENTORYOFFSET);
                 Sprite.Frame = 0;
                 Sprite.AnimationSpeed = 0;
             }
@@ -114,7 +116,11 @@ namespace Shoot__n_Loot
         {
             if (inventoryVisible) Inventory.Draw(spriteBatch, new Point(0, 0));
 
-            if (customizing) weapon.DrawCustomization(spriteBatch);
+            if (customizing)
+            {
+                weapon.DrawCustomization(spriteBatch);
+                Inventory.Draw(spriteBatch, CUSTOMIZINGINVENTORYOFFSET);
+            }
 
             spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
 

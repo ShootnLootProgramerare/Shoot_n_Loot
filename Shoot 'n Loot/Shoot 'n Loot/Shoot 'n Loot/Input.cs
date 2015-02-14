@@ -14,6 +14,8 @@ namespace Shoot__n_Loot
 
         public static Vector2 MousePosition { get { return new Vector2(newMs.X, newMs.Y) + Camera.Position - Camera.Origin; } }
 
+        public static Vector2 DeltaPos { get { return new Vector2(oldMs.X, oldMs.Y) - new Vector2(newMs.X, newMs.Y); } }
+
         public static void Initialize()
         {
             newKs = oldKs = Keyboard.GetState();
@@ -36,6 +38,18 @@ namespace Shoot__n_Loot
         public static bool LeftClickWasJustPressed()
         {
             return newMs.LeftButton == ButtonState.Pressed && oldMs.LeftButton == ButtonState.Released;
+        }
+
+
+        /// <summary>
+        /// relative to the world position.
+        /// </summary>
+        /// <param name="area"></param>
+        /// <returns></returns>
+        public static bool AreaIsClicked(Rectangle area)
+        {
+            return new Rectangle(newMs.X, newMs.Y, 1, 1).Intersects(area) && 
+                newMs.LeftButton == ButtonState.Pressed && oldMs.LeftButton == ButtonState.Released;
         }
     }
 }

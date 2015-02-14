@@ -1,9 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Shoot__n_Loot.Scenes;
 using Shoot__n_Loot.WeaponClasses;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -183,7 +185,7 @@ namespace Shoot__n_Loot
             baseSlot = new CustomizationSlot(new Rectangle(200, 100, 100, 100), WeaponPart.PartType.Base),
             magSlot = new CustomizationSlot(new Rectangle(200, 230, 100, 100), WeaponPart.PartType.Mag);
 
-        WeaponPart draggedItem;
+        Item draggedItem;
         Inventory unusedParts 
         { 
             get
@@ -197,11 +199,42 @@ namespace Shoot__n_Loot
             }
         }
 
-        public void CustomizingUpdate()
+        public void CustomizingUpdate(Inventory i, Point inventoryDrawOffset)
         {
             //dra items från alla weaponparts
             //om p[ en legit slot n'r man sl'pper s't det d'r och returnera gammalt till ;verblivna
             //annars l'gg tillbaka till 'verblivna
+            if (draggedItem == null)
+            {
+                for (int y = 0; y < i.Height; y++)
+                {
+                    for (int x = 0; x < i.Width; x++)
+                    {
+                        Rectangle r = Inventory.PositionForItem(x, y, inventoryDrawOffset);
+                        Item t = i.Slots[x, y].Item;
+                        if (t == null) continue;
+                        if (Input.AreaIsClicked(new Rectangle(r.X, r.Y, r.Width * t.Properties.Width, r.Height * t.Properties.Height)))
+                        {
+                            draggedItem = i.Slots[x, y].Item;
+                            i.Slots[x, y].Remove(1);
+                            draggedItem.Position = new Vector2(r.X, r.Y);
+                            Debug.WriteLine("item was clicked");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (Input.newMs.LeftButton == ButtonState.Released)
+                {
+                    i.Add(draggedItem);
+                    draggedItem = null;
+                }
+                else
+                {
+                    draggedItem.Position += Input.DeltaPos;
+                }
+            }
         }
 
         public void DrawCustomization(SpriteBatch spriteBatch)
@@ -209,6 +242,8 @@ namespace Shoot__n_Loot
             barrelSlot.Draw(spriteBatch);
             baseSlot.Draw(spriteBatch);
             magSlot.Draw(spriteBatch);
+
+            if (draggedItem != null) draggedItem.Draw(spriteBatch);
         }
     }
 }
