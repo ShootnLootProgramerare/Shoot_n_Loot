@@ -49,7 +49,7 @@ namespace Shoot__n_Loot
         public static bool AreaIsClicked(Rectangle area)
         {
             return new Rectangle(newMs.X, newMs.Y, 1, 1).Intersects(area) && 
-                newMs.LeftButton == ButtonState.Pressed && oldMs.LeftButton == ButtonState.Released;
+                LeftClickWasJustPressed();
         }
     }
 }
