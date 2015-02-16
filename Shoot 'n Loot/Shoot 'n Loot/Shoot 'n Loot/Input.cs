@@ -48,7 +48,7 @@ namespace Shoot__n_Loot
         /// <returns></returns>
         public static bool AreaIsClicked(Rectangle area)
         {
-            return new Rectangle(newMs.X, newMs.Y, 1, 1).Intersects(area) && 
+            return new Rectangle((int)MousePosition.X, (int)MousePosition.Y, 1, 1).Intersects(area) && 
                 LeftClickWasJustPressed();
         }
     }
