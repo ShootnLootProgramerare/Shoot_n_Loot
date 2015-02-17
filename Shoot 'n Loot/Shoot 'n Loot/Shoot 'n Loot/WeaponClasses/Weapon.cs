@@ -186,18 +186,18 @@ namespace Shoot__n_Loot
             magSlot = new CustomizationSlot(new Rectangle(200, 230, 100, 100), WeaponPart.PartType.Mag);
 
         Item draggedItem;
-        Inventory unusedParts 
+        /*Inventory unusedParts 
         { 
             get
             {
-                Inventory i = new Inventory(10, 10, 100000);
+                //Inventory i = new Inventory(10, 10, 100000);
                 
                 //waponparts need to be a seperate inventory
                 //go through all slots and get all items that arent null
 
-                return i;
+                //return i;
             }
-        }
+        }*/
 
         public void CustomizingUpdate(Inventory i, Point inventoryDrawOffset)
         {
@@ -210,14 +210,14 @@ namespace Shoot__n_Loot
                 {
                     for (int x = 0; x < i.Width; x++)
                     {
-                        Rectangle r = Inventory.PositionForItem(x, y, inventoryDrawOffset);
+                        Rectangle r = i.PositionForItem(x, y);
                         Item t = i.Slots[x, y].Item;
                         if (t == null) continue;
                         if (Input.AreaIsClicked(new Rectangle(r.X, r.Y, r.Width * t.Properties.Width, r.Height * t.Properties.Height)))
                         {
                             draggedItem = i.Slots[x, y].Item;
                             i.Slots[x, y].Remove(1);
-                            draggedItem.Position = new Vector2(r.X, r.Y);
+                            draggedItem.Position = new Vector2(r.X + r.Width / 2, r.Y + r.Height / 2);
                             Debug.WriteLine("item was clicked");
                         }
                     }
@@ -232,7 +232,7 @@ namespace Shoot__n_Loot
                 }
                 else
                 {
-                    draggedItem.Position += Input.DeltaPos;
+                    draggedItem.Position -= Input.DeltaPos;
                 }
             }
         }

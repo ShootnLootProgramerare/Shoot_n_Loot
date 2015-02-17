@@ -23,11 +23,8 @@ namespace Shoot__n_Loot
         {
             get
             {
-                List<Item> items = new List<Item>();
-                foreach (Item i in Items) if (i != null) items.Add(i);
-                items = items.Distinct().ToList();
                 float w = 0;
-                foreach (Item i in items) w += i.Properties.Weight;
+                foreach (ItemSlot s in Slots) w += s.Weight;
                 return w;
             }
         }
@@ -36,8 +33,13 @@ namespace Shoot__n_Loot
 
         public List<Item> Items { get { List<Item> i = new List<Item>(); foreach (ItemSlot s in Slots) if (s.Item != null) for (int j = 0; j < s.StackSize; j++) i.Add(s.Item); return i; } }
 
-        public Inventory(byte width, byte height, float maxWeight)
+        GameObject parent;
+        Point drawOffset;
+
+        public Inventory(GameObject parent, Point drawOffset, byte width, byte height, float maxWeight)
         {
+            this.parent = parent;
+            this.drawOffset = drawOffset;
             this.Width = width;
             this.Height = height;
             this.maxWeight = maxWeight;
@@ -83,6 +85,20 @@ namespace Shoot__n_Loot
             }
         }
 
+        public void Update(Point drawOffset)
+        {
+            for (int x = 0; x < Width; x++)
+            {
+                for (int y = 0; y < Height; y++)
+                {
+                    if (Input.AreaIsClicked(PositionForItem(x, y)))
+                    {
+                        Slots[x, y].ShowingOptions = !Slots[x, y].ShowingOptions;
+                    }
+                }
+            }
+        }
+
         Point SlotThatFits(Item i)
         {
             Point p = new Point(-1, -1);
@@ -114,9 +130,9 @@ namespace Shoot__n_Loot
             return new Point(-1, -1);
         }
 
-        public static Rectangle PositionForItem(int x, int y, Point offset)
+        public Rectangle PositionForItem(int x, int y)
         {
-            return new Rectangle(x * DRAWNSIZE + (int)Camera.Center.X + offset.X, y * DRAWNSIZE + (int)Camera.Center.Y + offset.Y, DRAWNSIZE, DRAWNSIZE);
+            return new Rectangle(x * DRAWNSIZE + (int)Camera.Center.X + drawOffset.X, y * DRAWNSIZE + (int)Camera.Center.Y + drawOffset.Y, DRAWNSIZE, DRAWNSIZE);
         }
 
 
@@ -125,15 +141,15 @@ namespace Shoot__n_Loot
         /// </summary>
         /// <param name="spriteBatch"></param>
         /// <param name="center">center of the inventory relative to the center of the screen. Note that it will automatically adjust for camera position!</param>
-        public void Draw(SpriteBatch spriteBatch, Point center)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            Point offset = new Point(center.X - (Width * DRAWNSIZE) / 2, center.Y - (Height * DRAWNSIZE) / 2);
+            Point offset = new Point(drawOffset.X - (Width * DRAWNSIZE) / 2, drawOffset.Y - (Height * DRAWNSIZE) / 2);
             List<Item> drawnItems = new List<Item>(); //keep track of duplicates and dont draw them
             for (int x = 0; x < Width; x++)
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    Rectangle t = PositionForItem(x, y, offset);
+                    Rectangle t = PositionForItem(x, y);
 
                     spriteBatch.Draw(TextureManager.inventorySlot, t, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, .001f);
 
@@ -145,8 +161,9 @@ namespace Shoot__n_Loot
                     //else if(!drawnItems.Contains(slots[x, y])) spriteBatch.Draw(TextureManager.enemy2, new Rectangle(x * DRAWNSIZE + (int)Camera.TotalOffset.X, y * DRAWNSIZE + (int)Camera.TotalOffset.Y, DRAWNSIZE, DRAWNSIZE), Color.White);
                 }
             }
-            string s =  Weight + "/" + maxWeight + " kg";
-            spriteBatch.DrawString(TextureManager.font, s, Camera.Center + new Vector2(center.X, center.Y) + new Vector2(0, 100) - TextureManager.font.MeasureString(s) / 2, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            string s = Weight + "/" + maxWeight + " kg";
+
+            spriteBatch.DrawString(TextureManager.font, s, Camera.Center + new Vector2(drawOffset.X, drawOffset.Y) + new Vector2(0, 100) - TextureManager.font.MeasureString(s) / 2, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
         }
     }
 }

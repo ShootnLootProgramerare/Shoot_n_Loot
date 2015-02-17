@@ -26,7 +26,7 @@ namespace Shoot__n_Loot
         public Player()
         {
             Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(100), 4, new Point(100, 100), 0);
-            Inventory = new Inventory(10, 4, 10);
+            Inventory = new Inventory(this, new Point(0, 0), 10, 4, 10);
             weapon = new Weapon();
             weapon.AddPart(new WeaponPart(WeaponPart.PartType.Mag, 1, 1, 10, false, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium }));
             this.MaxHealth = 100;
@@ -114,12 +114,12 @@ namespace Shoot__n_Loot
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (inventoryVisible) Inventory.Draw(spriteBatch, new Point(0, 0));
+            if (inventoryVisible) Inventory.Draw(spriteBatch);
 
             if (customizing)
             {
                 weapon.DrawCustomization(spriteBatch);
-                Inventory.Draw(spriteBatch, CUSTOMIZINGINVENTORYOFFSET);
+                Inventory.Draw(spriteBatch);
             }
 
             spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
