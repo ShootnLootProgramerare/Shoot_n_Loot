@@ -44,7 +44,7 @@ namespace Shoot__n_Loot
             this.Height = height;
             this.maxWeight = maxWeight;
             Slots = new ItemSlot[width, height];
-            for(int x = 0; x < width; x++)
+            for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
@@ -132,7 +132,7 @@ namespace Shoot__n_Loot
 
         public Rectangle PositionForItem(int x, int y)
         {
-            return new Rectangle(x * DRAWNSIZE + (int)Camera.Center.X + drawOffset.X, y * DRAWNSIZE + (int)Camera.Center.Y + drawOffset.Y, DRAWNSIZE, DRAWNSIZE);
+            return new Rectangle((x - Width / 2) * DRAWNSIZE + (int)Camera.Center.X + drawOffset.X, (y - Height / 2) * DRAWNSIZE + (int)Camera.Center.Y + drawOffset.Y, DRAWNSIZE, DRAWNSIZE);
         }
 
 
