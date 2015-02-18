@@ -4,6 +4,7 @@ using Shoot__n_Loot.Scenes;
 using Shoot__n_Loot.UI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -11,7 +12,7 @@ namespace Shoot__n_Loot.InvenoryStuff
 {
     class ItemSlot
     {
-        const int BUTTON_W = 50, BUTTON_H = 15;
+        const int BUTTON_W = 100, BUTTON_H = 25;
 
         public Item Item { get; private set; }
         public byte StackSize { get; private set; }
@@ -45,8 +46,7 @@ namespace Shoot__n_Loot.InvenoryStuff
                 Item = i;
                 StackSize++;
 
-                buttons = new List<Button>();
-                buttons.Add(new Button("drop", new Rectangle(0, 0, BUTTON_W, BUTTON_H), DropItem));
+                //SetButtons();
             }
         }
 
@@ -70,6 +70,39 @@ namespace Shoot__n_Loot.InvenoryStuff
             }
         }
 
+        /// <summary>
+        /// creates the buttons that appear when this item is selected, setting the position to the right spot
+        /// </summary>
+        private void SetButtons(int xOffset, int yOffset, Inventory container)
+        {
+            buttons = new List<Button>();
+            AddButton(buttons, new Button("drop", new Rectangle(container.PositionForItem(xOffset, yOffset).X, container.PositionForItem(xOffset, yOffset).Y, BUTTON_W, BUTTON_H), DropItem));
+            //if stackSize > 1 add drop all etc
+            if (StackSize > 1) AddButton(buttons, new Button("drop all", new Rectangle(container.PositionForItem(xOffset, yOffset).X, container.PositionForItem(xOffset, yOffset).Y, BUTTON_W, BUTTON_H), DropAll));
+            Debug.WriteLine(buttons[0].Area.X + ", " + buttons[0].Area.Y);
+        }
+
+        /// <summary>
+        /// adds the specified button to the specified list, setting the position to align under the other buttons
+        /// </summary>
+        /// <param name="buttons"></param>
+        /// <param name="b"></param>
+        private void AddButton(List<Button> buttons, Button b)
+        {
+            b.Area = new Rectangle(b.Area.X, b.Area.Bottom + buttons.Count * b.Area.Height, b.Area.Width, b.Area.Height);
+            buttons.Add(b);
+        }
+
+        public void Update(int x, int y, Inventory container)
+        {
+            if (Input.AreaIsClicked(container.PositionForItem(x, y)) && Input.LeftClickWasJustPressed()) ShowingOptions = !ShowingOptions;
+            if (Item != null && ShowingOptions)
+            {
+                SetButtons(x, y, container);
+                foreach (Button b in buttons) b.Update();
+            }
+        }
+
         public void Draw(SpriteBatch spriteBatch, Rectangle position)
         {
             if (Item != null) 
@@ -79,16 +112,23 @@ namespace Shoot__n_Loot.InvenoryStuff
 
                 if (ShowingOptions)
                 {
-                    foreach (Button b in buttons) b.Draw(spriteBatch);
+                    if (buttons != null) foreach (Button b in buttons) b.Draw(spriteBatch);
                 }
             }
         }
 
+        /// <summary>
+        /// to be used by buttons as a delegate
+        /// </summary>
         void DropItem() 
         {
+            SceneManager.gameScene.AddObject(new Item(Item.Properties, SceneManager.gameScene.player.Position));
             Remove(1);
-            Item.Position = SceneManager.gameScene.player.Position;
-            SceneManager.gameScene.AddObject(Item);
+        }
+
+        void DropAll()
+        {
+            for (int i = 0; i < StackSize; i++) DropItem();
         }
     }
 }

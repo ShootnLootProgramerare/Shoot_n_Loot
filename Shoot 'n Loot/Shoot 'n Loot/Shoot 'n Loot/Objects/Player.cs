@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Shoot__n_Loot.Scenes;
+using Shoot__n_Loot.WeaponClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,8 @@ namespace Shoot__n_Loot
             weapon.AddPart(new WeaponPart(WeaponPart.PartType.Mag, 1, 1, 10, false, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium }));
             this.MaxHealth = 100;
             CanDie = true;
+
+            Inventory.Add(Items.RandomItem(this.Position));
         }
 
         public override void Update()
@@ -40,6 +43,10 @@ namespace Shoot__n_Loot
                 Shoot();
                 weapon.ShootingUpdate();
                 Animate();
+            }
+            else if (inventoryVisible)
+            {
+                Inventory.Update(new Point(0, 0));
             }
             else if (customizing)
             {
@@ -53,7 +60,11 @@ namespace Shoot__n_Loot
 
             Move();
 
-            if (Input.KeyWasJustPressed(Keys.I) && !customizing) inventoryVisible = !inventoryVisible;
+            if (Input.KeyWasJustPressed(Keys.I) && !customizing)
+            {
+                inventoryVisible = !inventoryVisible;
+                Inventory.HideAllItemMenus();
+            }
             if (Input.KeyWasJustPressed(Keys.U) && !inventoryVisible) customizing = !customizing;
         }
 

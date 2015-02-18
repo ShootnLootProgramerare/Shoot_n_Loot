@@ -33,7 +33,8 @@ namespace Shoot__n_Loot
 
         public List<Item> Items { get { List<Item> i = new List<Item>(); foreach (ItemSlot s in Slots) if (s.Item != null) for (int j = 0; j < s.StackSize; j++) i.Add(s.Item); return i; } }
 
-        GameObject parent;
+        public GameObject parent { get; private set; }
+        
         Point drawOffset;
 
         public Inventory(GameObject parent, Point drawOffset, byte width, byte height, float maxWeight)
@@ -91,12 +92,14 @@ namespace Shoot__n_Loot
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    if (Input.AreaIsClicked(PositionForItem(x, y)))
-                    {
-                        Slots[x, y].ShowingOptions = !Slots[x, y].ShowingOptions;
-                    }
+                    Slots[x, y].Update(x, y, this);
                 }
             }
+        }
+
+        public void HideAllItemMenus()
+        {
+            foreach (ItemSlot s in Slots) s.ShowingOptions = false;
         }
 
         Point SlotThatFits(Item i)

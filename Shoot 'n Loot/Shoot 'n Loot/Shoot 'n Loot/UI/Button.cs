@@ -10,8 +10,8 @@ namespace Shoot__n_Loot.UI
     class Button
     {
         public string Text { get; set; }
-        public Rectangle Area { get; private set; }
-        public bool IsClicked { get { return Input.AreaIsClicked(Area); } }
+        public Rectangle Area { get; set; }
+        public bool IsClicked { get { return Input.AreaIsClicked(Area) && Input.LeftClickWasJustPressed(); } }
 
         Action onClick;
 
@@ -46,8 +46,8 @@ namespace Shoot__n_Loot.UI
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.inventorySlot, Area, Color.White);
-            spriteBatch.DrawString(TextureManager.font, Text, new Vector2(Area.X, Area.Y), Color.White);
+            spriteBatch.Draw(TextureManager.inventorySlot, Area, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.00001f);
+            spriteBatch.DrawString(TextureManager.font, Text, new Vector2(Area.X, Area.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
         }
     }
 }
