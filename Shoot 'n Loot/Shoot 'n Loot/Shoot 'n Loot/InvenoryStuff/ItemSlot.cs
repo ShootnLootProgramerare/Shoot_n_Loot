@@ -76,10 +76,11 @@ namespace Shoot__n_Loot.InvenoryStuff
         private void SetButtons(int xOffset, int yOffset, Inventory container)
         {
             buttons = new List<Button>();
-            AddButton(buttons, new Button("drop", new Rectangle(container.PositionForItem(xOffset, yOffset).X, container.PositionForItem(xOffset, yOffset).Y, BUTTON_W, BUTTON_H), DropItem));
-            //if stackSize > 1 add drop all etc
-            if (StackSize > 1) AddButton(buttons, new Button("drop all", new Rectangle(container.PositionForItem(xOffset, yOffset).X, container.PositionForItem(xOffset, yOffset).Y, BUTTON_W, BUTTON_H), DropAll));
-            Debug.WriteLine(buttons[0].Area.X + ", " + buttons[0].Area.Y);
+            Rectangle baseRect =  new Rectangle(container.PositionForItem(xOffset, yOffset).X, container.PositionForItem(xOffset, yOffset).Y, BUTTON_W, BUTTON_H);
+
+            AddButton(buttons, new Button("drop", baseRect, DropItem));
+            if (StackSize > 1) AddButton(buttons, new Button("drop all", baseRect, DropAll));
+            if (Item.Properties.IsConsumable) AddButton(buttons, new Button("eat", baseRect, Consume));
         }
 
         /// <summary>
@@ -129,6 +130,12 @@ namespace Shoot__n_Loot.InvenoryStuff
         void DropAll()
         {
             for (int i = 0; i < StackSize; i++) DropItem();
+        }
+
+        void Consume()
+        {
+            Item.Properties.onConsume(SceneManager.gameScene.player);
+            Remove(1);
         }
     }
 }
