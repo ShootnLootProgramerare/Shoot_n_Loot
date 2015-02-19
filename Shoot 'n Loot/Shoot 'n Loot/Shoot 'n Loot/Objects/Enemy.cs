@@ -127,6 +127,21 @@ namespace Shoot__n_Loot
             {
 
             }
+
+            foreach (GameObject g in SceneManager.currentScene.objects)
+            {
+                if (g.Type == Enemy.TYPE && g != this)
+                {
+                    if (g.DistanceSquared(Position) < 3000)
+                    {
+                        Vector2 v = g.Position - Position;
+                        if (v == Vector2.Zero) v = new Vector2((float)Game1.random.NextDouble() - .5f, (float)Game1.random.NextDouble()- .5f);
+                        v.Normalize();
+                        Position += v * -1;
+                        Debug.WriteLine("moving zombie, distance = " + (g.Position - Position).Length());
+                    }
+                }
+            }
         }
 
         private void Attacking()
@@ -173,10 +188,8 @@ namespace Shoot__n_Loot
         protected override void OnDestroy()
         {
             //create particles, spawn dropped items etc
-            SceneManager.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.Fisherman));
-            GameObject i = Items.RandomItem(Position);
-            SceneManager.gameScene.AddObject(i);
-            Debug.WriteLine("enemy died");
+            //SceneManager.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.Fisherman));
+            SceneManager.gameScene.AddObject(Items.RandomItem(Position));
         }
 
         public override void Draw(SpriteBatch spriteBatch)
