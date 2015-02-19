@@ -81,6 +81,7 @@ namespace Shoot__n_Loot.InvenoryStuff
             AddButton(buttons, new Button("drop", baseRect, DropItem));
             if (StackSize > 1) AddButton(buttons, new Button("drop all", baseRect, DropAll));
             if (Item.Properties.IsConsumable) AddButton(buttons, new Button("eat", baseRect, Consume));
+            if (Item.Properties.IsWeaponPart) AddButton(buttons, new Button("use in weapon", baseRect, UseInWeapon));
         }
 
         /// <summary>
@@ -136,6 +137,13 @@ namespace Shoot__n_Loot.InvenoryStuff
         {
             Item.Properties.onConsume(SceneManager.gameScene.player);
             Remove(1);
+        }
+
+        void UseInWeapon()
+        {
+            Item i = SceneManager.gameScene.player.weapon.AddPart(Item);
+            Remove(1);
+            if (i != null) SceneManager.gameScene.player.Inventory.Add(i);
         }
     }
 }

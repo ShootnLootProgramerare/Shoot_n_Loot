@@ -51,39 +51,41 @@ namespace Shoot__n_Loot
         
         public byte Ammo { get; private set; }
 
-        private List<WeaponPart> parts;
+        private List<Item> parts;
 
 
 
 
         public Weapon()
         {
-            parts = new List<WeaponPart>();
+            parts = new List<Item>();
             reloadTimer = 0;
             shootTimer = 0;
             CalculateValues();
         }
 
 
-
-        public bool AddPart(WeaponPart part)
+        /// <summary>
+        /// returns the replaced part if one existed, otherwise null
+        /// </summary>
+        /// <param name="part"></param>
+        /// <returns></returns>
+        public Item AddPart(Item part)
         {
-            if (ContainsType(part.Type)) return false;
-
+            Item oldPart = RemovePart(part.Properties.WeaponPart.Type);
             parts.Add(part);
 
             CalculateValues();
-
-            return true;
+            return oldPart;
         }
 
         public bool ContainsType(WeaponPart.PartType t)
         {
-            foreach (WeaponPart p in parts) if (p.Type == t) return true;
+            foreach (Item p in parts) if (p.Properties.WeaponPart.Type == t) return true;
             return false;
         }
 
-        public void RemovePart(WeaponPart p)
+        public void RemovePart(Item p)
         {
             parts.Remove(p);
             CalculateValues();
@@ -95,11 +97,11 @@ namespace Shoot__n_Loot
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public WeaponPart RemovePart(WeaponPart.PartType type)
+        public Item RemovePart(WeaponPart.PartType type)
         {
-            foreach (WeaponPart p in parts)
+            foreach (Item p in parts)
             {
-                if (p.Type == type)
+                if (p.Properties.WeaponPart.Type == type)
                 {
                     parts.Remove(p);
                     CalculateValues();
@@ -119,15 +121,15 @@ namespace Shoot__n_Loot
             bool auto = false;
             float rangeMod = 1;
 
-            foreach(WeaponPart p in parts)
+            foreach(Item p in parts)
             {
-                shootTimeMod += p.ShootSpeedMod;
-                reloadTimeMod += p.ReloadSpeedMod;
-                magSizeMod += p.MagSizeMod;
-                bulletSpeedMod += p.BulletSpeedMod;
-                bulletDamageMod += p.DamageMod;
-                rangeMod += p.RangeMod;
-                if (p.MakesAuto) auto = true;
+                shootTimeMod += p.Properties.WeaponPart.ShootSpeedMod;
+                reloadTimeMod += p.Properties.WeaponPart.ReloadSpeedMod;
+                magSizeMod += p.Properties.WeaponPart.MagSizeMod;
+                bulletSpeedMod += p.Properties.WeaponPart.BulletSpeedMod;
+                bulletDamageMod += p.Properties.WeaponPart.DamageMod;
+                rangeMod += p.Properties.WeaponPart.RangeMod;
+                if (p.Properties.WeaponPart.MakesAuto) auto = true;
             }
 
             shootTime = (byte)(baseShootTime * shootTimeMod);
