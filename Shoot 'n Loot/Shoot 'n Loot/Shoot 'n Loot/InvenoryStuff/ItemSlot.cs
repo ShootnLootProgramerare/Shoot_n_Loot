@@ -158,22 +158,24 @@ namespace Shoot__n_Loot.InvenoryStuff
             }
             if (Item != null && ShowingOptions)
             {
+                Rectangle r = parent.PositionForItem(x, y);
+                r.Width = 20 + (int)TextureManager.font.MeasureString(Item.Properties.InfoText).X;
+                r.X -= r.Width + 10;
+                r.Height = (int)TextureManager.font.MeasureString(Item.Properties.InfoText).Y + 10;
+                infoPos = r;
+
                 SetButtons(x, y, parent);
                 foreach (Button b in buttons) b.Update();
-                Rectangle r = parent.PositionForItem(x, y);
-                r.Width = 200;
-                r.X -= 200;
-                infoPos = r;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.inventorySlot, parent.PositionForItem(x, y), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0001f);
+            spriteBatch.Draw(TextureManager.inventorySlot, parent.PositionForItem(x, y), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000004f);
             if (Item != null)
             {
                 Item.DrawInInventory(parent.PositionForItem(x, y), spriteBatch);
-                spriteBatch.DrawString(TextureManager.font, StackSize.ToString(), new Vector2(parent.PositionForItem(x, y).X, parent.PositionForItem(x, y).Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.00001f);
+                spriteBatch.DrawString(TextureManager.font, StackSize.ToString(), new Vector2(parent.PositionForItem(x, y).X, parent.PositionForItem(x, y).Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.0000002f);
 
                 if (ShowingOptions)
                 {
@@ -182,12 +184,9 @@ namespace Shoot__n_Loot.InvenoryStuff
                     spriteBatch.DrawString(TextureManager.font, Item.Properties.InfoText, new Vector2(infoPos.X, infoPos.Y), Color.Black);
                 }
             }
-            else spriteBatch.DrawString(TextureManager.font, "null", new Vector2(parent.PositionForItem(x, y).X, parent.PositionForItem(x, y).Y), Color.Black);
         }
 
-        /// <summary>
-        /// to be used by buttons as a delegate
-        /// </summary>
+        //--------------- THESE ARE USED AS DELEGATES FOR BUTTON ONCLICKS -------------
         void DropItem() 
         {
             SceneManager.gameScene.AddObject(new Item(Item.Properties, SceneManager.gameScene.player.Position));

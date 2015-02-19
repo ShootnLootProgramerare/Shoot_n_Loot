@@ -9,7 +9,7 @@ namespace Shoot__n_Loot
 {
     class Tile
     {
-        public static TileProperties[] TilePrefabs = new TileProperties[] { new TileProperties(0, true), new TileProperties(1, false, false, 2, 30), new TileProperties(2, false) };
+        public static TileProperties[] TilePrefabs = new TileProperties[] { new TileProperties(0, true), new TileProperties(1, false, false, 2, 30), new TileProperties(2, false), new TileProperties(3, true) };
 
         public enum TileType { Grass = 0, Sea = 1, Wood = 2 }
 
