@@ -46,7 +46,7 @@ namespace Shoot__n_Loot.UI
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.inventorySlot, Area, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.00001f);
+            spriteBatch.Draw(TextureManager.inventorySlot, Area, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000001f);
             spriteBatch.DrawString(TextureManager.font, Text, new Vector2(Area.X, Area.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
         }
     }

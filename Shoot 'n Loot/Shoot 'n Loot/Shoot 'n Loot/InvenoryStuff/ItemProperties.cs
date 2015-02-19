@@ -9,6 +9,7 @@ namespace Shoot__n_Loot.InvenoryStuff
 {
     class ItemProperties
     {
+        public string InfoText { get; private set; }
         public byte Width { get; private set; }
         public byte Height { get; private set; }
         public byte MaxStack { get; private set; }
@@ -23,13 +24,13 @@ namespace Shoot__n_Loot.InvenoryStuff
         public Action<Player> onConsume;
 
 
-        public ItemProperties(byte width, byte height, byte weight, Texture2D texture, byte maxStack) : this(width, height, weight, texture, maxStack, null, null) { }
+        public ItemProperties(byte width, byte height, byte weight, Texture2D texture, byte maxStack, string infoText) : this(width, height, weight, texture, maxStack, infoText, null, null) { }
 
-        public ItemProperties(byte width, byte height, float weight, Texture2D texture, byte maxStack, Action<Player> onConsume) : this(width, height, weight, texture, maxStack, onConsume, null) { }
+        public ItemProperties(byte width, byte height, float weight, Texture2D texture, byte maxStack, string infoText, Action<Player> onConsume) : this(width, height, weight, texture, maxStack, infoText, onConsume, null) { }
 
-        public ItemProperties(byte width, byte height, float weight, Texture2D texture, byte maxStack, WeaponPart part) : this(width, height, weight, texture, maxStack, null, part) { }
+        public ItemProperties(byte width, byte height, float weight, Texture2D texture, byte maxStack, string infoText, WeaponPart part) : this(width, height, weight, texture, maxStack, infoText, null, part) { }
 
-        public ItemProperties(byte width, byte height, float weight, Texture2D texture, byte maxStack, Action<Player> onConsume, WeaponPart weaponPart)
+        public ItemProperties(byte width, byte height, float weight, Texture2D texture, byte maxStack, string infoText, Action<Player> onConsume, WeaponPart weaponPart)
         {
             this.Width = width;
             this.Height = height;
@@ -38,6 +39,7 @@ namespace Shoot__n_Loot.InvenoryStuff
             this.WeaponPart = weaponPart;
             this.MaxStack = maxStack;
             this.Texture = texture;
+            this.InfoText = infoText;
         }
     }
 }

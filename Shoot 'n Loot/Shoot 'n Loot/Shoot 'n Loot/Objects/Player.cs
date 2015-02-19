@@ -29,8 +29,8 @@ namespace Shoot__n_Loot
             Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(100), 4, new Point(100, 100), 0);
             Inventory = new Inventory(this, new Point(0, 0), 10, 4, 10);
             weapon = new Weapon();
-            weapon.AddPart(new Item(new InvenoryStuff.ItemProperties(1, 1, 1, TextureManager.map, 1, new WeaponPart(WeaponPart.PartType.Mag, 1, 1, 20, false, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium })), Vector2.Zero));
-            weapon.AddPart(new Item(new InvenoryStuff.ItemProperties(1, 1, 1, TextureManager.map, 1, new WeaponPart(WeaponPart.PartType.Base, 1, 1, 0, false, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium })), Vector2.Zero));
+            weapon.AddPart(new Item(new InvenoryStuff.ItemProperties(1, 1, 1, TextureManager.map, 1, "some part", new WeaponPart(WeaponPart.PartType.Mag, 1, 1, 20, false, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium })), Vector2.Zero));
+            weapon.AddPart(new Item(new InvenoryStuff.ItemProperties(1, 1, 1, TextureManager.map, 1, "other part", new WeaponPart(WeaponPart.PartType.Base, 1, 1, 0, false, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium })), Vector2.Zero));
             this.MaxHealth = 100;
             CanDie = true;
 

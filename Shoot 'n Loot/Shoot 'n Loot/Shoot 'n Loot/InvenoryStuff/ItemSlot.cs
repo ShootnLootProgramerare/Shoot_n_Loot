@@ -19,6 +19,8 @@ namespace Shoot__n_Loot.InvenoryStuff
 
         public bool ShowingOptions { get; set; }
 
+        Rectangle infoPos;
+
         public float Weight 
         {
             get
@@ -97,11 +99,19 @@ namespace Shoot__n_Loot.InvenoryStuff
 
         public void Update(int x, int y, Inventory container)
         {
-            if (Input.AreaIsClicked(container.PositionForItem(x, y)) && Input.LeftClickWasJustPressed()) ShowingOptions = !ShowingOptions;
+            if (Input.AreaIsClicked(container.PositionForItem(x, y)) && Input.LeftClickWasJustPressed())
+            {
+                container.HideAllItemMenus();
+                ShowingOptions = !ShowingOptions;
+            }
             if (Item != null && ShowingOptions)
             {
                 SetButtons(x, y, container);
                 foreach (Button b in buttons) b.Update();
+                Rectangle r = container.PositionForItem(x, y);
+                r.Width = 200;
+                r.X -= 200;
+                infoPos = r;
             }
         }
 
@@ -110,11 +120,13 @@ namespace Shoot__n_Loot.InvenoryStuff
             if (Item != null) 
             {
                 Item.DrawInInventory(position, spriteBatch);
-                spriteBatch.DrawString(TextureManager.font, StackSize.ToString(), new Vector2(position.X, position.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(TextureManager.font, StackSize.ToString(), new Vector2(position.X, position.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.00001f);
 
                 if (ShowingOptions)
                 {
                     if (buttons != null) foreach (Button b in buttons) b.Draw(spriteBatch);
+                    spriteBatch.Draw(TextureManager.inventorySlot, infoPos, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.00001f);
+                    spriteBatch.DrawString(TextureManager.font, Item.Properties.InfoText, new Vector2(infoPos.X, infoPos.Y), Color.Black);
                 }
             }
         }

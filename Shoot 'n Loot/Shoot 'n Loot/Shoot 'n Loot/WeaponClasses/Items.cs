@@ -18,9 +18,9 @@ namespace Shoot__n_Loot.WeaponClasses
 
         public static ItemProperties[] properties = new ItemProperties[]
         {
-            new ItemProperties(1, 1, 1, TextureManager.enemy1, 1),
-            new ItemProperties(2, 1, 1, TextureManager.medicineItem, 10, healht1),
-            new ItemProperties(1, 1, 1, TextureManager.house, 1, new WeaponPart(WeaponPart.PartType.Base, 1, 1, 30, true, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium } ))
+            new ItemProperties(1, 1, 1, TextureManager.enemy1, 1, "Does nothing"),
+            new ItemProperties(2, 1, 1, TextureManager.medicineItem, 10, "Heal 1 point", healht1),
+            new ItemProperties(1, 1, 1, TextureManager.house, 1, "Auto: true\nAlso newLine", new WeaponPart(WeaponPart.PartType.Base, 1, 1, 30, true, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium } ))
         } ;
 
         static void healht1(Player p)
