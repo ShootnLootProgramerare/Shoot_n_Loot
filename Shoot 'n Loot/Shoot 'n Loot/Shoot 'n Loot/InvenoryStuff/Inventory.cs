@@ -49,7 +49,7 @@ namespace Shoot__n_Loot
             {
                 for (int y = 0; y < height; y++)
                 {
-                    Slots[x, y] = new ItemSlot();
+                    Slots[x, y] = new ItemSlot(this, x, y);
                 }
             }
         }
@@ -64,15 +64,9 @@ namespace Shoot__n_Loot
             Point p = SlotThatFits(item);
             if (p == new Point(-1, -1)) return;
 
-            //Slots[p.X, p.Y].Add(item);
+            Slots[p.X, p.Y].Add(item);
 
-            for (int x = 0; x < item.Properties.Width; x++)
-            {
-                for (int y = 0; y < item.Properties.Height; y++)
-                {
-                    Slots[x + p.X, y + p.Y].Add(item);
-                }
-            }
+            
         }
 
         public void Remove(Item item, byte num)
@@ -92,7 +86,7 @@ namespace Shoot__n_Loot
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    Slots[x, y].Update(x, y, this);
+                    Slots[x, y].Update();
                 }
             }
         }
@@ -104,30 +98,11 @@ namespace Shoot__n_Loot
 
         Point SlotThatFits(Item i)
         {
-            Point p = new Point(-1, -1);
-
-            bool fits = true;
             for (int x = 0; x < this.Width; x++)
             {
                 for (int y = 0; y < this.Height; y++)
                 {
-                    if (Slots[x, y].CanContain(i))
-                    {
-                        fits = true;
-                        p = new Point(x, y);
-                        for (int xi = 0; xi < Width && xi + x < this.Width; xi++)
-                        {
-                            for (int yi = 0; yi < Height && yi + y < this.Height; yi++) //checking if out of bounds here might cause issues
-                            {
-                                if (!Slots[xi + x, yi + y].CanContain(i))
-                                {
-                                    fits = false;
-                                }
-                            }
-                        }
-                    }
-                    else fits = false;
-                    if (fits) return p;
+                    if (Slots[x, y].CanContain(i)) return new Point(x, y);
                 }
             }
             return new Point(-1, -1);
@@ -146,24 +121,9 @@ namespace Shoot__n_Loot
         /// <param name="center">center of the inventory relative to the center of the screen. Note that it will automatically adjust for camera position!</param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            Point offset = new Point(drawOffset.X - (Width * DRAWNSIZE) / 2, drawOffset.Y - (Height * DRAWNSIZE) / 2);
-            List<Item> drawnItems = new List<Item>(); //keep track of duplicates and dont draw them
-            for (int x = 0; x < Width; x++)
-            {
-                for (int y = 0; y < Height; y++)
-                {
-                    Rectangle t = PositionForItem(x, y);
-
-                    spriteBatch.Draw(TextureManager.inventorySlot, t, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, .001f);
-
-                    if (Slots[x, y].Item != null && !drawnItems.Contains(Slots[x, y].Item))
-                    {
-                        Slots[x, y].Draw(spriteBatch, t);
-                        drawnItems.Add(Slots[x, y].Item);
-                    }
-                    //else if(!drawnItems.Contains(slots[x, y])) spriteBatch.Draw(TextureManager.enemy2, new Rectangle(x * DRAWNSIZE + (int)Camera.TotalOffset.X, y * DRAWNSIZE + (int)Camera.TotalOffset.Y, DRAWNSIZE, DRAWNSIZE), Color.White);
-                }
-            }
+            //Point offset = new Point(drawOffset.X - (Width * DRAWNSIZE) / 2, drawOffset.Y - (Height * DRAWNSIZE) / 2);
+            //List<Item> drawnItems = new List<Item>(); //keep track of duplicates and dont draw them
+            foreach (ItemSlot slot in Slots) slot.Draw(spriteBatch);
             string s = Weight + "/" + maxWeight + " kg";
 
             spriteBatch.DrawString(TextureManager.font, s, Camera.Center + new Vector2(drawOffset.X, drawOffset.Y) + new Vector2(0, 100) - TextureManager.font.MeasureString(s) / 2, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);

@@ -21,6 +21,10 @@ namespace Shoot__n_Loot.InvenoryStuff
 
         Rectangle infoPos;
 
+        Inventory parent;
+
+        int x, y;
+
         public float Weight 
         {
             get
@@ -31,9 +35,18 @@ namespace Shoot__n_Loot.InvenoryStuff
         }
 
         List<Button> buttons;
-
-        public ItemSlot()
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parent">the inventory that contains this slot.</param>
+        /// <param name="x">where in the container this slot resides</param>
+        /// <param name="y">where in the container this slot resides</param>
+        public ItemSlot(Inventory parent, int x, int y)
         {
+            this.parent = parent;
+            this.x = x;
+            this.y = y;
             StackSize = 0;
         }
 
@@ -41,21 +54,54 @@ namespace Shoot__n_Loot.InvenoryStuff
         /// if this slot contains this item or null one will be added to the stack. if it contains something else it will be overwritten.
         /// </summary>
         /// <param name="i">the item to be added.</param>
-        public void Add(Item i)
+        public void Add(Item item)
         {
-            if (CanContain(i))
+            if (Item == null)
             {
-                Item = i;
-                StackSize++;
-
-                //SetButtons();
+                StackSize = 1;
             }
+            else if (Item.Properties != item.Properties)
+            {
+                StackSize = 1;
+            }
+            else StackSize++;
+
+            Item = item;
         }
 
         public bool CanContain(Item i)
         {
-            if (Item == null) return true;
-            else return (Item.Properties == i.Properties && StackSize < i.Properties.MaxStack);
+            //first check if this slot already contains that item
+            if (Item != null)
+            {
+                if (Item.Properties != i.Properties) { Debug.WriteLine("slot " + x + ", " + y + " contains a different item"); return false; }
+                else if (StackSize < Item.Properties.MaxStack) return true; //if its the same and the stack is not maxed, the item fits
+                else return false;
+            }
+            //otherwise see if no other item is obstructing the slot
+            foreach (ItemSlot s in parent.Slots) if (s.ExtendsTo(x, y)) { Debug.WriteLine("slot " + x + ", " + y + " is obstructed"); return false; }
+            //then see if the item would obstruct another slot if placed here
+            for (int x = 0; x < i.Properties.Width; x++ )
+            {
+                for (int y = 0; y < i.Properties.Height; y++)
+                {
+                    if (parent.Slots[x + this.x, y + this.y].Item != null) { Debug.WriteLine("adding to slot " + x + ", " + y + " would obstruct other slot"); return false; }
+                }
+            }
+            //if none of the above is true, the item fits
+            return true;
+        }
+
+        /// <summary>
+        /// checks if the item in this slot also obstructs the slot at the specified position
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public bool ExtendsTo(int x, int y)
+        {
+            if (Item == null) return false;
+            else return x < this.x + Item.Properties.Width && y < this.y + Item.Properties.Height;
         }
 
         /// <summary>
@@ -64,11 +110,17 @@ namespace Shoot__n_Loot.InvenoryStuff
         /// <param name="num"></param>
         public void Remove(byte num)
         {
-            if (StackSize > num) StackSize -= num;
-            else
+            for (int i = 0; i < num; i++)
             {
-                Item = null;
-                StackSize = 0;
+                StackSize--;
+
+                if (StackSize == 0)
+                {
+                    Debug.WriteLine("no items in this slot");
+                    Item = null;
+                    break;
+                }
+                
             }
         }
 
@@ -97,30 +149,31 @@ namespace Shoot__n_Loot.InvenoryStuff
             buttons.Add(b);
         }
 
-        public void Update(int x, int y, Inventory container)
+        public void Update()
         {
-            if (Input.AreaIsClicked(container.PositionForItem(x, y)) && Input.LeftClickWasJustPressed())
+            if (Input.AreaIsClicked(parent.PositionForItem(x, y)) && Input.LeftClickWasJustPressed())
             {
-                container.HideAllItemMenus();
+                parent.HideAllItemMenus();
                 ShowingOptions = !ShowingOptions;
             }
             if (Item != null && ShowingOptions)
             {
-                SetButtons(x, y, container);
+                SetButtons(x, y, parent);
                 foreach (Button b in buttons) b.Update();
-                Rectangle r = container.PositionForItem(x, y);
+                Rectangle r = parent.PositionForItem(x, y);
                 r.Width = 200;
                 r.X -= 200;
                 infoPos = r;
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, Rectangle position)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            if (Item != null) 
+            spriteBatch.Draw(TextureManager.inventorySlot, parent.PositionForItem(x, y), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0001f);
+            if (Item != null)
             {
-                Item.DrawInInventory(position, spriteBatch);
-                spriteBatch.DrawString(TextureManager.font, StackSize.ToString(), new Vector2(position.X, position.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.00001f);
+                Item.DrawInInventory(parent.PositionForItem(x, y), spriteBatch);
+                spriteBatch.DrawString(TextureManager.font, StackSize.ToString(), new Vector2(parent.PositionForItem(x, y).X, parent.PositionForItem(x, y).Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.00001f);
 
                 if (ShowingOptions)
                 {
@@ -129,6 +182,7 @@ namespace Shoot__n_Loot.InvenoryStuff
                     spriteBatch.DrawString(TextureManager.font, Item.Properties.InfoText, new Vector2(infoPos.X, infoPos.Y), Color.Black);
                 }
             }
+            else spriteBatch.DrawString(TextureManager.font, "null", new Vector2(parent.PositionForItem(x, y).X, parent.PositionForItem(x, y).Y), Color.Black);
         }
 
         /// <summary>
