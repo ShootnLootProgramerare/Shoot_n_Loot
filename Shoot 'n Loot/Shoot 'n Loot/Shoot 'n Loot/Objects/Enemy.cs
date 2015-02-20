@@ -189,7 +189,12 @@ namespace Shoot__n_Loot
         {
             //create particles, spawn dropped items etc
             //SceneManager.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.Fisherman));
-            SceneManager.gameScene.AddObject(Items.RandomItem(Position));
+            Item r = Items.RandomItem(Position);
+            int num = Game1.random.Next(r.Properties.MaxStack);
+            for (int i = 0; i < num; i++)
+            {
+                SceneManager.gameScene.AddObject(r);
+            } 
         }
 
         public override void Draw(SpriteBatch spriteBatch)

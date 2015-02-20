@@ -28,7 +28,9 @@ namespace Shoot__n_Loot.WeaponClasses
             heavyAmmo,
             new ItemProperties(1, 1, 1, TextureManager.enemy1, 1, "Pink blob\nDoes nothing"),
             new ItemProperties(2, 1, 1, TextureManager.medicineItem, 10, "Heal 1 point", healht1),
-            new ItemProperties(1, 1, 1, TextureManager.house, 1, "Auto: true\nAlso newLine", new WeaponPart(WeaponPart.PartType.Base, 1, 1, 30, true, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium } ))
+            new ItemProperties(1, 1, 1, TextureManager.house, 1, "Auto: true\nAlso newLine", new WeaponPart(WeaponPart.PartType.Base, 1, 1, 30, true, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium } )),
+            new ItemProperties(1, 1, 1, TextureManager.enemy2, 1, "Weaponpart 2", new WeaponPart(WeaponPart.PartType.Barrel, 1, 1, 0, false, 10, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Light } )),
+            new ItemProperties(1, 1, 1, TextureManager.house, 1, "Other house like part", new WeaponPart(WeaponPart.PartType.Base, 1, 3, 10, false, 2, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Heavy } ))
         } ;
 
         public static Item GetAmmo(Weapon.AmmoType type, Vector2 position)

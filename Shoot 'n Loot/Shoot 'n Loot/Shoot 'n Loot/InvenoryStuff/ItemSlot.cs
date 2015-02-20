@@ -135,8 +135,17 @@ namespace Shoot__n_Loot.InvenoryStuff
             AddButton(buttons, new Button("drop", baseRect, DropItem));
             if (StackSize > 1) AddButton(buttons, new Button("drop all", baseRect, DropAll));
             if (Item.Properties.IsConsumable) AddButton(buttons, new Button("eat", baseRect, Consume));
-            if (Item.Properties.IsWeaponPart) if (ArrayOverlaps(SceneManager.gameScene.player.weapon.CompatitbleAmmoTypes, Item.Properties.WeaponPart.AcceptableAmmo)) AddButton(buttons, new Button("use in weapon", baseRect, UseInWeapon));
-            if (Item.Properties.IsAmmo) if (SceneManager.gameScene.player.weapon.CompatitbleAmmoTypes.Contains(Item.Properties.AmmoType)) AddButton(buttons, new Button("use this ammo", baseRect, UseAsAmmo));
+            if (Item.Properties.IsWeaponPart)
+            {
+                if (ArrayOverlaps(SceneManager.gameScene.player.weapon.CompatitbleAmmoTypes(Item.Properties.WeaponPart.Type), Item.Properties.WeaponPart.AcceptableAmmo))
+                    AddButton(buttons, new Button("use in weapon", baseRect, UseInWeapon));
+                else AddButton(buttons, new Button("This part is not compatible with your weapon", baseRect, Color.Red));
+            }
+            if (Item.Properties.IsAmmo)
+            {
+                if (SceneManager.gameScene.player.weapon.CompatitbleAmmoTypes(null).Contains(Item.Properties.AmmoType)) AddButton(buttons, new Button("use this ammo", baseRect, UseAsAmmo));
+                else AddButton(buttons, new Button("Your weapon can't use this ammo", baseRect, Color.Red));
+            }
         }
 
 

@@ -112,15 +112,14 @@ namespace Shoot__n_Loot
             return null;
         }
 
-        public AmmoType[] CompatitbleAmmoTypes
+        public AmmoType[] CompatitbleAmmoTypes(WeaponPart.PartType? type)
         {
-            get
-            {
                 List<AmmoType> types = new List<AmmoType>();
                 foreach (AmmoType t in AmmoType.GetValues(typeof(AmmoType))) types.Add(t);
 
                 foreach (Item i in parts)
                 {
+                    if (i.Properties.WeaponPart.Type == type) continue;
                     for (int j = types.Count - 1; j >= 0; j--)
                     {
                         if (!i.Properties.WeaponPart.AcceptableAmmo.Contains(types[j])) types.RemoveAt(j);
@@ -128,7 +127,6 @@ namespace Shoot__n_Loot
                 }
 
                 return types.ToArray();
-            }
         }
 
         private void CalculateValues()
@@ -170,9 +168,11 @@ namespace Shoot__n_Loot
 
         public void StartReload(Inventory bulletContainer)
         {
-            //find and remove ammo
-            reloadTimer = 1;
-            DropAllAmmo();
+            if (ContainsType(WeaponPart.PartType.Base))
+            {
+                reloadTimer = 1;
+                DropAllAmmo();
+            }
         }
 
         private void DropAllAmmo()
