@@ -29,7 +29,11 @@ namespace Shoot__n_Loot
             house,
             inventorySlot,
 
-            medicineItem;
+            medicineItem,
+            
+            lightAmmo,
+            mediumAmmo,
+            heavyAmmo;
 
         public static Texture2D[]
             fishermanWalk,
@@ -69,6 +73,8 @@ namespace Shoot__n_Loot
             inventorySlot = content.Load<Texture2D>("inventorySlot");
 
             medicineItem = content.Load<Texture2D>("items/pill");
+
+            lightAmmo = mediumAmmo = heavyAmmo = content.Load<Texture2D>("items/ammo"); //should be different when we get sprites
         }
     }
 }

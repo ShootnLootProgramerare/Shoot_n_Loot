@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Shoot__n_Loot.InvenoryStuff;
 using Shoot__n_Loot.Scenes;
 using Shoot__n_Loot.WeaponClasses;
 using System;
@@ -23,7 +24,7 @@ namespace Shoot__n_Loot
 
         public enum AmmoType { Light, Medium, Heavy }
 
-        AmmoType currentAmmoType;
+        public AmmoType currentAmmoType;
 
         public Item item;
 
@@ -111,6 +112,25 @@ namespace Shoot__n_Loot
             return null;
         }
 
+        public AmmoType[] CompatitbleAmmoTypes
+        {
+            get
+            {
+                List<AmmoType> types = new List<AmmoType>();
+                foreach (AmmoType t in AmmoType.GetValues(typeof(AmmoType))) types.Add(t);
+
+                foreach (Item i in parts)
+                {
+                    for (int j = types.Count - 1; j >= 0; j--)
+                    {
+                        if (!i.Properties.WeaponPart.AcceptableAmmo.Contains(types[j])) types.RemoveAt(j);
+                    }
+                }
+
+                return types.ToArray();
+            }
+        }
+
         private void CalculateValues()
         {
             float shootTimeMod = 1;
@@ -141,17 +161,60 @@ namespace Shoot__n_Loot
             IsAuto = auto;
         }
 
-        private void Reload()
+        private void Reload(Inventory bulletContainer)
         {
             //ammo = maxAmmo etc
             Ammo = magSize;
+            Ammo = GetAmmoFromInventory(bulletContainer, magSize);
         }
 
         public void StartReload(Inventory bulletContainer)
         {
             //find and remove ammo
             reloadTimer = 1;
-            Ammo = 0; //TODO: drop old ammo on ground or return to inventory?
+            DropAllAmmo();
+        }
+
+        private void DropAllAmmo()
+        {
+            for (int i = 0; i < Ammo; i++)
+            {
+                SceneManager.gameScene.AddObject(Items.GetAmmo(currentAmmoType, SceneManager.gameScene.player.Position));
+            }
+            Ammo = 0;
+        }
+
+        /// <summary>
+        /// removes the specified amount of ammo and returns the amount removed.
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns>how much was found</returns>
+        byte GetAmmoFromInventory(Inventory i, byte amount)
+        {
+            byte found = 0;
+            foreach (ItemSlot s in i.Slots)
+            {
+                if (s.Item != null)
+                {
+                    if (s.Item.Properties.IsAmmo)
+                    {
+                        if (s.Item.Properties.AmmoType == currentAmmoType)
+                        {
+                            if (s.StackSize >= amount - found)
+                            {
+                                s.Remove(amount);
+                                return amount;
+                            }
+                            else
+                            {
+                                found += s.StackSize;
+                                s.Remove(s.StackSize);
+                            }
+                        }
+                    }
+                }
+            }
+            return found;
         }
         
         /// <summary>
@@ -169,13 +232,13 @@ namespace Shoot__n_Loot
             }
         }
 
-        public void ShootingUpdate()
+        public void ShootingUpdate(Inventory bulletContainer)
         {
             if (reloadTimer > 0) reloadTimer++;
             if (reloadTimer >= reloadTime)
             {
                 reloadTimer = 0;
-                Reload();
+                Reload(bulletContainer);
             }
 
             if (shootTimer > 0) shootTimer++;

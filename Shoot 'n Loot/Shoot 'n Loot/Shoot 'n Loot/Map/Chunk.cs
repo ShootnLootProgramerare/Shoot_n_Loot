@@ -24,8 +24,9 @@ namespace Shoot__n_Loot
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="map">the texture that contains the map of this chunk</param>
         /// <param name="relativePosition">posiiton in the game of the top left corner</param>
+        /// <param name="mapData">the color[] that contains the tiles</param>
+        /// <param name="spawnData">the color that describes spawning in this chunk</param>
         public Chunk(Vector2 relativePosition, Color[,] mapData, Color spawnData)
         {
             Tiles = new Tile[size, size];

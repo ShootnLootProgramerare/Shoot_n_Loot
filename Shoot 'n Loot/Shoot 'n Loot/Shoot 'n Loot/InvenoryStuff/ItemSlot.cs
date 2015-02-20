@@ -135,7 +135,24 @@ namespace Shoot__n_Loot.InvenoryStuff
             AddButton(buttons, new Button("drop", baseRect, DropItem));
             if (StackSize > 1) AddButton(buttons, new Button("drop all", baseRect, DropAll));
             if (Item.Properties.IsConsumable) AddButton(buttons, new Button("eat", baseRect, Consume));
-            if (Item.Properties.IsWeaponPart) AddButton(buttons, new Button("use in weapon", baseRect, UseInWeapon));
+            if (Item.Properties.IsWeaponPart) if (ArrayOverlaps(SceneManager.gameScene.player.weapon.CompatitbleAmmoTypes, Item.Properties.WeaponPart.AcceptableAmmo)) AddButton(buttons, new Button("use in weapon", baseRect, UseInWeapon));
+            if (Item.Properties.IsAmmo) if (SceneManager.gameScene.player.weapon.CompatitbleAmmoTypes.Contains(Item.Properties.AmmoType)) AddButton(buttons, new Button("use this ammo", baseRect, UseAsAmmo));
+        }
+
+
+        /// <summary>
+        /// check if two arrays share any elements
+        /// </summary>
+        /// <param name="a1"></param>
+        /// <param name="a2"></param>
+        /// <returns></returns>
+        bool ArrayOverlaps(Weapon.AmmoType[] a1, Weapon.AmmoType[] a2)
+        {
+            foreach (Weapon.AmmoType a in a1)
+            {
+                if (a2.Contains(a)) return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -209,6 +226,11 @@ namespace Shoot__n_Loot.InvenoryStuff
             Item i = SceneManager.gameScene.player.weapon.AddPart(Item);
             Remove(1);
             if (i != null) SceneManager.gameScene.player.Inventory.Add(i);
+        }
+
+        void UseAsAmmo()
+        {
+            SceneManager.gameScene.player.weapon.currentAmmoType = Item.Properties.AmmoType;
         }
     }
 }
