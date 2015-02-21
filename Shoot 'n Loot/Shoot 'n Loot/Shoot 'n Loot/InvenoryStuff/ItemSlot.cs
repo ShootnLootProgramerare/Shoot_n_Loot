@@ -222,7 +222,7 @@ namespace Shoot__n_Loot.InvenoryStuff
 
         void DropAll()
         {
-            for (int i = 0; i < StackSize + 1; i++) DropItem();
+            while (StackSize > 0) DropItem();
         }
 
         void Consume()
