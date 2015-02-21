@@ -48,8 +48,12 @@ namespace Shoot__n_Loot
         /// <returns></returns>
         public static bool AreaIsClicked(Rectangle area)
         {
-            return new Rectangle((int)MousePosition.X, (int)MousePosition.Y, 1, 1).Intersects(area) && 
-                LeftClickWasJustPressed();
+            return AreaIsHoveredOver(area) && LeftClickWasJustPressed();
+        }
+
+        public static bool AreaIsHoveredOver(Rectangle area)
+        {
+            return new Rectangle((int)MousePosition.X, (int)MousePosition.Y, 1, 1).Intersects(area);
         }
     }
 }

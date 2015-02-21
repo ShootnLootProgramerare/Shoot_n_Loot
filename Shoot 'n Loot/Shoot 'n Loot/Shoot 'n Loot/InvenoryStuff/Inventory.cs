@@ -126,7 +126,7 @@ namespace Shoot__n_Loot
             foreach (ItemSlot slot in Slots) slot.Draw(spriteBatch);
             string s = Weight + "/" + maxWeight + " kg";
 
-            spriteBatch.DrawString(TextureManager.font, s, Camera.Center + new Vector2(drawOffset.X, drawOffset.Y) + new Vector2(0, 100) - TextureManager.font.MeasureString(s) / 2, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.DrawString(TextureManager.font, s, Camera.Center + new Vector2(drawOffset.X, drawOffset.Y) + new Vector2(0, 100) - TextureManager.font.MeasureString(s) / 2, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.0000004f);
         }
     }
 }

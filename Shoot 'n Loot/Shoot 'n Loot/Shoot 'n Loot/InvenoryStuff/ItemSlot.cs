@@ -171,27 +171,28 @@ namespace Shoot__n_Loot.InvenoryStuff
         /// <param name="b"></param>
         private void AddButton(List<Button> buttons, Button b)
         {
-            b.Area = new Rectangle(b.Area.X, b.Area.Bottom + buttons.Count * b.Area.Height, b.Area.Width, b.Area.Height);
+            if (buttons.Count > 0) b.Area = new Rectangle(b.Area.X, buttons[buttons.Count - 1].Area.Bottom, b.Area.Width, b.Area.Height);
             buttons.Add(b);
         }
 
         public void Update()
         {
+            if (Item != null && ShowingOptions)
+            {
+                infoPos = parent.PositionForItem(x, y);
+                infoPos.Width = (int)TextureManager.font.MeasureString(Item.Properties.InfoText).X + Button.PADDING_X * 2;
+                infoPos.X -= infoPos.Width + 10;
+                infoPos.Height = (int)TextureManager.font.MeasureString(Item.Properties.InfoText).Y + Button.PADDING_Y * 2;
+
+                SetButtons(x, y, parent);
+                foreach (Button b in buttons) b.Update();
+            }
+            else ShowingOptions = false;
+
             if (Input.AreaIsClicked(parent.PositionForItem(x, y)) && Input.LeftClickWasJustPressed())
             {
                 parent.HideAllItemMenus();
                 ShowingOptions = !ShowingOptions;
-            }
-            if (Item != null && ShowingOptions)
-            {
-                Rectangle r = parent.PositionForItem(x, y);
-                r.Width = 20 + (int)TextureManager.font.MeasureString(Item.Properties.InfoText).X;
-                r.X -= r.Width + 10;
-                r.Height = (int)TextureManager.font.MeasureString(Item.Properties.InfoText).Y + 10;
-                infoPos = r;
-
-                SetButtons(x, y, parent);
-                foreach (Button b in buttons) b.Update();
             }
         }
 
@@ -206,8 +207,8 @@ namespace Shoot__n_Loot.InvenoryStuff
                 if (ShowingOptions)
                 {
                     if (buttons != null) foreach (Button b in buttons) b.Draw(spriteBatch);
-                    spriteBatch.Draw(TextureManager.inventorySlot, infoPos, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.00001f);
-                    spriteBatch.DrawString(TextureManager.font, Item.Properties.InfoText, new Vector2(infoPos.X, infoPos.Y), Color.Black);
+                    spriteBatch.Draw(TextureManager.inventorySlot, infoPos, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000001f);
+                    spriteBatch.DrawString(TextureManager.font, Item.Properties.InfoText, new Vector2(infoPos.X + Button.PADDING_X, infoPos.Y + Button.PADDING_Y), Color.Black);
                 }
             }
         }
@@ -221,7 +222,7 @@ namespace Shoot__n_Loot.InvenoryStuff
 
         void DropAll()
         {
-            for (int i = 0; i < StackSize; i++) DropItem();
+            for (int i = 0; i < StackSize + 1; i++) DropItem();
         }
 
         void Consume()
