@@ -43,7 +43,7 @@ namespace Shoot__n_Loot.WeaponClasses
                     return new Item(mediumAmmo, position);
                 case Weapon.AmmoType.Heavy:
                     return new Item(heavyAmmo, position);
-                default: return null;
+                default: goto case Weapon.AmmoType.Light; // keep all the bases covered ( ͡° ͜ʖ ͡°)
             }
         }
 
