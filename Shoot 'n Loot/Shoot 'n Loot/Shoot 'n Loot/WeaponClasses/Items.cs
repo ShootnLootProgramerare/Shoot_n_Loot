@@ -57,8 +57,8 @@ namespace Shoot__n_Loot.WeaponClasses
 
         static void Hunger(Player p)
         {
-            p.hunger -= 10;
-            if (p.hunger < 0) p.hunger = 0;
+            p.Hunger -= 10;
+            if (p.Hunger < 0) p.Hunger = 0;
         }
     }
 }

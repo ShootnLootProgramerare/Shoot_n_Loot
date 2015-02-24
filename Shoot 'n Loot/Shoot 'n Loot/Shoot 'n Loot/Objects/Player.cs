@@ -18,7 +18,7 @@ namespace Shoot__n_Loot
 
         public Inventory Inventory { get; set; }
 
-        public float hunger;
+        public float Hunger { get; set; }
 
         public Weapon weapon;
         bool inventoryVisible;
@@ -138,7 +138,7 @@ namespace Shoot__n_Loot
                 Inventory.Draw(spriteBatch);
             }
 
-            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health + "\nHunger: " + hunger, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
+            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health + "\nHunger: " + Hunger, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
 
             base.Draw(spriteBatch);
         }
