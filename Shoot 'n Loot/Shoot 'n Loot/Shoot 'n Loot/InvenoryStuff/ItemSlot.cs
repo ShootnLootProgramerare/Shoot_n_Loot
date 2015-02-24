@@ -134,7 +134,7 @@ namespace Shoot__n_Loot.InvenoryStuff
 
             AddButton(buttons, new Button("drop", baseRect, DropItem));
             if (StackSize > 1) AddButton(buttons, new Button("drop all", baseRect, DropAll));
-            if (Item.Properties.IsConsumable) AddButton(buttons, new Button("eat", baseRect, Consume));
+            if (Item.Properties.IsConsumable) AddButton(buttons, new Button("use", baseRect, Consume));
             if (Item.Properties.IsWeaponPart)
             {
                 if (ArrayOverlaps(SceneManager.gameScene.player.weapon.CompatitbleAmmoTypes(Item.Properties.WeaponPart.Type), Item.Properties.WeaponPart.AcceptableAmmo))

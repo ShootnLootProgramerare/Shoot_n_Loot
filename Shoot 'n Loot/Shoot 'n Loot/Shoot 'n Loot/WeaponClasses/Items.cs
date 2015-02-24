@@ -30,7 +30,8 @@ namespace Shoot__n_Loot.WeaponClasses
             new ItemProperties(2, 1, 1, TextureManager.medicineItem, 10, "Heal 1 point", healht1),
             new ItemProperties(1, 1, 1, TextureManager.house, 1, "Auto: true\nAlso newLine", new WeaponPart(WeaponPart.PartType.Base, 1, 1, 30, true, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium } )),
             new ItemProperties(1, 1, 1, TextureManager.enemy2, 1, "Weaponpart 2", new WeaponPart(WeaponPart.PartType.Barrel, 1, 1, 0, false, 10, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Light } )),
-            new ItemProperties(1, 1, 1, TextureManager.house, 1, "Other house like part", new WeaponPart(WeaponPart.PartType.Base, 1, 3, 10, false, 2, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Heavy } ))
+            new ItemProperties(1, 1, 1, TextureManager.house, 1, "Other house like part", new WeaponPart(WeaponPart.PartType.Base, 1, 3, 10, false, 2, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Heavy } )),
+            new ItemProperties(1, 1, 1, TextureManager.beans, 5, "Can of Beans\nRestore 10 health points", Hunger)
         } ;
 
         public static Item GetAmmo(Weapon.AmmoType type, Vector2 position)
@@ -47,9 +48,17 @@ namespace Shoot__n_Loot.WeaponClasses
             }
         }
 
+        //======================== DELEGATES FOR ITEM USAGE =======================
+
         static void healht1(Player p)
         {
             p.Health += 1;
+        }
+
+        static void Hunger(Player p)
+        {
+            p.hunger -= 10;
+            if (p.hunger < 0) p.hunger = 0;
         }
     }
 }

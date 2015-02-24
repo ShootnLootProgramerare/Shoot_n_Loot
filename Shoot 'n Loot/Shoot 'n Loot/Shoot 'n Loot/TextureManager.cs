@@ -30,6 +30,7 @@ namespace Shoot__n_Loot
             inventorySlot,
 
             medicineItem,
+            beans,
             
             lightAmmo,
             mediumAmmo,
@@ -73,6 +74,7 @@ namespace Shoot__n_Loot
             inventorySlot = content.Load<Texture2D>("inventorySlot");
 
             medicineItem = content.Load<Texture2D>("items/pill");
+            beans = content.Load<Texture2D>("items/beans");
 
             lightAmmo = mediumAmmo = heavyAmmo = content.Load<Texture2D>("items/ammo"); //should be different when we get sprites
         }
