@@ -31,10 +31,47 @@ namespace Shoot__n_Loot
         public EnemyType enemyType { get; set; }
 
         protected float range;
-
         protected bool attacking;
 
+        byte walkFrames, attackFrames;
+        float walkAnimSpeed, attackAnimSpeed;
+        Point frameSize;
+
+        Texture2D[] walkingAnims, attackAnims;
+
         Direction direction;
+
+        public Enemy(Vector2 position, Texture2D[] walkingAnims, Texture2D[] attackAnims)
+        {
+            this.walkingAnims = walkingAnims;
+            this.attackAnims = attackAnims;
+            Sprite = new Sprite(walkingAnims[0], position, new Vector2(200, 100), 4, new Point(200, 100), 0); //maybe an overload for different sizes etc
+        }
+
+
+        /// <summary>
+        /// set all the vars one might need for an enemy
+        /// </summary>
+        /// <param name="maxHealth"></param>
+        /// <param name="damage"></param>
+        /// <param name="speed"></param>
+        /// <param name="range"></param>
+        protected void SetGameplayVars(float maxHealth, int damage, float speed, float range)
+        {
+            this.MaxHealth = maxHealth;
+            this.Damage = damage;
+            this.Speed = speed;
+            this.range = range;
+        }
+
+        protected void SetAnimVars(Point frameSize, byte walkFrames, float walkAnimSpeed, byte attackFrames, float attackAnimSpeed)
+        {
+            this.frameSize = frameSize;
+            this.walkFrames = walkFrames;
+            this.walkAnimSpeed = walkAnimSpeed;
+            this.attackFrames = attackFrames;
+            this.attackAnimSpeed = attackAnimSpeed;
+        }
 
         /*public Enemy(Vector2 position, EnemyType enemytype)
         {
@@ -138,19 +175,22 @@ namespace Shoot__n_Loot
                         if (v == Vector2.Zero) v = new Vector2((float)Game1.random.NextDouble() - .5f, (float)Game1.random.NextDouble()- .5f);
                         v.Normalize();
                         Position += v * -1;
-                        Debug.WriteLine("moving zombie, distance = " + (g.Position - Position).Length());
+                        //Debug.WriteLine("moving zombie, distance = " + (g.Position - Position).Length());
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// checks if the animation is over and if so removes damage hp from the player if they are in range
+        /// </summary>
         protected void Attacking()
         {
             if (Sprite.EndOfAnim)
             {
                 attacking = false;
 
-                if (DistanceSquared(SceneManager.gameScene.player.Center) < 40000) SceneManager.gameScene.player.Health -= Damage;
+                if (DistanceSquared(SceneManager.gameScene.player.Center) <= range * range) SceneManager.gameScene.player.Health -= Damage;
             }
         }
 
@@ -158,7 +198,7 @@ namespace Shoot__n_Loot
         {
             if (Velocity.LengthSquared() > .3f)
             {
-                Sprite.AnimationSpeed = 9f / 60;
+                Sprite.AnimationSpeed = walkAnimSpeed;
                 if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
                 {
                     //left and right movement
@@ -179,10 +219,10 @@ namespace Shoot__n_Loot
 
             if (attacking)
             {
-                Sprite.SetTexture(TextureManager.fishermanAttack[(int)direction], 5, new Point(200, 100));
-                Sprite.AnimationSpeed = 6f / 60;
+                Sprite.SetTexture(attackAnims[(int)direction], attackFrames, frameSize); //maybe global var for how many frames
+                Sprite.AnimationSpeed = attackAnimSpeed;
             }
-            else Sprite.SetTexture(TextureManager.fishermanWalk[(int)direction], 4, new Point(200, 100));
+            else Sprite.SetTexture(walkingAnims[(int)direction], walkFrames, frameSize);
         }
 
         protected override void OnDestroy()

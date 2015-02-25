@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enemies\Fisherman.cs" />
+    <Compile Include="Enemies\Onelegged.cs" />
     <Compile Include="Objects\HPBar.cs" />
     <Compile Include="InvenoryStuff\ItemProperties.cs" />
     <Compile Include="InvenoryStuff\ItemSlot.cs" />

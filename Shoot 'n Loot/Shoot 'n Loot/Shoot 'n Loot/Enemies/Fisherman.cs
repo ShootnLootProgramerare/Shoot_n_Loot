@@ -9,14 +9,11 @@ namespace Shoot__n_Loot.Enemies
 {
     class Fisherman : Enemy
     {
-        public Fisherman(Vector2 position)
+        public Fisherman(Vector2 position) 
+            : base(position, TextureManager.fishermanWalk, TextureManager.fishermanAttack)
         {
-            Sprite = new Sprite(TextureManager.fishermanWalk[0], position, new Vector2(200, 100), 4, new Point(200, 100), 0);
-
-            this.MaxHealth = 3;
-            this.Damage = 8;
-            this.Speed = 1.2f;
-            this.range = 90;
+            SetGameplayVars(3, 8, 1.2f, 90);
+            SetAnimVars(new Point(200, 100), 4, 9f / 60, 5, 6f / 60);
         }
 
         public override void Update()
@@ -35,7 +32,7 @@ namespace Shoot__n_Loot.Enemies
             {
                 Vector2 d = SceneManager.gameScene.player.Position - Position;
                 d.Normalize();
-                Velocity = d * 3;
+                Velocity = d * Speed;
 
                 Move(true);
             }
