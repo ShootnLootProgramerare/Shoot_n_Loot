@@ -38,7 +38,10 @@ namespace Shoot__n_Loot
 
         public static Texture2D[]
             fishermanWalk,
-            fishermanAttack;
+            fishermanAttack,
+
+            oneleggedWalk,
+            oneleggedAttack;
 
         public static SpriteFont font;
 
@@ -68,6 +71,17 @@ namespace Shoot__n_Loot
             fishermanAttack[1] = content.Load<Texture2D>("enemies/fisherman/attack/down");
             fishermanAttack[2] = content.Load<Texture2D>("enemies/fisherman/attack/left");
             fishermanAttack[3] = content.Load<Texture2D>("enemies/fisherman/attack/right");
+
+            oneleggedWalk = new Texture2D[4];
+            oneleggedAttack = new Texture2D[4];
+            oneleggedWalk[0] = content.Load<Texture2D>("enemies/onelegged/walk/Up");
+            oneleggedWalk[1] = content.Load<Texture2D>("enemies/onelegged/walk/Down");
+            oneleggedWalk[2] = content.Load<Texture2D>("enemies/onelegged/walk/Left");
+            oneleggedWalk[3] = content.Load<Texture2D>("enemies/onelegged/walk/Right");
+            oneleggedAttack[0] = content.Load<Texture2D>("enemies/onelegged/attack/up");
+            oneleggedAttack[1] = content.Load<Texture2D>("enemies/onelegged/attack/down");
+            oneleggedAttack[2] = content.Load<Texture2D>("enemies/onelegged/attack/left");
+            oneleggedAttack[3] = content.Load<Texture2D>("enemies/onelegged/attack/right");
 
             bullet = content.Load<Texture2D>("bullet");
             house = content.Load<Texture2D>("house");
