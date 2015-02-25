@@ -30,13 +30,13 @@ namespace Shoot__n_Loot
         public float Speed { get; set; }
         public EnemyType enemyType { get; set; }
 
-        float range;
+        protected float range;
 
-        bool attacking;
+        protected bool attacking;
 
         Direction direction;
 
-        public Enemy(Vector2 position, EnemyType enemytype)
+        /*public Enemy(Vector2 position, EnemyType enemytype)
         {
             this.enemyType = enemytype;
             
@@ -66,13 +66,13 @@ namespace Shoot__n_Loot
 
             CanDie = true; //testing purposes, remove and use as example if you want
             ObstructsBullets = true;
-        }
+        }*/
 
         public override void Update()
         {
             Animate();
 
-            if (enemyType == EnemyType.Fisherman)
+            /*if (enemyType == EnemyType.Fisherman)
             {
                 if (attacking)
                 {
@@ -126,7 +126,7 @@ namespace Shoot__n_Loot
             if (enemyType == EnemyType.enemy3)
             {
 
-            }
+            }*/
 
             foreach (GameObject g in SceneManager.currentScene.objects)
             {
@@ -144,7 +144,7 @@ namespace Shoot__n_Loot
             }
         }
 
-        private void Attacking()
+        protected void Attacking()
         {
             if (Sprite.EndOfAnim)
             {
@@ -154,7 +154,7 @@ namespace Shoot__n_Loot
             }
         }
 
-        private void Animate()
+        protected void Animate()
         {
             if (Velocity.LengthSquared() > .3f)
             {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Shoot__n_Loot.Enemies;
 using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
@@ -71,13 +72,13 @@ namespace Shoot__n_Loot
                 int r = Game1.random.Next(spawnData.R + spawnData.G + spawnData.B);
 
                 Enemy.EnemyType e;
-                if (r > spawnData.R + spawnData.G) e = (Enemy.EnemyType)3; //decide which type
+                if (r > spawnData.R + spawnData.G) SceneManager.gameScene.AddObject(new Fisherman(Center));//e = (Enemy.EnemyType)3; //decide which type
                 else if (r > spawnData.R) e = (Enemy.EnemyType)2;
                 else e = (Enemy.EnemyType)1;
-                Debug.WriteLine("adding " + e + " at " + Center);
+                //Debug.WriteLine("adding " + e + " at " + Center);
 
 
-                list.Add(new Enemy(Center, e)); //add it
+                //list.Add(new Enemy(Center, e)); //add it
             }
         }
 
