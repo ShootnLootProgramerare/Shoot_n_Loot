@@ -43,6 +43,8 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
+            Hunger += .001f;
+
             if (!inventoryVisible && !customizing)
             {
                 Shoot();
@@ -87,6 +89,8 @@ namespace Shoot__n_Loot
             if (Math.Abs(Velocity.Y) < .05) Velocity = new Vector2(Velocity.X, 0);
 
             Move(true);
+
+            Hunger += Velocity.Length() * .0001f;
         }
 
         void Animate()
@@ -138,7 +142,7 @@ namespace Shoot__n_Loot
                 Inventory.Draw(spriteBatch);
             }
 
-            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health + "\nHunger: " + Hunger, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
+            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health + "\nHunger: " + Hunger.ToString("0"), Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
 
             base.Draw(spriteBatch);
         }
