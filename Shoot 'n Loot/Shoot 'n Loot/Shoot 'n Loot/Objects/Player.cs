@@ -21,6 +21,8 @@ namespace Shoot__n_Loot
         public float Hunger { get; set; }
 
         public Weapon weapon;
+
+        public float bleeding; //how much hp is removed each second
         bool inventoryVisible;
         bool customizing;
 
@@ -44,6 +46,7 @@ namespace Shoot__n_Loot
         public override void Update()
         {
             Hunger += .001f;
+            Health -= bleeding;
 
             if (!inventoryVisible && !customizing)
             {
@@ -142,7 +145,7 @@ namespace Shoot__n_Loot
                 Inventory.Draw(spriteBatch);
             }
 
-            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health + "\nHunger: " + Hunger.ToString("0"), Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
+            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health + "\nHunger: " + Hunger.ToString("0") + "\nBleeding: " + bleeding, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
 
             base.Draw(spriteBatch);
         }
