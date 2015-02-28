@@ -193,7 +193,7 @@ namespace Shoot__n_Loot
                 if (DistanceSquared(SceneManager.gameScene.player.Center) <= range * range)
                 {
                     SceneManager.gameScene.player.Health -= Damage;
-                    SceneManager.gameScene.player.bleeding += .05f; // maybe this should be different for different zombies
+                    SceneManager.gameScene.player.bleeding += .01f; // maybe this should be different for different zombies
                 }
             }
         }
