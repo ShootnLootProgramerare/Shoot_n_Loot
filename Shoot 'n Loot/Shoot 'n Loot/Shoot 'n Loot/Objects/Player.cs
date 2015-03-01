@@ -57,10 +57,11 @@ namespace Shoot__n_Loot
             else if (inventoryVisible)
             {
                 Inventory.Update(new Point(0, 0));
+                weapon.CustomizingUpdate();
             }
             else if (customizing)
             {
-                weapon.CustomizingUpdate(Inventory, CUSTOMIZINGINVENTORYOFFSET);
+                //weapon.CustomizingUpdate(Inventory, CUSTOMIZINGINVENTORYOFFSET);
                 Sprite.Frame = 0;
                 Sprite.AnimationSpeed = 0;
             }
@@ -137,7 +138,12 @@ namespace Shoot__n_Loot
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (inventoryVisible) Inventory.Draw(spriteBatch);
+            if (inventoryVisible)
+            {
+                Inventory.Draw(spriteBatch);
+                //weapon.Draw(spriteBatch);
+                weapon.DrawCustomization(spriteBatch);
+            }
 
             if (customizing)
             {

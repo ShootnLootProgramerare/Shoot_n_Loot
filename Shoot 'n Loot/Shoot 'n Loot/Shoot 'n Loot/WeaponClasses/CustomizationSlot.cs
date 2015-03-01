@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Shoot__n_Loot.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,53 +10,41 @@ namespace Shoot__n_Loot.WeaponClasses
 {
     class CustomizationSlot
     {
-        public WeaponPart.PartType type;
-        public WeaponPart Part { get { return part; } }
-        public Rectangle Position { get {  return new Rectangle((int)Camera.TotalOffset.X + position.X, (int)Camera.TotalOffset.Y + position.Y, position.Width, position.Height); } }
+        Rectangle position; // should be relative to camera
+        public WeaponPart.PartType Type { get; private set; }
+        List<Button> buttons;
+        string partInfo;
 
-        public bool HasPart { get { return part != null; } }
+        private Rectangle WorldPosition { get { return new Rectangle(position.X + (int)Camera.Position.X, position.Y + (int)Camera.Position.Y, position.Width, position.Height); } }
 
-        private WeaponPart part;
-
-
-        private Rectangle position;
-
-        public CustomizationSlot(Rectangle position, WeaponPart.PartType type)
+        public CustomizationSlot(WeaponPart.PartType type, Rectangle position)
         {
             this.position = position;
-            this.type = type;
+            this.Type = type;
+            buttons = new List<Button>();
+            partInfo = "no info :(";
         }
 
         /// <summary>
-        /// tries to add the specified part. Returns the old part on succes (Might be null!) or returns null if the part doesnt fit.
+        /// 
         /// </summary>
-        /// <param name="part"></param>
-        /// <returns></returns>
-        public WeaponPart AddPart(WeaponPart part)
+        /// <param name="part">should be raw from weapon.partOfType, ie can be null</param>
+        public void Update(Item part)
         {
-            WeaponPart p = null;
-            if (part.Type == type)
+            if (part != null)
             {
-                p = this.part;
-                this.part = part;
-            }
-            return p;
-        }
+                //on click create buttons, remove on another click or part removal
 
-        /// <summary>
-        /// sets the this.part to null and returns the old part. (might be null)
-        /// </summary>
-        /// <returns></returns>
-        public WeaponPart RemovePart()
-        {
-            WeaponPart p = part;
-            part = null;
-            return p;
+                partInfo = part.Properties.WeaponPart.GetInfoText();
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.inventorySlot, Position, Color.White);
+            spriteBatch.Draw(TextureManager.inventorySlot, WorldPosition, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000004f);
+            spriteBatch.DrawString(TextureManager.font, Type.ToString(), new Vector2(WorldPosition.X, WorldPosition.Y - 25), Color.Black);
+            //if mouseover and no buttons draw part text
+            if (Input.AreaIsHoveredOver(WorldPosition) && buttons.Count == 0) spriteBatch.DrawString(TextureManager.font, partInfo, new Vector2(Input.newMs.X, Input.newMs.Y) + Camera.TotalOffset, Color.Black);
         }
     }
 }

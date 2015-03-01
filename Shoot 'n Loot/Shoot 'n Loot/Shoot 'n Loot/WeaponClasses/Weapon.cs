@@ -25,10 +25,7 @@ namespace Shoot__n_Loot
         public enum AmmoType { Light, Medium, Heavy }
 
         public AmmoType currentAmmoType;
-
-        public Item item;
-
-        
+                
         private BulletProperties BulletProperties
         {
             get
@@ -54,6 +51,7 @@ namespace Shoot__n_Loot
 
         private List<Item> parts;
 
+        private List<CustomizationSlot> partSlots;
 
 
 
@@ -63,9 +61,24 @@ namespace Shoot__n_Loot
             reloadTimer = 0;
             shootTimer = 0;
             CalculateValues();
+            partSlots = new List<CustomizationSlot>();
+            MakeSlots();
         }
 
+        public void ShootingUpdate(Inventory bulletContainer)
+        {
+            if (reloadTimer > 0) reloadTimer++;
+            if (reloadTimer >= reloadTime)
+            {
+                reloadTimer = 0;
+                Reload(bulletContainer);
+            }
 
+            if (shootTimer > 0) shootTimer++;
+            if (shootTimer >= shootTime) shootTimer = 0;
+        }
+
+        #region Part Related Stuff
         /// <summary>
         /// returns the replaced part if one existed, otherwise null
         /// </summary>
@@ -84,6 +97,12 @@ namespace Shoot__n_Loot
         {
             foreach (Item p in parts) if (p.Properties.WeaponPart.Type == t) return true;
             return false;
+        }
+
+        public Item PartOfType(WeaponPart.PartType t)
+        {
+            foreach (Item p in parts) if (p.Properties.WeaponPart.Type == t) return p;
+            return null;
         }
 
         public void RemovePart(Item p)
@@ -128,37 +147,9 @@ namespace Shoot__n_Loot
 
                 return types.ToArray();
         }
+        #endregion
 
-        private void CalculateValues()
-        {
-            float shootTimeMod = 1;
-            float reloadTimeMod = 1;
-            sbyte magSizeMod = 0;
-            float bulletSpeedMod = 1;
-            float bulletDamageMod = 1;
-            bool auto = false;
-            float rangeMod = 1;
-
-            foreach(Item p in parts)
-            {
-                shootTimeMod += p.Properties.WeaponPart.ShootSpeedMod;
-                reloadTimeMod += p.Properties.WeaponPart.ReloadSpeedMod;
-                magSizeMod += p.Properties.WeaponPart.MagSizeMod;
-                bulletSpeedMod += p.Properties.WeaponPart.BulletSpeedMod;
-                bulletDamageMod += p.Properties.WeaponPart.DamageMod;
-                rangeMod += p.Properties.WeaponPart.RangeMod;
-                if (p.Properties.WeaponPart.MakesAuto) auto = true;
-            }
-
-            shootTime = (byte)(baseShootTime * shootTimeMod);
-            reloadTime = (byte)(baseReloadTime * reloadTimeMod);
-            magSize = (byte)(baseMagSize + magSizeMod);
-            bulletSpeed = baseBulletSpeed * bulletSpeedMod;
-            bulletDamage = baseBulletDamage * bulletDamageMod;
-            range = (int)(baseRange * rangeMod);
-            IsAuto = auto;
-        }
-
+        #region ammo stuff
         private void Reload(Inventory bulletContainer)
         {
             //ammo = maxAmmo etc
@@ -231,84 +222,87 @@ namespace Shoot__n_Loot
                 shootTimer = 1;
             }
         }
+        #endregion
 
-        public void ShootingUpdate(Inventory bulletContainer)
+        /// <summary>
+        /// draws the different parts similarly to an inventory
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        public void Draw(SpriteBatch spriteBatch)
         {
-            if (reloadTimer > 0) reloadTimer++;
-            if (reloadTimer >= reloadTime)
+            Array types = WeaponPart.PartType.GetValues(typeof(WeaponPart.PartType));
+            Vector2 center = Camera.Position - new Vector2(0, 300);
+            const int padding = 30, itemSize = 50;
+            float wPerI = (padding + itemSize);
+            float totalW = types.Length * wPerI;
+            for (int i = 0; i < types.Length; i++)
             {
-                reloadTimer = 0;
-                Reload(bulletContainer);
+                Rectangle position = new Rectangle((int)(center.X - totalW / 2 + i * wPerI), (int)(center.Y + itemSize / 2), itemSize, itemSize);
+                spriteBatch.Draw(TextureManager.inventorySlot, position, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000004f);
+                spriteBatch.DrawString(TextureManager.font, types.GetValue(i).ToString(), new Vector2(position.X, position.Y - 25), Color.Black);
+                Item p = PartOfType((WeaponPart.PartType)types.GetValue(i));
+                Debug.WriteLine(p == null);
+                if (p != null) p.DrawInInventory(position, spriteBatch);
             }
-
-            if (shootTimer > 0) shootTimer++;
-            if (shootTimer >= shootTime) shootTimer = 0;
         }
 
-        CustomizationSlot 
-            barrelSlot = new CustomizationSlot(new Rectangle(800, 100, 100, 100), WeaponPart.PartType.Barrel),
-            baseSlot = new CustomizationSlot(new Rectangle(200, 100, 100, 100), WeaponPart.PartType.Base),
-            magSlot = new CustomizationSlot(new Rectangle(200, 230, 100, 100), WeaponPart.PartType.Mag);
+        #region customization ui related
 
-        Item draggedItem;
-        /*Inventory unusedParts 
-        { 
-            get
-            {
-                //Inventory i = new Inventory(10, 10, 100000);
-                
-                //waponparts need to be a seperate inventory
-                //go through all slots and get all items that arent null
-
-                //return i;
-            }
-        }*/
-
-        public void CustomizingUpdate(Inventory i, Point inventoryDrawOffset)
+        private void MakeSlots()
         {
-            //dra items från alla weaponparts
-            //om p[ en legit slot n'r man sl'pper s't det d'r och returnera gammalt till ;verblivna
-            //annars l'gg tillbaka till 'verblivna
-            if (draggedItem == null)
+            Array types = WeaponPart.PartType.GetValues(typeof(WeaponPart.PartType));
+            Vector2 center = Camera.Position - new Vector2(0, 300);
+            const int padding = 30, itemSize = 50;
+            float wPerI = (padding + itemSize);
+            float totalW = types.Length * wPerI;
+            for (int i = 0; i < types.Length; i++)
             {
-                for (int y = 0; y < i.Height; y++)
-                {
-                    for (int x = 0; x < i.Width; x++)
-                    {
-                        Rectangle r = i.PositionForItem(x, y);
-                        Item t = i.Slots[x, y].Item;
-                        if (t == null) continue;
-                        if (Input.AreaIsClicked(new Rectangle(r.X, r.Y, r.Width * t.Properties.Width, r.Height * t.Properties.Height)))
-                        {
-                            draggedItem = i.Slots[x, y].Item;
-                            i.Slots[x, y].Remove(1);
-                            draggedItem.Position = new Vector2(r.X + r.Width / 2, r.Y + r.Height / 2);
-                            Debug.WriteLine("item was clicked");
-                        }
-                    }
-                }
+                Rectangle position = new Rectangle((int)(center.X - totalW / 2 + i * wPerI), (int)(center.Y + itemSize / 2), itemSize, itemSize);
+                partSlots.Add(new CustomizationSlot((WeaponPart.PartType)types.GetValue(i), position));
             }
-            else
+        }
+
+        private void CalculateValues()
+        {
+            float shootTimeMod = 1;
+            float reloadTimeMod = 1;
+            sbyte magSizeMod = 0;
+            float bulletSpeedMod = 1;
+            float bulletDamageMod = 1;
+            bool auto = false;
+            float rangeMod = 1;
+
+            foreach (Item p in parts)
             {
-                if (Input.newMs.LeftButton == ButtonState.Released)
-                {
-                    i.Add(draggedItem);
-                    draggedItem = null;
-                }
-                else
-                {
-                    draggedItem.Position -= Input.DeltaPos;
-                }
+                shootTimeMod += p.Properties.WeaponPart.ShootSpeedMod;
+                reloadTimeMod += p.Properties.WeaponPart.ReloadSpeedMod;
+                magSizeMod += p.Properties.WeaponPart.MagSizeMod;
+                bulletSpeedMod += p.Properties.WeaponPart.BulletSpeedMod;
+                bulletDamageMod += p.Properties.WeaponPart.DamageMod;
+                rangeMod += p.Properties.WeaponPart.RangeMod;
+                if (p.Properties.WeaponPart.MakesAuto) auto = true;
             }
+
+            shootTime = (byte)(baseShootTime * shootTimeMod);
+            reloadTime = (byte)(baseReloadTime * reloadTimeMod);
+            magSize = (byte)(baseMagSize + magSizeMod);
+            bulletSpeed = baseBulletSpeed * bulletSpeedMod;
+            bulletDamage = baseBulletDamage * bulletDamageMod;
+            range = (int)(baseRange * rangeMod);
+            IsAuto = auto;
+        }
+
+        public void CustomizingUpdate()
+        {
+            foreach (CustomizationSlot s in partSlots) s.Update(PartOfType(s.Type));
         }
 
         public void DrawCustomization(SpriteBatch spriteBatch)
         {
-            barrelSlot.Draw(spriteBatch);
-            baseSlot.Draw(spriteBatch);
-            magSlot.Draw(spriteBatch);
-
-            if (draggedItem != null) draggedItem.Draw(spriteBatch);
+            foreach (CustomizationSlot s in partSlots) s.Draw(spriteBatch);
+            //draw the thumbnail
         }
+
+        #endregion
     }
 }
