@@ -32,5 +32,39 @@ namespace Shoot__n_Loot
             this.AcceptableAmmo = acceptableAmmo;
             this.BulletSpeedMod = BulletSpeedMod;
         }
+
+        public string GetInfoText()
+        {
+            string s = "";
+
+            s += ConstructMessage(DamageMod, "Damage");
+            s += ConstructMessage(BulletSpeedMod, "Bullet Speed");
+            s += ConstructMessage(ShootSpeedMod, "Fire Rate");
+            s += ConstructMessage(ReloadSpeedMod, "Reload Speed");
+            s += ConstructMessage(MagSizeMod, "Ammo");
+            if (MakesAuto) s += "Makes gun full auto\n";
+            s += "Compatible ammo:\n";
+            foreach (Weapon.AmmoType t in AcceptableAmmo) s += "  " + t + "\n";
+
+            return s;
+        }
+
+        private string ConstructMessage(float modifier, string name)
+        {
+            if (modifier == 0) return "";
+            string sign = "";
+            if (modifier > 0) sign = "+";
+            else if (modifier < 0) sign = "-";
+            return name + " " + sign + (int)(modifier * 100) + "%\n";
+        }
+
+        private string ConstructMessage(int modifier, string name)
+        {
+            if (modifier == 0) return "";
+            string sign = "";
+            if (modifier > 0) sign = "+";
+            else if (modifier < 0) sign = "-";
+            return name + " " + sign + modifier + "\n";
+        }
     }
 }
