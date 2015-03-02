@@ -26,7 +26,8 @@ namespace Shoot__n_Loot
         //percentage = currentHP / maxHp
         public void Draw(SpriteBatch spriteBatch, float percentage)
         {
-
+            spriteBatch.Draw(TextureManager.hpRed, new Vector2(26, 2) + Camera.TotalOffset, new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)(percentage * 100), TextureManager.hpRed.Height), Color.White);
+            spriteBatch.Draw(TextureManager.hpBar, Camera.TotalOffset, Color.White);
         }
     }
 }

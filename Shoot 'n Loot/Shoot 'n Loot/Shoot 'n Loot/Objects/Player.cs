@@ -26,6 +26,8 @@ namespace Shoot__n_Loot
         bool inventoryVisible;
         bool customizing;
 
+        HPBar hpBar;
+
         private Point CUSTOMIZINGINVENTORYOFFSET { get { return new Point(0, 100); } }
 
         public Player()
@@ -35,6 +37,7 @@ namespace Shoot__n_Loot
             weapon = new Weapon();
             this.MaxHealth = 100;
             CanDie = true;
+            hpBar = new HPBar(new Vector2(Camera.TotalOffset.X, Camera.TotalOffset.Y), 100);
 
             for (int i = 0; i < 10; i++)
             {
@@ -152,6 +155,8 @@ namespace Shoot__n_Loot
             }
 
             spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health + "\nHunger: " + Hunger.ToString("0") + "\nBleeding: " + bleeding, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
+
+            hpBar.Draw(spriteBatch, base.Health / base.MaxHealth);
 
             base.Draw(spriteBatch);
         }

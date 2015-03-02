@@ -25,16 +25,19 @@ namespace Shoot__n_Loot
             enemy2,
             enemy3,
 
-            bullet, 
+            bullet,
             house,
             inventorySlot,
 
             medicineItem,
             beans,
-            
+
             lightAmmo,
             mediumAmmo,
-            heavyAmmo;
+            heavyAmmo,
+
+            hpBar,
+            hpRed;
 
         public static Texture2D[]
             fishermanWalk,
@@ -91,6 +94,9 @@ namespace Shoot__n_Loot
             beans = content.Load<Texture2D>("items/beans");
 
             lightAmmo = mediumAmmo = heavyAmmo = content.Load<Texture2D>("items/ammo"); //should be different when we get sprites
+
+            hpBar = content.Load<Texture2D>("hpBar");
+            hpRed = content.Load<Texture2D>("RedHP");
         }
     }
 }
