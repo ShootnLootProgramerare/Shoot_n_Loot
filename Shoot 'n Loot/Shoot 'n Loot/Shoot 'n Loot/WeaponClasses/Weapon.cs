@@ -299,8 +299,9 @@ namespace Shoot__n_Loot
 
         public void DrawCustomization(SpriteBatch spriteBatch)
         {
+            const int w = 400, h = 200, y = 20;
+            spriteBatch.Draw(TextureManager.inventorySlot, new Rectangle((int)Camera.Position.X - w / 2, (int)Camera.TotalOffset.Y + y, w, h), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000005f);
             foreach (CustomizationSlot s in partSlots) s.Draw(spriteBatch);
-            //draw the thumbnail
         }
 
         #endregion

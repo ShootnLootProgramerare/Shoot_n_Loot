@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Shoot__n_Loot.InvenoryStuff;
+using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -62,7 +63,11 @@ namespace Shoot__n_Loot
         public void Add(Item item)
         {
             Point p = SlotThatFits(item);
-            if (p == new Point(-1, -1)) return;
+            if (p == new Point(-1, -1))
+            {
+                SceneManager.currentScene.AddObject(item);
+                return;
+            }
 
             Slots[p.X, p.Y].Add(item);
 
