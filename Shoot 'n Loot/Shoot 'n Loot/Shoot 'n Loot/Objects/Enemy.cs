@@ -16,13 +16,9 @@ namespace Shoot__n_Loot
 {
     internal class Enemy : GameObject
     {
-        enum Direction { Up = 0, Down = 1, Left = 2, Right = 3} //number corresponds to index in array in texturemanager
 
         new public const string TYPE = "Enemy";
         public override string Type { get { return TYPE; } }
-
-        public override Rectangle MapCollider { get { return new Rectangle(base.MapCollider.X + (int)(base.MapCollider.Width * .4f), base.MapCollider.Y + (int)(base.MapCollider.Height * .75f), (int)(base.MapCollider.Width / 5), (int)(base.MapCollider.Height * .25f)); } }
-        public override Rectangle BulletCollider { get { return new Rectangle(base.BulletCollider.X + (int)(base.MapCollider.Width / 3f), base.MapCollider.Y, base.MapCollider.Width / 3, base.MapCollider.Height); } }
 
         public enum EnemyType { Fisherman = 1, enemy2 = 2, enemy3 = 3 };
 
@@ -200,9 +196,9 @@ namespace Shoot__n_Loot
 
         protected void Animate()
         {
-            if (Velocity.LengthSquared() > .3f)
+            if (Velocity.LengthSquared() > Speed * Speed * .9f)
             {
-                Sprite.AnimationSpeed = walkAnimSpeed;
+                /*Sprite.AnimationSpeed = walkAnimSpeed;
                 if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
                 {
                     //left and right movement
@@ -213,7 +209,8 @@ namespace Shoot__n_Loot
                 {
                     if (Velocity.Y > 0) direction = Direction.Down;
                     else if (Velocity.Y < 0) direction = Direction.Up;
-                }
+                }*/
+                direction = VelDirection;
             }
             else if (!attacking)
             {

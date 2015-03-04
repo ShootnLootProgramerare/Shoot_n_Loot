@@ -137,6 +137,7 @@ namespace Shoot__n_Loot
                     if (Frame >= Frames) Frame = 0;
                 }
             }
+            
             spriteBatch.Draw(Texture, Position, sourceRectangle, Color * Alpha, Rotation, Origin, scale, SpriteEffects, LayerDepth);
         }
     }

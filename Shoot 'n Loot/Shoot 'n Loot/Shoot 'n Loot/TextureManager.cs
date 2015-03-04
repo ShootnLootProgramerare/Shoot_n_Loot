@@ -44,16 +44,27 @@ namespace Shoot__n_Loot
             fishermanAttack,
 
             oneleggedWalk,
-            oneleggedAttack;
+            oneleggedAttack,
+            
+            playerWalkNoWeapon,
+            playerWalkWeapon,
+            playerAttack;
 
         public static SpriteFont font;
 
         public static void Load(ContentManager content)
         {
-            playerLeft = content.Load<Texture2D>("player/left");
-            playerRight = content.Load<Texture2D>("player/right");
-            playerUp = content.Load<Texture2D>("player/up");
-            playerDown = content.Load<Texture2D>("player/down");
+            playerWalkNoWeapon = new Texture2D[4];
+            playerWalkNoWeapon[0] = content.Load<Texture2D>("player/walk/noWeapon/up");
+            playerWalkNoWeapon[1] = content.Load<Texture2D>("player/walk/noWeapon/down");
+            playerWalkNoWeapon[2] = content.Load<Texture2D>("player/walk/noWeapon/left");
+            playerWalkNoWeapon[3] = content.Load<Texture2D>("player/walk/noWeapon/right");
+            playerWalkNoWeapon = LoadWalkSprites("player/walk/noWeapon", content);
+            playerWalkWeapon = LoadWalkSprites("player/walk/weapon", content);
+            /*playerWalkWeapon[0] = content.Load<Texture2D>("player/walk/Weapon/up");
+            playerWalkWeapon[1] = content.Load<Texture2D>("player/walk/Weapon/down");
+            playerWalkWeapon[2] = content.Load<Texture2D>("player/walk/Weapon/left");
+            playerWalkWeapon[3] = content.Load<Texture2D>("player/walk/Weapon/right");*/
 
             font = content.Load<SpriteFont>("font");
             tiles = content.Load<Texture2D>("tiles");
@@ -97,6 +108,16 @@ namespace Shoot__n_Loot
 
             hpBar = content.Load<Texture2D>("hpBar");
             hpRed = content.Load<Texture2D>("RedHP");
+        }
+
+        private static Texture2D[] LoadWalkSprites(string path, ContentManager content)
+        {
+            Texture2D[] t = new Texture2D[4];
+            t[0] = content.Load<Texture2D>(path + "/up");
+            t[1] = content.Load<Texture2D>(path + "/down");
+            t[2] = content.Load<Texture2D>(path + "/left");
+            t[3] = content.Load<Texture2D>(path + "/right");
+            return t;
         }
     }
 }

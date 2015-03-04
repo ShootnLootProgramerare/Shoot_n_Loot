@@ -32,7 +32,7 @@ namespace Shoot__n_Loot
 
         public Player()
         {
-            Sprite = new Sprite(TextureManager.playerRight, new Vector2(500), new Vector2(100), 4, new Point(100, 100), 0);
+            Sprite = new Sprite(TextureManager.playerWalkNoWeapon[0], new Vector2(500), new Vector2(100), 4, new Point(100, 100), 0);
             Inventory = new Inventory(this, new Point(0, 0), 10, 4, 10);
             weapon = new Weapon();
             this.MaxHealth = 100;
@@ -102,9 +102,9 @@ namespace Shoot__n_Loot
 
         void Animate()
         {
-            if (Velocity.LengthSquared() > .3f)
+            if (Velocity.LengthSquared() > 1f)
             {
-                Sprite.AnimationSpeed = 9f / 60;
+                /*
                 if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
                 {
                     //left and right movement
@@ -115,7 +115,10 @@ namespace Shoot__n_Loot
                 {
                     if (Velocity.Y > 0) Sprite.SetTexture(TextureManager.playerDown, 4, new Point(100, 100));
                     else if (Velocity.Y < 0) Sprite.SetTexture(TextureManager.playerUp, 4, new Point(100, 100));
-                }
+                }*/
+                Sprite.AnimationSpeed = 9f / 60;
+                if (weapon.Parts == 0) Sprite.SetTexture(TextureManager.playerWalkNoWeapon[(int)VelDirection], 4, new Point(100, 100));
+                else Sprite.SetTexture(TextureManager.playerWalkWeapon[(int)VelDirection], 4, new Point(100, 100));
             }
             else
             {

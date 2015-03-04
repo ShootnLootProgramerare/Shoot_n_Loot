@@ -25,6 +25,8 @@ namespace Shoot__n_Loot
         public enum AmmoType { Light, Medium, Heavy }
 
         public AmmoType currentAmmoType;
+
+        public int Parts { get { return parts.Count; } }
                 
         private BulletProperties BulletProperties
         {

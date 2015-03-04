@@ -9,6 +9,8 @@ namespace Shoot__n_Loot
 {
     class GameObject
     {
+        public enum Direction { Up = 0, Down = 1, Left = 2, Right = 3 } //number corresponds to index in array in texturemanager
+
         private float health;
         private float maxHealth;
 
@@ -34,6 +36,26 @@ namespace Shoot__n_Loot
 
         protected bool CollidedOnX { get; private set; }
         protected bool CollidedOnY { get; private set; }
+
+        public Direction VelDirection
+        {
+            get
+            {
+                Direction direction = Direction.Left;
+                if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
+                {
+                    //left and right movement
+                    if (Velocity.X > 0) direction = Direction.Right;
+                    else if (Velocity.X < 0) direction = Direction.Left;
+                }
+                else
+                {
+                    if (Velocity.Y > 0) direction = Direction.Down;
+                    else if (Velocity.Y < 0) direction = Direction.Up;
+                }
+                return direction;
+            }
+        }
 
 
         /// <summary>
@@ -141,20 +163,24 @@ namespace Shoot__n_Loot
 
             Move(Velocity.X, 0);
             int x = Velocity.X.CompareTo(0);
-            while (IsCollidingWithAny(solidTiles))
+            int _x = 0;
+            while (IsCollidingWithAny(solidTiles) && _x <= Math.Abs(Velocity.X) + 1)
             {
                 Move(-x, 0);
                 Velocity = new Vector2(0, Velocity.Y);
                 CollidedOnX = true;
+                _x++;
             }
 
             Move(0, Velocity.Y);
             int y = Velocity.Y.CompareTo(0);
-            while (IsCollidingWithAny(solidTiles))
+            int _y = 0;
+            while (IsCollidingWithAny(solidTiles) && _y <= Math.Abs(Velocity.Y) + 1)
             {
                 Move(0, -y);
                 Velocity = new Vector2(Velocity.X, 0);
                 CollidedOnY = true;
+                _y++;
             }
         }
     }
