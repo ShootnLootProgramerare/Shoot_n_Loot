@@ -118,6 +118,7 @@
     <Compile Include="Scenes\AboutScene.cs" />
     <Compile Include="Scenes\PauseScene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
+    <Compile Include="SoundManager.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="WeaponClasses\BulletProperties.cs" />
     <Compile Include="Camera.cs" />
