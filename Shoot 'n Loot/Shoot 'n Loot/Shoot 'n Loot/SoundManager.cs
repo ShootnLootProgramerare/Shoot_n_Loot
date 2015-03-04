@@ -30,22 +30,23 @@ namespace Shoot__n_Loot
 
         public static void Load(ContentManager content)
         {
-            playerShoot = content.Load<SoundEffect>("");
-            playerHurt = content.Load<SoundEffect>("");
-            playerWalkOutside = content.Load<SoundEffect>("");
-            playerWalkIndoor = content.Load<SoundEffect>("");
+            playerShoot = content.Load<SoundEffect>("Sounds/playerShoot");
+            playerHurt = content.Load<SoundEffect>("Sounds/playerHurt");
+            playerWalkOutside = content.Load<SoundEffect>("Sounds/playerWalkOutside");
+            playerWalkIndoor = content.Load<SoundEffect>("Sounds/playerWalkIndoor");
+            playerDie = content.Load<SoundEffect>("Sounds/playerDie");
 
-            inventory = content.Load<SoundEffect>("");
-            weaponEquip = content.Load<SoundEffect>("");
-            itemUse = content.Load<SoundEffect>("");
+            inventory = content.Load<SoundEffect>("Sounds/inventory");
+            weaponEquip = content.Load<SoundEffect>("Sounds/weaponEquip");
+            itemUse = content.Load<SoundEffect>("Sounds/itemUse");
 
-            zombie1 = content.Load<SoundEffect>("");
-            zombie2 = content.Load<SoundEffect>("");
-            zombie3 = content.Load<SoundEffect>("");
-            zombieHurt = content.Load<SoundEffect>("");
+            zombie1 = content.Load<SoundEffect>("Sounds/zombie1");
+            zombie2 = content.Load<SoundEffect>("Sounds/zombie2");
+            zombie3 = content.Load<SoundEffect>("Sounds/zombie3");
+            zombieHurt = content.Load<SoundEffect>("Sounds/zombieHurt");
 
-            door = content.Load<SoundEffect>("");
-            water = content.Load<SoundEffect>("");
+            door = content.Load<SoundEffect>("Sounds/door");
+            water = content.Load<SoundEffect>("Sounds/water");
         }
 
 
