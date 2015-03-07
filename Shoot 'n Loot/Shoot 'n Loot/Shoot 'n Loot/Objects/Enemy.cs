@@ -41,6 +41,7 @@ namespace Shoot__n_Loot
         {
             this.walkingAnims = walkingAnims;
             this.attackAnims = attackAnims;
+            ObstructsBullets = true;
             Sprite = new Sprite(walkingAnims[0], position, new Vector2(200, 100), 4, new Point(200, 100), 0); //maybe an overload for different sizes etc
         }
 
@@ -196,34 +197,37 @@ namespace Shoot__n_Loot
 
         protected void Animate()
         {
-            if (Velocity.LengthSquared() > Speed * Speed * .9f)
+            if (!attacking)
             {
-                /*Sprite.AnimationSpeed = walkAnimSpeed;
-                if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
+                if (Velocity.Length() > .1f)
                 {
-                    //left and right movement
-                    if (Velocity.X > 0) direction = Direction.Right;
-                    else if (Velocity.X < 0) direction = Direction.Left;
+                    /*Sprite.AnimationSpeed = walkAnimSpeed;
+                    if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
+                    {
+                        //left and right movement
+                        if (Velocity.X > 0) direction = Direction.Right;
+                        else if (Velocity.X < 0) direction = Direction.Left;
+                    }
+                    else
+                    {
+                        if (Velocity.Y > 0) direction = Direction.Down;
+                        else if (Velocity.Y < 0) direction = Direction.Up;
+                    }*/
+                    Sprite.AnimationSpeed = walkAnimSpeed;
+                    direction = VelDirection;
+                    Sprite.SetTexture(walkingAnims[(int)direction], walkFrames, frameSize);
                 }
                 else
                 {
-                    if (Velocity.Y > 0) direction = Direction.Down;
-                    else if (Velocity.Y < 0) direction = Direction.Up;
-                }*/
-                direction = VelDirection;
+                    Sprite.AnimationSpeed = 0;
+                    Sprite.Frame = 0;
+                }
             }
-            else if (!attacking)
+            else
             {
-                Sprite.AnimationSpeed = 0;
-                Sprite.Frame = 0;
-            }
-
-            if (attacking)
-            {
-                Sprite.SetTexture(attackAnims[(int)direction], attackFrames, frameSize); //maybe global var for how many frames
+                Sprite.SetTexture(attackAnims[(int)direction], attackFrames, frameSize);
                 Sprite.AnimationSpeed = attackAnimSpeed;
             }
-            else Sprite.SetTexture(walkingAnims[(int)direction], walkFrames, frameSize);
         }
 
         protected override void OnDestroy()
