@@ -20,8 +20,8 @@ namespace Shoot__n_Loot
             base.Initialize();
 
             player = new Player();
-            Enemy enemy = new Onelegged(Vector2.Zero);
-            objects.Add(enemy);
+            //Enemy enemy = new Onelegged(Vector2.Zero);
+            //objects.Add(enemy);
             //objects.Add(new Enemy(new Vector2(1000, 1000), Enemy.EnemyType.enemy2));
             objects.Add(player);
             objects.Add(new House());
