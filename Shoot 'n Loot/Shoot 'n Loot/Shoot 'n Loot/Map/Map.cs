@@ -10,7 +10,7 @@ namespace Shoot__n_Loot
 {
     class Map
     {
-        public const byte width = 16, height = 16, maxZombies = 10; //number of chunks. width * Tile.size * chunk.size should equal the width of the map texture, same for height.
+        public const byte width = 12, height = 12, maxZombies = 10; //number of chunks. width * Tile.size * chunk.size should equal the width of the map texture, same for height.
 
         public static Chunk[,] chunks { get; set; }
 
@@ -28,6 +28,19 @@ namespace Shoot__n_Loot
                     chunks[x, y] = new Chunk(Chunk.sizePx * new Vector2(x, y), subChunk(mapData, x * Chunk.size, y * Chunk.size, Chunk.size, Chunk.size), spawnData[x, y]);
                 }
             }
+        }
+
+        public static bool TileAtPosIsWalkable(Vector2 position)
+        {
+            int x = (int)(position.X / Tile.size);
+            int y = (int)(position.Y / Tile.size);
+            int chunkX = x / Chunk.size;
+            int chunkY = y / Chunk.size;
+            try
+            {
+                return chunks[chunkX, chunkY].Tiles[x % Chunk.size, y % Chunk.size].Properties.IsWalkable;
+            }
+            catch { return false; }
         }
 
         static Color[,] subChunk(Color[,] source, int x, int y, int w, int h)

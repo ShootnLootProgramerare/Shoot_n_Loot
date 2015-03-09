@@ -65,10 +65,10 @@ namespace Shoot__n_Loot
             playerWalkWeapon[1] = content.Load<Texture2D>("player/walk/Weapon/down");
             playerWalkWeapon[2] = content.Load<Texture2D>("player/walk/Weapon/left");
             playerWalkWeapon[3] = content.Load<Texture2D>("player/walk/Weapon/right");*/
-
+            
             font = content.Load<SpriteFont>("font");
             tiles = content.Load<Texture2D>("tiles");
-            map = content.Load<Texture2D>("map/map");
+            map = content.Load<Texture2D>("map/map_wotrees");
             spawnData = content.Load<Texture2D>("map/spawnData");
 
             enemy1 = content.Load<Texture2D>("enemies/enemy1");
