@@ -220,6 +220,7 @@ namespace Shoot__n_Loot
             if (shootTimer == 0 && Ammo > 0)
             {
                 scene.AddObject(new Bullet(angle, position, BulletProperties));
+                SoundManager.playerShoot.Play();
                 Ammo--;
                 shootTimer = 1;
             }
