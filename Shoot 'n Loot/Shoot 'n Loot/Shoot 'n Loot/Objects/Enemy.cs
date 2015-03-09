@@ -43,6 +43,7 @@ namespace Shoot__n_Loot
             this.attackAnims = attackAnims;
             ObstructsBullets = true;
             Sprite = new Sprite(walkingAnims[0], position, new Vector2(200, 100), 4, new Point(200, 100), 0); //maybe an overload for different sizes etc
+            //Sprite.Origin = Size / 2;
         }
 
 
@@ -68,6 +69,7 @@ namespace Shoot__n_Loot
             this.walkAnimSpeed = walkAnimSpeed;
             this.attackFrames = attackFrames;
             this.attackAnimSpeed = attackAnimSpeed;
+            Sprite.Origin = new Vector2(frameSize.X / 2, frameSize.Y / 2);
         }
 
         /*public Enemy(Vector2 position, EnemyType enemytype)
@@ -252,8 +254,6 @@ namespace Shoot__n_Loot
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(TextureManager.house, MapCollider, Color.White * .5f);
-            spriteBatch.DrawString(TextureManager.font, Velocity.ToString(), Position, Color.Black);
             base.Draw(spriteBatch);
         }
     }

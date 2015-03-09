@@ -9,9 +9,9 @@ namespace Shoot__n_Loot.Enemies
 {
     class Onelegged : Enemy
     {
-        const int mw = 30, mh = 15;
-        public override Rectangle MapCollider { get { return new Rectangle((int)(Position.X - mw / 2), (int)(Position.Y + Size.Y / 2 - mh), mw, mh); } }
-        public override Rectangle BulletCollider { get { return new Rectangle(base.BulletCollider.X + (int)(base.MapCollider.Width / 3f), base.MapCollider.Y, base.MapCollider.Width / 3, base.MapCollider.Height); } }
+        const int mw = 60, mh = 25, bw = 60, bh = 150;
+        public override Rectangle MapCollider { get { return new Rectangle((int)(Position.X - mw / 2), (int)(Position.Y + Size.Y / 1.35f - mh), mw, mh); } }
+        public override Rectangle BulletCollider { get { return new Rectangle((int)(Position.X - bw / 2), (int)(Position.Y + Size.Y / 1.35f -bh), bw, bh); } }
 
 
         public Onelegged(Vector2 position)
@@ -46,6 +46,7 @@ namespace Shoot__n_Loot.Enemies
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
             //spriteBatch.DrawString(TextureManager.font, (DistanceSquared(SceneManager.gameScene.player.Center) - (range * range)).ToString(), Position, Color.Black);
+            //spriteBatch.Draw(TextureManager.house, MapCollider, Color.White);
             base.Draw(spriteBatch);
         }
     }
