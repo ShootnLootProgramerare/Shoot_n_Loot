@@ -227,12 +227,14 @@ namespace Shoot__n_Loot.InvenoryStuff
 
         void Consume()
         {
+            SoundManager.itemUse.Play();
             Item.Properties.onConsume(SceneManager.gameScene.player);
             Remove(1);
         }
 
         void UseInWeapon()
         {
+            SoundManager.itemUse.Play();
             Item i = SceneManager.gameScene.player.weapon.AddPart(Item);
             Remove(1);
             if (i != null) SceneManager.gameScene.player.Inventory.Add(i);
@@ -240,6 +242,7 @@ namespace Shoot__n_Loot.InvenoryStuff
 
         void UseAsAmmo()
         {
+            SoundManager.itemUse.Play();
             SceneManager.gameScene.player.weapon.currentAmmoType = Item.Properties.AmmoType;
         }
     }

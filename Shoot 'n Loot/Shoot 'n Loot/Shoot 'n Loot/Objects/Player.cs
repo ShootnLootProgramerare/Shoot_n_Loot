@@ -77,6 +77,7 @@ namespace Shoot__n_Loot
 
             if (Input.KeyWasJustPressed(Keys.I) && !customizing)
             {
+                SoundManager.inventory.Play();
                 inventoryVisible = !inventoryVisible;
                 Inventory.HideAllItemMenus();
             }
