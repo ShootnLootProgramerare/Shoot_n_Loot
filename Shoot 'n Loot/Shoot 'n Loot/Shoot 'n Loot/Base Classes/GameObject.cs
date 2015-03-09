@@ -24,7 +24,7 @@ namespace Shoot__n_Loot
         public virtual Rectangle BulletCollider { get { return Sprite.Area; } }
         
         public bool Dead { get; set; }
-        public float Health { get { return health; } set { health = value; if (health <= 0 && CanDie) { Dead = true; OnDestroy(); } } }
+        public float Health { get { return health; } set { health = value; if (health <= 0 && CanDie) { Dead = true; OnDestroy(); SoundManager.playerDie.Play(); } } }
         public float MaxHealth { get { return maxHealth; } set { maxHealth = health = value; } }
         public bool CanDie { get; set; }
         

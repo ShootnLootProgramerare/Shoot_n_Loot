@@ -199,6 +199,7 @@ namespace Shoot__n_Loot
 
                 if (DistanceSquared(SceneManager.gameScene.player.Center) <= range * range)
                 {
+                    SoundManager.playerHurt.Play();
                     SceneManager.gameScene.player.Health -= Damage;
                     SceneManager.gameScene.player.bleeding += .001f; // maybe this should be different for different zombies
                 }
