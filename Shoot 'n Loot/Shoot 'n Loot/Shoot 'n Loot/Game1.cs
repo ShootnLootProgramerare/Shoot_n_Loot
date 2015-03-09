@@ -61,6 +61,7 @@ namespace Shoot__n_Loot
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.Load(Content);
+            SoundManager.Load(Content);
             SceneManager.LoadAll();
         }
 
