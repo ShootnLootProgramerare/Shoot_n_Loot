@@ -9,6 +9,10 @@ namespace Shoot__n_Loot.Enemies
 {
     class Onelegged : Enemy
     {
+        const int mw = 30, mh = 15;
+        public override Rectangle MapCollider { get { return new Rectangle((int)(Position.X - mw / 2), (int)(Position.Y + Size.Y / 2 - mh), mw, mh); } }
+        public override Rectangle BulletCollider { get { return new Rectangle(base.BulletCollider.X + (int)(base.MapCollider.Width / 3f), base.MapCollider.Y, base.MapCollider.Width / 3, base.MapCollider.Height); } }
+
 
         public Onelegged(Vector2 position)
             : base(position, TextureManager.oneleggedWalk, TextureManager.oneleggedAttack)
@@ -29,17 +33,11 @@ namespace Shoot__n_Loot.Enemies
             }
             else if (DistanceSquared(SceneManager.gameScene.player.Center) < 300000)
             {
-                Vector2 d = -1 * (Position - SceneManager.gameScene.player.Center);
-                d.Normalize();
-                Velocity = d * 4 * Speed;
-                Move(true);
+                MoveTowardsPlayer(4 * Speed);
             }
             else
             {
-                Vector2 d = -1 * (Position - SceneManager.gameScene.player.Center);
-                d.Normalize();
-                Velocity = d * Speed;
-                Move(true);
+                MoveTowardsPlayer(Speed);
             }
 
             base.Update();

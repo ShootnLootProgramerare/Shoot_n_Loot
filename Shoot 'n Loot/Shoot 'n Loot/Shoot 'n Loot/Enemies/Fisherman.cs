@@ -33,11 +33,7 @@ namespace Shoot__n_Loot.Enemies
             }
             else if (DistanceSquared(SceneManager.gameScene.player.Center) < 250000)
             {
-                Vector2 d = SceneManager.gameScene.player.Position - Position;
-                d.Normalize();
-                Velocity = d * Speed;
-
-                Move(true);
+                MoveTowardsPlayer(Speed);
             }
 
             base.Update();

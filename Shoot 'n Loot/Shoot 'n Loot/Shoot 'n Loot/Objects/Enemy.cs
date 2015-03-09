@@ -102,6 +102,14 @@ namespace Shoot__n_Loot
             ObstructsBullets = true;
         }*/
 
+        protected void MoveTowardsPlayer(float speed)
+        {
+            Vector2 d = -1 * (Position - SceneManager.gameScene.player.Center);
+            d.Normalize();
+            Velocity = d * speed;
+            Move(true);
+        }
+
         public override void Update()
         {
             Animate();
@@ -245,6 +253,7 @@ namespace Shoot__n_Loot
         public override void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.Draw(TextureManager.house, MapCollider, Color.White * .5f);
+            spriteBatch.DrawString(TextureManager.font, Velocity.ToString(), Position, Color.Black);
             base.Draw(spriteBatch);
         }
     }

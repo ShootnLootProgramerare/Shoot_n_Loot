@@ -169,7 +169,7 @@ namespace Shoot__n_Loot
                 Move(-x, 0);
                 Velocity = new Vector2(0, Velocity.Y);
                 CollidedOnX = true;
-                _x++;
+                //_x++;
             }
 
             Move(0, Velocity.Y);
@@ -180,7 +180,7 @@ namespace Shoot__n_Loot
                 Move(0, -y);
                 Velocity = new Vector2(Velocity.X, 0);
                 CollidedOnY = true;
-                _y++;
+                //_y++;
             }
         }
     }
