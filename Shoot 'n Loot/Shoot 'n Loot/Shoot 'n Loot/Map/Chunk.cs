@@ -70,9 +70,12 @@ namespace Shoot__n_Loot
             if (Game1.random.Next(255) < spawnData.A * SPAWNRATE && SceneManager.gameScene.NoOfZombies() < Map.maxZombies)
             {
                 Vector2 position = Position;
+                int tries = 0;
                 while (!Map.TileAtPosIsWalkable(position))
                 {
+                    tries++;
                     position += new Vector2(Tile.size);
+                    if (tries > 100) return;
                 }
 
                 int r = Game1.random.Next(spawnData.R + spawnData.G + spawnData.B);
