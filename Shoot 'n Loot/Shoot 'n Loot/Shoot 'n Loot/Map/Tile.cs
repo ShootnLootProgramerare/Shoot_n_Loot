@@ -14,7 +14,9 @@ namespace Shoot__n_Loot
             new TileProperties(0, true), //grass
             new TileProperties(1, false, false, 2, 30), //water
             new TileProperties(2, false), //floor
-            new TileProperties(3, true) //wall
+            new TileProperties(3, true), //wall
+            new TileProperties(4, true), //beach
+            new TileProperties(5, true) //path
         };
 
         public enum TileType { Grass = 0, Sea = 1, Wood = 2 }

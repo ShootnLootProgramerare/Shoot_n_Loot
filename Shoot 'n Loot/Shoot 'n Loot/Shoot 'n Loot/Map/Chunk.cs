@@ -12,7 +12,16 @@ namespace Shoot__n_Loot
 {
     class Chunk
     {
-        static Color[] tileTypes = new Color[] { new Color(43, 78, 6), new Color(6, 23, 78), new Color(255, 128, 128), new Color(138, 134, 124) }; //which tileTypes these correspond to is defined in Tile.TilePrefabs
+        static Color[] tileTypes = new Color[] 
+        { 
+            new Color(43, 78, 6), 
+            new Color(6, 23, 78), 
+            new Color(255, 128, 128), 
+            new Color(129, 113, 75), 
+            new Color(88, 75, 42),
+            new Color(138, 134, 124)
+        }; //which tileTypes these correspond to is defined in Tile.TilePrefabs
+
         public const byte size = 12;
         public static short sizePx { get { return size * Tile.size; } }
 
