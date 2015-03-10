@@ -19,6 +19,16 @@ namespace Shoot__n_Loot
             new TileProperties(5, true) //path
         };
 
+        public static Color[] tileTypes = new Color[] 
+        { 
+            new Color(43, 78, 6), 
+            new Color(6, 23, 78), 
+            new Color(255, 128, 128), 
+            new Color(129, 113, 75), 
+            new Color(88, 75, 42),
+            new Color(138, 134, 124)
+        };
+
         public enum TileType { Grass = 0, Sea = 1, Wood = 2 }
 
         public const byte size = 48;

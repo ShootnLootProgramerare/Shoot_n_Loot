@@ -12,16 +12,6 @@ namespace Shoot__n_Loot
 {
     class Chunk
     {
-        static Color[] tileTypes = new Color[] 
-        { 
-            new Color(43, 78, 6), 
-            new Color(6, 23, 78), 
-            new Color(255, 128, 128), 
-            new Color(129, 113, 75), 
-            new Color(88, 75, 42),
-            new Color(138, 134, 124)
-        }; //which tileTypes these correspond to is defined in Tile.TilePrefabs
-
         public const byte size = 12;
         public static short sizePx { get { return size * Tile.size; } }
 
@@ -49,9 +39,9 @@ namespace Shoot__n_Loot
                 {
                     //if(!tileTypes.Contains(mapData[x, y])) throw new Exception("Color not valid, pixel " + x + ", " + y);
                     byte type = 0;
-                    for (byte i = 0; i < tileTypes.Length; i++)
+                    for (byte i = 0; i < Tile.tileTypes.Length; i++)
 			        {
-			            if(tileTypes[i] == mapData[x, y]) type = i;
+			            if(Tile.tileTypes[i] == mapData[x, y]) type = i;
 			        }
                     Tiles[x ,y] = new Tile(Position + new Vector2(x, y) * Tile.size, type);
                 }
