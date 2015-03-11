@@ -22,7 +22,7 @@ namespace Shoot__n_Loot
         const byte baseReloadTime = 60;
         const byte baseMagSize = 10;
 
-        public enum AmmoType { Light, Medium, Heavy }
+        public enum AmmoType { Light, Medium, Heavy, Nails }
 
         public AmmoType currentAmmoType;
 

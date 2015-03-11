@@ -32,10 +32,12 @@ namespace Shoot__n_Loot
 
             medicineItem,
             beans,
+            bandage,
 
             lightAmmo,
             mediumAmmo,
             heavyAmmo,
+            nails,
 
             hpBar,
             hpRed;
@@ -105,8 +107,10 @@ namespace Shoot__n_Loot
 
             medicineItem = content.Load<Texture2D>("items/pill");
             beans = content.Load<Texture2D>("items/beans");
+            bandage = content.Load<Texture2D>("items/bandage");
 
             lightAmmo = mediumAmmo = heavyAmmo = content.Load<Texture2D>("items/ammo"); //should be different when we get sprites
+            nails = content.Load<Texture2D>("items/nails");
 
             hpBar = content.Load<Texture2D>("hpBar");
             hpRed = content.Load<Texture2D>("RedHP");

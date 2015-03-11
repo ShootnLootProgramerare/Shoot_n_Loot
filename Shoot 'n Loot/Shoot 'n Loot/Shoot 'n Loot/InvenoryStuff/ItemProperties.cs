@@ -27,9 +27,9 @@ namespace Shoot__n_Loot.InvenoryStuff
         public Action<Player> onConsume;
 
 
-        public ItemProperties(byte width, byte height, byte weight, Texture2D texture, byte maxStack, string infoText) : this(width, height, weight, texture, maxStack, infoText, null, null, null) { }
+        public ItemProperties(byte width, byte height, float weight, Texture2D texture, byte maxStack, string infoText) : this(width, height, weight, texture, maxStack, infoText, null, null, null) { }
 
-        public ItemProperties(byte width, byte height, byte weight, Texture2D texture, byte maxStack, string infoText, Weapon.AmmoType ammoType) : this(width, height, weight, texture, maxStack, infoText, null, null, ammoType) { }
+        public ItemProperties(byte width, byte height, float weight, Texture2D texture, byte maxStack, string infoText, Weapon.AmmoType ammoType) : this(width, height, weight, texture, maxStack, infoText, null, null, ammoType) { }
 
         public ItemProperties(byte width, byte height, float weight, Texture2D texture, byte maxStack, string infoText, Action<Player> onConsume) : this(width, height, weight, texture, maxStack, infoText, onConsume, null, null) { }
 
