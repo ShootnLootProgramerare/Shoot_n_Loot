@@ -20,6 +20,7 @@ namespace Shoot__n_Loot
             map,
             spawnData,
             tiles,
+            propData,
 
             enemy1,
             enemy2,
@@ -70,6 +71,7 @@ namespace Shoot__n_Loot
             tiles = content.Load<Texture2D>("tiles");
             map = content.Load<Texture2D>("map/map_wotrees");
             spawnData = content.Load<Texture2D>("map/spawnData");
+            propData = content.Load<Texture2D>("map/propData");
 
             enemy1 = content.Load<Texture2D>("enemies/enemy1");
             enemy2 = content.Load<Texture2D>("enemies/enemy2");

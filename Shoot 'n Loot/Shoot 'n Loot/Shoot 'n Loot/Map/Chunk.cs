@@ -27,7 +27,7 @@ namespace Shoot__n_Loot
         /// <param name="relativePosition">posiiton in the game of the top left corner</param>
         /// <param name="mapData">the color[] that contains the tiles</param>
         /// <param name="spawnData">the color that describes spawning in this chunk</param>
-        public Chunk(Vector2 relativePosition, Color[,] mapData, Color spawnData)
+        public Chunk(Vector2 relativePosition, Color[,] mapData, Color[,] propData, Color spawnData)
         {
             Tiles = new Tile[size, size];
             Position = relativePosition;
@@ -44,8 +44,23 @@ namespace Shoot__n_Loot
 			            if(Tile.tileTypes[i] == mapData[x, y]) type = i;
 			        }
                     Tiles[x ,y] = new Tile(Position + new Vector2(x, y) * Tile.size, type);
+
+                    Color prop = propData[x, y];
+                    if (prop == Color.Red)
+                    {
+                        SceneManager.gameScene.player.Position = TilePosition(x, y);
+                    }
+                    else if (prop == Color.Black)
+                    {
+                        SceneManager.gameScene.objects.Add(new House(TilePosition(x, y)));
+                    }
                 }
             }
+        }
+
+        private Vector2 TilePosition(int x, int y)
+        {
+            return new Vector2(Tile.size) * new Vector2(x, y) + Position;
         }
 
         public List<Tile> NonWalkableTiles()

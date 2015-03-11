@@ -9,9 +9,9 @@ namespace Shoot__n_Loot
 {
     class House : GameObject
     {
-        public House()
+        public House(Vector2 position)
         {
-            Sprite = new Sprite(TextureManager.house, new Vector2(48 * 20) - new Vector2(0, 48 * 5), new Vector2(48 * 5));
+            Sprite = new Sprite(TextureManager.house, position, new Vector2(48 * 5));
             Sprite.Origin = Vector2.Zero;
         }
 

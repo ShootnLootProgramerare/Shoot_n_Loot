@@ -21,6 +21,8 @@ namespace Shoot__n_Loot.Scenes
             aboutScene = new AboutScene();
             pauseScene = new PauseScene();
 
+            Map.Initialize(); //should be in gameScene but that fucks thigns up
+
             currentScene = mainMenuScene;
         }
     }

@@ -19,13 +19,14 @@ namespace Shoot__n_Loot
             chunks = new Chunk[width, height];
 
             Color[,] mapData = loadTexture(TextureManager.map);
+            Color[,] propData = loadTexture(TextureManager.propData);
             Color[,] spawnData = loadTexture(TextureManager.spawnData);            
 
             for(int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    chunks[x, y] = new Chunk(Chunk.sizePx * new Vector2(x, y), subChunk(mapData, x * Chunk.size, y * Chunk.size, Chunk.size, Chunk.size), spawnData[x, y]);
+                    chunks[x, y] = new Chunk(Chunk.sizePx * new Vector2(x, y), subChunk(mapData, x * Chunk.size, y * Chunk.size, Chunk.size, Chunk.size), subChunk(propData, x * Chunk.size, y * Chunk.size, Chunk.size, Chunk.size), spawnData[x, y]);
                 }
             }
         }
