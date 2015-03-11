@@ -12,7 +12,7 @@ namespace Shoot__n_Loot.InvenoryStuff
 {
     class ItemSlot
     {
-        const int BUTTON_W = 100, BUTTON_H = 25;
+        const int BUTTON_W = 100, BUTTON_H = 0;
 
         public Item Item { get; private set; }
         public byte StackSize { get; private set; }
