@@ -17,7 +17,8 @@ namespace Shoot__n_Loot
             new TileProperties(3, true), //wall
             new TileProperties(6, true),  //beach
             new TileProperties(5, true), //path
-            new TileProperties(4, true) //dirt
+            new TileProperties(4, true), //dirt
+            new TileProperties(7, true), //bridge
         };
 
         public static Color[] tileTypes = new Color[] 
@@ -28,7 +29,8 @@ namespace Shoot__n_Loot
             new Color(129, 113, 75), 
             new Color(88, 75, 42),
             new Color(138, 134, 124),
-            new Color(128, 138, 20)
+            new Color(128, 138, 20),
+            new Color(76, 57, 10)
         };
 
         public enum TileType { Grass = 0, Sea = 1, Wood = 2 }

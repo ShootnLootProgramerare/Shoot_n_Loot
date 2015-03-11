@@ -65,8 +65,8 @@ namespace Shoot__n_Loot.UI
 
             textSize = TextureManager.font.MeasureString(text);
 
-            if (textSize.X > area.X + PADDING_X * 2) Area = new Rectangle(Area.X, area.Y, (int)textSize.X + PADDING_X * 2, Area.Y);
-            if (textSize.Y > area.Y + PADDING_Y * 2) Area = new Rectangle(Area.X, area.Y, Area.X, (int)textSize.Y + PADDING_Y * 2);
+            if (textSize.X > area.Width + PADDING_X * 2) Area = new Rectangle(Area.X, area.Y, (int)textSize.X + PADDING_X * 2, Area.Y);
+            if (textSize.Y > area.Height + PADDING_Y * 2) Area = new Rectangle(Area.X, area.Y, Area.X, (int)textSize.Y + PADDING_Y * 2);
         }
 
         /// <summary>
