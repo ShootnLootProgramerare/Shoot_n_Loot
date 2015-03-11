@@ -17,7 +17,9 @@ namespace Shoot__n_Loot.UI
         public Rectangle Area { get; set; }
         public bool IsClicked { get { return Input.AreaIsClicked(Area); } }
         public Color color;
+
         Action onClick;
+        Vector2 textSize;
 
         Color AdjustedColor
         {
@@ -61,7 +63,10 @@ namespace Shoot__n_Loot.UI
             this.onClick = onClick;
             this.color = color;
 
-            Area = new Rectangle(Area.X, area.Y, (int)TextureManager.font.MeasureString(text).X + PADDING_X * 2, (int)TextureManager.font.MeasureString(text).Y + PADDING_Y * 2);
+            textSize = TextureManager.font.MeasureString(text);
+
+            if (textSize.X > area.X + PADDING_X * 2) Area = new Rectangle(Area.X, area.Y, (int)textSize.X + PADDING_X * 2, Area.Y);
+            if (textSize.Y > area.Y + PADDING_Y * 2) Area = new Rectangle(Area.X, area.Y, Area.X, (int)textSize.Y + PADDING_Y * 2);
         }
 
         /// <summary>
@@ -84,7 +89,7 @@ namespace Shoot__n_Loot.UI
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(TextureManager.inventorySlot, Area, null, AdjustedColor, 0, Vector2.Zero, SpriteEffects.None, 0.0000001f);
-            spriteBatch.DrawString(TextureManager.font, Text, new Vector2(Area.X + PADDING_X, Area.Y + PADDING_Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.DrawString(TextureManager.font, Text, new Vector2(Area.X + Area.Width / 2, Area.Y + Area.Height / 2), Color.Black, 0, textSize / 2, 1, SpriteEffects.None, 0);
         }
     }
 }
