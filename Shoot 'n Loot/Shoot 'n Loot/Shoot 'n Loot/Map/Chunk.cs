@@ -21,6 +21,8 @@ namespace Shoot__n_Loot
         public Vector2 Position { get; private set; }
         public Vector2 Center { get { return Position + new Vector2(size / 2); } }
 
+        List<Vector2> spawnPositions;
+
         /// <summary>
         /// 
         /// </summary>
@@ -32,6 +34,8 @@ namespace Shoot__n_Loot
             Tiles = new Tile[size, size];
             Position = relativePosition;
             this.spawnData = spawnData;
+
+            spawnPositions = new List<Vector2>();
 
             for(int x = 0; x < size; x++)
             {
@@ -53,6 +57,10 @@ namespace Shoot__n_Loot
                     else if (prop == Color.Black)
                     {
                         SceneManager.gameScene.objects.Add(new House(TilePosition(x, y)));
+                    }
+                    else if (prop == Color.Yellow)
+                    {
+                        spawnPositions.Add(TilePosition(x, y));
                     }
                 }
             }
@@ -81,23 +89,16 @@ namespace Shoot__n_Loot
         {
             const float SPAWNRATE = .00001f;
 
-            if (Game1.random.Next(255) < spawnData.A * SPAWNRATE && SceneManager.gameScene.NoOfZombies() < Map.maxZombies)
+            if (Game1.random.Next(255) < spawnData.A * SPAWNRATE && SceneManager.gameScene.NoOfZombies() < Map.maxZombies && spawnPositions.Count > 0)
             {
-                Vector2 position = Position;
-                int tries = 0;
-                while (!Map.TileAtPosIsWalkable(position))
-                {
-                    tries++;
-                    position += new Vector2(Tile.size);
-                    if (tries > 100) return;
-                }
+                Vector2 position = spawnPositions[(Game1.random.Next(spawnPositions.Count))];
 
                 int r = Game1.random.Next(spawnData.R + spawnData.G + spawnData.B);
 
-                Enemy.EnemyType e;
+                //TODO: rewrite this so every type of enemy has a seperate map of spawn frequency
                 if (r > spawnData.R + spawnData.G) SceneManager.gameScene.AddObject(new Fisherman(position));//e = (Enemy.EnemyType)3; //decide which type
-                else if (r > spawnData.R) e = (Enemy.EnemyType)2;
-                else e = (Enemy.EnemyType)1;
+                else if (r > spawnData.R) SceneManager.gameScene.AddObject(new Onelegged(position));
+                else SceneManager.gameScene.AddObject(new FatLady(position));
             }
         }
 

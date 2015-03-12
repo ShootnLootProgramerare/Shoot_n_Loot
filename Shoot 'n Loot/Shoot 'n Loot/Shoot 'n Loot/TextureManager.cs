@@ -49,6 +49,9 @@ namespace Shoot__n_Loot
             oneleggedWalk,
             oneleggedAttack,
             
+            fatLadyWalk, 
+            fatLadyAttack,
+            
             playerWalkNoWeapon,
             playerWalkWeapon,
             playerAttack;
@@ -57,11 +60,6 @@ namespace Shoot__n_Loot
 
         public static void Load(ContentManager content)
         {
-            playerWalkNoWeapon = new Texture2D[4];
-            playerWalkNoWeapon[0] = content.Load<Texture2D>("player/walk/noWeapon/up");
-            playerWalkNoWeapon[1] = content.Load<Texture2D>("player/walk/noWeapon/down");
-            playerWalkNoWeapon[2] = content.Load<Texture2D>("player/walk/noWeapon/left");
-            playerWalkNoWeapon[3] = content.Load<Texture2D>("player/walk/noWeapon/right");
             playerWalkNoWeapon = LoadWalkSprites("player/walk/noWeapon", content);
             playerWalkWeapon = LoadWalkSprites("player/walk/weapon", content);
             /*playerWalkWeapon[0] = content.Load<Texture2D>("player/walk/Weapon/up");
@@ -79,27 +77,14 @@ namespace Shoot__n_Loot
             enemy2 = content.Load<Texture2D>("enemies/enemy2");
             enemy3 = content.Load<Texture2D>("enemies/enemy3");
 
-            fishermanWalk = new Texture2D[4];
-            fishermanAttack = new Texture2D[4];
-            fishermanWalk[0] = content.Load<Texture2D>("enemies/fisherman/walk/Up");
-            fishermanWalk[1] = content.Load<Texture2D>("enemies/fisherman/walk/Down");
-            fishermanWalk[2]= content.Load<Texture2D>("enemies/fisherman/walk/Left");
-            fishermanWalk[3] = content.Load<Texture2D>("enemies/fisherman/walk/Right");
-            fishermanAttack[0] = content.Load<Texture2D>("enemies/fisherman/attack/up");
-            fishermanAttack[1] = content.Load<Texture2D>("enemies/fisherman/attack/down");
-            fishermanAttack[2] = content.Load<Texture2D>("enemies/fisherman/attack/left");
-            fishermanAttack[3] = content.Load<Texture2D>("enemies/fisherman/attack/right");
+            fishermanWalk = LoadWalkSprites("enemies/fisherman/walk", content);
+            fishermanAttack = LoadWalkSprites("enemies/fisherman/attack", content);
 
-            oneleggedWalk = new Texture2D[4];
-            oneleggedAttack = new Texture2D[4];
-            oneleggedWalk[0] = content.Load<Texture2D>("enemies/onelegged/walk/Up");
-            oneleggedWalk[1] = content.Load<Texture2D>("enemies/onelegged/walk/Down");
-            oneleggedWalk[2] = content.Load<Texture2D>("enemies/onelegged/walk/Left");
-            oneleggedWalk[3] = content.Load<Texture2D>("enemies/onelegged/walk/Right");
-            oneleggedAttack[0] = content.Load<Texture2D>("enemies/onelegged/attack/up");
-            oneleggedAttack[1] = content.Load<Texture2D>("enemies/onelegged/attack/down");
-            oneleggedAttack[2] = content.Load<Texture2D>("enemies/onelegged/attack/left");
-            oneleggedAttack[3] = content.Load<Texture2D>("enemies/onelegged/attack/right");
+            oneleggedWalk = LoadWalkSprites("enemies/onelegged/walk", content);
+            oneleggedAttack = LoadWalkSprites("enemies/onelegged/attack", content);
+
+            fatLadyWalk = LoadWalkSprites("enemies/fatLady/walk", content);
+            fatLadyAttack = LoadWalkSprites("enemies/fatLady/attack", content);
 
             bullet = content.Load<Texture2D>("bullet");
             house = content.Load<Texture2D>("house");
