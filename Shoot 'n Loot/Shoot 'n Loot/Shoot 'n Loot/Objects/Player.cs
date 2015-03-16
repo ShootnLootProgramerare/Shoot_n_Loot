@@ -25,6 +25,9 @@ namespace Shoot__n_Loot
         public float bleeding; //how much hp is removed each second
         bool inventoryVisible;
         bool customizing;
+        bool usingMelee;
+
+        public MeleeWeaponProperties MeleeWeapon { get; set; }
 
         HPBar hpBar;
 
