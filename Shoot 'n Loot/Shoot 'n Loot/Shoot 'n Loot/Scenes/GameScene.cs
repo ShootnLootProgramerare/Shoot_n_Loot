@@ -32,6 +32,8 @@ namespace Shoot__n_Loot
         {
             Camera.Follow(player.Position);
 
+            if (player.Dead) { SceneManager.currentScene = SceneManager.gameOverScene; SoundManager.playerDie.Play(); }
+
             if (Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.Escape)) SceneManager.currentScene = SceneManager.pauseScene;
 
             foreach (Chunk c in Map.chunks)

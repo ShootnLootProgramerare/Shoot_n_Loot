@@ -31,7 +31,7 @@ namespace Shoot__n_Loot
             
             if (b[0].IsClicked) { SceneManager.currentScene = SceneManager.gameScene; }
             if (b[1].IsClicked) { SceneManager.currentScene = SceneManager.aboutScene; }
-            if (b[2].IsClicked) {  }
+            if (b[2].IsClicked) { /* Exit the Game */ }
 
             foreach (Button bu in b) bu.Update();
 
