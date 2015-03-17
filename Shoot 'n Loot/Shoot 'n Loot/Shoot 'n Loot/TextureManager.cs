@@ -39,6 +39,9 @@ namespace Shoot__n_Loot
             heavyAmmo,
             nails,
 
+            gunBarrel,
+            gunMechs,
+
             hpBar,
             hpRed;
 
@@ -96,6 +99,9 @@ namespace Shoot__n_Loot
 
             lightAmmo = mediumAmmo = heavyAmmo = content.Load<Texture2D>("items/ammo"); //should be different when we get sprites
             nails = content.Load<Texture2D>("items/nails");
+
+            gunBarrel = content.Load<Texture2D>("items/gunBarrel");
+            gunMechs = content.Load<Texture2D>("items/gunMechs");
 
             hpBar = content.Load<Texture2D>("hpBar");
             hpRed = content.Load<Texture2D>("RedHP");

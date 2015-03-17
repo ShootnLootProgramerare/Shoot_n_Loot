@@ -30,8 +30,8 @@ namespace Shoot__n_Loot.WeaponClasses
             nailAmmo,
             new ItemProperties(1, 1, 3, TextureManager.enemy1, 1, "Pink blob\nDoes nothing"),
             new ItemProperties(2, 1, .01f, TextureManager.medicineItem, 10, "Heal 1 point", healht1),
-            new ItemProperties(1, 1, .3f, TextureManager.house, 1, "Auto: true\nAlso newLine", new WeaponPart(WeaponPart.PartType.Base, 1, 1, 30, true, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium } )),
-            new ItemProperties(1, 1, .4f, TextureManager.enemy2, 1, "Weaponpart 2", new WeaponPart(WeaponPart.PartType.Barrel, 1, 1, 0, false, 10, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Light } )),
+            new ItemProperties(1, 1, .3f, TextureManager.gunMechs, 1, "Auto: true\nAlso newLine", new WeaponPart(WeaponPart.PartType.Base, 1, 1, 30, true, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium } )),
+            new ItemProperties(1, 1, .4f, TextureManager.gunBarrel, 1, "Shitty gun barrel", new WeaponPart(WeaponPart.PartType.Barrel, 1, 1, 0, false, 10, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Light } )),
             new ItemProperties(1, 1, .35f, TextureManager.house, 1, "Other house like part", new WeaponPart(WeaponPart.PartType.Base, 1, 3, 10, false, 2, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Heavy } )),
             new ItemProperties(1, 1, .5f, TextureManager.beans, 5, "Can of Beans\nRestore 10 hunger points", Hunger),
             new ItemProperties(1, 1, .2f, TextureManager.bandage, 10, "Bandage\nReduce bleeding", Bandage)
