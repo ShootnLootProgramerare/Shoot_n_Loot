@@ -117,6 +117,7 @@
     <Compile Include="Music.cs" />
     <Compile Include="Objects\Bullet.cs" />
     <Compile Include="Scenes\AboutScene.cs" />
+    <Compile Include="Scenes\GameOverScene.cs" />
     <Compile Include="Scenes\PauseScene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
     <Compile Include="SoundManager.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Map\TileProperties.cs" />
     <Compile Include="WeaponClasses\CustomizationSlot.cs" />
     <Compile Include="WeaponClasses\Items.cs" />
+    <Compile Include="WeaponClasses\MeleeWeaponProperties.cs" />
     <Compile Include="WeaponClasses\Weapon.cs" />
     <Compile Include="WeaponClasses\WeaponPart.cs" />
   </ItemGroup>

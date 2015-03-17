@@ -25,6 +25,10 @@ namespace Shoot__n_Loot
         public float bleeding; //how much hp is removed each second
         bool inventoryVisible;
         bool customizing;
+        bool usingMelee;
+
+        public MeleeWeaponProperties MeleeWeapon { get; set; }
+        int meleeAttackTimer;
 
         HPBar hpBar;
 
@@ -54,7 +58,9 @@ namespace Shoot__n_Loot
 
             if (!inventoryVisible && !customizing)
             {
-                Shoot();
+                if (!usingMelee) Shoot();
+                else MeleeWeaponUpdate();
+
                 weapon.ShootingUpdate(Inventory);
                 Animate();
             }
@@ -82,6 +88,22 @@ namespace Shoot__n_Loot
                 Inventory.HideAllItemMenus();
             }
             //if (Input.KeyWasJustPressed(Keys.U) && !inventoryVisible) customizing = !customizing;
+        }
+
+        void MeleeWeaponUpdate()
+        {
+            if (meleeAttackTimer > 0)
+            {
+                meleeAttackTimer++;
+                if (meleeAttackTimer > MeleeWeapon.AttackSpeed)
+                {
+                    meleeAttackTimer = 0;
+                }
+            }
+            else if (Input.newMs.LeftButton == ButtonState.Pressed)
+            {
+                //attack
+            }
         }
 
         void Move()

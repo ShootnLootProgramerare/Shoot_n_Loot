@@ -250,7 +250,8 @@ namespace Shoot__n_Loot
             for (int i = 0; i < num; i++)
             {
                 SceneManager.gameScene.AddObject(r);
-            } 
+            }
+            SoundManager.zombieHurt.Play();
         }
 
         public override void Draw(SpriteBatch spriteBatch)

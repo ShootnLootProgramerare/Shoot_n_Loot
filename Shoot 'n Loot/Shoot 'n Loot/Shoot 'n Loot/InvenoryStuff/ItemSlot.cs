@@ -146,6 +146,10 @@ namespace Shoot__n_Loot.InvenoryStuff
                 if (SceneManager.gameScene.player.weapon.CompatitbleAmmoTypes(null).Contains(Item.Properties.AmmoType)) AddButton(buttons, new Button("use this ammo", baseRect, UseAsAmmo));
                 else AddButton(buttons, new Button("Your weapon can't use this ammo", baseRect, Color.Red));
             }
+            if (Item.Properties.IsMeleeWeapon)
+            {
+                AddButton(buttons, new Button("Use as melee weapon", baseRect, UseMeleeWeapon));
+            }
         }
 
 
@@ -244,6 +248,11 @@ namespace Shoot__n_Loot.InvenoryStuff
         {
             SoundManager.itemUse.Play();
             SceneManager.gameScene.player.weapon.currentAmmoType = Item.Properties.AmmoType;
+        }
+
+        void UseMeleeWeapon()
+        {
+            SceneManager.gameScene.player.MeleeWeapon = Item.Properties.MeleeWeaponProperties;
         }
     }
 }
