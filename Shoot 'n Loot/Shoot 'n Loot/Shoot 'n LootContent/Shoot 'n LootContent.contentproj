@@ -346,26 +346,26 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="player\walk\weapon\up.png">
+    <Compile Include="player\walk\gun\up.png">
       <Name>up</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="player\walk\weapon\down.png">
+    <Compile Include="player\walk\gun\down.png">
       <Name>down</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="player\walk\weapon\left.png">
+    <Compile Include="player\walk\gun\left.png">
       <Name>left</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="player\walk\weapon\right.png">
+    <Compile Include="player\walk\gun\right.png">
       <Name>right</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -480,8 +480,32 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="houses\lighthouse.png">
-      <Name>lighthouse</Name>
+    <Compile Include="houses\lightHouse.png">
+      <Name>lightHouse</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="player\walk\melee\down.png">
+      <Name>down</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="player\walk\melee\left.png">
+      <Name>left</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="player\walk\melee\right.png">
+      <Name>right</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="player\walk\melee\up.png">
+      <Name>up</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

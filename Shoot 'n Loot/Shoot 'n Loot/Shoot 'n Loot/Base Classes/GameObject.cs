@@ -11,6 +11,8 @@ namespace Shoot__n_Loot
     {
         public enum Direction { Up = 0, Down = 1, Left = 2, Right = 3 } //number corresponds to index in array in texturemanager
 
+        Direction direction;
+
         private float health;
         private float maxHealth;
 
@@ -41,17 +43,20 @@ namespace Shoot__n_Loot
         {
             get
             {
-                Direction direction = Direction.Left;
-                if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
+                //todo: implement some "old direction" and only update if moving
+                if (Velocity.LengthSquared() > 0)
                 {
-                    //left and right movement
-                    if (Velocity.X > 0) direction = Direction.Right;
-                    else if (Velocity.X < 0) direction = Direction.Left;
-                }
-                else
-                {
-                    if (Velocity.Y > 0) direction = Direction.Down;
-                    else if (Velocity.Y < 0) direction = Direction.Up;
+                    if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
+                    {
+                        //left and right movement
+                        if (Velocity.X > 0) direction = Direction.Right;
+                        else if (Velocity.X < 0) direction = Direction.Left;
+                    }
+                    else
+                    {
+                        if (Velocity.Y > 0) direction = Direction.Down;
+                        else if (Velocity.Y < 0) direction = Direction.Up;
+                    }
                 }
                 return direction;
             }

@@ -5,6 +5,7 @@ using Shoot__n_Loot.Scenes;
 using Shoot__n_Loot.WeaponClasses;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -25,7 +26,7 @@ namespace Shoot__n_Loot
         public float bleeding; //how much hp is removed each second
         bool inventoryVisible;
         bool customizing;
-        bool usingMelee;
+        bool UsingMelee { get { return MeleeWeapon != null; } }
 
         public MeleeWeaponProperties MeleeWeapon { get; set; }
         int meleeAttackTimer;
@@ -58,7 +59,7 @@ namespace Shoot__n_Loot
 
             if (!inventoryVisible && !customizing)
             {
-                if (!usingMelee) Shoot();
+                if (!UsingMelee) Shoot();
                 else MeleeWeaponUpdate();
 
                 weapon.ShootingUpdate(Inventory);
@@ -94,15 +95,28 @@ namespace Shoot__n_Loot
         {
             if (meleeAttackTimer > 0)
             {
-                meleeAttackTimer++;
-                if (meleeAttackTimer > MeleeWeapon.AttackSpeed)
-                {
-                    meleeAttackTimer = 0;
-                }
+                meleeAttackTimer--;
             }
-            else if (Input.newMs.LeftButton == ButtonState.Pressed)
+            else if (Input.newMs.LeftButton == ButtonState.Pressed && meleeAttackTimer == 0)
             {
-                //attack
+                Sprite.SetTexture(TextureManager.playerAttack[(int)VelDirection], 4, new Point(100, 100));
+                Sprite.AnimationSpeed = .1f;
+                meleeAttackTimer = -1;
+            }
+            else
+            {
+                if (Sprite.EndOfAnim)
+                {
+                    meleeAttackTimer = MeleeWeapon.AttackSpeed;
+                    meleeAttackTimer = 0;
+                    SetRegularSprite();
+                    const float WEAPON_RANGE = 50;
+                    foreach (GameObject g in SceneManager.gameScene.objects.Where(e => e.Type == "Enemy").Where(e => e.DistanceSquared(SceneManager.gameScene.player.Center) < WEAPON_RANGE * WEAPON_RANGE))
+                    {
+                        Debug.WriteLine("enemy took damage, hp = " + g.Health + ", dead = " + g.Dead);
+                        g.Health -= MeleeWeapon.Damage;
+                    }
+                }
             }
         }
 
@@ -141,14 +155,23 @@ namespace Shoot__n_Loot
                     else if (Velocity.Y < 0) Sprite.SetTexture(TextureManager.playerUp, 4, new Point(100, 100));
                 }*/
                 Sprite.AnimationSpeed = 9f / 60;
-                if (weapon.Parts == 0) Sprite.SetTexture(TextureManager.playerWalkNoWeapon[(int)VelDirection], 4, new Point(100, 100));
-                else Sprite.SetTexture(TextureManager.playerWalkWeapon[(int)VelDirection], 4, new Point(100, 100));
+                SetRegularSprite();
             }
             else
             {
-                Sprite.AnimationSpeed = 0;
-                Sprite.Frame = 0;
+                if (meleeAttackTimer != -1)
+                {
+                    Sprite.AnimationSpeed = 0;
+                    Sprite.Frame = 0;
+                }
             }
+        }
+
+        void SetRegularSprite()
+        {
+            if (UsingMelee) Sprite.SetTexture(TextureManager.playerWalkMelee[(int)VelDirection], 4, new Point(100, 100));
+            else if (weapon.Parts == 0) Sprite.SetTexture(TextureManager.playerWalkNoWeapon[(int)VelDirection], 4, new Point(100, 100));
+            else Sprite.SetTexture(TextureManager.playerWalkGun[(int)VelDirection], 4, new Point(100, 100));
         }
 
         void Shoot()

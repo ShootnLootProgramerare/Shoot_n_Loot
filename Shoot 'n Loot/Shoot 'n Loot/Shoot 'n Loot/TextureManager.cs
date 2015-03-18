@@ -59,7 +59,8 @@ namespace Shoot__n_Loot
             fatLadyAttack,
             
             playerWalkNoWeapon,
-            playerWalkWeapon,
+            playerWalkGun,
+            playerWalkMelee,
             playerAttack;
 
         public static SpriteFont font;
@@ -67,7 +68,8 @@ namespace Shoot__n_Loot
         public static void Load(ContentManager content)
         {
             playerWalkNoWeapon = LoadWalkSprites("player/walk/noWeapon", content);
-            playerWalkWeapon = LoadWalkSprites("player/walk/weapon", content);
+            playerWalkGun = LoadWalkSprites("player/walk/gun", content);
+            playerWalkMelee = LoadWalkSprites("player/walk/melee", content);
             playerAttack = LoadWalkSprites("player/attack/melee", content);
             /*playerWalkWeapon[0] = content.Load<Texture2D>("player/walk/Weapon/up");
             playerWalkWeapon[1] = content.Load<Texture2D>("player/walk/Weapon/down");

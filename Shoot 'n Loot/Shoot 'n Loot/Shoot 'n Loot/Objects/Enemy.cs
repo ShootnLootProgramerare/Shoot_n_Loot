@@ -43,6 +43,7 @@ namespace Shoot__n_Loot
             this.attackAnims = attackAnims;
             ObstructsBullets = true;
             Sprite = new Sprite(walkingAnims[0], position, new Vector2(200, 100), 4, new Point(200, 100), 0); //maybe an overload for different sizes etc
+            CanDie = true;
             //Sprite.Origin = Size / 2;
         }
 
