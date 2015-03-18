@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Shoot__n_Loot.Enemies;
+using Shoot__n_Loot.Objects;
 using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
@@ -62,6 +63,10 @@ namespace Shoot__n_Loot
                     {
                         spawnPositions.Add(TilePosition(x, y));
                     }
+                    else if (prop == Color.Orange)
+                    {
+                        SceneManager.gameScene.AddObject(new LightHouse(TilePosition(x, y)));
+                    }
                 }
             }
         }
@@ -92,6 +97,8 @@ namespace Shoot__n_Loot
             if (Game1.random.Next(255) < spawnData.A * SPAWNRATE && SceneManager.gameScene.NoOfZombies() < Map.maxZombies && spawnPositions.Count > 0)
             {
                 Vector2 position = spawnPositions[(Game1.random.Next(spawnPositions.Count))];
+
+                if (SceneManager.gameScene.player.DistanceSquared(position) < GameScene.MAXSPAWNDIST * GameScene.MAXSPAWNDIST) return;
 
                 int r = Game1.random.Next(spawnData.R + spawnData.G + spawnData.B);
 

@@ -13,7 +13,7 @@ namespace Shoot__n_Loot
     {
         public  Player player;
 
-        const float MINSPAWNDIST = 500, MAXSPAWNDIST = 1000;
+        public const float MINSPAWNDIST = 500, MAXSPAWNDIST = 1000;
         
         public GameScene()
         {

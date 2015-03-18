@@ -28,6 +28,7 @@ namespace Shoot__n_Loot
 
             bullet,
             house,
+            lightHouse,
             inventorySlot,
 
             medicineItem,
@@ -67,6 +68,7 @@ namespace Shoot__n_Loot
         {
             playerWalkNoWeapon = LoadWalkSprites("player/walk/noWeapon", content);
             playerWalkWeapon = LoadWalkSprites("player/walk/weapon", content);
+            playerAttack = LoadWalkSprites("player/attack/melee", content);
             /*playerWalkWeapon[0] = content.Load<Texture2D>("player/walk/Weapon/up");
             playerWalkWeapon[1] = content.Load<Texture2D>("player/walk/Weapon/down");
             playerWalkWeapon[2] = content.Load<Texture2D>("player/walk/Weapon/left");
@@ -92,7 +94,8 @@ namespace Shoot__n_Loot
             fatLadyAttack = LoadWalkSprites("enemies/fatLady/attack", content);
 
             bullet = content.Load<Texture2D>("bullet");
-            house = content.Load<Texture2D>("house");
+            house = content.Load<Texture2D>("houses/house");
+            lightHouse = content.Load<Texture2D>("houses/lightHouse");
             inventorySlot = content.Load<Texture2D>("inventorySlot");
 
             medicineItem = content.Load<Texture2D>("items/pill");
