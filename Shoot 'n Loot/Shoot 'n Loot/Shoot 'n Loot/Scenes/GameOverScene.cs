@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Shoot__n_Loot.UI;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace Shoot__n_Loot.Scenes
 
         public override void Update()
         {
+            if (Input.KeyWasJustPressed(Keys.Enter)) SceneManager.currentScene = SceneManager.gameScene;
+            Camera.Follow(Vector2.Zero);
             if (b.IsClicked) { SceneManager.currentScene = SceneManager.mainMenuScene; }
             if (bt.IsClicked) { /* Exit the Game */ }
             b.Update();
@@ -33,7 +36,7 @@ namespace Shoot__n_Loot.Scenes
         {
             b.Draw(spriteBatch);
             bt.Draw(spriteBatch);
-            spriteBatch.DrawString(TextureManager.font, "Paused", - TextureManager.font.MeasureString("Paused") / 2, Color.Black);
+            spriteBatch.DrawString(TextureManager.font, "GAME OVER", - TextureManager.font.MeasureString("GAME OVER") / 2, Color.Black);
             base.Draw(spriteBatch);
         }
     }
