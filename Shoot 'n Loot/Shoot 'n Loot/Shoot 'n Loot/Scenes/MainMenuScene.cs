@@ -29,7 +29,7 @@ namespace Shoot__n_Loot
             if (Input.newKs.IsKeyDown(Keys.Enter)) SceneManager.currentScene = SceneManager.gameScene;
             else if (Input.KeyWasJustPressed(Keys.Escape)) SceneManager.currentScene = SceneManager.aboutScene;
             
-            if (b[0].IsClicked) { SceneManager.currentScene = SceneManager.gameScene; }
+            if (b[0].IsClicked) { SceneManager.gameScene = new GameScene(); SceneManager.currentScene = SceneManager.gameScene; }
             if (b[1].IsClicked) { SceneManager.currentScene = SceneManager.aboutScene; }
             if (b[2].IsClicked) { /* Exit the Game */ }
 
