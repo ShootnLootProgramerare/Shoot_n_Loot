@@ -15,8 +15,8 @@ namespace Shoot__n_Loot.Scenes
 
         public GameOverScene()
         {
-            b = new Button("Main Menu", new Rectangle(-64, -32, 32, 128));
-            bt = new Button("Quit", new Rectangle(-64, 32, 32, 128));
+            b = new Button("Main Menu", new Rectangle(-64, -32, 128, 32));
+            bt = new Button("Quit", new Rectangle(-64, 32, 128, 32));
             base.Initialize();
         }
 
