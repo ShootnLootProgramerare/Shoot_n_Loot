@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -66,8 +67,16 @@ namespace Shoot__n_Loot.UI
             textSize = TextureManager.font.MeasureString(text);
             Vector2 minSize = textSize + new Vector2(PADDING_X, PADDING_Y) * 2;
 
-            if (area.Width < minSize.X) Area = new Rectangle(Area.X, Area.Y, (int)minSize.X, Area.Height);
-            if (area.Height < minSize.Y) Area = new Rectangle(Area.X, Area.Y, Area.Width, (int)minSize.Y);
+            if (area.Width < minSize.X)
+            {
+                Area = new Rectangle(Area.X, Area.Y, (int)minSize.X, Area.Height);
+                Debug.WriteLine("resizing button \"" + text + "\" on X axis");
+            }
+            if (area.Height < minSize.Y)
+            {
+                Area = new Rectangle(Area.X, Area.Y, Area.Width, (int)minSize.Y);
+                Debug.WriteLine("resizing button \"" + text + "\" on Y axis");
+            }
         }
 
         /// <summary>

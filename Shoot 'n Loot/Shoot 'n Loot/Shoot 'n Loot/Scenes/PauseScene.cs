@@ -16,8 +16,8 @@ namespace Shoot__n_Loot.Scenes
 
         public PauseScene()
         {
-            b = new Button("Continue", new Rectangle(-64, -32, 32, 128));
-            bt = new Button("Main Menu", new Rectangle(-64, 32, 32, 128));
+            b = new Button("Continue", new Rectangle(-64, -32, 128, 32));
+            bt = new Button("Main Menu", new Rectangle(-64, 32, 128, 32));
             base.Initialize();
         }
 
@@ -36,7 +36,6 @@ namespace Shoot__n_Loot.Scenes
         {
             b.Draw(spriteBatch);
             bt.Draw(spriteBatch);
-            spriteBatch.DrawString(TextureManager.font, "Paused", - TextureManager.font.MeasureString("Paused") / 2, Color.Black);
             base.Draw(spriteBatch);
         }
     }
