@@ -19,6 +19,8 @@ namespace Shoot__n_Loot
     {
         public static Point ScreenSize { get { return new Point(1200, 750); } }
         public static Random random;
+
+        public static bool exit;
         
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -81,6 +83,8 @@ namespace Shoot__n_Loot
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (exit) Exit();
+
             Input.Update();
 
             SceneManager.currentScene.Update();

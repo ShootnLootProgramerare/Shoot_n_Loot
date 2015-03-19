@@ -26,7 +26,7 @@ namespace Shoot__n_Loot.Scenes
             if (Input.KeyWasJustPressed(Keys.Enter)) SceneManager.currentScene = SceneManager.gameScene;
             Camera.Follow(Vector2.Zero);
             if (b.IsClicked) { SceneManager.currentScene = SceneManager.mainMenuScene; }
-            if (bt.IsClicked) { /* Exit the Game */ }
+            if (bt.IsClicked) { /* Exit the Game */ Game1.exit = true; }
             b.Update();
             bt.Update();
             base.Update();
