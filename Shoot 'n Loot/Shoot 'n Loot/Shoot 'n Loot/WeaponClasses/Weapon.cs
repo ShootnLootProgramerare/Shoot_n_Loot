@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Shoot__n_Loot.InvenoryStuff;
 using Shoot__n_Loot.Scenes;
+using Shoot__n_Loot.UI;
 using Shoot__n_Loot.WeaponClasses;
 using System;
 using System.Collections.Generic;
@@ -251,6 +252,10 @@ namespace Shoot__n_Loot
 
         #region customization ui related
 
+        Button useWeapon;
+
+        const int HUD_W = 400, HUD_H = 200, HUD_Y = 20;
+
         private void MakeSlots()
         {
             Array types = WeaponPart.PartType.GetValues(typeof(WeaponPart.PartType));
@@ -298,13 +303,24 @@ namespace Shoot__n_Loot
         public void CustomizingUpdate()
         {
             foreach (CustomizationSlot s in partSlots) s.Update(PartOfType(s.Type));
+            if (SceneManager.gameScene.player.UsingMelee)
+            {
+                useWeapon = new Button("Use weapon", new Rectangle((int)Camera.Position.X - HUD_H / 2 + 20, (int)Camera.TotalOffset.Y + HUD_Y + HUD_H - 20, 0, 0), StopUsingMelee);
+                useWeapon.Update();
+            }
+            else useWeapon = null;
         }
 
         public void DrawCustomization(SpriteBatch spriteBatch)
         {
-            const int w = 400, h = 200, y = 20;
-            spriteBatch.Draw(TextureManager.inventorySlot, new Rectangle((int)Camera.Position.X - w / 2, (int)Camera.TotalOffset.Y + y, w, h), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000005f);
+            spriteBatch.Draw(TextureManager.inventorySlot, new Rectangle((int)Camera.Position.X - HUD_W / 2, (int)Camera.TotalOffset.Y + HUD_Y, HUD_W, HUD_H), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000005f);
             foreach (CustomizationSlot s in partSlots) s.Draw(spriteBatch);
+            if (useWeapon != null) useWeapon.Draw(spriteBatch);
+        }
+
+        void StopUsingMelee()
+        {
+            SceneManager.gameScene.player.MeleeWeapon = null;
         }
 
         #endregion
