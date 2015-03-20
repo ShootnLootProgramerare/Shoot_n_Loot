@@ -25,7 +25,6 @@ namespace Shoot__n_Loot
 
         public float bleeding; //how much hp is removed each second
         bool inventoryVisible;
-        bool customizing;
         bool UsingMelee { get { return MeleeWeapon != null; } }
 
         public MeleeWeaponProperties MeleeWeapon { get; set; }
@@ -57,7 +56,7 @@ namespace Shoot__n_Loot
             Hunger += .001f;
             Health -= bleeding;
 
-            if (!inventoryVisible && !customizing)
+            if (!inventoryVisible)
             {
                 if (!UsingMelee) Shoot();
                 else MeleeWeaponUpdate();
@@ -70,25 +69,18 @@ namespace Shoot__n_Loot
                 Inventory.Update(new Point(0, 0));
                 weapon.CustomizingUpdate();
             }
-            else if (customizing)
-            {
-                //weapon.CustomizingUpdate(Inventory, CUSTOMIZINGINVENTORYOFFSET);
-                Sprite.Frame = 0;
-                Sprite.AnimationSpeed = 0;
-            }
             else
             {
             }
 
             Move();
 
-            if (Input.KeyWasJustPressed(Keys.I) && !customizing)
+            if (Input.KeyWasJustPressed(Keys.E))
             {
                 SoundManager.inventory.Play();
                 inventoryVisible = !inventoryVisible;
                 Inventory.HideAllItemMenus();
             }
-            //if (Input.KeyWasJustPressed(Keys.U) && !inventoryVisible) customizing = !customizing;
         }
 
         void MeleeWeaponUpdate()
@@ -100,7 +92,7 @@ namespace Shoot__n_Loot
             else if (Input.newMs.LeftButton == ButtonState.Pressed && meleeAttackTimer == 0)
             {
                 Sprite.SetTexture(TextureManager.playerAttack[(int)VelDirection], 4, new Point(100, 100));
-                Sprite.AnimationSpeed = .1f;
+                Sprite.AnimationSpeed = .2f;
                 meleeAttackTimer = -1;
             }
             else
@@ -196,12 +188,6 @@ namespace Shoot__n_Loot
                 Inventory.Draw(spriteBatch);
                 //weapon.Draw(spriteBatch);
                 weapon.DrawCustomization(spriteBatch);
-            }
-
-            if (customizing)
-            {
-                weapon.DrawCustomization(spriteBatch);
-                Inventory.Draw(spriteBatch);
             }
 
             spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health + "\nHunger: " + Hunger.ToString("0") + "\nBleeding: " + bleeding, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
