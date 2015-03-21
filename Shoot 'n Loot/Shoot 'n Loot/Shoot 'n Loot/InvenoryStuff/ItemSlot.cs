@@ -129,7 +129,8 @@ namespace Shoot__n_Loot.InvenoryStuff
         /// </summary>
         private void SetButtons(int xOffset, int yOffset, Inventory container)
         {
-            buttons = new List<Button>();
+            if (buttons == null) buttons = new List<Button>();
+            else buttons.Clear();
             Rectangle baseRect =  new Rectangle(container.PositionForItem(xOffset, yOffset).X, container.PositionForItem(xOffset, yOffset).Y, BUTTON_W, BUTTON_H);
 
             AddButton(buttons, new Button("drop", baseRect, DropItem));

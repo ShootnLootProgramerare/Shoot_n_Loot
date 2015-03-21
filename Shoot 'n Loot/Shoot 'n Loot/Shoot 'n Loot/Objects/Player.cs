@@ -100,7 +100,6 @@ namespace Shoot__n_Loot
                 if (Sprite.EndOfAnim)
                 {
                     meleeAttackTimer = MeleeWeapon.AttackSpeed;
-                    meleeAttackTimer = 0;
                     SetRegularSprite();
                     const float WEAPON_RANGE = 50;
                     foreach (GameObject g in SceneManager.gameScene.objects.Where(e => e.Type == "Enemy").Where(e => e.DistanceSquared(SceneManager.gameScene.player.Center) < WEAPON_RANGE * WEAPON_RANGE))
