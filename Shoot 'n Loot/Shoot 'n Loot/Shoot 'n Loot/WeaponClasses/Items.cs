@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Shoot__n_Loot.InvenoryStuff;
+using Shoot__n_Loot.Objects;
+using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +37,8 @@ namespace Shoot__n_Loot.WeaponClasses
             new ItemProperties(1, 1, .35f, TextureManager.house, 1, "Other house like part", new WeaponPart(WeaponPart.PartType.Base, 1, 3, 10, false, 2, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Heavy } )),
             new ItemProperties(1, 1, .5f, TextureManager.beans, 5, "Can of Beans\nRestore 10 hunger points", Hunger),
             new ItemProperties(1, 1, .2f, TextureManager.bandage, 10, "Bandage\nReduce bleeding", Bandage),
-            new ItemProperties(1, 1, .5f, TextureManager.twoByFour, 1, "2 by 4 wood\nCrushes sculls", new MeleeWeaponProperties(2, 100))
+            new ItemProperties(1, 1, .5f, TextureManager.twoByFour, 1, "2 by 4 wood\nCrushes sculls", new MeleeWeaponProperties(2, 100)),
+            new ItemProperties(1, 1, 1, TextureManager.landmine, 1, "Landmine\nExplodes on zombie contact\nUse to place where you stand", Landmine)
         } ;
 
         public static Item GetAmmo(Weapon.AmmoType type, Vector2 position)
@@ -71,6 +74,11 @@ namespace Shoot__n_Loot.WeaponClasses
         {
             p.bleeding -= .5f;
             if (p.bleeding < 0) p.bleeding = 0;
+        }
+
+        static void Landmine(Player p)
+        {
+            SceneManager.currentScene.AddObject(new Landmine(p.Center));
         }
     }
 }

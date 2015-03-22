@@ -17,6 +17,8 @@ namespace Shoot__n_Loot
             playerUp,
             playerDown,
 
+            explosion,
+
             map,
             spawnData,
             tiles,
@@ -30,6 +32,7 @@ namespace Shoot__n_Loot
             house,
             lightHouse,
             inventorySlot,
+            landmine,
 
             medicineItem,
             beans,
@@ -82,6 +85,8 @@ namespace Shoot__n_Loot
             spawnData = content.Load<Texture2D>("map/spawnData");
             propData = content.Load<Texture2D>("map/propData");
 
+            explosion = content.Load<Texture2D>("explosion");
+
             enemy1 = content.Load<Texture2D>("enemies/enemy1");
             enemy2 = content.Load<Texture2D>("enemies/enemy2");
             enemy3 = content.Load<Texture2D>("enemies/enemy3");
@@ -99,6 +104,7 @@ namespace Shoot__n_Loot
             house = content.Load<Texture2D>("houses/house");
             lightHouse = content.Load<Texture2D>("houses/lightHouse");
             inventorySlot = content.Load<Texture2D>("inventorySlot");
+            landmine = content.Load<Texture2D>("items/landmine");
 
             medicineItem = content.Load<Texture2D>("items/pill");
             beans = content.Load<Texture2D>("items/beans");
