@@ -32,8 +32,8 @@ namespace Shoot__n_Loot
         {
             playerShoot = content.Load<SoundEffect>("Sounds/playerShoot");
             playerHurt = content.Load<SoundEffect>("Sounds/playerHurt");
-            playerWalkOutside = content.Load<SoundEffect>("Sounds/playerWalkOutside");
-            playerWalkIndoor = content.Load<SoundEffect>("Sounds/playerWalkIndoor");
+            playerWalkOutside = content.Load<SoundEffect>("Sounds/playerWalkOutside"); //wrong
+            playerWalkIndoor = content.Load<SoundEffect>("Sounds/playerWalkIndoor"); //wrong
             playerDie = content.Load<SoundEffect>("Sounds/playerDie");
 
             inventory = content.Load<SoundEffect>("Sounds/inventory");

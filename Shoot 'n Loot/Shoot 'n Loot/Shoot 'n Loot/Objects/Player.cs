@@ -32,6 +32,8 @@ namespace Shoot__n_Loot
 
         HPBar hpBar;
 
+        int chunkX, chunkY, tileX, tileY;
+
         private Point CUSTOMIZINGINVENTORYOFFSET { get { return new Point(0, 100); } }
 
         public Player()
@@ -55,6 +57,25 @@ namespace Shoot__n_Loot
         {
             Hunger += .001f;
             Health -= bleeding;
+
+            tileX = (int)Center.X / Tile.size;
+            chunkX = tileX / Chunk.size;
+            tileX %= Chunk.size;
+
+            tileY = (int)Center.Y / Tile.size;
+            chunkY = tileY / Chunk.size;
+            tileY %= Chunk.size;
+
+            Tile t = Map.chunks[chunkX, chunkY].Tiles[tileX, tileY];
+
+            if (t.Properties.TextureIndex == 0) { SoundManager.playerWalkOutside.Play(); } // Grass sound
+            if (t.Properties.TextureIndex == 3) { } // Wall sound
+            if (t.Properties.TextureIndex == 4) { } // Dirt sound
+            if (t.Properties.TextureIndex == 5) { } // Path sound
+            if (t.Properties.TextureIndex == 6) { } // Beach sound
+            if (t.Properties.TextureIndex == 7) { } // Bridge sound
+
+
 
             if (!inventoryVisible)
             {
