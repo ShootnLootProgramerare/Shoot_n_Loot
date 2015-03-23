@@ -37,6 +37,7 @@ namespace Shoot__n_Loot
             medicineItem,
             beans,
             bandage,
+            fuelCan,
 
             twoByFour,
             
@@ -111,6 +112,7 @@ namespace Shoot__n_Loot
             medicineItem = content.Load<Texture2D>("items/pill");
             beans = content.Load<Texture2D>("items/beans");
             bandage = content.Load<Texture2D>("items/bandage");
+            fuelCan = content.Load<Texture2D>("items/fuelCan");
 
             twoByFour = content.Load<Texture2D>("items/twoByFour");
 

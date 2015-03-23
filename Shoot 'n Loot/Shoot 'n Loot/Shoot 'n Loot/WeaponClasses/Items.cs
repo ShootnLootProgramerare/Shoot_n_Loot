@@ -38,7 +38,8 @@ namespace Shoot__n_Loot.WeaponClasses
             new ItemProperties(1, 1, .5f, TextureManager.beans, 5, "Can of Beans\nRestore 10 hunger points", Hunger),
             new ItemProperties(1, 1, .2f, TextureManager.bandage, 10, "Bandage\nReduce bleeding", Bandage),
             new ItemProperties(1, 1, .5f, TextureManager.twoByFour, 1, "2 by 4 wood\nCrushes sculls", new MeleeWeaponProperties(2, 100)),
-            new ItemProperties(1, 1, 1, TextureManager.landmine, 1, "Landmine\nExplodes on zombie contact\nUse to place where you stand", Landmine)
+            new ItemProperties(1, 1, 1, TextureManager.landmine, 1, "Landmine\nExplodes on zombie contact\nUse to place where you stand", Landmine),
+            new ItemProperties(1, 1, 1, TextureManager.fuelCan, 5, "Fuel Can\nDrop on a vehicle to fuel it")
         } ;
 
         public static Item GetAmmo(Weapon.AmmoType type, Vector2 position)
