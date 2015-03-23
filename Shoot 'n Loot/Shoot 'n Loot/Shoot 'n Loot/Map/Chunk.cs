@@ -65,7 +65,12 @@ namespace Shoot__n_Loot
                     }
                     else if (prop == Color.Orange)
                     {
-                        SceneManager.gameScene.AddObject(new LightHouse(TilePosition(x, y)));
+                        SceneManager.gameScene.objects.Add(new LightHouse(TilePosition(x, y)));
+                    }
+                    else if (prop == Color.Green)
+                    {
+                        SceneManager.gameScene.objects.Add(new Boat(TilePosition(x, y)));
+                        Debug.WriteLine("Adding boat at " + TilePosition(x, y).ToString());
                     }
                 }
             }

@@ -46,9 +46,7 @@ namespace Shoot__n_Loot
 
         public int NoOfZombies()
         {
-            int i = 0;
-            foreach (GameObject g in objects) if (g.Type == Enemy.TYPE) i++;
-            return i;
+            return objects.Where(i => i is Enemy).Count();
         }
 
         public override void Draw(SpriteBatch spriteBatch)

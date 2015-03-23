@@ -39,6 +39,8 @@ namespace Shoot__n_Loot
             bandage,
 
             twoByFour,
+            
+            boat,
 
             lightAmmo,
             mediumAmmo,
@@ -111,6 +113,8 @@ namespace Shoot__n_Loot
             bandage = content.Load<Texture2D>("items/bandage");
 
             twoByFour = content.Load<Texture2D>("items/twoByFour");
+
+            boat = content.Load<Texture2D>("boat");
 
             lightAmmo = mediumAmmo = heavyAmmo = content.Load<Texture2D>("items/ammo"); //should be different when we get sprites
             nails = content.Load<Texture2D>("items/nails");

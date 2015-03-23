@@ -23,7 +23,7 @@ namespace Shoot__n_Loot
         const byte baseReloadTime = 60;
         const byte baseMagSize = 10;
 
-        public enum AmmoType { Light, Medium, Heavy, Nails }
+        public enum AmmoType { None, Light, Medium, Heavy, Nails }
 
         public AmmoType currentAmmoType;
 
@@ -316,6 +316,7 @@ namespace Shoot__n_Loot
             spriteBatch.Draw(TextureManager.inventorySlot, new Rectangle((int)Camera.Position.X - HUD_W / 2, (int)Camera.TotalOffset.Y + HUD_Y, HUD_W, HUD_H), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000005f);
             foreach (CustomizationSlot s in partSlots) s.Draw(spriteBatch);
             if (useWeapon != null) useWeapon.Draw(spriteBatch);
+            spriteBatch.DrawString(TextureManager.font, "Using Ammo: " + currentAmmoType.ToString(), Camera.Center, Color.Black);
         }
 
         void StopUsingMelee()
