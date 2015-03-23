@@ -34,6 +34,8 @@ namespace Shoot__n_Loot
 
         int chunkX, chunkY, tileX, tileY;
 
+        int playSound = 0;
+
         private Point CUSTOMIZINGINVENTORYOFFSET { get { return new Point(0, 100); } }
 
         public Player()
@@ -68,13 +70,18 @@ namespace Shoot__n_Loot
 
             Tile t = Map.chunks[chunkX, chunkY].Tiles[tileX, tileY];
 
-            if (t.Properties.TextureIndex == 0) { SoundManager.playerWalkOutside.Play(); } // Grass sound
-            if (t.Properties.TextureIndex == 3) { } // Wall sound
-            if (t.Properties.TextureIndex == 4) { } // Dirt sound
-            if (t.Properties.TextureIndex == 5) { } // Path sound
-            if (t.Properties.TextureIndex == 6) { } // Beach sound
-            if (t.Properties.TextureIndex == 7) { } // Bridge sound
+            playSound++;
 
+            if (playSound >= 32 && (Input.newKs.IsKeyDown(Keys.A) || Input.newKs.IsKeyDown(Keys.D) || Input.newKs.IsKeyDown(Keys.W) || Input.newKs.IsKeyDown(Keys.S)))
+            {
+                if (t.Properties.TextureIndex == 0) { SoundManager.playerWalkGrass.Play(); } // Grass sound
+                if (t.Properties.TextureIndex == 3) { SoundManager.playerWalkFloor.Play(0.8f, 0f, 0f); } // Wall sound
+                if (t.Properties.TextureIndex == 4) { SoundManager.playerWalkDirt.Play(); } // Dirt sound
+                if (t.Properties.TextureIndex == 5) { SoundManager.playerWalkPath.Play(); } // Path sound
+                if (t.Properties.TextureIndex == 6) { SoundManager.playerWalkBeach.Play(0.5f, 0f, 0f); } // Beach sound
+                if (t.Properties.TextureIndex == 7) { SoundManager.playerWalkBridge.Play(); } // Bridge sound
+                playSound = 0;
+            }
 
 
             if (!inventoryVisible)

@@ -12,8 +12,12 @@ namespace Shoot__n_Loot
         public static SoundEffect
             playerShoot,
             playerHurt,
-            playerWalkOutside,
-            playerWalkIndoor,
+            playerWalkGrass,
+            playerWalkFloor,
+            playerWalkDirt,
+            playerWalkPath,
+            playerWalkBeach,
+            playerWalkBridge,
             playerDie,
 
             inventory,
@@ -32,8 +36,12 @@ namespace Shoot__n_Loot
         {
             playerShoot = content.Load<SoundEffect>("Sounds/playerShoot");
             playerHurt = content.Load<SoundEffect>("Sounds/playerHurt");
-            playerWalkOutside = content.Load<SoundEffect>("Sounds/playerWalkOutside"); //wrong
-            playerWalkIndoor = content.Load<SoundEffect>("Sounds/playerWalkIndoor"); //wrong
+            playerWalkGrass = content.Load<SoundEffect>("Sounds/playerWalkGrass");
+            playerWalkFloor = content.Load<SoundEffect>("Sounds/playerWalkFloor");
+            playerWalkDirt = content.Load<SoundEffect>("Sounds/playerWalkDirt");
+            playerWalkPath = content.Load<SoundEffect>("Sounds/playerWalkPath");
+            playerWalkBeach = content.Load<SoundEffect>("Sounds/playerWalkBeach");
+            playerWalkBridge = content.Load<SoundEffect>("Sounds/playerWalkBridge");
             playerDie = content.Load<SoundEffect>("Sounds/playerDie");
 
             inventory = content.Load<SoundEffect>("Sounds/inventory");
