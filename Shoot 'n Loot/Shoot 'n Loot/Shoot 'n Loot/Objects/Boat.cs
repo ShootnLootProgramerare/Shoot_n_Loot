@@ -15,7 +15,7 @@ namespace Shoot__n_Loot.Objects
 
         public Boat(Vector2 position)
         {
-            Sprite = new Sprite(TextureManager.boat, position, new Vector2(200, 100));
+            Sprite = new Sprite(TextureManager.boat, position, new Vector2(200, 100), 2, new Point(200, 100), 0);
         }
 
         public override void Update()
@@ -34,9 +34,16 @@ namespace Shoot__n_Loot.Objects
             {
                 //end the game
                 Velocity = new Vector2(10, 0);
+                SceneManager.gameScene.RemoveObject(SceneManager.gameScene.player);
+                Sprite.Frame = 1;
             }
 
             Position += Velocity;
+
+            if (Velocity.Length() > 0)
+            {
+                Camera.Follow(Center);
+            }
 
             base.Update();
         }
