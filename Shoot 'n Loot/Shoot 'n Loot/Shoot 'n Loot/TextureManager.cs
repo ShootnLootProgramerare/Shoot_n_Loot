@@ -60,10 +60,14 @@ namespace Shoot__n_Loot
 
             oneleggedWalk,
             oneleggedAttack,
-            
-            fatLadyWalk, 
+
+            fatLadyWalk,
             fatLadyAttack,
-            
+
+            babyWalk,
+            babyAttack,
+            babyNuke,
+
             playerWalkNoWeapon,
             playerWalkGun,
             playerWalkMelee,
@@ -102,6 +106,10 @@ namespace Shoot__n_Loot
 
             fatLadyWalk = LoadWalkSprites("enemies/fatLady/walk", content);
             fatLadyAttack = LoadWalkSprites("enemies/fatLady/attack", content);
+
+            babyWalk = LoadWalkSprites("enemies/baby/walk", content);
+            babyAttack = LoadWalkSprites("enemies/baby/attack", content);
+            babyNuke = LoadWalkSprites("enemies/baby/nuke", content);
 
             bullet = content.Load<Texture2D>("bullet");
             house = content.Load<Texture2D>("houses/house");

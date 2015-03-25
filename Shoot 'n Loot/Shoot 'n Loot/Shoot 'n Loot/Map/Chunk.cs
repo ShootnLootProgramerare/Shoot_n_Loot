@@ -99,22 +99,24 @@ namespace Shoot__n_Loot
         {
             const float SPAWNRATE = .01f;
 
-            if (Game1.random.NextDouble() * 255 < spawnData.A * SPAWNRATE && SceneManager.gameScene.NoOfZombies() < Map.maxZombies && spawnPositions.Count > 0)
+            if (Game1.random.NextDouble() * 255 * 4 < (spawnData.A + spawnData.R + spawnData.G + spawnData.B) * SPAWNRATE && SceneManager.gameScene.NoOfZombies() < Map.maxZombies && spawnPositions.Count > 0)
             {
                 Vector2 position = spawnPositions[(Game1.random.Next(spawnPositions.Count))];
 
                 if (SceneManager.gameScene.player.DistanceSquared(position) < GameScene.MAXSPAWNDIST * GameScene.MAXSPAWNDIST) return;
 
                 int r = Game1.random.Next(spawnData.R + spawnData.G + spawnData.B);
+                r += 1000;
                 Debug.WriteLine("seed = " + r);
 
                 /*
+                 * ALPHA = BABY
                  * BLUE = FISHERMAN
                  * GREEN = ONELEG
                  * RED = FAT
                  */
-
-                if (r > spawnData.R + spawnData.G) SceneManager.gameScene.AddObject(new Fisherman(position));
+                if (r > spawnData.R + spawnData.G + spawnData.B) SceneManager.gameScene.AddObject(new Baby(position));
+                else if (r > spawnData.R + spawnData.G) SceneManager.gameScene.AddObject(new Fisherman(position));
                 else if (r > spawnData.R) SceneManager.gameScene.AddObject(new Onelegged(position));
                 else SceneManager.gameScene.AddObject(new FatLady(position));
             }
