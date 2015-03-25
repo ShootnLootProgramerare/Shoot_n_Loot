@@ -52,7 +52,20 @@ namespace Shoot__n_Loot
             gunMechs,
 
             hpBar,
-            hpRed;
+            hpRed,
+            
+            backButton,
+            backButtonL,
+            exitButton,
+            exitButtonL,
+            infoButton,
+            infoButtonL,
+            menuButton,
+            menuButtonL,
+            playButton,
+            playButtonL,
+            resumeButton,
+            resumeButtonL;
 
         public static Texture2D[]
             fishermanWalk,
@@ -134,6 +147,19 @@ namespace Shoot__n_Loot
 
             hpBar = content.Load<Texture2D>("hpBar");
             hpRed = content.Load<Texture2D>("RedHP");
+
+            backButton = content.Load<Texture2D>("back_button");
+            backButtonL = content.Load<Texture2D>("back_button_light");
+            exitButton = content.Load<Texture2D>("exit_button");
+            exitButtonL = content.Load<Texture2D>("exit_button_light");
+            infoButton = content.Load<Texture2D>("info_button");
+            infoButtonL = content.Load<Texture2D>("info_button_light");
+            menuButton = content.Load<Texture2D>("menu_button");
+            menuButtonL = content.Load<Texture2D>("menu_button_light");
+            playButton = content.Load<Texture2D>("play_button");
+            playButtonL = content.Load<Texture2D>("play_button_light");
+            resumeButton = content.Load<Texture2D>("resume_button");
+            resumeButtonL = content.Load<Texture2D>("resume_button_light");
         }
 
         private static Texture2D[] LoadWalkSprites(string path, ContentManager content)
