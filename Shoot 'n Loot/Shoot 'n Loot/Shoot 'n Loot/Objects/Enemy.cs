@@ -33,7 +33,7 @@ namespace Shoot__n_Loot
         float walkAnimSpeed, attackAnimSpeed;
         Point frameSize;
 
-        Texture2D[] walkingAnims, attackAnims;
+        protected Texture2D[] walkingAnims, attackAnims;
 
         Direction direction;
 
