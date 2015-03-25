@@ -17,7 +17,7 @@ namespace Shoot__n_Loot
         public MainMenuScene()
         {
             b = new List<Button>();
-            b.Add(new Button("Play", new Rectangle(-16, -32, 100, 32), TextureManager.house, TextureManager.heavyAmmo, TextureManager.gunBarrel));
+            b.Add(new Button("Play", new Rectangle(-16, -32, 100, 32), TextureManager.house, TextureManager.heavyAmmo, null));
             b.Add(new Button("Info", new Rectangle(-16, 32, 100, 32)));
             b.Add(new Button("Quit", new Rectangle(-16, 96, 100, 32)));
 
@@ -26,16 +26,18 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            if (Input.newKs.IsKeyDown(Keys.Enter)) SceneManager.currentScene = SceneManager.gameScene;
-            else if (Input.KeyWasJustPressed(Keys.Escape)) SceneManager.currentScene = SceneManager.aboutScene;
+            Camera.Position = Vector2.Zero;
+
+            if (Input.newKs.IsKeyDown(Keys.Enter)) SceneManager.CurrentScene = SceneManager.gameScene;
+            else if (Input.KeyWasJustPressed(Keys.Escape)) SceneManager.CurrentScene = SceneManager.aboutScene;
             
             if (b[0].IsClicked) 
             { 
                 SceneManager.gameScene = new GameScene();
                 Map.Initialize();
-                SceneManager.currentScene = SceneManager.gameScene; 
+                SceneManager.CurrentScene = SceneManager.gameScene; 
             }
-            if (b[1].IsClicked) { SceneManager.currentScene = SceneManager.aboutScene; }
+            if (b[1].IsClicked) { SceneManager.CurrentScene = SceneManager.aboutScene; }
             if (b[2].IsClicked) { /* Exit the Game */ Game1.exit = true; }
 
             foreach (Button bu in b) bu.Update();

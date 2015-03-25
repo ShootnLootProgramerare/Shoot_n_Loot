@@ -16,7 +16,7 @@ namespace Shoot__n_Loot.Objects
 
         public override void Update()
         {
-            if (Sprite.EndOfAnim) SceneManager.currentScene.RemoveObject(this);
+            if (Sprite.EndOfAnim) SceneManager.CurrentScene.RemoveObject(this);
         }
     }
 }

@@ -87,7 +87,7 @@ namespace Shoot__n_Loot
 
             Input.Update();
 
-            SceneManager.currentScene.Update();
+            SceneManager.CurrentScene.Update();
 
             base.Update(gameTime);
         }
@@ -101,7 +101,7 @@ namespace Shoot__n_Loot
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, Camera.Transform);
 
-            SceneManager.currentScene.Draw(spriteBatch); 
+            SceneManager.CurrentScene.Draw(spriteBatch); 
 
             spriteBatch.End();
             base.Draw(gameTime);

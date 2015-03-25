@@ -28,13 +28,18 @@ namespace Shoot__n_Loot
             //Map.Initialize();
         }
 
+        public override void OnResume()
+        {
+            Camera.Position = player.Center;
+        }
+
         public override void Update()
         {
             Camera.Follow(player.Position);
 
-            if (player.Dead) { SceneManager.currentScene = SceneManager.gameOverScene; SoundManager.playerDie.Play(); }
+            if (player.Dead) { SceneManager.CurrentScene = SceneManager.gameOverScene; SoundManager.playerDie.Play(); }
 
-            if (Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.Escape)) SceneManager.currentScene = SceneManager.pauseScene;
+            if (Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.Escape)) SceneManager.CurrentScene = SceneManager.pauseScene;
 
             foreach (Chunk c in Map.chunks)
             {

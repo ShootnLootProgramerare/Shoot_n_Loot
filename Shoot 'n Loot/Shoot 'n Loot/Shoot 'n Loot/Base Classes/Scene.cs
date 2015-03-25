@@ -23,6 +23,8 @@ namespace Shoot__n_Loot
             objectsToRemove = new List<GameObject>();
         }
 
+        public virtual void OnResume() { }
+
         public virtual void Update()
         {
             foreach (GameObject g in objectsToAdd) objects.Add(g);

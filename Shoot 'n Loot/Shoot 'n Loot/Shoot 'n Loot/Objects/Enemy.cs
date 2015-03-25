@@ -173,7 +173,7 @@ namespace Shoot__n_Loot
 
             }*/
 
-            foreach (GameObject g in SceneManager.currentScene.objects)
+            foreach (GameObject g in SceneManager.CurrentScene.objects)
             {
                 if (g.Type == Enemy.TYPE && g != this)
                 {

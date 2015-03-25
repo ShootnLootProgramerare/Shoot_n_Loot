@@ -21,12 +21,17 @@ namespace Shoot__n_Loot.Scenes
             base.Initialize();
         }
 
+        public override void OnResume()
+        {
+            Camera.Position = Vector2.Zero;
+        }
+
         public override void Update()
         {
-            if (Input.KeyWasJustPressed(Keys.Escape)) SceneManager.currentScene = SceneManager.gameScene;
+            if (Input.KeyWasJustPressed(Keys.Escape)) SceneManager.CurrentScene = SceneManager.gameScene;
             Camera.Follow(Vector2.Zero);
-            if (b.IsClicked) { SceneManager.currentScene = SceneManager.gameScene; }
-            if (bt.IsClicked) { SceneManager.currentScene = SceneManager.mainMenuScene; }
+            if (b.IsClicked) { SceneManager.CurrentScene = SceneManager.gameScene; }
+            if (bt.IsClicked) { SceneManager.CurrentScene = SceneManager.mainMenuScene; }
             b.Update();
             bt.Update();
             base.Update();

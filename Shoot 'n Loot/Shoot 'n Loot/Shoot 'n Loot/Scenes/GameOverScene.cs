@@ -23,9 +23,9 @@ namespace Shoot__n_Loot.Scenes
 
         public override void Update()
         {
-            if (Input.KeyWasJustPressed(Keys.Enter)) SceneManager.currentScene = SceneManager.gameScene;
+            if (Input.KeyWasJustPressed(Keys.Enter)) SceneManager.CurrentScene = SceneManager.gameScene;
             Camera.Follow(Vector2.Zero);
-            if (b.IsClicked) { SceneManager.currentScene = SceneManager.mainMenuScene; }
+            if (b.IsClicked) { SceneManager.CurrentScene = SceneManager.mainMenuScene; }
             if (bt.IsClicked) { /* Exit the Game */ Game1.exit = true; }
             b.Update();
             bt.Update();

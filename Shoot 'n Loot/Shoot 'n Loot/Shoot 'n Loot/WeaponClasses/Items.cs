@@ -79,7 +79,7 @@ namespace Shoot__n_Loot.WeaponClasses
 
         static void Landmine(Player p)
         {
-            SceneManager.currentScene.AddObject(new Landmine(p.Center));
+            SceneManager.CurrentScene.AddObject(new Landmine(p.Center));
         }
     }
 }

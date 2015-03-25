@@ -7,7 +7,8 @@ namespace Shoot__n_Loot.Scenes
 {
     static class SceneManager
     {
-        internal static Scene currentScene;
+        private static Scene currentScene;
+        internal static Scene CurrentScene { get { return currentScene; } set { currentScene = value; currentScene.OnResume(); } }
 
         internal static MainMenuScene mainMenuScene;
         internal static GameScene gameScene;
@@ -25,7 +26,7 @@ namespace Shoot__n_Loot.Scenes
 
             Map.Initialize(); //should be in gameScene but that fucks thigns up
 
-            currentScene = mainMenuScene;
+            CurrentScene = mainMenuScene;
         }
     }
 }

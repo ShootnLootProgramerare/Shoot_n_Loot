@@ -18,13 +18,13 @@ namespace Shoot__n_Loot.Objects
 
         public override void Update()
         {
-            foreach (GameObject g in SceneManager.currentScene.objects.Where(item => item is Enemy))
+            foreach (GameObject g in SceneManager.CurrentScene.objects.Where(item => item is Enemy))
             {
                 if (DistanceSquared(g.Center) < range * range)
                 {
                     //TODO: spawn new explosion
-                    SceneManager.currentScene.AddObject(new Explosion(Center));
-                    SceneManager.currentScene.RemoveObject(this);
+                    SceneManager.CurrentScene.AddObject(new Explosion(Center));
+                    SceneManager.CurrentScene.RemoveObject(this);
                     g.Health -= 10;
                 }
             }
