@@ -97,18 +97,24 @@ namespace Shoot__n_Loot
         /// <param name="list">where the zombie will be added.</param>
         public void SpawnZombie(List<GameObject> list)
         {
-            const float SPAWNRATE = .00001f;
+            const float SPAWNRATE = .01f;
 
-            if (Game1.random.Next(255) < spawnData.A * SPAWNRATE && SceneManager.gameScene.NoOfZombies() < Map.maxZombies && spawnPositions.Count > 0)
+            if (Game1.random.NextDouble() * 255 < spawnData.A * SPAWNRATE && SceneManager.gameScene.NoOfZombies() < Map.maxZombies && spawnPositions.Count > 0)
             {
                 Vector2 position = spawnPositions[(Game1.random.Next(spawnPositions.Count))];
 
                 if (SceneManager.gameScene.player.DistanceSquared(position) < GameScene.MAXSPAWNDIST * GameScene.MAXSPAWNDIST) return;
 
                 int r = Game1.random.Next(spawnData.R + spawnData.G + spawnData.B);
+                Debug.WriteLine("seed = " + r);
 
-                //TODO: rewrite this so every type of enemy has a seperate map of spawn frequency
-                if (r > spawnData.R + spawnData.G) SceneManager.gameScene.AddObject(new Fisherman(position));//e = (Enemy.EnemyType)3; //decide which type
+                /*
+                 * BLUE = FISHERMAN
+                 * GREEN = ONELEG
+                 * RED = FAT
+                 */
+
+                if (r > spawnData.R + spawnData.G) SceneManager.gameScene.AddObject(new Fisherman(position));
                 else if (r > spawnData.R) SceneManager.gameScene.AddObject(new Onelegged(position));
                 else SceneManager.gameScene.AddObject(new FatLady(position));
             }
