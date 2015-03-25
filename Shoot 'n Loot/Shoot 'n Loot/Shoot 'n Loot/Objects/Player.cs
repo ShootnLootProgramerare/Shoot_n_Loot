@@ -35,6 +35,7 @@ namespace Shoot__n_Loot
         int chunkX, chunkY, tileX, tileY;
 
         int playSound = 0;
+        int playWaterSound = 0;
 
         private Point CUSTOMIZINGINVENTORYOFFSET { get { return new Point(0, 100); } }
 
@@ -71,6 +72,26 @@ namespace Shoot__n_Loot
             Tile t = Map.chunks[chunkX, chunkY].Tiles[tileX, tileY];
 
             playSound++;
+
+            try
+            {
+                if (Map.chunks[chunkX, chunkY].Tiles[tileX + 1, tileY].Properties.TextureIndex == 1 ||
+                    Map.chunks[chunkX, chunkY].Tiles[tileX - 1, tileY].Properties.TextureIndex == 1 ||
+                    Map.chunks[chunkX, chunkY].Tiles[tileX, tileY + 1].Properties.TextureIndex == 1 ||
+                    Map.chunks[chunkX, chunkY].Tiles[tileX, tileY - 1].Properties.TextureIndex == 1 ||
+                    Map.chunks[chunkX, chunkY].Tiles[tileX + 1, tileY + 1].Properties.TextureIndex == 1 ||
+                    Map.chunks[chunkX, chunkY].Tiles[tileX - 1, tileY + 1].Properties.TextureIndex == 1 ||
+                    Map.chunks[chunkX, chunkY].Tiles[tileX + 1, tileY - 1].Properties.TextureIndex == 1 ||
+                    Map.chunks[chunkX, chunkY].Tiles[tileX - 1, tileY - 1].Properties.TextureIndex == 1)
+                {
+                    playWaterSound++;
+                    if (playWaterSound >= 16) { SoundManager.water.Play(0.4f, 0f, 0f); playWaterSound = 0; }
+                }
+            }
+            catch
+            {
+
+            }
 
             if (playSound >= 32 && (Input.newKs.IsKeyDown(Keys.A) || Input.newKs.IsKeyDown(Keys.D) || Input.newKs.IsKeyDown(Keys.W) || Input.newKs.IsKeyDown(Keys.S)))
             {
