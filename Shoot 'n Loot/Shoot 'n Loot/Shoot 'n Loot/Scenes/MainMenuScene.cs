@@ -17,7 +17,7 @@ namespace Shoot__n_Loot
         public MainMenuScene()
         {
             b = new List<Button>();
-            b.Add(new Button("Play", new Rectangle(-16, -32, 100, 32)));
+            b.Add(new Button("Play", new Rectangle(-16, -32, 100, 32), TextureManager.house, TextureManager.heavyAmmo, TextureManager.gunBarrel));
             b.Add(new Button("Info", new Rectangle(-16, 32, 100, 32)));
             b.Add(new Button("Quit", new Rectangle(-16, 96, 100, 32)));
 

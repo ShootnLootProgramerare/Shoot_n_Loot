@@ -19,6 +19,23 @@ namespace Shoot__n_Loot.UI
         public bool IsClicked { get { return Input.AreaIsClicked(Area); } }
         public Color color;
 
+        Texture2D Texture
+        {
+            get
+            {
+                Texture2D t;
+                switch (State)
+                {
+                    case ButtonState.Hovering: t = hover; break;
+                    case ButtonState.Clicked: t = clicked; break;
+                    default: t = regular; break;
+                }
+                return (t == null ? regular : t);
+            }
+        }
+
+        Texture2D regular, hover, clicked;
+
         Action onClick;
         Vector2 textSize;
 
@@ -41,15 +58,19 @@ namespace Shoot__n_Loot.UI
         /// </summary>
         /// <param name="area"></param>
         public Button(string text, Rectangle area)
-            : this(text, area, null, Color.White)
+            : this(text, area, null, Color.White, null, null, null)
+        { }
+
+        public Button(string text, Rectangle area, Texture2D texture, Texture2D hover, Texture2D clicked)
+            : this(text, area, null, Color.White, texture, hover, clicked)
         { }
 
         public Button(string text, Rectangle area, Color color)
-            : this(text, area, null, color)
+            : this(text, area, null, color, null, null, null)
         { }
 
         public Button(string text, Rectangle area, Action onClick)
-            : this(text, area, onClick, Color.White)
+            : this(text, area, onClick, Color.White, null, null, null)
         { }
 
         /// <summary>
@@ -57,12 +78,16 @@ namespace Shoot__n_Loot.UI
         /// </summary>
         /// <param name="area"></param>
         /// <param name="onClick"></param>
-        public Button(string text, Rectangle area, Action onClick, Color color)
+        public Button(string text, Rectangle area, Action onClick, Color color, Texture2D regular, Texture2D hover, Texture2D clicked)
         {
             this.Text = text;
             this.Area = area;
             this.onClick = onClick;
-            this.color = color;
+            this.color = (color == null) ? Color.White : color;
+
+            this.regular = (regular == null ? TextureManager.inventorySlot : regular);
+            this.hover = hover;
+            this.clicked = clicked;
 
             textSize = TextureManager.font.MeasureString(text);
             Vector2 minSize = textSize + new Vector2(PADDING_X, PADDING_Y) * 2;
@@ -95,10 +120,10 @@ namespace Shoot__n_Loot.UI
             }
             else State = ButtonState.None;
         }
-
+        
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.inventorySlot, Area, null, AdjustedColor, 0, Vector2.Zero, SpriteEffects.None, 0.0000001f);
+            spriteBatch.Draw(Texture, Area, null, AdjustedColor, 0, Vector2.Zero, SpriteEffects.None, 0.0000001f);
             spriteBatch.DrawString(TextureManager.font, Text, new Vector2(Area.X + Area.Width / 2, Area.Y + Area.Height / 2), Color.Black, 0, textSize / 2, 1, SpriteEffects.None, 0);
         }
     }
