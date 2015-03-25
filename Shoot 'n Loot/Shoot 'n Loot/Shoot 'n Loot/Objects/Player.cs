@@ -42,7 +42,7 @@ namespace Shoot__n_Loot
         {
             Vector2 position = new Vector2(112, 10) * Tile.size; //should be defined in the item map?
             Sprite = new Sprite(TextureManager.playerWalkNoWeapon[0], position, new Vector2(100), 4, new Point(100, 100), 0);
-            Inventory = new Inventory(this, new Point(0, 0), 10, 4, 10);
+            Inventory = new Inventory(this, new Point(0, 0), 5, 4, 5);
             weapon = new Weapon();
             this.MaxHealth = 100;
             CanDie = true;
