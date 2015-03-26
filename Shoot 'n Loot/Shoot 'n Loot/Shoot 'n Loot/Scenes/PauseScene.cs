@@ -16,8 +16,8 @@ namespace Shoot__n_Loot.Scenes
 
         public PauseScene()
         {
-            b = new Button("Continue", new Rectangle(-64, -32, 128, 32));
-            bt = new Button("Main Menu", new Rectangle(-64, 32, 128, 32));
+            b = new Button("", new Rectangle(-64, -32, 120, 72), TextureManager.resumeButton, TextureManager.resumeButtonL, null);
+            bt = new Button("", new Rectangle(-64, 32, 120, 72), TextureManager.menuButton, TextureManager.menuButtonL, null);
             base.Initialize();
         }
 

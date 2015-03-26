@@ -18,7 +18,7 @@ namespace Shoot__n_Loot.Scenes
 
         public AboutScene()
         {
-            b = new Button("Return", new Rectangle(-64, -32, 32, 32));
+            b = new Button("", new Rectangle(-64, -32, 120, 72), TextureManager.resumeButton, TextureManager.resumeButtonL, null);
             base.Initialize();  
         }
 

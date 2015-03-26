@@ -148,18 +148,18 @@ namespace Shoot__n_Loot
             hpBar = content.Load<Texture2D>("hpBar");
             hpRed = content.Load<Texture2D>("RedHP");
 
-            backButton = content.Load<Texture2D>("buttons/back_button");
-            backButtonL = content.Load<Texture2D>("buttons/back_button_light");
-            exitButton = content.Load<Texture2D>("buttons/exit_button");
-            exitButtonL = content.Load<Texture2D>("buttons/exit_button_light");
-            infoButton = content.Load<Texture2D>("buttons/info_button");
-            infoButtonL = content.Load<Texture2D>("buttons/info_button_light");
-            menuButton = content.Load<Texture2D>("buttons/menu_button");
-            menuButtonL = content.Load<Texture2D>("buttons/menu_button_light");
-            playButton = content.Load<Texture2D>("buttons/play_button");
-            playButtonL = content.Load<Texture2D>("buttons/play_button_light");
-            resumeButton = content.Load<Texture2D>("buttons/resume_button");
-            resumeButtonL = content.Load<Texture2D>("buttons/resume_button_light");
+            backButton = content.Load<Texture2D>("Buttons/back_button");
+            backButtonL = content.Load<Texture2D>("Buttons/back_button_light");
+            exitButton = content.Load<Texture2D>("Buttons/exit_button");
+            exitButtonL = content.Load<Texture2D>("Buttons/exit_button_light");
+            infoButton = content.Load<Texture2D>("Buttons/info_button");
+            infoButtonL = content.Load<Texture2D>("Buttons/info_button_light");
+            menuButton = content.Load<Texture2D>("Buttons/menu_button");
+            menuButtonL = content.Load<Texture2D>("Buttons/menu_button_light");
+            playButton = content.Load<Texture2D>("Buttons/play_button");
+            playButtonL = content.Load<Texture2D>("Buttons/play_button_light");
+            resumeButton = content.Load<Texture2D>("Buttons/resume_button");
+            resumeButtonL = content.Load<Texture2D>("Buttons/resume_button_light");
         }
 
         private static Texture2D[] LoadWalkSprites(string path, ContentManager content)
