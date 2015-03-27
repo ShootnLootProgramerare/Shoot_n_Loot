@@ -16,8 +16,8 @@ namespace Shoot__n_Loot.Scenes
 
         public GameOverScene()
         {
-            b = new Button("", new Rectangle(-64, -32, 120, 72), TextureManager.menuButton, TextureManager.menuButtonL, null);
-            bt = new Button("", new Rectangle(-64, 32, 120, 72), TextureManager.exitButton, TextureManager.exitButtonL, null);
+            b = new Button("", new Rectangle(-64, 32, 120, 72), TextureManager.menuButton, TextureManager.menuButtonL, null);
+            bt = new Button("", new Rectangle(-64, 96, 120, 72), TextureManager.exitButton, TextureManager.exitButtonL, null);
             base.Initialize();
         }
 

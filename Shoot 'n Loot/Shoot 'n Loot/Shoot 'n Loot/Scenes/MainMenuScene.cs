@@ -17,9 +17,9 @@ namespace Shoot__n_Loot
         public MainMenuScene()
         {
             b = new List<Button>();
-            b.Add(new Button("", new Rectangle(-16, -32, 120, 72), TextureManager.playButton, TextureManager.playButtonL, null));
-            b.Add(new Button("", new Rectangle(-16, 32, 120, 72), TextureManager.infoButton, TextureManager.infoButtonL, null));
-            b.Add(new Button("", new Rectangle(-16, 96, 120, 72), TextureManager.exitButton, TextureManager.exitButtonL, null));
+            b.Add(new Button("", new Rectangle(-64, 32, 120, 72), TextureManager.playButton, TextureManager.playButtonL, null));
+            b.Add(new Button("", new Rectangle(-64, 96, 120, 72), TextureManager.infoButton, TextureManager.infoButtonL, null));
+            b.Add(new Button("", new Rectangle(-64, 160, 120, 72), TextureManager.exitButton, TextureManager.exitButtonL, null));
 
             base.Initialize();
         }

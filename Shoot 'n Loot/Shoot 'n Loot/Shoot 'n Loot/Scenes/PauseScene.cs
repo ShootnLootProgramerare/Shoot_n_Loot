@@ -14,10 +14,13 @@ namespace Shoot__n_Loot.Scenes
         Button b;
         Button bt;
 
+        const string text =
+            "PAUSED";
+
         public PauseScene()
         {
-            b = new Button("", new Rectangle(-64, -32, 120, 72), TextureManager.resumeButton, TextureManager.resumeButtonL, null);
-            bt = new Button("", new Rectangle(-64, 32, 120, 72), TextureManager.menuButton, TextureManager.menuButtonL, null);
+            b = new Button("", new Rectangle(-64, 32, 120, 72), TextureManager.resumeButton, TextureManager.resumeButtonL, null);
+            bt = new Button("", new Rectangle(-64, 96, 120, 72), TextureManager.menuButton, TextureManager.menuButtonL, null);
             base.Initialize();
         }
 
@@ -39,6 +42,7 @@ namespace Shoot__n_Loot.Scenes
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.DrawString(TextureManager.font, text, -TextureManager.font.MeasureString(text) / 2, Microsoft.Xna.Framework.Color.Black);
             b.Draw(spriteBatch);
             bt.Draw(spriteBatch);
             base.Draw(spriteBatch);
