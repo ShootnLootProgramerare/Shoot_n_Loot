@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Shoot__n_Loot.Scenes;
+using Shoot__n_Loot.UI;
 using Shoot__n_Loot.WeaponClasses;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,9 @@ namespace Shoot__n_Loot
         public MeleeWeaponProperties MeleeWeapon { get; set; }
         int meleeAttackTimer;
 
-        HPBar hpBar;
+        //HPBar hpBar;
+
+        Bar healthBar;
 
         int chunkX, chunkY, tileX, tileY;
 
@@ -47,7 +50,9 @@ namespace Shoot__n_Loot
             weapon = new Weapon();
             this.MaxHealth = 100;
             CanDie = true;
-            hpBar = new HPBar(new Vector2(Camera.TotalOffset.X, Camera.TotalOffset.Y), 100);
+            //hpBar = new HPBar(new Vector2(Camera.TotalOffset.X, Camera.TotalOffset.Y), 100);
+
+            healthBar = new Bar(TextureManager.healthBar, TextureManager.fuelCan, new Rectangle(0, 0, 150, 75));
 
             for (int i = 0; i < 10; i++)
             {
@@ -240,7 +245,9 @@ namespace Shoot__n_Loot
 
             spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health + "\nHunger: " + Hunger.ToString("0") + "\nBleeding: " + bleeding, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
 
-            hpBar.Draw(spriteBatch, base.Health / base.MaxHealth);
+            //hpBar.Draw(spriteBatch, base.Health / base.MaxHealth);
+
+            healthBar.Draw(spriteBatch, Health / MaxHealth);
 
             base.Draw(spriteBatch);
         }
