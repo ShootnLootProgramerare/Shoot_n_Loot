@@ -106,7 +106,6 @@ namespace Shoot__n_Loot
                 if (SceneManager.gameScene.player.DistanceSquared(position) < GameScene.MAXSPAWNDIST * GameScene.MAXSPAWNDIST) return;
 
                 int r = Game1.random.Next(spawnData.R + spawnData.G + spawnData.B);
-                r += 1000;
                 Debug.WriteLine("seed = " + r);
 
                 /*

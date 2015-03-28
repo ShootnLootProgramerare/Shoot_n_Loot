@@ -65,6 +65,7 @@ namespace Shoot__n_Loot
         {
             Hunger += .001f;
             Health -= bleeding;
+            bleeding *= (bleeding > .01f) ? .95f : .9999f;
 
             tileX = (int)Center.X / Tile.size;
             chunkX = tileX / Chunk.size;
