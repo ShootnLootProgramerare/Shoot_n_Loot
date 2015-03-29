@@ -38,6 +38,7 @@ namespace Shoot__n_Loot
             beans,
             bandage,
             fuelCan,
+            chest,
 
             twoByFour,
             
@@ -130,6 +131,7 @@ namespace Shoot__n_Loot
             lightHouse = content.Load<Texture2D>("houses/lightHouse");
             inventorySlot = content.Load<Texture2D>("inventorySlot");
             landmine = content.Load<Texture2D>("items/landmine");
+            chest = content.Load<Texture2D>("objects/chest");
 
             medicineItem = content.Load<Texture2D>("items/pill");
             beans = content.Load<Texture2D>("items/beans");

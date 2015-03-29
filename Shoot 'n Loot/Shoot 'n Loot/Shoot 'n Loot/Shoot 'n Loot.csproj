@@ -119,6 +119,7 @@
     <Compile Include="InvenoryStuff\ItemSlot.cs" />
     <Compile Include="Music.cs" />
     <Compile Include="Objects\Bullet.cs" />
+    <Compile Include="Objects\ItemContainer.cs" />
     <Compile Include="Objects\Landmine.cs" />
     <Compile Include="Objects\LightHouse.cs" />
     <Compile Include="Scenes\AboutScene.cs" />

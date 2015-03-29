@@ -12,6 +12,7 @@ namespace Shoot__n_Loot.Objects
         public Explosion(Vector2 position)
         {
             Sprite = new Sprite(TextureManager.explosion, position, new Vector2(100), 6, new Point(100, 100), 10 / 60f);
+            Sprite.Frame = 1;
         }
 
         public override void Update()
