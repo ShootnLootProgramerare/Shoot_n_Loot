@@ -61,12 +61,8 @@ namespace Shoot__n_Loot
                 
         }
 
-        public override void Update()
+        void JohansSkitAkaAudioStuff()
         {
-            Hunger += .001f;
-            Health -= bleeding;
-            bleeding *= (bleeding > .01f) ? .95f : .9999f;
-
             tileX = (int)Center.X / Tile.size;
             chunkX = tileX / Chunk.size;
             tileX %= Chunk.size;
@@ -109,7 +105,15 @@ namespace Shoot__n_Loot
                 if (t.Properties.TextureIndex == 7) { SoundManager.playerWalkBridge.Play(); } // Bridge sound
                 playSound = 0;
             }
+        }
 
+        public override void Update()
+        {
+            Hunger += .001f;
+            Health -= bleeding;
+            bleeding *= (bleeding > .01f) ? .95f : .9999f;
+
+            JohansSkitAkaAudioStuff(); // :^)))) 
 
             if (!inventoryVisible)
             {
