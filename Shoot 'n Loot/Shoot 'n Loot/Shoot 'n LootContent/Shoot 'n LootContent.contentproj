@@ -515,13 +515,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="boat.PNG">
-      <Name>boat</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="items\fuelCan.PNG">
       <Name>fuelCan</Name>
       <Importer>TextureImporter</Importer>
@@ -695,6 +688,13 @@
   <ItemGroup>
     <Compile Include="healthBar.png">
       <Name>healthBar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="boat.PNG">
+      <Name>boat</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
