@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Shoot__n_Loot.Base_Classes;
 using Shoot__n_Loot.InvenoryStuff;
 using Shoot__n_Loot.Scenes;
 using Shoot__n_Loot.UI;
@@ -13,20 +14,19 @@ using System.Text;
 
 namespace Shoot__n_Loot
 {
-    class Player : GameObject
+    class Player : ObjectWithInventory
     {
         private const float accelerationMult = .7f, friction = .87f;
 
         public override Rectangle MapCollider { get { return new Rectangle(base.MapCollider.X + (int)(base.MapCollider.Width * .375f), base.MapCollider.Y + (int)(base.MapCollider.Height * .75f), (int)(base.MapCollider.Width / 4), (int)(base.MapCollider.Height * .25f)); } }
 
-        public Inventory Inventory { get; set; }
+        //public Inventory Inventory { get; set; }
 
         public float Hunger { get; set; }
 
         public Weapon weapon;
 
         public float bleeding; //how much hp is removed each second
-        bool inventoryVisible;
         public bool UsingMelee { get { return MeleeWeapon != null; } }
 
         public MeleeWeaponProperties MeleeWeapon { get; set; }
@@ -49,7 +49,7 @@ namespace Shoot__n_Loot
         {
             Vector2 position = new Vector2(112, 10) * Tile.size; //should be defined in the item map?
             Sprite = new Sprite(TextureManager.playerWalkNoWeapon[0], position, new Vector2(100), 4, new Point(100, 100), 0);
-            Inventory = new Inventory(this, new Point(0, 0), 5, 4, 5);
+            inventory = new Inventory(this, new Point(0, 0), 5, 4, 5);
             weapon = new Weapon();
             this.MaxHealth = 100;
             CanDie = true;
@@ -59,7 +59,7 @@ namespace Shoot__n_Loot
 
             for (int i = 0; i < 10; i++)
             {
-                Inventory.Add(Items.RandomItem(this.Position));
+                inventory.Add(Items.RandomItem(this.Position));
             } 
                 
         }
@@ -123,12 +123,12 @@ namespace Shoot__n_Loot
                 if (!UsingMelee) Shoot();
                 else MeleeWeaponUpdate();
 
-                weapon.ShootingUpdate(Inventory);
+                weapon.ShootingUpdate(inventory);
                 Animate();
             }
             else if (inventoryVisible)
             {
-                Inventory.Update(new Point(0, 0));
+                inventory.Update(new Point(0, 0));
                 weapon.CustomizingUpdate();
                 InventoryUpdate();
             }
@@ -142,7 +142,7 @@ namespace Shoot__n_Loot
             {
                 SoundManager.inventory.Play();
                 inventoryVisible = !inventoryVisible;
-                Inventory.HideAllItemMenus();
+                inventory.HideAllItemMenus();
             }
         }
 
@@ -153,11 +153,11 @@ namespace Shoot__n_Loot
                 if (draggedItem == null)
                 {
                     //get item if clicked slot
-                    ItemSlot i = ItemSlotAtMousePos();
+                    ItemSlot i = Inventory.SlotAtMousePos();
                     if (i != null && i.Item != null)
                     {
                         draggedItem = new Item(i.Item.Properties, Input.MousePosition);
-                        Inventory.Remove(i.Item, 1);
+                        i.Remove(1);
                         draggedItem.Position = Input.MousePosition;
                         Debug.WriteLine("an item was clicked");
                     }
@@ -174,7 +174,7 @@ namespace Shoot__n_Loot
                 {
                     Debug.WriteLine("an item was released");
                     //put in slot under mouse or if none exists put back in standard slot
-                    ItemSlot i = ItemSlotAtMousePos();
+                    ItemSlot i = Inventory.SlotAtMousePos();
                     Debug.WriteLine("i == null = " + (i == null));
                     if (i != null)
                     {
@@ -183,32 +183,17 @@ namespace Shoot__n_Loot
                         else
                         {
                             Debug.WriteLine("this slot didnt fit the item");
-                            Inventory.Add(draggedItem);
+                            inventory.Add(draggedItem);
                         }
                     }
                     else
                     {
                         draggedItem.Position = Position;
                         SceneManager.CurrentScene.AddObject(draggedItem);
-                    } draggedItem = null;
+                    } 
+                    draggedItem = null;
                 }
             }
-        }
-
-        //this should probably be in inventory
-        ItemSlot ItemSlotAtMousePos()
-        {
-            for (int x = 0; x < Inventory.Width; x++)
-            {
-                for (int y = 0; y < Inventory.Height; y++)
-                {
-                    if (Inventory.PositionForItem(x, y).Contains(new Point(Input.newMs.X + (int)Camera.TotalOffset.X, Input.newMs.Y + (int)Camera.TotalOffset.Y)))
-                    {
-                        return Inventory.Slots[x, y];
-                    }
-                }
-            }
-            return null;
         }
 
         void MeleeWeaponUpdate()
@@ -305,14 +290,14 @@ namespace Shoot__n_Loot
                     weapon.TryShoot(Center + offset, (float)Math.Atan2(v.Y, v.X), SceneManager.gameScene);
                 }
             }
-            if (Input.KeyWasJustPressed(Keys.R)) weapon.StartReload(Inventory);
+            if (Input.KeyWasJustPressed(Keys.R)) weapon.StartReload(inventory);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (inventoryVisible)
             {
-                Inventory.Draw(spriteBatch);
+                inventory.Draw(spriteBatch);
                 //weapon.Draw(spriteBatch);
                 weapon.DrawCustomization(spriteBatch);
 

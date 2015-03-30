@@ -75,7 +75,7 @@ namespace Shoot__n_Loot.WeaponClasses
 
         void RemoveItem()
         {
-            SceneManager.gameScene.player.Inventory.Add(SceneManager.gameScene.player.weapon.RemovePart(Type));
+            SceneManager.gameScene.player.inventory.Add(SceneManager.gameScene.player.weapon.RemovePart(Type));
         }
     }
 }

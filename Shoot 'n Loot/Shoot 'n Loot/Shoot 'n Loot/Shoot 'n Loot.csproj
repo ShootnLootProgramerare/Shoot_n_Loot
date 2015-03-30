@@ -108,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base Classes\ObjectWithInventory.cs" />
     <Compile Include="Enemies\Baby.cs" />
     <Compile Include="Enemies\FatLady.cs" />
     <Compile Include="Enemies\Fisherman.cs" />

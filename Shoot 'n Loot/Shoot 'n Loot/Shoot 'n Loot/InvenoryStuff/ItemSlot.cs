@@ -252,7 +252,7 @@ namespace Shoot__n_Loot.InvenoryStuff
             SoundManager.itemUse.Play();
             Item i = SceneManager.gameScene.player.weapon.AddPart(Item);
             Remove(1);
-            if (i != null) SceneManager.gameScene.player.Inventory.Add(i);
+            if (i != null) SceneManager.gameScene.player.inventory.Add(i);
         }
 
         void UseAsAmmo()

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Shoot__n_Loot.Base_Classes;
 using Shoot__n_Loot.InvenoryStuff;
 using Shoot__n_Loot.Scenes;
 using System;
@@ -116,6 +117,26 @@ namespace Shoot__n_Loot
         public Rectangle PositionForItem(int x, int y)
         {
             return new Rectangle((x - Width / 2) * DRAWNSIZE + (int)Camera.Center.X + drawOffset.X, (y - Height / 2) * DRAWNSIZE + (int)Camera.Center.Y + drawOffset.Y, DRAWNSIZE, DRAWNSIZE);
+        }
+
+        public static ItemSlot SlotAtMousePos()
+        {
+            foreach (ObjectWithInventory o in SceneManager.CurrentScene.objects.Where(item => item is ObjectWithInventory))
+            {
+                if (!o.inventoryVisible) continue;
+                Inventory Inventory = o.inventory;
+                for (int x = 0; x < Inventory.Width; x++)
+                {
+                    for (int y = 0; y < Inventory.Height; y++)
+                    {
+                        if (Inventory.PositionForItem(x, y).Contains(new Point(Input.newMs.X + (int)Camera.TotalOffset.X, Input.newMs.Y + (int)Camera.TotalOffset.Y)))
+                        {
+                            return Inventory.Slots[x, y];
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
 

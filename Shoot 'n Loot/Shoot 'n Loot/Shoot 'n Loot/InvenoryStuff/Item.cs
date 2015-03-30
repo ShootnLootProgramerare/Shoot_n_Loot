@@ -23,9 +23,9 @@ namespace Shoot__n_Loot
         {
             if (SceneManager.gameScene.player.MapCollider.Intersects(MapCollider) && Input.KeyWasJustPressed(Microsoft.Xna.Framework.Input.Keys.E))
             {
-                if (SceneManager.gameScene.player.Inventory.Fits(this))
+                if (SceneManager.gameScene.player.inventory.Fits(this))
                 {
-                    SceneManager.gameScene.player.Inventory.Add(this);
+                    SceneManager.gameScene.player.inventory.Add(this);
                     SceneManager.gameScene.RemoveObject(this);
                 }
             }

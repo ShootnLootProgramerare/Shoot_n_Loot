@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Shoot__n_Loot.Base_Classes;
 using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,8 @@ using System.Text;
 
 namespace Shoot__n_Loot.Objects
 {
-    class ItemContainer : GameObject
+    class ItemContainer : ObjectWithInventory
     {
-        public Inventory inventory;
-
-        bool inventoryVisible;
-
         public ItemContainer(Vector2 position)
         {
             Sprite = new Sprite(TextureManager.chest, position, new Vector2(100));
