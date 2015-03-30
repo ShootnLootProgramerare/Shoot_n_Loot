@@ -79,13 +79,13 @@ namespace Shoot__n_Loot.InvenoryStuff
                 else return false;
             }
             //otherwise see if no other item is obstructing the slot
-            foreach (ItemSlot s in parent.Slots) if (s.ExtendsTo(x, y)) { Debug.WriteLine("slot " + x + ", " + y + " is obstructed"); return false; }
+            foreach (ItemSlot s in parent.Slots) if (s.ExtendsTo(x, y)) { Debug.WriteLine("slot " + x + ", " + y + " is obstructed by " + s.Item.Properties.InfoText); return false; }
             //then see if the item would obstruct another slot if placed here
             for (int x = 0; x < i.Properties.Width; x++ )
             {
                 for (int y = 0; y < i.Properties.Height; y++)
                 {
-                    if (parent.Slots[x + this.x, y + this.y].Item != null) { Debug.WriteLine("adding to slot " + x + ", " + y + " would obstruct other slot"); return false; }
+                    if (x + this.x >= parent.Width || y + this.y >= parent.Height || parent.Slots[x + this.x, y + this.y].Item != null) { Debug.WriteLine("adding to slot " + x + ", " + y + " would obstruct other slot"); return false; }
                 }
             }
             //if none of the above is true, the item fits
@@ -101,7 +101,7 @@ namespace Shoot__n_Loot.InvenoryStuff
         public bool ExtendsTo(int x, int y)
         {
             if (Item == null) return false;
-            else return x < this.x + Item.Properties.Width && y < this.y + Item.Properties.Height;
+            else return x <= this.x + Item.Properties.Width - 1 && y <= this.y + Item.Properties.Height - 1 && y >= this.y && x >= this.x;
         }
 
         /// <summary>

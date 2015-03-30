@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Shoot__n_Loot.InvenoryStuff;
 using Shoot__n_Loot.Scenes;
 using Shoot__n_Loot.UI;
 using Shoot__n_Loot.WeaponClasses;
@@ -30,6 +31,8 @@ namespace Shoot__n_Loot
 
         public MeleeWeaponProperties MeleeWeapon { get; set; }
         int meleeAttackTimer;
+
+        Item draggedItem;
 
         //HPBar hpBar;
 
@@ -127,6 +130,7 @@ namespace Shoot__n_Loot
             {
                 Inventory.Update(new Point(0, 0));
                 weapon.CustomizingUpdate();
+                InventoryUpdate();
             }
             else
             {
@@ -140,6 +144,71 @@ namespace Shoot__n_Loot
                 inventoryVisible = !inventoryVisible;
                 Inventory.HideAllItemMenus();
             }
+        }
+
+        void InventoryUpdate()
+        {
+            if (Input.newMs.RightButton == ButtonState.Pressed)
+            {
+                if (draggedItem == null)
+                {
+                    //get item if clicked slot
+                    ItemSlot i = ItemSlotAtMousePos();
+                    if (i != null && i.Item != null)
+                    {
+                        draggedItem = new Item(i.Item.Properties, Input.MousePosition);
+                        Inventory.Remove(i.Item, 1);
+                        draggedItem.Position = Input.MousePosition;
+                        Debug.WriteLine("an item was clicked");
+                    }
+                }
+                else
+                {
+                    //track mouse with it
+                    draggedItem.Position -= Input.DeltaPos - Velocity; // should have used a separate spritebatch for ui :((
+                }
+            }
+            else
+            {
+                if (draggedItem != null)
+                {
+                    Debug.WriteLine("an item was released");
+                    //put in slot under mouse or if none exists put back in standard slot
+                    ItemSlot i = ItemSlotAtMousePos();
+                    Debug.WriteLine("i == null = " + (i == null));
+                    if (i != null)
+                    {
+                        Debug.WriteLine("i.Item == null = " + (i.Item == null) + "\nStackSize = " + i.StackSize);
+                        if (i.CanContain(draggedItem)) i.Add(draggedItem);
+                        else
+                        {
+                            Debug.WriteLine("this slot didnt fit the item");
+                            Inventory.Add(draggedItem);
+                        }
+                    }
+                    else
+                    {
+                        draggedItem.Position = Position;
+                        SceneManager.CurrentScene.AddObject(draggedItem);
+                    } draggedItem = null;
+                }
+            }
+        }
+
+        //this should probably be in inventory
+        ItemSlot ItemSlotAtMousePos()
+        {
+            for (int x = 0; x < Inventory.Width; x++)
+            {
+                for (int y = 0; y < Inventory.Height; y++)
+                {
+                    if (Inventory.PositionForItem(x, y).Contains(new Point(Input.newMs.X + (int)Camera.TotalOffset.X, Input.newMs.Y + (int)Camera.TotalOffset.Y)))
+                    {
+                        return Inventory.Slots[x, y];
+                    }
+                }
+            }
+            return null;
         }
 
         void MeleeWeaponUpdate()
@@ -246,6 +315,12 @@ namespace Shoot__n_Loot
                 Inventory.Draw(spriteBatch);
                 //weapon.Draw(spriteBatch);
                 weapon.DrawCustomization(spriteBatch);
+
+                if (draggedItem != null)
+                {
+                    draggedItem.Sprite.LayerDepth = 0;
+                    draggedItem.Draw(spriteBatch);
+                }
             }
 
             spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health + "\nHunger: " + Hunger.ToString("0") + "\nBleeding: " + bleeding, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .8f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);

@@ -34,7 +34,7 @@ namespace Shoot__n_Loot
 
         protected Vector2 Velocity { get; set; }
         
-        protected Sprite Sprite { get; set; }
+        public Sprite Sprite { get; set; }
 
         protected bool CollidedOnX { get; private set; }
         protected bool CollidedOnY { get; private set; }
