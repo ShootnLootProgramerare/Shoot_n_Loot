@@ -48,7 +48,7 @@ namespace Shoot__n_Loot.WeaponClasses
             new ItemProperties(1, 1, 1, TextureManager.rifleHandle, 1, "Rifle Mechanics\nTurn your weapon into an automatic killing machine", new WeaponPart(WeaponPart.PartType.Base, 1, .5f, 0, true, -.5f, 0, new Weapon.AmmoType[] { Weapon.AmmoType.Light, Weapon.AmmoType.Medium, Weapon.AmmoType.Heavy } )),
             
             //============== MELEE WEAPONS ========================
-            new ItemProperties(1, 1, .5f, TextureManager.twoByFour, 1, "2 by 4 wood\nCrushes sculls", new MeleeWeaponProperties(2, 100))
+            new ItemProperties(1, 1, .5f, TextureManager.twoByFour, 1, "2x4\" piece of wood\nCrushes sculls", new MeleeWeaponProperties(2, 100))
         } ;
 
         public static Item GetAmmo(Weapon.AmmoType type, Vector2 position)
