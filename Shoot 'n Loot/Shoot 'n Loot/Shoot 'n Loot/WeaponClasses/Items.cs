@@ -26,20 +26,29 @@ namespace Shoot__n_Loot.WeaponClasses
 
         public static ItemProperties[] properties = new ItemProperties[]
         {
+            //============== AMMO =====================
             ligthAmmo,
             mediumAmmo,
             heavyAmmo,
             nailAmmo,
-            new ItemProperties(1, 1, 3, TextureManager.enemy1, 1, "Pink blob\nDoes nothing"),
-            new ItemProperties(2, 1, .01f, TextureManager.medicineItem, 10, "Heal 1 point", healht1),
-            new ItemProperties(1, 1, .3f, TextureManager.gunMechs, 1, "Auto: true\nAlso newLine", new WeaponPart(WeaponPart.PartType.Base, 1, 1, 30, true, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium } )),
+
+            //============ MISC ITEMS ============================
+            new ItemProperties(1, 1, 3, TextureManager.enemy1, 1, "Pink blob"),
+            new ItemProperties(2, 1, .1f, TextureManager.medicineItem, 10, "Heal 10 points", Health),
+            new ItemProperties(1, 1, .1f, TextureManager.bandage, 10, "Bandage\nReduce bleeding", Bandage),
+            new ItemProperties(1, 1, .2f, TextureManager.beans, 5, "Can of Beans\nRestore 10 hunger points", Hunger),
+            new ItemProperties(1, 1, 1, TextureManager.landmine, 1, "Landmine\nExplodes on zombie contact\nUse to place where you stand", Landmine),
+            new ItemProperties(2, 2, 1, TextureManager.fuelCan, 5, "Fuel Can\nDrop on a vehicle to fuel it"),
+
+            //============= WEAPON PARTS ===============================
+            new ItemProperties(1, 1, .45f, TextureManager.gunMechs, 1, "Automatic thing", new WeaponPart(WeaponPart.PartType.Base, 1, 1, 30, true, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium } )),
             new ItemProperties(1, 1, .4f, TextureManager.gunBarrel, 1, "Shitty gun barrel", new WeaponPart(WeaponPart.PartType.Barrel, 1, 1, 0, false, 10, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Light } )),
             new ItemProperties(1, 1, .35f, TextureManager.house, 1, "Other house like part", new WeaponPart(WeaponPart.PartType.Base, 1, 3, 10, false, 2, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Heavy } )),
-            new ItemProperties(1, 1, .5f, TextureManager.beans, 5, "Can of Beans\nRestore 10 hunger points", Hunger),
-            new ItemProperties(1, 1, .2f, TextureManager.bandage, 10, "Bandage\nReduce bleeding", Bandage),
-            new ItemProperties(1, 1, .5f, TextureManager.twoByFour, 1, "2 by 4 wood\nCrushes sculls", new MeleeWeaponProperties(2, 100)),
-            new ItemProperties(1, 1, 1, TextureManager.landmine, 1, "Landmine\nExplodes on zombie contact\nUse to place where you stand", Landmine),
-            new ItemProperties(1, 1, 1, TextureManager.fuelCan, 5, "Fuel Can\nDrop on a vehicle to fuel it")
+            new ItemProperties(1, 2, .5f, TextureManager.rifleBarrel, 1, "Rifle Barrel\n", new WeaponPart(WeaponPart.PartType.Barrel, -.03f, 0, 0, false, .1f, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium, Weapon.AmmoType.Heavy } )),
+            new ItemProperties(1, 1, 1, TextureManager.rifleHandle, 1, "Rifle Mechanics\nTurn your weapon into an automatic killing machine", new WeaponPart(WeaponPart.PartType.Base, 1, .5f, 0, true, -.5f, 0, new Weapon.AmmoType[] { Weapon.AmmoType.Light, Weapon.AmmoType.Medium, Weapon.AmmoType.Heavy } )),
+            
+            //============== MELEE WEAPONS ========================
+            new ItemProperties(1, 1, .5f, TextureManager.twoByFour, 1, "2 by 4 wood\nCrushes sculls", new MeleeWeaponProperties(2, 100))
         } ;
 
         public static Item GetAmmo(Weapon.AmmoType type, Vector2 position)
@@ -60,9 +69,9 @@ namespace Shoot__n_Loot.WeaponClasses
 
         //======================== DELEGATES FOR ITEM USAGE =======================
 
-        static void healht1(Player p)
+        static void Health(Player p)
         {
-            p.Health += 1;
+            p.Health += 10;
         }
 
         static void Hunger(Player p)

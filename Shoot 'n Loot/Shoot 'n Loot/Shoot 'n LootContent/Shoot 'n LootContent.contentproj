@@ -427,12 +427,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="items\gunBarrel.png">
+    <Compile Include="items\gunParts\gunBarrel.png">
       <Name>gunBarrel</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="items\gunMechs.png">
+    <Compile Include="items\gunParts\gunMechs.png">
       <Name>gunMechs</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -702,6 +702,28 @@
   <ItemGroup>
     <Compile Include="objects\chest.PNG">
       <Name>chest</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="items\gunParts\gun scrap.png">
+      <Name>gun scrap</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="items\gunParts\Rifle barrel.png">
+      <Name>Rifle barrel</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="items\gunParts\Rifle handle.png">
+      <Name>Rifle handle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="items\gunParts\Rifle scrap.png">
+      <Name>Rifle scrap</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
