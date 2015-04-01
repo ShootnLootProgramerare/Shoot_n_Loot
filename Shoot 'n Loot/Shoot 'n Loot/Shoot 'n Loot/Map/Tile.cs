@@ -11,7 +11,7 @@ namespace Shoot__n_Loot
     {
         public static TileProperties[] TilePrefabs = new TileProperties[] 
         { 
-            new TileProperties(0, true), //grass
+            new TileProperties(0, true, false, 2, 0), //grass
             new TileProperties(1, false, false, 2, 30), //water
             new TileProperties(2, false), //floor
             new TileProperties(3, true), //wall
@@ -51,6 +51,11 @@ namespace Shoot__n_Loot
             animCounter = 0;
             this.Position = position;
             this.Type = (TileType)type;
+
+            if (type == 0) //its a grass tile
+            {
+                if (Game1.random.NextDouble() < .1) frame = 1;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

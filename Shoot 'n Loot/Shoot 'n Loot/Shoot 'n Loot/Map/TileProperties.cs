@@ -37,6 +37,7 @@ namespace Shoot__n_Loot
 
         public void Animate(ref byte frame, ref byte counter)
         {
+            if (FramesPerFrame == 0) return;
             counter += 1;
             if(counter >= FramesPerFrame)
             {
