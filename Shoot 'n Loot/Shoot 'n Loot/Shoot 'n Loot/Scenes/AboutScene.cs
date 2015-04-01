@@ -14,11 +14,11 @@ namespace Shoot__n_Loot.Scenes
         Button b;
 
         const string text =
-            "WASD to move\nLeft click to shoot\nE to pick up items\nI to view inventory\nR to reload\n\nEscape to return to main menu";
+            "Controls:\n\nWASD to move\nLeft click to shoot\nQ to pick up items\nE to view inventory\nR to reload\n\nRight click-and-drag to move items between containers\nLeft click on items to bring up options\n\nFind a way of the island before the zombies kill you!\nGood luck.";
 
         public AboutScene()
         {
-            b = new Button("", new Rectangle(-64, 96, 120, 72), TextureManager.resumeButton, TextureManager.resumeButtonL, null);
+            b = new Button("", new Rectangle(-60, 200, 120, 72), TextureManager.resumeButton, TextureManager.resumeButtonL, null);
             base.Initialize();  
         }
 

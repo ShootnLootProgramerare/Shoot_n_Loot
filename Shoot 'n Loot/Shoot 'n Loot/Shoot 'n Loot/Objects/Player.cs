@@ -113,7 +113,8 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            Hunger += .001f;
+            Hunger += .0005f;
+            if (Hunger > 25) Health -= .0001f;
             Health -= bleeding;
             bleeding *= (bleeding > .01f) ? .95f : .9999f;
 
@@ -173,17 +174,13 @@ namespace Shoot__n_Loot
             {
                 if (draggedItem != null)
                 {
-                    Debug.WriteLine("an item was released");
                     //put in slot under mouse or if none exists put back in standard slot
                     ItemSlot i = Inventory.SlotAtMousePos();
-                    Debug.WriteLine("i == null = " + (i == null));
                     if (i != null)
                     {
-                        Debug.WriteLine("i.Item == null = " + (i.Item == null) + "\nStackSize = " + i.StackSize);
                         if (i.CanContain(draggedItem)) i.Add(draggedItem);
                         else
                         {
-                            Debug.WriteLine("this slot didnt fit the item");
                             inventory.Add(draggedItem);
                         }
                     }
@@ -218,7 +215,6 @@ namespace Shoot__n_Loot
                     const float WEAPON_RANGE = 50;
                     foreach (GameObject g in SceneManager.gameScene.objects.Where(e => e.Type == "Enemy").Where(e => e.DistanceSquared(SceneManager.gameScene.player.Center) < WEAPON_RANGE * WEAPON_RANGE))
                     {
-                        Debug.WriteLine("enemy took damage, hp = " + g.Health + ", dead = " + g.Dead);
                         g.Health -= MeleeWeapon.Damage;
                     }
                 }
