@@ -28,7 +28,7 @@ namespace Shoot__n_Loot.UI
 
         private Rectangle BackgroundRectangle(float percent)
         {
-            return new Rectangle(RealSpace.X, RealSpace.Y, (int)(RealSpace.Width * percent), RealSpace.Height);
+            return new Rectangle(RealSpace.X, RealSpace.Y + RealSpace.Height / 3, (int)(RealSpace.Width * percent), RealSpace.Height / 3);
         }
 
         public void Draw(SpriteBatch batch, float percent)

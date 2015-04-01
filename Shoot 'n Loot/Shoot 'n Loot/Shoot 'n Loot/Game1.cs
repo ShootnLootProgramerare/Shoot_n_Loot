@@ -27,6 +27,7 @@ namespace Shoot__n_Loot
         
         public Game1()
         {
+            Window.Title = "Escape from Zombie Island";
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = ScreenSize.X;
             graphics.PreferredBackBufferHeight = ScreenSize.Y;

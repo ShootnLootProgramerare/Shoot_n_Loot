@@ -59,6 +59,7 @@ namespace Shoot__n_Loot
             hpBar,
             hpRed,
             healthBar,
+            hungerBar,
             
             backButton,
             backButtonL,
@@ -160,6 +161,7 @@ namespace Shoot__n_Loot
             hpRed = content.Load<Texture2D>("RedHP");
 
             healthBar = content.Load<Texture2D>("healthBar");
+            hungerBar = content.Load<Texture2D>("bar_hunger");
 
             backButton = content.Load<Texture2D>("Buttons/back_button");
             backButtonL = content.Load<Texture2D>("Buttons/back_button_light");

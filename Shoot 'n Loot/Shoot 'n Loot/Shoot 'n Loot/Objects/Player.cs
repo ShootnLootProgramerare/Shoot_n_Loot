@@ -36,7 +36,7 @@ namespace Shoot__n_Loot
 
         //HPBar hpBar;
 
-        Bar healthBar;
+        Bar healthBar, hungerBar;
 
         int chunkX, chunkY, tileX, tileY;
 
@@ -56,6 +56,7 @@ namespace Shoot__n_Loot
             //hpBar = new HPBar(new Vector2(Camera.TotalOffset.X, Camera.TotalOffset.Y), 100);
 
             healthBar = new Bar(TextureManager.healthBar, TextureManager.fuelCan, new Rectangle(0, 0, 150, 75));
+            hungerBar = new Bar(TextureManager.hungerBar, TextureManager.rifleBarrel, new Rectangle(0, 75, 150, 75));
 
             for (int i = 0; i < 10; i++)
             {
@@ -313,6 +314,7 @@ namespace Shoot__n_Loot
             //hpBar.Draw(spriteBatch, base.Health / base.MaxHealth);
 
             healthBar.Draw(spriteBatch, Health / MaxHealth);
+            hungerBar.Draw(spriteBatch, Hunger / 25f);
 
             base.Draw(spriteBatch);
         }
