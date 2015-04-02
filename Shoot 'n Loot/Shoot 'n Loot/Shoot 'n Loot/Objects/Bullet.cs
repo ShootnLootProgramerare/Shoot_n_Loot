@@ -12,6 +12,8 @@ namespace Shoot__n_Loot
         const float speed = 15;
         const float w = 6, h = 3;
 
+        float traveledDist;
+
         Vector2 velocity;
 
         public BulletProperties Properties { get; private set; }
@@ -27,6 +29,7 @@ namespace Shoot__n_Loot
         public override void Update()
         {
             Position += velocity;
+            traveledDist += velocity.Length();
 
             //List<GameObject> objects = new List<GameObject>();
             //foreach (Enemy e in Game1.enemies) objects.Add((GameObject)e);
@@ -37,7 +40,7 @@ namespace Shoot__n_Loot
                 {
                     if (MapCollider.Intersects(g.BulletCollider))
                     {
-                        g.Health -= Properties.Damage; //this should have a damage property
+                        g.Health -= Properties.Damage * (traveledDist / Properties.MaxRange);
                         this.Dead = true;
                     }
                 }

@@ -33,6 +33,7 @@ namespace Shoot__n_Loot
         int meleeAttackTimer;
 
         Item draggedItem;
+        byte noOfItems;
 
         //HPBar hpBar;
 
@@ -159,7 +160,9 @@ namespace Shoot__n_Loot
                     if (i != null && i.Item != null)
                     {
                         draggedItem = new Item(i.Item.Properties, Input.MousePosition);
-                        i.Remove(1);
+                        if (Input.newKs.IsKeyDown(Keys.LeftShift)) noOfItems = i.StackSize;
+                        else noOfItems = 1;
+                        i.Remove(noOfItems);
                         draggedItem.Position = Input.MousePosition;
                         Debug.WriteLine("an item was clicked");
                     }
@@ -178,16 +181,28 @@ namespace Shoot__n_Loot
                     ItemSlot i = Inventory.SlotAtMousePos();
                     if (i != null)
                     {
-                        if (i.CanContain(draggedItem)) i.Add(draggedItem);
+                        if (i.CanContain(draggedItem))
+                        {
+                            for (byte j = 0; j < noOfItems; j++)
+                            {
+                                i.Add(draggedItem);
+                            }
+                        }
                         else
                         {
-                            inventory.Add(draggedItem);
+                            for (byte j = 0; j < noOfItems; j++)
+                            {
+                                inventory.Add(draggedItem);
+                            }
                         }
                     }
                     else
                     {
                         draggedItem.Position = Position;
-                        SceneManager.CurrentScene.AddObject(draggedItem);
+                        for (byte j = 0; j < noOfItems; j++)
+                        {
+                            SceneManager.CurrentScene.AddObject(draggedItem);
+                        }
                     } 
                     draggedItem = null;
                 }

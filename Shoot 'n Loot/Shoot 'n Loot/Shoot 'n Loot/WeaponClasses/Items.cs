@@ -12,10 +12,10 @@ namespace Shoot__n_Loot.WeaponClasses
     static class Items
     {
         static ItemProperties
-            ligthAmmo = new ItemProperties(1, 1, 1, TextureManager.lightAmmo, 20, "Light Ammo", Weapon.AmmoType.Light),
-            mediumAmmo = new ItemProperties(1, 1, 1, TextureManager.lightAmmo, 20, "Medium Ammo", Weapon.AmmoType.Medium),
-            heavyAmmo = new ItemProperties(1, 1, 1, TextureManager.lightAmmo, 20, "Heavy Ammo", Weapon.AmmoType.Heavy),
-            nailAmmo = new ItemProperties(1, 1, .1f, TextureManager.nails, 20, "Nails\nVery deadly", Weapon.AmmoType.Nails);
+            ligthAmmo = new ItemProperties(1, 1, .02f, TextureManager.lightAmmo, 20, "Light Ammo", Weapon.AmmoType.Light),
+            mediumAmmo = new ItemProperties(1, 1, .05f, TextureManager.lightAmmo, 20, "Medium Ammo", Weapon.AmmoType.Medium),
+            heavyAmmo = new ItemProperties(1, 1, .1f, TextureManager.lightAmmo, 20, "Heavy Ammo", Weapon.AmmoType.Heavy),
+            nailAmmo = new ItemProperties(1, 1, .07f, TextureManager.nails, 20, "Nails\nVery deadly", Weapon.AmmoType.Nails);
 
         public static Item RandomItem(Vector2 position)
         {
