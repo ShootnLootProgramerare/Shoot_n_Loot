@@ -196,6 +196,10 @@ namespace Shoot__n_Loot
                                 {
                                     draggedItem.Position = Position;
                                     SceneManager.CurrentScene.AddObject(draggedItem);
+                                    if (draggedItem.Properties.IsMeleeWeapon && draggedItem.Properties.MeleeWeaponProperties == MeleeWeapon)
+                                    {
+                                        MeleeWeapon = null;
+                                    }
                                 }
                             }
                         }
@@ -206,6 +210,10 @@ namespace Shoot__n_Loot
                         for (byte j = 0; j < noOfItems; j++)
                         {
                             SceneManager.CurrentScene.AddObject(draggedItem);
+                            if (draggedItem.Properties.IsMeleeWeapon && draggedItem.Properties.MeleeWeaponProperties == MeleeWeapon)
+                            {
+                                MeleeWeapon = null;
+                            }
                         }
                     } 
                     draggedItem = null;

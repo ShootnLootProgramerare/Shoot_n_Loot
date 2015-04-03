@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using Shoot__n_Loot.Scenes;
 using Shoot__n_Loot.WeaponClasses;
 using System.Diagnostics;
+using Shoot__n_Loot.Objects;
 
 namespace Shoot__n_Loot
 {
@@ -246,12 +247,7 @@ namespace Shoot__n_Loot
         {
             //create particles, spawn dropped items etc
             //SceneManager.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.Fisherman));
-            Item r = Items.RandomItem(Position);
-            int num = Game1.random.Next(r.Properties.MaxStack);
-            for (int i = 0; i < num; i++)
-            {
-                SceneManager.gameScene.AddObject(r);
-            }
+            SceneManager.CurrentScene.AddObject(new ItemContainer(Position));
             SoundManager.zombieHurt.Play();
         }
 

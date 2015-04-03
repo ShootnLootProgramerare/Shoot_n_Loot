@@ -20,10 +20,10 @@ namespace Shoot__n_Loot
         
         public Bullet(float angle, Vector2 position, BulletProperties properties)
         {
+            this.Properties = properties;
             velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * Properties.Speed;
             Sprite = new Sprite(TextureManager.bullet, position, new Vector2(w, h), angle, null);
             Sprite.LayerDepth = 0;
-            this.Properties = properties;
         }
 
         public override void Update()
