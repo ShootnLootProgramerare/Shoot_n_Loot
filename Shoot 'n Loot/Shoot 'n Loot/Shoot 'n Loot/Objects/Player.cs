@@ -164,7 +164,6 @@ namespace Shoot__n_Loot
                         else noOfItems = 1;
                         i.Remove(noOfItems);
                         draggedItem.Position = Input.MousePosition;
-                        Debug.WriteLine("an item was clicked");
                     }
                 }
                 else
@@ -192,7 +191,12 @@ namespace Shoot__n_Loot
                         {
                             for (byte j = 0; j < noOfItems; j++)
                             {
-                                inventory.Add(draggedItem);
+                                if (inventory.Fits(draggedItem)) inventory.Add(draggedItem);
+                                else 
+                                {
+                                    draggedItem.Position = Position;
+                                    SceneManager.CurrentScene.AddObject(draggedItem);
+                                }
                             }
                         }
                     }

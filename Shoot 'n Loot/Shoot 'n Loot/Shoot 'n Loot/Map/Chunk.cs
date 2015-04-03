@@ -42,7 +42,6 @@ namespace Shoot__n_Loot
             {
                 for (int y = 0; y < size; y++)
                 {
-                    //if(!tileTypes.Contains(mapData[x, y])) throw new Exception("Color not valid, pixel " + x + ", " + y);
                     byte type = 0;
                     for (byte i = 0; i < Tile.tileTypes.Length; i++)
 			        {
@@ -100,7 +99,7 @@ namespace Shoot__n_Loot
         /// <param name="list">where the zombie will be added.</param>
         public void SpawnZombie(List<GameObject> list)
         {
-            const float SPAWNRATE = .01f;
+            const float SPAWNRATE = .001f;
 
             if (Game1.random.NextDouble() * 255 * 4 < (spawnData.A + spawnData.R + spawnData.G + spawnData.B) * SPAWNRATE && SceneManager.gameScene.NoOfZombies() < Map.maxZombies && spawnPositions.Count > 0)
             {
@@ -109,7 +108,6 @@ namespace Shoot__n_Loot
                 if (SceneManager.gameScene.player.DistanceSquared(position) < GameScene.MAXSPAWNDIST * GameScene.MAXSPAWNDIST) return;
 
                 int r = Game1.random.Next(spawnData.R + spawnData.G + spawnData.B);
-                Debug.WriteLine("seed = " + r);
 
                 /*
                  * ALPHA = BABY

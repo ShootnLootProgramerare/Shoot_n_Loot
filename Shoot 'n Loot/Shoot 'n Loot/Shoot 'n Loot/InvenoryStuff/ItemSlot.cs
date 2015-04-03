@@ -72,6 +72,7 @@ namespace Shoot__n_Loot.InvenoryStuff
         public bool CanContain(Item i)
         {
             //first check if this slot already contains that item
+            if (parent.Weight + i.Properties.Weight > parent.MaxWeight) return false;
             if (Item != null)
             {
                 if (Item.Properties != i.Properties) { Debug.WriteLine("slot " + x + ", " + y + " contains a different item"); return false; }

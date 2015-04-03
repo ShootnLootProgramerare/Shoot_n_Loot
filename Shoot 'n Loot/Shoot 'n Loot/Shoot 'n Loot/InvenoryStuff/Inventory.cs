@@ -19,7 +19,7 @@ namespace Shoot__n_Loot
         public byte Width { get; private set; }
         public byte Height { get; private set; }
         
-        float maxWeight;
+        public float MaxWeight { get; private set; }
 
         public float Weight
         {
@@ -45,7 +45,7 @@ namespace Shoot__n_Loot
             this.drawOffset = drawOffset;
             this.Width = width;
             this.Height = height;
-            this.maxWeight = maxWeight;
+            this.MaxWeight = maxWeight;
             Slots = new ItemSlot[width, height];
             for (int x = 0; x < width; x++)
             {
@@ -58,7 +58,7 @@ namespace Shoot__n_Loot
 
         public bool Fits(Item item)
         {
-            return Weight + item.Properties.Weight <= maxWeight && SlotThatFits(item) != new Point(-1, -1);
+            return Weight + item.Properties.Weight <= MaxWeight && SlotThatFits(item) != new Point(-1, -1);
         }
 
         public void Add(Item item)
@@ -71,8 +71,6 @@ namespace Shoot__n_Loot
             }
 
             Slots[p.X, p.Y].Add(item);
-
-            
         }
 
         public void Remove(Item item, byte num)
@@ -150,7 +148,7 @@ namespace Shoot__n_Loot
             //Point offset = new Point(drawOffset.X - (Width * DRAWNSIZE) / 2, drawOffset.Y - (Height * DRAWNSIZE) / 2);
             //List<Item> drawnItems = new List<Item>(); //keep track of duplicates and dont draw them
             foreach (ItemSlot slot in Slots) slot.Draw(spriteBatch);
-            string s = Weight + "/" + maxWeight + " kg";
+            string s = Weight + "/" + MaxWeight + " kg";
 
             spriteBatch.DrawString(TextureManager.font, s, Camera.Center + new Vector2(drawOffset.X, drawOffset.Y) + new Vector2(0, 100) - TextureManager.font.MeasureString(s) / 2, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.0000004f);
         }
