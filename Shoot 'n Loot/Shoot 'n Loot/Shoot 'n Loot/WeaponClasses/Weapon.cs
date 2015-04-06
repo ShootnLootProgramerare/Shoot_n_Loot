@@ -316,7 +316,8 @@ namespace Shoot__n_Loot
             spriteBatch.Draw(TextureManager.inventorySlot, new Rectangle((int)Camera.Position.X - HUD_W / 2, (int)Camera.TotalOffset.Y + HUD_Y, HUD_W, HUD_H), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000005f);
             foreach (CustomizationSlot s in partSlots) s.Draw(spriteBatch);
             if (useWeapon != null) useWeapon.Draw(spriteBatch);
-            spriteBatch.DrawString(TextureManager.font, "Using Ammo: " + currentAmmoType.ToString(), Camera.Center, Color.Black);
+            spriteBatch.DrawString(TextureManager.font, "Using Ammo: " + currentAmmoType.ToString(), Camera.Center - new Vector2(100, 200), Color.Black);
+            if (!ContainsType(WeaponPart.PartType.Base)) spriteBatch.DrawString(TextureManager.font, "You need a base for your weapon!", Camera.Center - new Vector2(175, 220), Color.Red);
         }
 
         void StopUsingMelee()
