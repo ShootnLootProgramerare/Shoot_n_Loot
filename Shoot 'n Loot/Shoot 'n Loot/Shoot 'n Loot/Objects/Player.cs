@@ -56,8 +56,8 @@ namespace Shoot__n_Loot
             CanDie = true;
             //hpBar = new HPBar(new Vector2(Camera.TotalOffset.X, Camera.TotalOffset.Y), 100);
 
-            healthBar = new Bar(TextureManager.healthBar, TextureManager.fuelCan, new Rectangle(0, 0, 150, 75));
-            hungerBar = new Bar(TextureManager.hungerBar, TextureManager.rifleBarrel, new Rectangle(0, 75, 150, 75));
+            healthBar = new Bar(TextureManager.healthBar, TextureManager.pixel, new Rectangle(0, 0, 150, 75), 23, Color.LimeGreen, Color.Red);
+            hungerBar = new Bar(TextureManager.hungerBar, TextureManager.pixel, new Rectangle(0, 75, 150, 75), 28, Color.Red, Color.LimeGreen);
 
             for (int i = 0; i < 10; i++)
             {

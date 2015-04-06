@@ -61,6 +61,8 @@ namespace Shoot__n_Loot
             healthBar,
             hungerBar,
             
+            pixel,
+            
             backButton,
             backButtonL,
             exitButton,
@@ -126,6 +128,8 @@ namespace Shoot__n_Loot
 
             fatLadyWalk = LoadWalkSprites("enemies/fatLady/walk", content);
             fatLadyAttack = LoadWalkSprites("enemies/fatLady/attack", content);
+
+            pixel = content.Load<Texture2D>("pixel");
 
             babyWalk = LoadWalkSprites("enemies/baby/walk", content);
             babyAttack = LoadWalkSprites("enemies/baby/attack", content);
