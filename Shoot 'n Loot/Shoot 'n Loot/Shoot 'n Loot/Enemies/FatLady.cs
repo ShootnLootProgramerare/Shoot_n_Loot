@@ -9,11 +9,13 @@ namespace Shoot__n_Loot.Enemies
 {
     class FatLady : Enemy
     {
+        List<Baby> baes;
         public FatLady(Vector2 position) 
             : base(position, TextureManager.fatLadyWalk, TextureManager.fatLadyAttack)
         {
             SetGameplayVars(3, 1, 1, 100);
             SetAnimVars(new Point(100, 100), 4, .1f, 4, .1f);
+            baes = new List<Baby>();
         }
 
         public override void Update()
@@ -32,6 +34,16 @@ namespace Shoot__n_Loot.Enemies
                 Velocity = Vector2.Zero;
             }
             base.Update();
+        }
+
+        protected override void OnDestroy()
+        {
+            SceneManager.CurrentScene.AddObject(new Baby(Position));
+            SceneManager.CurrentScene.AddObject(new Baby(Position));
+            SceneManager.CurrentScene.AddObject(new Baby(Position));
+            SceneManager.CurrentScene.AddObject(new Baby(Position));
+            SceneManager.CurrentScene.AddObject(new Baby(Position));
+            base.OnDestroy();
         }
     }
 }
