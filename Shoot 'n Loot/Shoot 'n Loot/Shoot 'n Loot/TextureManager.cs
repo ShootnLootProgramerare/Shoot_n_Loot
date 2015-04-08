@@ -19,6 +19,9 @@ namespace Shoot__n_Loot
 
             explosion,
 
+            oakTree,
+            firTree,
+
             map,
             spawnData,
             tiles,
@@ -107,6 +110,9 @@ namespace Shoot__n_Loot
             playerWalkWeapon[1] = content.Load<Texture2D>("player/walk/Weapon/down");
             playerWalkWeapon[2] = content.Load<Texture2D>("player/walk/Weapon/left");
             playerWalkWeapon[3] = content.Load<Texture2D>("player/walk/Weapon/right");*/
+
+            oakTree = content.Load<Texture2D>("objects/oak");
+            firTree = content.Load<Texture2D>("objects/fir");
             
             font = content.Load<SpriteFont>("font");
             tiles = content.Load<Texture2D>("tiles");
