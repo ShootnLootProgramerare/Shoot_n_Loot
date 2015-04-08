@@ -362,13 +362,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="map\propData.png">
-      <Name>propData</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="items\bandage.png">
       <Name>bandage</Name>
       <Importer>TextureImporter</Importer>
@@ -750,6 +743,13 @@
     </Compile>
     <Compile Include="objects\oak.png">
       <Name>oak</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="map\propData.png">
+      <Name>propData</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

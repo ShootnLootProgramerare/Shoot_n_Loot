@@ -74,6 +74,14 @@ namespace Shoot__n_Loot
                     {
                         SceneManager.gameScene.objects.Add(new ItemContainer(TilePosition(x, y)));
                     }
+                    else if (prop == new Color(96, 255, 0))
+                    {
+                        SceneManager.gameScene.objects.Add(new Tree(TilePosition(x, y), Tree.TreeType.Oak));
+                    }
+                    else if (prop == new Color(77, 53, 3))
+                    {
+                        SceneManager.gameScene.objects.Add(new Tree(TilePosition(x, y), Tree.TreeType.Fir));
+                    }
                 }
             }
         }
