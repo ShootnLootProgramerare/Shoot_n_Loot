@@ -32,6 +32,9 @@ namespace Shoot__n_Loot
         public MeleeWeaponProperties MeleeWeapon { get; set; }
         int meleeAttackTimer;
 
+        Texture2D[] MeleeAttackTextures { get { return (MeleeWeapon.hitSprites != null ? MeleeWeapon.hitSprites: TextureManager.playerAttack); } }
+        Texture2D[] MeleeWalkTextures { get { return (MeleeWeapon.walkSprites != null ? MeleeWeapon.walkSprites : TextureManager.playerWalkMelee); } }
+
         Item draggedItem;
         byte noOfItems;
 
@@ -229,7 +232,7 @@ namespace Shoot__n_Loot
             }
             else if (Input.newMs.LeftButton == ButtonState.Pressed && meleeAttackTimer == 0)
             {
-                Sprite.SetTexture(TextureManager.playerAttack[(int)VelDirection], 4, new Point(100, 100));
+                Sprite.SetTexture(MeleeAttackTextures[(int)VelDirection], 4, new Point(100, 100));
                 Sprite.AnimationSpeed = .2f;
                 meleeAttackTimer = -1;
             }
@@ -297,7 +300,7 @@ namespace Shoot__n_Loot
 
         void SetRegularSprite()
         {
-            if (UsingMelee) Sprite.SetTexture(TextureManager.playerWalkMelee[(int)VelDirection], 4, new Point(100, 100));
+            if (UsingMelee) Sprite.SetTexture(MeleeWalkTextures[(int)VelDirection], 4, new Point(100, 100));
             else if (weapon.Parts == 0) Sprite.SetTexture(TextureManager.playerWalkNoWeapon[(int)VelDirection], 4, new Point(100, 100));
             else Sprite.SetTexture(TextureManager.playerWalkGun[(int)VelDirection], 4, new Point(100, 100));
         }
