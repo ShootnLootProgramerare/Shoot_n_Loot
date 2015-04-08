@@ -36,6 +36,7 @@ namespace Shoot__n_Loot
             lightHouse,
             inventorySlot,
             landmine,
+            mineThumb,
 
             medicineItem,
             beans,
@@ -148,6 +149,7 @@ namespace Shoot__n_Loot
             lightHouse = content.Load<Texture2D>("houses/lightHouse");
             inventorySlot = content.Load<Texture2D>("inventorySlot");
             landmine = content.Load<Texture2D>("items/landmine");
+            mineThumb = content.Load<Texture2D>("items/mineThumb");
             chest = content.Load<Texture2D>("objects/chest");
 
             medicineItem = content.Load<Texture2D>("items/pill");

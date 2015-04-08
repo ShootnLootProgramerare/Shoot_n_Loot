@@ -37,7 +37,7 @@ namespace Shoot__n_Loot.WeaponClasses
             new ItemProperties(2, 1, .1f, TextureManager.medicineItem, 10, "Heal 10 points", Health),
             new ItemProperties(1, 1, .1f, TextureManager.bandage, 10, "Bandage\nReduce bleeding", Bandage),
             new ItemProperties(1, 1, .2f, TextureManager.beans, 5, "Can of Beans\nRestore 10 hunger points", Hunger),
-            new ItemProperties(1, 1, 1, TextureManager.landmine, 1, "Landmine\nExplodes on zombie contact\nUse to place where you stand", Landmine),
+            new ItemProperties(1, 1, 1, TextureManager.mineThumb, 1, "Landmine\nExplodes on zombie contact\nUse to place where you stand", Landmine),
             new ItemProperties(2, 2, 1, TextureManager.fuelCan, 5, "Fuel Can\nDrop on a vehicle to fuel it"),
 
             //============= WEAPON PARTS ===============================
