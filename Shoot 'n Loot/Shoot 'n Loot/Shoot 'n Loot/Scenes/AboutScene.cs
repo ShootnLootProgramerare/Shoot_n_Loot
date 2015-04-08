@@ -32,8 +32,10 @@ namespace Shoot__n_Loot.Scenes
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(TextureManager.background, new Vector2(-TextureManager.background.Width / 2, -TextureManager.background.Height / 2), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, .01f);
             b.Draw(spriteBatch);
-            spriteBatch.DrawString(TextureManager.font, text, -TextureManager.font.MeasureString(text) / 2, Microsoft.Xna.Framework.Color.Black);
+            spriteBatch.Draw(TextureManager.pixel, new Rectangle(-350, -170, 700, 350), null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, .001f);
+            spriteBatch.DrawString(TextureManager.font, text, -TextureManager.font.MeasureString(text) / 2, Microsoft.Xna.Framework.Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, .0001f);
             base.Draw(spriteBatch);
         }
     }

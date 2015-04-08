@@ -47,12 +47,11 @@ namespace Shoot__n_Loot
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            string s = "Press Enter for game or Escape for info";
+            spriteBatch.Draw(TextureManager.background, new Vector2(-TextureManager.background.Width / 2, -TextureManager.background.Height / 2), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, .01f);
             for (int i = 0; i < b.Count; i++)
             {
                 b[i].Draw(spriteBatch);
             }
-            spriteBatch.DrawString(TextureManager.font, s, Vector2.Zero - TextureManager.font.MeasureString(s) / 2, Color.Black);
             base.Draw(spriteBatch);
         }
     }
