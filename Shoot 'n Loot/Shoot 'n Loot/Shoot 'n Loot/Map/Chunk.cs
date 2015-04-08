@@ -117,7 +117,7 @@ namespace Shoot__n_Loot
 
                 int r = Game1.random.Next(spawnData.R + spawnData.G + spawnData.B);
 
-                /*
+                /* each color corresponds to a zombie type
                  * ALPHA = BABY
                  * BLUE = FISHERMAN
                  * GREEN = ONELEG
