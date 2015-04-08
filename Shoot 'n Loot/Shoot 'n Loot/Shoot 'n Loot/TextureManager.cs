@@ -116,8 +116,17 @@ namespace Shoot__n_Loot
 
             oakTree = content.Load<Texture2D>("objects/oak");
             firTree = content.Load<Texture2D>("objects/fir");
+
+            try
+            {
+                font = content.Load<SpriteFont>("font");
+            }
+            catch
+            {
+                font = content.Load<SpriteFont>("font_default");
+            }
             
-            font = content.Load<SpriteFont>("font");
+
             tiles = content.Load<Texture2D>("tiles");
             map = content.Load<Texture2D>("map/map_wotrees");
             spawnData = content.Load<Texture2D>("map/spawnData");
