@@ -44,11 +44,19 @@ namespace Shoot__n_Loot.WeaponClasses
                     if (buttons.Count == 0)
                     {
                         buttons.Add(new Button("Remove", WorldPosition, RemoveItem));
+                        buttons[0].Area = new Rectangle(WorldPosition.X, WorldPosition.Y + 100, WorldPosition.Width, WorldPosition.Height);
                     }
                     else
                     {
                         buttons.Clear();
                     }
+
+                }
+                else if (buttons.Count == 1)
+                {
+                    buttons[0].Area = new Rectangle((int)WorldPosition.X, (int)WorldPosition.Y + 100, buttons[0].Area.Width, buttons[0].Area.Height);
+                    if (Input.LeftClickWasJustPressed())
+                        buttons.Clear();
                 }
             }
             else

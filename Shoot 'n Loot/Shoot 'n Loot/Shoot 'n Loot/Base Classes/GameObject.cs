@@ -26,7 +26,7 @@ namespace Shoot__n_Loot
         public virtual Rectangle BulletCollider { get { return Sprite.Area; } }
         
         public bool Dead { get; set; }
-        public float Health { get { return health; } set { health = value; if (health <= 0 && CanDie) { Dead = true; OnDestroy(); } } }
+        public float Health { get { return health; } set { OnTakeDamage(health - value); health = value; if (health <= 0 && CanDie) { Dead = true; OnDestroy(); } } }
         public float MaxHealth { get { return maxHealth; } set { maxHealth = health = value; } }
         public bool CanDie { get; set; }
         
@@ -155,7 +155,9 @@ namespace Shoot__n_Loot
                 if (t.Hitbox.Intersects(MapCollider)) return true;
             }
             return false;
-        } 
+        }
+
+        protected virtual void OnTakeDamage(float amount) { }
 
         /// <summary>
         /// moves the object on the map using this.Velocity, colliding with tiles and setting the velocity to 0 in the necessary axees if it hits something. Uses this.hitbox, which can be overridden.

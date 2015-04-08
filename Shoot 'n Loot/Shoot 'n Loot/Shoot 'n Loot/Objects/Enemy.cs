@@ -36,6 +36,8 @@ namespace Shoot__n_Loot
 
         protected Texture2D[] walkingAnims, attackAnims;
 
+        int hitTimer;
+
         Direction direction;
 
         public Enemy(Vector2 position, Texture2D[] walkingAnims, Texture2D[] attackAnims)
@@ -72,6 +74,11 @@ namespace Shoot__n_Loot
             this.attackFrames = attackFrames;
             this.attackAnimSpeed = attackAnimSpeed;
             Sprite.Origin = new Vector2(frameSize.X / 2, frameSize.Y / 2);
+        }
+
+        protected override void OnTakeDamage(float amount)
+        {
+            hitTimer = 20;
         }
 
         /*public Enemy(Vector2 position, EnemyType enemytype)
@@ -253,6 +260,9 @@ namespace Shoot__n_Loot
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            hitTimer--;
+            if (hitTimer > 0) Sprite.Color = Color.Pink;
+            else Sprite.Color = Color.White;
             base.Draw(spriteBatch);
         }
     }
