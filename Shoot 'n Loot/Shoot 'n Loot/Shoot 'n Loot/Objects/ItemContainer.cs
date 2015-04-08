@@ -14,7 +14,7 @@ namespace Shoot__n_Loot.Objects
         const int randomItems = 4;
         public ItemContainer(Vector2 position)
         {
-            Sprite = new Sprite(TextureManager.chest, position, new Vector2(100));
+            Sprite = new Sprite(TextureManager.chest, position, new Vector2(100), 2, new Point(50, 50), 0);
             inventory = new Inventory(this, new Point(-200, 0), 3, 3, 10);
             for (int i = 0; i < randomItems; i++)
                 inventory.Add(Items.RandomItem(Position));
@@ -26,8 +26,13 @@ namespace Shoot__n_Loot.Objects
             if (DistanceSquared(SceneManager.gameScene.player.Center) < 2500)
             {
                 inventoryVisible = true;
+                Sprite.Frame = 1;
             }
-            else inventoryVisible = false;
+            else
+            {
+                inventoryVisible = false;
+                Sprite.Frame = 0;
+            }
 
             base.Update();
         }
