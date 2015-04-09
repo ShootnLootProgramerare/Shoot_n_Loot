@@ -80,7 +80,8 @@ namespace Shoot__n_Loot
             resumeButton,
             resumeButtonL,
             
-            background;
+            menuBackground,
+            gameOverBackground;
 
         public static Texture2D[]
             fishermanWalk,
@@ -199,7 +200,8 @@ namespace Shoot__n_Loot
             resumeButton = content.Load<Texture2D>("Buttons/resume_button");
             resumeButtonL = content.Load<Texture2D>("Buttons/resume_button_light");
 
-            background = content.Load<Texture2D>("menu background");
+            menuBackground = content.Load<Texture2D>("backgrounds/menu background");
+            gameOverBackground = content.Load<Texture2D>("backgrounds/game over");
         }
 
         private static Texture2D[] LoadWalkSprites(string path, ContentManager content)
