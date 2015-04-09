@@ -508,13 +508,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="items\fuelCan.PNG">
-      <Name>fuelCan</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sounds\playerWalkGrass.wav">
       <Name>playerWalkGrass</Name>
       <Importer>WavImporter</Importer>
@@ -778,6 +771,13 @@
   <ItemGroup>
     <Compile Include="Backgrounds\game over.png">
       <Name>game over</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="items\fuelCan.png">
+      <Name>fuelCan</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
