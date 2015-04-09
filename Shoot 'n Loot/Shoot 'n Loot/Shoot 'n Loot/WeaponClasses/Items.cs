@@ -19,9 +19,16 @@ namespace Shoot__n_Loot.WeaponClasses
 
         public static Item RandomItem(Vector2 position)
         {
-            Item i = new Item(properties[Game1.random.Next(properties.Length)], position);
-            i.Position = position;
-            return i;
+            while(true) 
+            {
+                int item = Game1.random.Next(properties.Length);
+                if (Game1.random.NextDouble() < rarity[item]) 
+                {
+                    Item i = new Item(properties[item], position);
+                    i.Position = position;
+                    return i;
+                }
+            }
         }
 
         public static ItemProperties[] properties = new ItemProperties[]
@@ -33,7 +40,7 @@ namespace Shoot__n_Loot.WeaponClasses
             nailAmmo,
 
             //============ MISC ITEMS ============================
-            new ItemProperties(1, 1, 3, TextureManager.enemy1, 1, "Pink blob"),
+            new ItemProperties(1, 1, 3, TextureManager.enemy1, 1, "Pink blob\nVery rare,\nVery useless"),
             new ItemProperties(2, 1, .1f, TextureManager.medicineItem, 10, "Heal 10 points", Health),
             new ItemProperties(1, 1, .1f, TextureManager.bandage, 10, "Bandage\nReduce bleeding", Bandage),
             new ItemProperties(1, 1, .2f, TextureManager.beans, 5, "Can of Beans\nRestore 10 hunger points", Hunger),
@@ -51,6 +58,30 @@ namespace Shoot__n_Loot.WeaponClasses
             //============== MELEE WEAPONS ========================
             new ItemProperties(1, 1, .5f, TextureManager.twoByFour, 1, "2x4\" piece of wood\nCrushes sculls", new MeleeWeaponProperties(2, 15))
         } ;
+
+        public static float[] rarity = new float[] 
+        {
+            1,
+            1,
+            1,
+            1,
+
+            .05f,
+            .8f,
+            .7f,
+            .8f,
+            .3f,
+            .1f,
+
+            .5f,
+            .5f,
+            .5f,
+            .3f,
+            .3f,
+            .3f,
+
+            .9f
+        };
 
         public static Item GetAmmo(Weapon.AmmoType type, Vector2 position)
         {
