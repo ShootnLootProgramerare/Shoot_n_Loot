@@ -80,7 +80,16 @@ namespace Shoot__n_Loot.InvenoryStuff
                 else return false;
             }
             //otherwise see if no other item is obstructing the slot
-            foreach (ItemSlot s in parent.Slots) if (s.ExtendsTo(x, y)) { Debug.WriteLine("slot " + x + ", " + y + " is obstructed by " + s.Item.Properties.InfoText); return false; }
+            foreach (ItemSlot s in parent.Slots)
+            {
+                for (int x = this.x; x < i.Size.X + this.x; x++)
+                {
+                    for (int y = this.y; y < i.Size.Y + this.y; y++)
+                    {
+                        if (s.ExtendsTo(x, y)) { Debug.WriteLine("slot " + x + ", " + y + " is obstructed by " + s.Item.Properties.InfoText); return false; }
+                    }
+                }
+            }
             //then see if the item would obstruct another slot if placed here
             for (int x = 0; x < i.Properties.Width; x++ )
             {
