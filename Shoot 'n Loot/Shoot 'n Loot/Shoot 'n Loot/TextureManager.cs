@@ -101,8 +101,15 @@ namespace Shoot__n_Loot
 
             playerWalkNoWeapon,
             playerWalkGun,
-            playerWalkMelee,
-            playerAttack;
+
+            playerWalkMelee, //machete, standard
+            playerAttack, //machete, standard
+
+            playerWalkWood,
+            playerAttackWood,
+            
+            playerWalkSledgeHammer,
+            playerAttackSledgeHammer;
 
         public static SpriteFont font;
 
@@ -112,10 +119,9 @@ namespace Shoot__n_Loot
             playerWalkGun = LoadWalkSprites("player/walk/gun", content);
             playerWalkMelee = LoadWalkSprites("player/walk/melee", content);
             playerAttack = LoadWalkSprites("player/attack/melee", content);
-            /*playerWalkWeapon[0] = content.Load<Texture2D>("player/walk/Weapon/up");
-            playerWalkWeapon[1] = content.Load<Texture2D>("player/walk/Weapon/down");
-            playerWalkWeapon[2] = content.Load<Texture2D>("player/walk/Weapon/left");
-            playerWalkWeapon[3] = content.Load<Texture2D>("player/walk/Weapon/right");*/
+
+            playerWalkSledgeHammer = LoadWalkSprites("player/walk/sledgehammer", content);
+            playerAttackSledgeHammer = LoadWalkSprites("player/attack/sledgehammer", content);
 
             oakTree = content.Load<Texture2D>("objects/oak");
             firTree = content.Load<Texture2D>("objects/fir");
@@ -211,7 +217,8 @@ namespace Shoot__n_Loot
         private static Texture2D[] LoadWalkSprites(string path, ContentManager content)
         {
             Texture2D[] t = new Texture2D[4];
-            t[0] = content.Load<Texture2D>(path + "/up");
+            try { t[0] = content.Load<Texture2D>(path + "/up"); }
+            catch { t[0] = content.Load<Texture2D>("player/walk/gun/up"); }
             t[1] = content.Load<Texture2D>(path + "/down");
             t[2] = content.Load<Texture2D>(path + "/left");
             t[3] = content.Load<Texture2D>(path + "/right");

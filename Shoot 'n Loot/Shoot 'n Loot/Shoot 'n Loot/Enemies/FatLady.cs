@@ -39,10 +39,6 @@ namespace Shoot__n_Loot.Enemies
         protected override void OnDestroy()
         {
             SceneManager.CurrentScene.AddObject(new Baby(Position));
-            SceneManager.CurrentScene.AddObject(new Baby(Position));
-            SceneManager.CurrentScene.AddObject(new Baby(Position));
-            SceneManager.CurrentScene.AddObject(new Baby(Position));
-            SceneManager.CurrentScene.AddObject(new Baby(Position));
             base.OnDestroy();
         }
     }
