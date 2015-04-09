@@ -83,24 +83,29 @@ namespace Shoot__n_Loot
 
             playSound++;
 
-            try
+            if (playWaterSound > 20)
             {
-                if (Map.chunks[chunkX, chunkY].Tiles[tileX + 1, tileY].Properties.TextureIndex == 1 ||
-                    Map.chunks[chunkX, chunkY].Tiles[tileX - 1, tileY].Properties.TextureIndex == 1 ||
-                    Map.chunks[chunkX, chunkY].Tiles[tileX, tileY + 1].Properties.TextureIndex == 1 ||
-                    Map.chunks[chunkX, chunkY].Tiles[tileX, tileY - 1].Properties.TextureIndex == 1 ||
-                    Map.chunks[chunkX, chunkY].Tiles[tileX + 1, tileY + 1].Properties.TextureIndex == 1 ||
+                try
+                {
+                    bool doIt = false;
+                    if (tileX < Chunk.size) if (Map.chunks[chunkX, chunkY].Tiles[tileX + 1, tileY].Properties.TextureIndex == 1) doIt = true;
+                    if (tileX > 0) if (Map.chunks[chunkX, chunkY].Tiles[tileX - 1, tileY].Properties.TextureIndex == 1) doIt = true;
+                    if (tileY < Chunk.size) if (Map.chunks[chunkX, chunkY].Tiles[tileX, tileY + 1].Properties.TextureIndex == 1) doIt = true;
+                    if (tileY >= 0) if (Map.chunks[chunkX, chunkY].Tiles[tileX, tileY - 1].Properties.TextureIndex == 1) doIt = true;
+                    /*Map.chunks[chunkX, chunkY].Tiles[tileX + 1, tileY + 1].Properties.TextureIndex == 1 ||
                     Map.chunks[chunkX, chunkY].Tiles[tileX - 1, tileY + 1].Properties.TextureIndex == 1 ||
                     Map.chunks[chunkX, chunkY].Tiles[tileX + 1, tileY - 1].Properties.TextureIndex == 1 ||
                     Map.chunks[chunkX, chunkY].Tiles[tileX - 1, tileY - 1].Properties.TextureIndex == 1)
-                {
-                    playWaterSound++;
-                    if (playWaterSound >= 16) { SoundManager.water.Play(0.4f, 0f, 0f); playWaterSound = 0; }
+                */
+                    if (doIt)
+                    {
+                        SoundManager.water.Play(0.4f, 0f, 0f); playWaterSound = 0;
+                    }
                 }
-            }
-            catch
-            {
+                catch
+                {
 
+                }
             }
 
             if (playSound >= 32 && (Input.newKs.IsKeyDown(Keys.A) || Input.newKs.IsKeyDown(Keys.D) || Input.newKs.IsKeyDown(Keys.W) || Input.newKs.IsKeyDown(Keys.S)))
