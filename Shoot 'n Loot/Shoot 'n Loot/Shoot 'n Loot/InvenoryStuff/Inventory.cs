@@ -66,8 +66,11 @@ namespace Shoot__n_Loot
             Point p = SlotThatFits(item);
             if (p == new Point(-1, -1))
             {
-                if (SceneManager.CurrentScene != null) 
+                if (SceneManager.CurrentScene != null)
+                {
+                    item.Position = parent.Position;
                     SceneManager.CurrentScene.AddObject(item);
+                }
                 return;
             }
 

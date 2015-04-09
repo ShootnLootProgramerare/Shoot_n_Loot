@@ -71,20 +71,25 @@ namespace Shoot__n_Loot.InvenoryStuff
 
         public bool CanContain(Item i)
         {
+            Debug.Write("checking if itemSlot " + this.x + ", " + this.y + " can contain " + i.Properties.InfoText);
             //first check if this slot already contains that item
-            if (parent.Weight + i.Properties.Weight > parent.MaxWeight) return false;
+            if (parent.Weight + i.Properties.Weight > parent.MaxWeight)
+            {
+                Debug.WriteLine("this inventory is too heavy");
+                return false;
+            }
             if (Item != null)
             {
-                if (Item.Properties != i.Properties) { Debug.WriteLine("slot " + x + ", " + y + " contains a different item"); return false; }
+                if (Item.Properties != i.Properties) { Debug.WriteLine("slot " + x + ", " + y + " contains a " + Item.Properties.InfoText + ". Stacksize = " + StackSize); return false; }
                 else if (StackSize < Item.Properties.MaxStack) return true; //if its the same and the stack is not maxed, the item fits
                 else return false;
             }
             //otherwise see if no other item is obstructing the slot
             foreach (ItemSlot s in parent.Slots)
             {
-                for (int x = this.x; x < i.Size.X + this.x; x++)
+                for (int x = this.x; x < i.Properties.Width + this.x; x++)
                 {
-                    for (int y = this.y; y < i.Size.Y + this.y; y++)
+                    for (int y = this.y; y < i.Properties.Height + this.y; y++)
                     {
                         if (s.ExtendsTo(x, y)) { Debug.WriteLine("slot " + x + ", " + y + " is obstructed by " + s.Item.Properties.InfoText); return false; }
                     }
@@ -111,7 +116,16 @@ namespace Shoot__n_Loot.InvenoryStuff
         public bool ExtendsTo(int x, int y)
         {
             if (Item == null) return false;
-            else return x <= this.x + Item.Properties.Width - 1 && y <= this.y + Item.Properties.Height - 1 && y >= this.y && x >= this.x;
+            bool b =
+                x <= this.x + Item.Properties.Width - 1 
+                    &&
+                y <= this.y + Item.Properties.Height - 1 
+                    && 
+                y >= this.y 
+                    && 
+                x >= this.x;
+            Debug.WriteLine("slot at " + this.x + ", " + this.y + (b ? " does not" : "" ) + " obstructs the slot at " + x + ", " + y);
+            return b;
         }
 
         /// <summary>

@@ -107,7 +107,7 @@ namespace Shoot__n_Loot
         /// <param name="list">where the zombie will be added.</param>
         public void SpawnZombie(List<GameObject> list)
         {
-            const float SPAWNRATE = .001f;
+            const float SPAWNRATE = .005f;
 
             if (Game1.random.NextDouble() * 255 * 4 < (spawnData.A + spawnData.R + spawnData.G + spawnData.B) * SPAWNRATE && SceneManager.gameScene.NoOfZombies() < Map.maxZombies && spawnPositions.Count > 0)
             {
