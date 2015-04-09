@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Shoot__n_Loot.Scenes;
 using Shoot__n_Loot.UI;
+using Shoot__n_Loot.WeaponClasses;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -185,6 +186,14 @@ namespace Shoot__n_Loot.InvenoryStuff
                 if (Item.Properties.MeleeWeaponProperties != SceneManager.gameScene.player.MeleeWeapon) AddButton(buttons, new Button("Use as melee weapon", baseRect, UseMeleeWeapon));
                 else AddButton(buttons, new Button("You're using this weapon already", baseRect, Color.LimeGreen));
             }
+
+            if (Item.Properties == Items.properties[7]) //this is a can of beans
+            {
+                if (parent.Contains(Items.properties[16])) //2x4"
+                {
+                    AddButton(buttons, new Button("Attach to 2x4\"", baseRect, AttachCanToWood));
+                }
+            }
         }
 
 
@@ -257,6 +266,13 @@ namespace Shoot__n_Loot.InvenoryStuff
         {
             SceneManager.gameScene.AddObject(new Item(Item.Properties, SceneManager.gameScene.player.Position));
             Remove(1);
+        }
+
+        void AttachCanToWood()
+        {
+            parent.Remove(Item, 1);
+            parent.Remove(Items.properties[16], 1);
+            parent.Add(new Item(Items.properties[18], Vector2.Zero));
         }
 
         void DropAll()

@@ -56,8 +56,9 @@ namespace Shoot__n_Loot.WeaponClasses
             new ItemProperties(1, 1, 1, TextureManager.rifleHandle, 1, "Rifle Mechanics\nTurn your weapon into an automatic killing machine", new WeaponPart(WeaponPart.PartType.Base, 1, .5f, 0, true, -.5f, 0, new Weapon.AmmoType[] { Weapon.AmmoType.Light, Weapon.AmmoType.Medium, Weapon.AmmoType.Heavy } )),
             
             //============== MELEE WEAPONS ========================
-            new ItemProperties(1, 2, .5f, TextureManager.twoByFour, 1, "2x4\" piece of wood\nCrushes sculls", new MeleeWeaponProperties(2, 15)),
-            new ItemProperties(3, 1, 1, TextureManager.machete, 1, "Machete\nSharpest edge on the island", new MeleeWeaponProperties(3, 10))
+            new ItemProperties(1, 2, .5f, TextureManager.twoByFour, 1, "2x4\" piece of wood\nCrushes sculls", new MeleeWeaponProperties(1, 15)),
+            new ItemProperties(3, 1, 1, TextureManager.machete, 1, "Machete\nSharpest edge on the island", new MeleeWeaponProperties(3, 10)),
+            new ItemProperties(2, 1, 1, TextureManager.sledgeHammer, 1, "Sledge Hammer\nCrushes sculls even harder", new MeleeWeaponProperties(3, 20))
         } ;
 
         public static float[] rarity = new float[] 
@@ -82,7 +83,8 @@ namespace Shoot__n_Loot.WeaponClasses
             .15f,
 
             .9f,
-            .3f
+            .3f,
+            .01f
         };
 
         public static Item GetAmmo(Weapon.AmmoType type, Vector2 position)

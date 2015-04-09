@@ -46,6 +46,7 @@ namespace Shoot__n_Loot
 
             twoByFour,
             machete,
+            sledgeHammer,
             
             boat,
 
@@ -170,6 +171,7 @@ namespace Shoot__n_Loot
 
             twoByFour = content.Load<Texture2D>("items/twoByFour");
             machete = content.Load<Texture2D>("items/machete");
+            sledgeHammer = content.Load<Texture2D>("items/sledgeHammer");
 
             boat = content.Load<Texture2D>("boat");
 

@@ -61,6 +61,16 @@ namespace Shoot__n_Loot
             return Weight + item.Properties.Weight <= MaxWeight && SlotThatFits(item) != new Point(-1, -1);
         }
 
+        public bool Contains(ItemProperties item)
+        {
+            foreach (ItemSlot s in Slots)
+            {
+                if (s.Item == null) continue;
+                if (s.Item.Properties == item) return true;
+            }
+            return false;
+        }
+
         public void Add(Item item)
         {
             Point p = SlotThatFits(item);
@@ -84,6 +94,19 @@ namespace Shoot__n_Loot
                 for (int y = 0; y < Height; y++)
                 {
                     if (Slots[x, y].Item == item) Slots[x, y].Remove(num);
+                }
+            }
+        }
+
+        public void Remove(ItemProperties item, byte num)
+        {
+            foreach (ItemSlot s in Slots)
+            {
+                if (s.Item == null) continue;
+                if (s.Item.Properties == item)
+                {
+                    s.Remove(num);
+                    break;
                 }
             }
         }
