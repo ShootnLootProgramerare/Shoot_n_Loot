@@ -45,6 +45,7 @@ namespace Shoot__n_Loot
             chest,
 
             twoByFour,
+            machete,
             
             boat,
 
@@ -168,6 +169,7 @@ namespace Shoot__n_Loot
             fuelCan = content.Load<Texture2D>("items/fuelCan");
 
             twoByFour = content.Load<Texture2D>("items/twoByFour");
+            machete = content.Load<Texture2D>("items/machete");
 
             boat = content.Load<Texture2D>("boat");
 
