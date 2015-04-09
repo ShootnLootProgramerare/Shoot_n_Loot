@@ -35,18 +35,20 @@ namespace Shoot__n_Loot
         Point frameSize;
 
         protected Texture2D[] walkingAnims, attackAnims;
+        protected Texture2D deadTexture;
 
         int hitTimer;
 
         Direction direction;
 
-        public Enemy(Vector2 position, Texture2D[] walkingAnims, Texture2D[] attackAnims)
+        public Enemy(Vector2 position, Texture2D[] walkingAnims, Texture2D[] attackAnims, Texture2D deadTexture)
         {
             this.walkingAnims = walkingAnims;
             this.attackAnims = attackAnims;
             ObstructsBullets = true;
             Sprite = new Sprite(walkingAnims[0], position, new Vector2(200, 100), 4, new Point(200, 100), 0); //maybe an overload for different sizes etc
             CanDie = true;
+            this.deadTexture = deadTexture;
             //Sprite.Origin = Size / 2;
         }
 
@@ -254,8 +256,9 @@ namespace Shoot__n_Loot
         {
             //create particles, spawn dropped items etc
             //SceneManager.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.Fisherman));
-            SceneManager.CurrentScene.AddObject(new ItemContainer(Position));
+            //SceneManager.CurrentScene.AddObject(new ItemContainer(Position));
             SoundManager.zombieHurt.Play();
+            if (deadTexture != null) SceneManager.CurrentScene.AddObject(new DeadEnemy(deadTexture, Position));
         }
 
         public override void Draw(SpriteBatch spriteBatch)

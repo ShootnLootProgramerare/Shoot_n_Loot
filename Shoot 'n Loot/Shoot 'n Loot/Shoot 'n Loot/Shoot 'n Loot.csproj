@@ -114,6 +114,7 @@
     <Compile Include="Enemies\Fisherman.cs" />
     <Compile Include="Enemies\Onelegged.cs" />
     <Compile Include="Objects\Boat.cs" />
+    <Compile Include="Objects\DeadEnemy.cs" />
     <Compile Include="Objects\Explosion.cs" />
     <Compile Include="Objects\HPBar.cs" />
     <Compile Include="InvenoryStuff\ItemProperties.cs" />

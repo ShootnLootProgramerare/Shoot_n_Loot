@@ -83,7 +83,11 @@ namespace Shoot__n_Loot
             resumeButtonL,
             
             menuBackground,
-            gameOverBackground;
+            gameOverBackground,
+            
+            deadLady,
+            deadOneLeg,
+            deadFisherman;
 
         public static Texture2D[]
             fishermanWalk,
@@ -212,6 +216,10 @@ namespace Shoot__n_Loot
 
             menuBackground = content.Load<Texture2D>("backgrounds/menu background");
             gameOverBackground = content.Load<Texture2D>("backgrounds/game over");
+
+            deadLady = content.Load<Texture2D>("enemies/fatLady/dead");
+            deadOneLeg = content.Load<Texture2D>("enemies/onelegged/dead");
+            deadFisherman = content.Load<Texture2D>("enemies/fisherman/dead");
         }
 
         private static Texture2D[] LoadWalkSprites(string path, ContentManager content)

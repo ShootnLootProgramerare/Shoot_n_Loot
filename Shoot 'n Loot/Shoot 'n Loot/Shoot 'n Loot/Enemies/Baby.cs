@@ -22,7 +22,7 @@ namespace Shoot__n_Loot.Enemies
 
 
         public Baby(Vector2 position)
-            : base(position, TextureManager.babyWalk, TextureManager.babyAttack)
+            : base(position, TextureManager.babyWalk, TextureManager.babyAttack, null)
         {
             SetGameplayVars(1, 1, 3, 50);
             SetAnimVars(new Point(75, 75), 4, 4f / 60, 4, 15f / 60);
@@ -72,7 +72,7 @@ namespace Shoot__n_Loot.Enemies
 
             if (nuking && Sprite.EndOfAnim)
             {
-                foreach (GameObject g in SceneManager.gameScene.objects.Where(item => item.DistanceSquared(Center) < nukeRadius * nukeRadius))
+                foreach (GameObject g in SceneManager.gameScene.objects.Where(item => item.DistanceSquared(Center) < nukeRadius * nukeRadius + 100))
                 {
                     g.Health -= nukeDamage;
                 }

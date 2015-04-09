@@ -9,7 +9,7 @@ namespace Shoot__n_Loot.Objects
 {
     class Landmine : GameObject
     {
-        const float range = 50;
+        const float range = 150;
 
         public Landmine(Vector2 position)
         {

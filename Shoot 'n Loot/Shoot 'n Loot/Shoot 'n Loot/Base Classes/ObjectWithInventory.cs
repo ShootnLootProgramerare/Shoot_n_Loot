@@ -23,5 +23,11 @@ namespace Shoot__n_Loot.Base_Classes
                 }
             }
         }
+
+        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        {
+            if (inventoryVisible) inventory.Draw(spriteBatch);
+            base.Draw(spriteBatch);
+        }
     }
 }
