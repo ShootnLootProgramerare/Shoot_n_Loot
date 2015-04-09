@@ -62,7 +62,7 @@ namespace Shoot__n_Loot
             healthBar = new Bar(TextureManager.healthBar, TextureManager.pixel, new Rectangle(0, 0, 150, 75), 23, Color.LimeGreen, Color.Red);
             hungerBar = new Bar(TextureManager.hungerBar, TextureManager.pixel, new Rectangle(0, 75, 150, 75), 28, Color.Red, Color.LimeGreen);
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 2; i++)
             {
                 inventory.Add(Items.RandomItem(this.Position));
             } 
@@ -232,6 +232,7 @@ namespace Shoot__n_Loot
             else if (Input.newMs.LeftButton == ButtonState.Pressed && meleeAttackTimer == 0)
             {
                 Sprite.SetTexture(MeleeAttackTextures[(int)VelDirection], 4, new Point(100, 100));
+                Sprite.Frame = 0;
                 Sprite.AnimationSpeed = .2f;
                 meleeAttackTimer = -1;
             }
@@ -270,7 +271,7 @@ namespace Shoot__n_Loot
 
         void Animate()
         {
-            if (Velocity.LengthSquared() > 1f)
+            if (Velocity.LengthSquared() > 1f && meleeAttackTimer == 0)
             {
                 /*
                 if (Math.Abs(Velocity.X) > Math.Abs(Velocity.Y))
