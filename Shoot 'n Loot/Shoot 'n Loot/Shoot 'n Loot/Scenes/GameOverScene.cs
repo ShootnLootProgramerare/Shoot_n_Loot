@@ -37,7 +37,7 @@ namespace Shoot__n_Loot.Scenes
             b.Draw(spriteBatch);
             bt.Draw(spriteBatch);
             //spriteBatch.DrawString(TextureManager.font, "GAME OVER", - TextureManager.font.MeasureString("GAME OVER") / 2, Color.Black);
-            spriteBatch.Draw(TextureManager.gameOverBackground, new Rectangle(-Game1.ScreenSize.X / 2, -Game1.ScreenSize.Y / 2, Game1.ScreenSize.X, Game1.ScreenSize.Y), Color.White);
+            spriteBatch.Draw(TextureManager.gameOverBackground, new Rectangle(-Game1.ScreenSize.X / 2, -Game1.ScreenSize.Y / 2, Game1.ScreenSize.X, Game1.ScreenSize.Y), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, .001f);
             base.Draw(spriteBatch);
         }
     }
