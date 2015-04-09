@@ -124,6 +124,7 @@
     <Compile Include="Objects\ItemContainer.cs" />
     <Compile Include="Objects\Landmine.cs" />
     <Compile Include="Objects\LightHouse.cs" />
+    <Compile Include="Objects\Sign.cs" />
     <Compile Include="Objects\Tree.cs" />
     <Compile Include="Scenes\AboutScene.cs" />
     <Compile Include="Scenes\GameOverScene.cs" />

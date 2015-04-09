@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Shoot__n_Loot.Base_Classes;
 using Shoot__n_Loot.InvenoryStuff;
+using Shoot__n_Loot.Objects;
 using Shoot__n_Loot.Scenes;
 using Shoot__n_Loot.UI;
 using Shoot__n_Loot.WeaponClasses;
@@ -65,8 +66,7 @@ namespace Shoot__n_Loot
             for (int i = 0; i < 2; i++)
             {
                 inventory.Add(Items.RandomItem(this.Position));
-            } 
-                
+            }
         }
 
         void JohansSkitAkaAudioStuff()
@@ -136,9 +136,6 @@ namespace Shoot__n_Loot
                 inventory.Update(new Point(0, 0));
                 weapon.CustomizingUpdate();
                 InventoryUpdate();
-            }
-            else
-            {
             }
 
             Move();

@@ -49,6 +49,7 @@ namespace Shoot__n_Loot
             sledgeHammer,
             
             boat,
+            sign,
 
             lightAmmo,
             mediumAmmo,
@@ -113,7 +114,8 @@ namespace Shoot__n_Loot
             playerAttackWood,
             
             playerWalkSledgeHammer,
-            playerAttackSledgeHammer;
+            playerAttackSledgeHammer,
+            signs;
 
         public static SpriteFont font;
 
@@ -184,6 +186,7 @@ namespace Shoot__n_Loot
             sledgeHammer = content.Load<Texture2D>("items/sledgeHammer");
 
             boat = content.Load<Texture2D>("boat");
+            sign = content.Load<Texture2D>("objects/sign");
 
             lightAmmo = mediumAmmo = heavyAmmo = content.Load<Texture2D>("items/ammo"); //should be different when we get sprites
             nails = content.Load<Texture2D>("items/nails");
@@ -220,6 +223,12 @@ namespace Shoot__n_Loot
             deadLady = content.Load<Texture2D>("enemies/fatLady/dead");
             deadOneLeg = content.Load<Texture2D>("enemies/onelegged/dead");
             deadFisherman = content.Load<Texture2D>("enemies/fisherman/dead");
+
+            signs = new Texture2D[8];
+            for (int i = 0; i < signs.Length; i++)
+            {
+                signs[i] = content.Load<Texture2D>("signs/" + i);
+            }
         }
 
         private static Texture2D[] LoadWalkSprites(string path, ContentManager content)

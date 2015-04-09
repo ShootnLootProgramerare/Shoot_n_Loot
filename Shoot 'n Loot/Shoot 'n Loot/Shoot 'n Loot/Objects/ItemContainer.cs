@@ -14,7 +14,7 @@ namespace Shoot__n_Loot.Objects
         const int randomItems = 4;
         public ItemContainer(Vector2 position)
         {
-            Sprite = new Sprite(TextureManager.chest, position, new Vector2(100), 2, new Point(50, 50), 0);
+            Sprite = new Sprite(TextureManager.chest, position, new Vector2(50), 2, new Point(50, 50), 0);
             inventory = new Inventory(this, new Point(-200, 0), 3, 3, 10);
             for (int i = 0; i < randomItems; i++)
                 inventory.Add(Items.RandomItem(Position));

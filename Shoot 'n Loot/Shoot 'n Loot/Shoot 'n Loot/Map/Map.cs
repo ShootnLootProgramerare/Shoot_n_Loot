@@ -1,8 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Shoot__n_Loot.Objects;
+using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -14,13 +17,17 @@ namespace Shoot__n_Loot
 
         public static Chunk[,] chunks { get; set; }
 
+        public static List<Vector2> signPositions;
+
         public static void Initialize()
         {
             chunks = new Chunk[width, height];
 
             Color[,] mapData = loadTexture(TextureManager.map);
             Color[,] propData = loadTexture(TextureManager.propData);
-            Color[,] spawnData = loadTexture(TextureManager.spawnData);            
+            Color[,] spawnData = loadTexture(TextureManager.spawnData);
+
+            signPositions = new List<Vector2>();
 
             for(int x = 0; x < width; x++)
             {
@@ -28,6 +35,15 @@ namespace Shoot__n_Loot
                 {
                     chunks[x, y] = new Chunk(Chunk.sizePx * new Vector2(x, y), subChunk(mapData, x * Chunk.size, y * Chunk.size, Chunk.size, Chunk.size), subChunk(propData, x * Chunk.size, y * Chunk.size, Chunk.size, Chunk.size), spawnData[x, y]);
                 }
+            }
+
+            for (int t = 0; t < TextureManager.signs.Length; t++)
+            {
+                if (signPositions.Count == 0) break;
+                int i = Game1.random.Next(signPositions.Count);
+                SceneManager.gameScene.AddObject(new Sign(signPositions[i], TextureManager.signs[t]));
+                signPositions.RemoveAt(i);
+                Debug.WriteLine("adding sign with texture " + t + " at position " + i);
             }
         }
 

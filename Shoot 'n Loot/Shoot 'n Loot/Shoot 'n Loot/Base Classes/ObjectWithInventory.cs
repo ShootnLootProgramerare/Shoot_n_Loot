@@ -1,4 +1,5 @@
-﻿using Shoot__n_Loot.InvenoryStuff;
+﻿using Microsoft.Xna.Framework;
+using Shoot__n_Loot.InvenoryStuff;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,11 @@ namespace Shoot__n_Loot.Base_Classes
                     s.Add(s.Item);
                 }
             }
+        }
+
+        public override void Update()
+        {
+            if (inventoryVisible) inventory.Update(new Point(0, 0)); //TODO: some stuff should be restricted to the players inventory
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)

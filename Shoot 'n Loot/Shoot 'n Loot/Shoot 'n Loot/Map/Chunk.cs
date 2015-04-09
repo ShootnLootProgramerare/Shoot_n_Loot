@@ -82,6 +82,11 @@ namespace Shoot__n_Loot
                     {
                         SceneManager.gameScene.objects.Add(new Tree(TilePosition(x, y), Tree.TreeType.Fir));
                     }
+                    else if (prop == new Color(255, 255, 255))
+                    {
+                        Map.signPositions.Add(TilePosition(x, y));
+                        Debug.WriteLine("signPos at " + x + ", " + y);
+                    }
                 }
             }
         }
