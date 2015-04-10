@@ -335,7 +335,7 @@ namespace Shoot__n_Loot
                 }
             }
 
-            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nHP: " + Health + "\nHunger: " + Hunger.ToString("0") + "\nBleeding: " + bleeding, Camera.Position + Camera.Origin * new Vector2(-1, 1) * .7f - TextureManager.font.MeasureString("Ammo: " + weapon.Ammo.ToString()), Color.Black);
+            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nBleeding: " + bleeding, Camera.Position + Camera.Origin * new Vector2(-1, -1) + new Vector2(10, 150), Color.Black);
 
             //hpBar.Draw(spriteBatch, base.Health / base.MaxHealth);
 
