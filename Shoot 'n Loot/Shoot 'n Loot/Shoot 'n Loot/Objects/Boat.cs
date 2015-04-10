@@ -10,8 +10,9 @@ namespace Shoot__n_Loot.Objects
 {
     class Boat : GameObject
     {
-        const byte REQUIRED_FUEL = 2;
+        const byte REQUIRED_FUEL = 3;
         byte fuel;
+        int time;
 
         public Boat(Vector2 position)
         {
@@ -30,30 +31,40 @@ namespace Shoot__n_Loot.Objects
                 }
             }
 
+            if (Velocity.Length() > 0)
+            {
+                Camera.Follow(Center);
+                time++;
+                if (time > 120) SceneManager.CurrentScene = SceneManager.winScene;
+                SceneManager.gameScene.player.Position = Position + new Vector2(0, -50);
+            }
+
+
             if (fuel >= REQUIRED_FUEL && MapCollider.Intersects(SceneManager.gameScene.player.MapCollider))
             {
                 //end the game
                 Velocity = new Vector2(10, 5);
                 //SceneManager.gameScene.RemoveObject(SceneManager.gameScene.player);
                 Sprite.Frame = 0;
+                SceneManager.CurrentScene.RemoveObject(SceneManager.gameScene.player);
+                SceneManager.gameScene.player.Sprite.AnimationSpeed = 0;
+                SceneManager.gameScene.player.inventoryVisible = false;
             }
 
             Position += Velocity;
 
-            if (Velocity.Length() > 0)
-            {
-                Camera.Follow(Center);
-                SceneManager.CurrentScene.RemoveObject(SceneManager.gameScene.player);
-                SceneManager.gameScene.player.Sprite.AnimationSpeed = 0;
-                SceneManager.gameScene.player.Position = Position + new Vector2(0, -50);
-            }
 
             base.Update();
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
-            if (Velocity.LengthSquared() > 0) SceneManager.gameScene.player.Draw(spriteBatch);
+            if (Velocity.LengthSquared() > 0)
+            {
+                SceneManager.gameScene.player.Sprite.LayerDepth = .1f;
+                SceneManager.gameScene.player.Draw(spriteBatch);
+            }
+            Sprite.LayerDepth = 0;
             base.Draw(spriteBatch);
         }
     }
