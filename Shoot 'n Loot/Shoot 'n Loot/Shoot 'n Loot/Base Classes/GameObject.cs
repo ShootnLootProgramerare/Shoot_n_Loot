@@ -109,8 +109,19 @@ namespace Shoot__n_Loot
         /// <param name="spriteBatch"></param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            
+
             Sprite.LayerDepth = .9999f - ((float)Sprite.Area.Bottom / (Map.height * Chunk.sizePx)); //draws things closer to camera on top
+            Sprite.Draw(spriteBatch);
+        }
+
+        /// <summary>
+        /// draws the sprite. override and draw sprite manually or call base.Draw
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        public virtual void Draw(SpriteBatch spriteBatch, bool dontAdjust)
+        {
+            
+            if (!dontAdjust) Sprite.LayerDepth = .9999f - ((float)Sprite.Area.Bottom / (Map.height * Chunk.sizePx)); //draws things closer to camera on top
             Sprite.Draw(spriteBatch);
         }
 

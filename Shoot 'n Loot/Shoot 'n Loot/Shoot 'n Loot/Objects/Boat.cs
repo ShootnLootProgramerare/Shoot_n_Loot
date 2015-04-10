@@ -62,10 +62,10 @@ namespace Shoot__n_Loot.Objects
             if (Velocity.LengthSquared() > 0)
             {
                 SceneManager.gameScene.player.Sprite.LayerDepth = .1f;
-                SceneManager.gameScene.player.Draw(spriteBatch);
+                SceneManager.gameScene.player.Draw(spriteBatch, true);
             }
             Sprite.LayerDepth = 0;
-            base.Draw(spriteBatch);
+            base.Draw(spriteBatch, true);
         }
     }
 }

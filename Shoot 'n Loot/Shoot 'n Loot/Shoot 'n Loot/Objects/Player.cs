@@ -331,7 +331,7 @@ namespace Shoot__n_Loot
                 if (draggedItem != null)
                 {
                     draggedItem.Sprite.LayerDepth = 0;
-                    draggedItem.Draw(spriteBatch);
+                    draggedItem.Draw(spriteBatch, true);
                 }
             }
 
