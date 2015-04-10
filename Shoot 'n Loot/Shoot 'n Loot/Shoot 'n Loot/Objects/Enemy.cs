@@ -127,6 +127,11 @@ namespace Shoot__n_Loot
         {
             Animate();
 
+            if (DistanceSquared(SceneManager.gameScene.player.Center) > GameScene.MAXSPAWNDIST * 2 * GameScene.MAXSPAWNDIST)
+            {
+                SceneManager.gameScene.RemoveObject(this);
+            }
+
             /*if (enemyType == EnemyType.Fisherman)
             {
                 if (attacking)
