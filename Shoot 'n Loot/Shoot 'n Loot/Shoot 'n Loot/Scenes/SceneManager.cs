@@ -28,7 +28,7 @@ namespace Shoot__n_Loot.Scenes
 
             Map.Initialize(); //should be in gameScene but that fucks thigns up
 
-            CurrentScene = winScene;
+            CurrentScene = mainMenuScene;
         }
     }
 }
