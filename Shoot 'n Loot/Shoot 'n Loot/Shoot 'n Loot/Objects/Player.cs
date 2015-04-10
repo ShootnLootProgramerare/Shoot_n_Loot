@@ -85,15 +85,16 @@ namespace Shoot__n_Loot
             Tile t = Map.chunks[chunkX, chunkY].Tiles[tileX, tileY];
 
             playSound++;
+            playWaterSound++;
 
             if (playWaterSound > 20)
             {
 
                 bool doIt = false;
-                if (tileX < Chunk.size) if (Map.chunks[chunkX, chunkY].Tiles[tileX + 1, tileY].Properties.TextureIndex == 1) doIt = true;
+                if (tileX < Chunk.size - 1) if (Map.chunks[chunkX, chunkY].Tiles[tileX + 1, tileY].Properties.TextureIndex == 1) doIt = true;
                 if (tileX > 0) if (Map.chunks[chunkX, chunkY].Tiles[tileX - 1, tileY].Properties.TextureIndex == 1) doIt = true;
-                if (tileY < Chunk.size) if (Map.chunks[chunkX, chunkY].Tiles[tileX, tileY + 1].Properties.TextureIndex == 1) doIt = true;
-                if (tileY >= 0) if (Map.chunks[chunkX, chunkY].Tiles[tileX, tileY - 1].Properties.TextureIndex == 1) doIt = true;
+                if (tileY < Chunk.size - 1) if (Map.chunks[chunkX, chunkY].Tiles[tileX, tileY + 1].Properties.TextureIndex == 1) doIt = true;
+                if (tileY > 0) if (Map.chunks[chunkX, chunkY].Tiles[tileX, tileY - 1].Properties.TextureIndex == 1) doIt = true;
                 /*Map.chunks[chunkX, chunkY].Tiles[tileX + 1, tileY + 1].Properties.TextureIndex == 1 ||
                 Map.chunks[chunkX, chunkY].Tiles[tileX - 1, tileY + 1].Properties.TextureIndex == 1 ||
                 Map.chunks[chunkX, chunkY].Tiles[tileX + 1, tileY - 1].Properties.TextureIndex == 1 ||
