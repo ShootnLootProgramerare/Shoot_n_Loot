@@ -69,6 +69,7 @@ namespace Shoot__n_Loot
             {
                 inventory.Add(Items.RandomItem(this.Position));
             }
+            FillStacks();
         }
 
         void JohansSkitAkaAudioStuff()

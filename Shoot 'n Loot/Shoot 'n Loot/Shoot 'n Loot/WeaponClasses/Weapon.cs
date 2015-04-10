@@ -156,8 +156,16 @@ namespace Shoot__n_Loot
         private void Reload(Inventory bulletContainer)
         {
             //ammo = maxAmmo etc
-            Ammo = magSize;
-            Ammo = GetAmmoFromInventory(bulletContainer, magSize);
+            if (CompatitbleAmmoTypes(null).Contains(currentAmmoType))
+            {
+                Ammo = magSize;
+                Ammo = GetAmmoFromInventory(bulletContainer, magSize);
+            }
+            else
+            {
+                currentAmmoType = AmmoType.None;
+                Debug.WriteLine("removing bad ammo");
+            }
         }
 
         public void StartReload(Inventory bulletContainer)
