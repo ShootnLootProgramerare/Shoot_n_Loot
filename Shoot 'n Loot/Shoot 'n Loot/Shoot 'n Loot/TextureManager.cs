@@ -130,6 +130,7 @@ namespace Shoot__n_Loot
             playerAttackSledgeHammer = LoadWalkSprites("player/attack/sledgehammer", content);
 
             playerWalkWood = LoadWalkSprites("player/walk/wood", content);
+            playerAttackWood = LoadWalkSprites("player/attack/wood", content);
 
             oakTree = content.Load<Texture2D>("objects/oak");
             firTree = content.Load<Texture2D>("objects/fir");
