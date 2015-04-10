@@ -111,13 +111,13 @@ namespace Shoot__n_Loot
             }
         }
 
-        public void Update(Point drawOffset)
+        public void Update(Point drawOffset, bool isPlayerInventory)
         {
             for (int x = 0; x < Width; x++)
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    Slots[x, y].Update();
+                    Slots[x, y].Update(isPlayerInventory);
                 }
             }
         }

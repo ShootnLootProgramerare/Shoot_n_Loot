@@ -63,6 +63,8 @@ namespace Shoot__n_Loot
             healthBar = new Bar(TextureManager.healthBar, TextureManager.pixel, new Rectangle(0, 0, 150, 75), 23, Color.LimeGreen, Color.Red);
             hungerBar = new Bar(TextureManager.hungerBar, TextureManager.pixel, new Rectangle(0, 75, 150, 75), 28, Color.Red, Color.LimeGreen);
 
+            isPlayerInventory = true;
+
             for (int i = 0; i < 2; i++)
             {
                 inventory.Add(Items.RandomItem(this.Position));
@@ -133,7 +135,7 @@ namespace Shoot__n_Loot
             }
             else if (inventoryVisible)
             {
-                inventory.Update(new Point(0, 0));
+                inventory.Update(new Point(0, 0), true);
                 weapon.CustomizingUpdate();
                 InventoryUpdate();
             }

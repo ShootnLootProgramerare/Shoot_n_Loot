@@ -26,6 +26,8 @@ namespace Shoot__n_Loot.InvenoryStuff
 
         int x, y;
 
+        bool hovering;
+
         public float Weight 
         {
             get
@@ -152,15 +154,15 @@ namespace Shoot__n_Loot.InvenoryStuff
         /// <summary>
         /// creates the buttons that appear when this item is selected, setting the position to the right spot
         /// </summary>
-        private void SetButtons(int xOffset, int yOffset, Inventory container)
+        private void SetButtons(int xOffset, int yOffset, Inventory container, bool isPlayerInventory)
         {
             if (buttons == null) buttons = new List<Button>();
             else buttons.Clear();
             Rectangle baseRect =  new Rectangle(container.PositionForItem(xOffset, yOffset).X, container.PositionForItem(xOffset, yOffset).Y, BUTTON_W, BUTTON_H);
 
-            AddButton(buttons, new Button("drop", baseRect, DropItem));
+            if (isPlayerInventory) AddButton(buttons, new Button("drop", baseRect, DropItem));
 
-            if (StackSize > 1) AddButton(buttons, new Button("drop all", baseRect, DropAll));
+            if (StackSize > 1 && isPlayerInventory) AddButton(buttons, new Button("drop all", baseRect, DropAll));
 
             if (Item.Properties.IsConsumable) AddButton(buttons, new Button("use", baseRect, Consume));
 
@@ -171,7 +173,7 @@ namespace Shoot__n_Loot.InvenoryStuff
                 else AddButton(buttons, new Button("This part is not compatible with your weapon", baseRect, Color.Red));
             }
 
-            if (Item.Properties.IsAmmo)
+            if (Item.Properties.IsAmmo && isPlayerInventory)
             {
                 if (SceneManager.gameScene.player.weapon.CompatitbleAmmoTypes(null).Contains(Item.Properties.AmmoType))
                 {
@@ -181,7 +183,7 @@ namespace Shoot__n_Loot.InvenoryStuff
                 else AddButton(buttons, new Button("Your weapon can't use this ammo", baseRect, Color.Red));
             }
 
-            if (Item.Properties.IsMeleeWeapon)
+            if (Item.Properties.IsMeleeWeapon && isPlayerInventory)
             {
                 if (Item.Properties.MeleeWeaponProperties != SceneManager.gameScene.player.MeleeWeapon) AddButton(buttons, new Button("Use as melee weapon", baseRect, UseMeleeWeapon));
                 else AddButton(buttons, new Button("You're using this weapon already", baseRect, Color.LimeGreen));
@@ -189,7 +191,7 @@ namespace Shoot__n_Loot.InvenoryStuff
 
             if (Item.Properties == Items.properties[7]) //this is a can of beans
             {
-                if (parent.Contains(Items.properties[16])) //2x4"
+                if (parent.Contains(Items.properties[16]) && isPlayerInventory) //2x4"
                 {
                     AddButton(buttons, new Button("Attach to 2x4\"", baseRect, AttachCanToWood));
                 }
@@ -223,17 +225,21 @@ namespace Shoot__n_Loot.InvenoryStuff
             buttons.Add(b);
         }
 
-        public void Update()
+        public void Update(bool isPlayerInventory)
         {
-            if (Item != null && ShowingOptions)
+            if (Item != null && (ShowingOptions || hovering))
             {
                 infoPos = parent.PositionForItem(x, y);
                 infoPos.Width = (int)TextureManager.font.MeasureString(Item.Properties.InfoText).X + Button.PADDING_X * 2;
                 infoPos.X -= infoPos.Width + 10;
                 infoPos.Height = (int)TextureManager.font.MeasureString(Item.Properties.InfoText).Y + Button.PADDING_Y * 2;
 
-                SetButtons(x, y, parent);
-                foreach (Button b in buttons) b.Update();
+                if (ShowingOptions)
+                {
+                    SetButtons(x, y, parent, isPlayerInventory);
+                    foreach (Button b in buttons) b.Update(); //updaterar direkt, man ser inte
+                }
+
             }
             else ShowingOptions = false;
 
@@ -242,6 +248,7 @@ namespace Shoot__n_Loot.InvenoryStuff
                 parent.HideAllItemMenus();
                 ShowingOptions = !ShowingOptions;
             }
+            hovering = Input.AreaIsHoveredOver(parent.PositionForItem(x, y));
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -255,6 +262,10 @@ namespace Shoot__n_Loot.InvenoryStuff
                 if (ShowingOptions)
                 {
                     if (buttons != null) foreach (Button b in buttons) b.Draw(spriteBatch);
+                }
+                Debug.WriteLine(hovering + ", " + ShowingOptions);
+                if (hovering || ShowingOptions)
+                {
                     spriteBatch.Draw(TextureManager.inventorySlot, infoPos, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000001f);
                     spriteBatch.DrawString(TextureManager.font, Item.Properties.InfoText, new Vector2(infoPos.X + Button.PADDING_X, infoPos.Y + Button.PADDING_Y), Color.Black);
                 }

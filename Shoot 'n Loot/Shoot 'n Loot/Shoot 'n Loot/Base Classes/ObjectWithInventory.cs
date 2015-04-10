@@ -11,6 +11,7 @@ namespace Shoot__n_Loot.Base_Classes
     {
         public Inventory inventory;
         public bool inventoryVisible;
+        protected bool isPlayerInventory;
 
         protected void FillStacks()
         {
@@ -27,7 +28,7 @@ namespace Shoot__n_Loot.Base_Classes
 
         public override void Update()
         {
-            if (inventoryVisible) inventory.Update(new Point(0, 0)); //TODO: some stuff should be restricted to the players inventory
+            if (inventoryVisible) inventory.Update(new Point(0, 0), isPlayerInventory); //TODO: some stuff should be restricted to the players inventory
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
