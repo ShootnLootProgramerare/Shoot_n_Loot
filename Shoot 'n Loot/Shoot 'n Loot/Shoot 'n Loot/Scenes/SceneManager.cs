@@ -15,6 +15,7 @@ namespace Shoot__n_Loot.Scenes
         internal static AboutScene aboutScene;
         internal static PauseScene pauseScene;
         internal static GameOverScene gameOverScene;
+        internal static WinScene winScene;
 
         public static void LoadAll()
         {
@@ -23,10 +24,11 @@ namespace Shoot__n_Loot.Scenes
             aboutScene = new AboutScene();
             pauseScene = new PauseScene();
             gameOverScene = new GameOverScene();
+            winScene = new WinScene();
 
             Map.Initialize(); //should be in gameScene but that fucks thigns up
 
-            CurrentScene = mainMenuScene;
+            CurrentScene = winScene;
         }
     }
 }

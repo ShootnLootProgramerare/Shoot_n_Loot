@@ -130,6 +130,7 @@
     <Compile Include="Scenes\GameOverScene.cs" />
     <Compile Include="Scenes\PauseScene.cs" />
     <Compile Include="Scenes\SceneManager.cs" />
+    <Compile Include="Scenes\WinScene.cs" />
     <Compile Include="SoundManager.cs" />
     <Compile Include="UI\Bar.cs" />
     <Compile Include="UI\Button.cs" />
