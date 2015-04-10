@@ -12,6 +12,9 @@ namespace Shoot__n_Loot.Objects
 {
     class DeadEnemy : ObjectWithInventory
     {
+        const int MAX_LIFE = 3600;
+        int lifeTime;
+
         public DeadEnemy(Texture2D texture, Vector2 position) 
         {
             Sprite = new Sprite(texture, position, new Vector2(texture.Width, texture.Height));
@@ -22,6 +25,8 @@ namespace Shoot__n_Loot.Objects
 
         public override void Update()
         {
+            lifeTime++;
+            if (lifeTime > MAX_LIFE) SceneManager.CurrentScene.RemoveObject(this);
            inventoryVisible = DistanceSquared(SceneManager.gameScene.player.Center) < 10000;
            base.Update();
         }
