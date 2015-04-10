@@ -10,7 +10,7 @@ namespace Shoot__n_Loot.Objects
 {
     class Boat : GameObject
     {
-        const byte REQUIRED_FUEL = 1;
+        const byte REQUIRED_FUEL = 3;
         byte fuel;
 
         public Boat(Vector2 position)
@@ -33,9 +33,9 @@ namespace Shoot__n_Loot.Objects
             if (fuel >= REQUIRED_FUEL && MapCollider.Intersects(SceneManager.gameScene.player.MapCollider))
             {
                 //end the game
-                Velocity = new Vector2(10, 0);
-                SceneManager.gameScene.RemoveObject(SceneManager.gameScene.player);
-                Sprite.Frame = 1;
+                Velocity = new Vector2(10, 5);
+                //SceneManager.gameScene.RemoveObject(SceneManager.gameScene.player);
+                Sprite.Frame = 0;
             }
 
             Position += Velocity;
@@ -43,6 +43,9 @@ namespace Shoot__n_Loot.Objects
             if (Velocity.Length() > 0)
             {
                 Camera.Follow(Center);
+                SceneManager.CurrentScene.RemoveObject(SceneManager.gameScene.player);
+                SceneManager.gameScene.player.Sprite.AnimationSpeed = 0;
+                SceneManager.gameScene.player.Position = Position + new Vector2(0, -50);
             }
 
             base.Update();
@@ -50,6 +53,7 @@ namespace Shoot__n_Loot.Objects
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
+            if (Velocity.LengthSquared() > 0) SceneManager.gameScene.player.Draw(spriteBatch);
             base.Draw(spriteBatch);
         }
     }

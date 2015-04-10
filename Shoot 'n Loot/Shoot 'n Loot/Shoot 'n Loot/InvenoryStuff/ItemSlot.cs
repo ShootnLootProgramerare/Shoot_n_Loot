@@ -237,7 +237,7 @@ namespace Shoot__n_Loot.InvenoryStuff
                 if (ShowingOptions)
                 {
                     SetButtons(x, y, parent, isPlayerInventory);
-                    foreach (Button b in buttons) b.Update(); //updaterar direkt, man ser inte
+                    foreach (Button b in buttons) b.Update();
                 }
 
             }

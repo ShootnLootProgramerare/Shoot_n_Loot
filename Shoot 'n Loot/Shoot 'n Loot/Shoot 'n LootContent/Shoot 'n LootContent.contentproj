@@ -49,13 +49,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="map\map.png">
-      <Name>map</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="tiles.png">
       <Name>tiles</Name>
       <Importer>TextureImporter</Importer>

@@ -99,7 +99,7 @@ namespace Shoot__n_Loot
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(new Color(0, 3, 73));
             spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, Camera.Transform);
 
             SceneManager.CurrentScene.Draw(spriteBatch); 
