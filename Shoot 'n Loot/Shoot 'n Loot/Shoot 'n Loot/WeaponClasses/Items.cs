@@ -73,7 +73,7 @@ namespace Shoot__n_Loot.WeaponClasses
             .7f,
             .8f,
             .3f,
-            .2f,
+            .25f,
 
             .35f,
             .35f,

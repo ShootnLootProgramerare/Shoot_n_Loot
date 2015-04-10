@@ -122,7 +122,7 @@ namespace Shoot__n_Loot
             Hunger += .0005f;
             if (Hunger > 25) Health -= .0001f;
             Health -= bleeding;
-            bleeding *= (bleeding > .01f) ? .95f : .9999f;
+            bleeding *= (bleeding > .01f) ? .93f : .995f;
 
             JohansSkitAkaAudioStuff(); // :^)))) 
 
@@ -266,7 +266,7 @@ namespace Shoot__n_Loot
 
             Move(true);
 
-            Hunger += Velocity.Length() * .0001f;
+            Hunger += Velocity.Length() * .0002f;
         }
 
         void Animate()
@@ -335,7 +335,7 @@ namespace Shoot__n_Loot
                 }
             }
 
-            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nBleeding: " + bleeding, Camera.Position + Camera.Origin * new Vector2(-1, -1) + new Vector2(10, 150), Color.Black);
+            spriteBatch.DrawString(TextureManager.font, "Ammo: " + weapon.Ammo.ToString() + "\nBleeding: " + (bleeding * 60).ToString("0.0000") + "/s", Camera.Position + Camera.Origin * new Vector2(-1, -1) + new Vector2(10, 150), Color.Black);
 
             //hpBar.Draw(spriteBatch, base.Health / base.MaxHealth);
 
