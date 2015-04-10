@@ -23,7 +23,7 @@ namespace Shoot__n_Loot
         const byte baseReloadTime = 60;
         const byte baseMagSize = 10;
 
-        public enum AmmoType { None, Light, Medium, Heavy, Nails }
+        public enum AmmoType { None = 0, Light = 5, Medium = 8, Heavy = 10, Nails  = 20}
 
         public AmmoType currentAmmoType;
 
@@ -33,7 +33,7 @@ namespace Shoot__n_Loot
         {
             get
             {
-                return new BulletProperties(bulletDamage, bulletSpeed, range);
+                return new BulletProperties(bulletDamage * (int)currentAmmoType / 10f, bulletSpeed, range);
             }
         }
 
