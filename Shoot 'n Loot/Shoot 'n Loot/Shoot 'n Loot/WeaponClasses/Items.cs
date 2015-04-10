@@ -48,9 +48,9 @@ namespace Shoot__n_Loot.WeaponClasses
             new ItemProperties(2, 2, 1, TextureManager.fuelCan, 1, "Fuel Can\nDrop on a vehicle to fuel it"),
 
             //============= WEAPON PARTS ===============================
-            new ItemProperties(1, 1, .45f, TextureManager.gunMechs, 1, "Automatic thing", new WeaponPart(WeaponPart.PartType.Base, 1, 1, 30, true, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Light, Weapon.AmmoType.Medium } )),
-            new ItemProperties(1, 1, .4f, TextureManager.gunBarrel, 1, "Shitty gun barrel", new WeaponPart(WeaponPart.PartType.Barrel, 1, 1, 0, false, 10, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Light } )),
-            new ItemProperties(1, 1, .5f, TextureManager.gunScrap, 1, "Old gun scraps", new WeaponPart(WeaponPart.PartType.Mag, 0, 0, 10, false, -.5f, 0, new Weapon.AmmoType[] { Weapon.AmmoType.Medium, Weapon.AmmoType.Light } )),
+            new ItemProperties(1, 1, .45f, TextureManager.gunMechs, 1, "Automatic thing", new WeaponPart(WeaponPart.PartType.Base, 1, 1, 30, false, 1, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Light, Weapon.AmmoType.Medium } )),
+            new ItemProperties(1, 1, .4f, TextureManager.gunBarrel, 1, "Shitty gun barrel", new WeaponPart(WeaponPart.PartType.Barrel, -.1f, 0, 0, false, 10, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Light } )),
+            new ItemProperties(1, 1, .5f, TextureManager.gunScrap, 1, "Old gun scraps", new WeaponPart(WeaponPart.PartType.Mag, 0, 0, 10, true, -.5f, 0, new Weapon.AmmoType[] { Weapon.AmmoType.Medium, Weapon.AmmoType.Light } )),
             new ItemProperties(1, 1, .35f, TextureManager.rifleScrap, 1, "Heavy gun base", new WeaponPart(WeaponPart.PartType.Base, 1, 3, 10, false, 2, 10, new Weapon.AmmoType[] { Weapon.AmmoType.Heavy } )),
             new ItemProperties(1, 2, .5f, TextureManager.rifleBarrel, 1, "Rifle Barrel", new WeaponPart(WeaponPart.PartType.Barrel, -.03f, 0, 0, false, .1f, 1, new Weapon.AmmoType[] { Weapon.AmmoType.Medium, Weapon.AmmoType.Heavy } )),
             new ItemProperties(1, 1, 1, TextureManager.rifleHandle, 1, "Rifle Mechanics\nTurn your weapon into an automatic killing machine", new WeaponPart(WeaponPart.PartType.Base, 1, .5f, 0, true, -.5f, 0, new Weapon.AmmoType[] { Weapon.AmmoType.Light, Weapon.AmmoType.Medium, Weapon.AmmoType.Heavy } )),
