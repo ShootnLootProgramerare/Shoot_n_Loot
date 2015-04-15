@@ -85,6 +85,7 @@ namespace Shoot__n_Loot
             
             menuBackground,
             gameOverBackground,
+            victoryBackground,
             
             deadLady,
             deadOneLeg,
@@ -222,6 +223,7 @@ namespace Shoot__n_Loot
 
             menuBackground = content.Load<Texture2D>("backgrounds/menu background");
             gameOverBackground = content.Load<Texture2D>("backgrounds/game over");
+            victoryBackground = content.Load<Texture2D>("backgrounds/victory");
 
             deadLady = content.Load<Texture2D>("enemies/fatLady/dead");
             deadOneLeg = content.Load<Texture2D>("enemies/onelegged/dead");
