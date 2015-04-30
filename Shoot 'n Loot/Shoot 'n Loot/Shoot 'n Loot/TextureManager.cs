@@ -86,6 +86,8 @@ namespace Shoot__n_Loot
             menuBackground,
             gameOverBackground,
             victoryBackground,
+
+            damageOverlay,
             
             deadLady,
             deadOneLeg,
@@ -144,6 +146,8 @@ namespace Shoot__n_Loot
             {
                 font = content.Load<SpriteFont>("font_default");
             }
+
+            damageOverlay = content.Load<Texture2D>("damageOverlay");
             
 
             tiles = content.Load<Texture2D>("tiles");

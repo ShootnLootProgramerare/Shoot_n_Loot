@@ -48,6 +48,8 @@ namespace Shoot__n_Loot
         int playSound = 0;
         int playWaterSound = 0;
 
+        float damageOverlayCounter;
+
         private Point CUSTOMIZINGINVENTORYOFFSET { get { return new Point(0, 100); } }
 
         public Player()
@@ -120,6 +122,8 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
+            damageOverlayCounter = damageOverlayCounter / 1.1f;
+
             Hunger += .0005f;
             if (Hunger > 25) Health -= .0001f;
             Health -= bleeding;
@@ -299,6 +303,12 @@ namespace Shoot__n_Loot
             }
         }
 
+        protected override void OnTakeDamage(float amount)
+        {
+            damageOverlayCounter += amount;
+            base.OnTakeDamage(amount);
+        }
+
         void SetRegularSprite()
         {
             if (UsingMelee) Sprite.SetTexture(MeleeWalkTextures[(int)VelDirection], 4, new Point(100, 100));
@@ -342,6 +352,8 @@ namespace Shoot__n_Loot
 
             healthBar.Draw(spriteBatch, Health / MaxHealth);
             hungerBar.Draw(spriteBatch, Hunger / 25f);
+
+            if (damageOverlayCounter > .05f) spriteBatch.Draw(TextureManager.damageOverlay, new Rectangle((int)Camera.TotalOffset.X, (int)Camera.TotalOffset.Y, Game1.ScreenSize.X, Game1.ScreenSize.Y), Color.White * damageOverlayCounter);
 
             base.Draw(spriteBatch);
         }
