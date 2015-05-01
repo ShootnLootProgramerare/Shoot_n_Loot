@@ -39,7 +39,6 @@ namespace Shoot__n_Loot.Objects
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
-            if (inventoryVisible) inventory.Draw(spriteBatch);
             base.Draw(spriteBatch);
         }
     }

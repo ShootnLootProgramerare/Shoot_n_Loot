@@ -18,8 +18,6 @@ namespace Shoot__n_Loot.Enemies
         const int nukeDamage = 30;
         const int pauseTime = 60;
 
-        byte attacks;
-        bool nuking;
         bool jumping;
         bool wasKilled;
 
@@ -42,7 +40,6 @@ namespace Shoot__n_Loot.Enemies
         protected override void OnDestroy()
         {
             SceneManager.CurrentScene.AddObject(new BabyExplosion(this, !wasKilled));
-            Debug.WriteLine("ondestroy on baby");
             base.OnDestroy();
         }
 
@@ -56,13 +53,13 @@ namespace Shoot__n_Loot.Enemies
 
             CanDie = pauseCounter >= pauseTime;
 
-            if (DistanceSquared(SceneManager.gameScene.player.Center) < range * range && !nuking)
+            if (DistanceSquared(SceneManager.gameScene.player.Center) < range * range)
             {
                 Health = 0;
                 Sprite.Frame = 0;
                 Sprite.AnimationSpeed = 15f / 60;
             }
-            else if (DistanceSquared(SceneManager.gameScene.player.Center) < sightRadius * sightRadius && !nuking)
+            else if (DistanceSquared(SceneManager.gameScene.player.Center) < sightRadius * sightRadius)
             {
                 MoveTowardsPlayer(Speed);
                 if (Math.Abs(DistanceSquared(SceneManager.gameScene.player.Center) - jumpDist * jumpDist) < 30 && !jumping)
@@ -82,12 +79,11 @@ namespace Shoot__n_Loot.Enemies
                 jumping = false;
             }
 
-            base.Update(); //shouldnt animate more, the rest doesnt matter either
+            base.Update();
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (pauseCounter >= pauseTime) base.Draw(spriteBatch);
-            //spriteBatch.DrawString(TextureManager.font, jumping.ToString() + "\n" + Math.Sqrt(DistanceSquared(SceneManager.gameScene.player.Center)), Center, Color.Black);
         }
     }
 }

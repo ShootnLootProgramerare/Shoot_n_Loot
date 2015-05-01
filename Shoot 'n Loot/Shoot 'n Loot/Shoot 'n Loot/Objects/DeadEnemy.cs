@@ -23,12 +23,21 @@ namespace Shoot__n_Loot.Objects
             FillStacks();
         }
 
+        public void UpdateInventory()
+        {
+            base.Update(); 
+        }
+
         public override void Update()
         {
             lifeTime++;
             if (lifeTime > MAX_LIFE) SceneManager.CurrentScene.RemoveObject(this);
-           inventoryVisible = DistanceSquared(SceneManager.gameScene.player.Center) < 10000;
-           base.Update();
+            if (Sprite.Area.Intersects(SceneManager.gameScene.player.Sprite.Area)) EnemyInvetoryRenderer.Submit(this);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            Sprite.Draw(spriteBatch);
         }
     }
 }

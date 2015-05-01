@@ -45,8 +45,10 @@ namespace Shoot__n_Loot
             {
                 if (player.DistanceSquared(c.Center) < Math.Pow(MAXSPAWNDIST, 2) && player.DistanceSquared(c.Center) > Math.Pow(MINSPAWNDIST, 2)) c.SpawnZombie(objects);
             }
-         
+
+            EnemyInvetoryRenderer.Init();
             base.Update();
+            EnemyInvetoryRenderer.Update();
         }
 
         public int NoOfZombies()
@@ -58,6 +60,7 @@ namespace Shoot__n_Loot
         {
             Map.Draw(spriteBatch);
             base.Draw(spriteBatch);
+            EnemyInvetoryRenderer.Draw(spriteBatch);
         }
     }
 }

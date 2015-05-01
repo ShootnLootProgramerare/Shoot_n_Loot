@@ -116,6 +116,7 @@
     <Compile Include="Enemies\FatLady.cs" />
     <Compile Include="Enemies\Fisherman.cs" />
     <Compile Include="Enemies\Onelegged.cs" />
+    <Compile Include="EnemyInvetoryRenderer.cs" />
     <Compile Include="Objects\BabyExplosion.cs" />
     <Compile Include="Objects\Boat.cs" />
     <Compile Include="Objects\DeadEnemy.cs" />

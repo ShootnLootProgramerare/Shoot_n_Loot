@@ -11,7 +11,7 @@ namespace Shoot__n_Loot.Objects
 {
     class BabyExplosion : GameObject
     {
-        const float explosionRadius = 100;
+        const float explosionRadius = 200;
         const float damage = 20;
         bool doesDamage;
 
