@@ -148,7 +148,7 @@ namespace Shoot__n_Loot
         {
             foreach (ObjectWithInventory o in SceneManager.CurrentScene.objects.Where(item => item is ObjectWithInventory))
             {
-                if (!o.inventoryVisible) continue;
+                if (!o.inventoryVisible && EnemyInvetoryRenderer.closest != o) continue;
                 Inventory Inventory = o.inventory;
                 for (int x = 0; x < Inventory.Width; x++)
                 {

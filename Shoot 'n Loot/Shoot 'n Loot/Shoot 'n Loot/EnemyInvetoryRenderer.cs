@@ -11,7 +11,7 @@ namespace Shoot__n_Loot
 {
     static class EnemyInvetoryRenderer
     {
-        static DeadEnemy closest;
+        public static DeadEnemy closest;
         static float dist;
 
         public static void Init() 
@@ -34,7 +34,11 @@ namespace Shoot__n_Loot
 
         public static void Update()
         {
-            if (closest != null) closest.UpdateInventory();
+            if (closest != null)
+            {
+                Debug.WriteLine("updating eir");
+                closest.UpdateInventory();
+            }
         }
 
         public static void Draw(SpriteBatch batch)

@@ -3,6 +3,7 @@ using Shoot__n_Loot.InvenoryStuff;
 using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -29,7 +30,8 @@ namespace Shoot__n_Loot.Base_Classes
 
         public override void Update()
         {
-            if (inventoryVisible && SceneManager.gameScene.player.inventoryVisible) inventory.Update(new Point(0, 0), isPlayerInventory); //TODO: some stuff should be restricted to the players inventory
+            inventory.Update(new Point(0, 0), isPlayerInventory);
+            if (!isPlayerInventory) Debug.WriteLine("iventory was updated");
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)

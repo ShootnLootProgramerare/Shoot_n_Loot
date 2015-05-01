@@ -143,7 +143,7 @@ namespace Shoot__n_Loot
             {
                 inventory.Update(new Point(0, 0), true);
                 weapon.CustomizingUpdate();
-                InventoryUpdate();
+                //InventoryUpdate();
             }
 
             Move();
@@ -156,7 +156,7 @@ namespace Shoot__n_Loot
             }
         }
 
-        void InventoryUpdate()
+        public void InventoryUpdate()
         {
             if (Input.newMs.RightButton == ButtonState.Pressed)
             {

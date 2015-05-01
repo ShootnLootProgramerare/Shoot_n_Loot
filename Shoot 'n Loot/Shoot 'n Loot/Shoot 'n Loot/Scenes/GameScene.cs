@@ -49,6 +49,7 @@ namespace Shoot__n_Loot
             EnemyInvetoryRenderer.Init();
             base.Update();
             EnemyInvetoryRenderer.Update();
+            player.InventoryUpdate();
         }
 
         public int NoOfZombies()

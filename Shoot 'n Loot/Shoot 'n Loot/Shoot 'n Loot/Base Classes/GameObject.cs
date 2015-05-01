@@ -156,7 +156,7 @@ namespace Shoot__n_Loot
         /// <param name="tileColission"></param>
         protected void Move(bool tileColission)
         {
-            if (tileColission) MoveWithTileCollision();
+            if (tileColission) MoveWithTileCollision(Velocity);
             else Move(Velocity.X, Velocity.Y);
         }
 
@@ -186,32 +186,40 @@ namespace Shoot__n_Loot
         /// <summary>
         /// moves the object on the map using this.Velocity, colliding with tiles and setting the velocity to 0 in the necessary axees if it hits something. Uses this.hitbox, which can be overridden.
         /// </summary>
-        private void MoveWithTileCollision()
+        public void MoveWithTileCollision(Vector2 Velocity)
         {
             CollidedOnX = CollidedOnY = false;
 
             List<Tile> solidTiles = CloseSolidTiles;
 
-            Move(Velocity.X, 0);
-            int x = Velocity.X.CompareTo(0);
-            int _x = 0;
-            while (IsCollidingWithAny(solidTiles) && _x <= Math.Abs(Velocity.X) + 1)
+            const int steps = 5;
+            float x = Velocity.X / steps;
+            float y = Velocity.Y / steps;
+
+            for (int i = 0; i < steps; i++)
             {
-                Move(-x, 0);
-                Velocity = new Vector2(0, Velocity.Y);
-                CollidedOnX = true;
-                //_x++;
+                Move(x, 0);
+
+                if (IsCollidingWithAny(solidTiles))
+                {
+                    Move(-x, 0);
+                    Velocity = new Vector2(0, Velocity.Y);
+                    CollidedOnX = true;
+                    break;
+                }
             }
 
-            Move(0, Velocity.Y);
-            int y = Velocity.Y.CompareTo(0);
-            int _y = 0;
-            while (IsCollidingWithAny(solidTiles) && _y <= Math.Abs(Velocity.Y) + 1)
+            for (int i = 0; i < steps; i++)
             {
-                Move(0, -y);
-                Velocity = new Vector2(Velocity.X, 0);
-                CollidedOnY = true;
-                //_y++;
+                Move(0, y);
+
+                if (IsCollidingWithAny(solidTiles))
+                {
+                    Velocity = new Vector2(Velocity.X, 0);
+                    Move(0, -y);
+                    CollidedOnY = true;
+                    break;
+                }
             }
         }
     }

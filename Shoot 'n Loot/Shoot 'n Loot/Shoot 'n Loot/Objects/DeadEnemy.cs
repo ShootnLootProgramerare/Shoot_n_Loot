@@ -5,6 +5,7 @@ using Shoot__n_Loot.Scenes;
 using Shoot__n_Loot.WeaponClasses;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -25,6 +26,7 @@ namespace Shoot__n_Loot.Objects
 
         public void UpdateInventory()
         {
+            Debug.WriteLine("deadenemy inventory was updated");
             base.Update(); 
         }
 
