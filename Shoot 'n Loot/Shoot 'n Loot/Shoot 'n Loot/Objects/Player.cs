@@ -243,15 +243,18 @@ namespace Shoot__n_Loot
             }
             else
             {
-                if (Sprite.EndOfAnim)
+                if (Sprite.IsAtStartOfFrame(MeleeWeapon.DamageFrame))
                 {
-                    meleeAttackTimer = MeleeWeapon.AttackSpeed;
-                    SetRegularSprite();
                     const float WEAPON_RANGE = 80;
                     foreach (GameObject g in SceneManager.gameScene.objects.Where(e => e.Type == "Enemy").Where(e => e.DistanceSquared(SceneManager.gameScene.player.Center) < WEAPON_RANGE * WEAPON_RANGE))
                     {
                         g.Health -= MeleeWeapon.Damage;
                     }
+                }
+                else if (Sprite.EndOfAnim)
+                {
+                    meleeAttackTimer = MeleeWeapon.AttackSpeed;
+                    SetRegularSprite();
                 }
             }
         }

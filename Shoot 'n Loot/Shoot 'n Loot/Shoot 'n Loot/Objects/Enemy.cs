@@ -30,7 +30,7 @@ namespace Shoot__n_Loot
         protected float range;
         protected bool attacking;
 
-        byte walkFrames, attackFrames;
+        byte walkFrames, attackFrames, damageFrame;
         float walkAnimSpeed, attackAnimSpeed;
         Point frameSize;
 
@@ -68,13 +68,14 @@ namespace Shoot__n_Loot
             this.range = range;
         }
 
-        protected void SetAnimVars(Point frameSize, byte walkFrames, float walkAnimSpeed, byte attackFrames, float attackAnimSpeed)
+        protected void SetAnimVars(Point frameSize, byte walkFrames, float walkAnimSpeed, byte attackFrames, float attackAnimSpeed, byte damageFrame)
         {
             this.frameSize = frameSize;
             this.walkFrames = walkFrames;
             this.walkAnimSpeed = walkAnimSpeed;
             this.attackFrames = attackFrames;
             this.attackAnimSpeed = attackAnimSpeed;
+            this.damageFrame = damageFrame;
             Sprite.Origin = new Vector2(frameSize.X / 2, frameSize.Y / 2);
         }
 
@@ -209,7 +210,7 @@ namespace Shoot__n_Loot
         /// </summary>
         protected void Attacking()
         {
-            if (Sprite.EndOfAnim)
+            if (Sprite.IsAtStartOfFrame(damageFrame))
             {
                 attacking = false;
 

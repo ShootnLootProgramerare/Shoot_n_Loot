@@ -14,7 +14,7 @@ namespace Shoot__n_Loot.Enemies
             : base(position, TextureManager.fatLadyWalk, TextureManager.fatLadyAttack, TextureManager.deadLady)
         {
             SetGameplayVars(3, 1, 1, 100);
-            SetAnimVars(new Point(100, 100), 4, .1f, 4, .1f);
+            SetAnimVars(new Point(100, 100), 4, .1f, 4, .1f, 3);
             baes = new List<Baby>();
         }
 

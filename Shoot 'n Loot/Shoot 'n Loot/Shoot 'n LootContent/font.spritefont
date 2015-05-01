@@ -11,7 +11,7 @@ with.
     <!--
     Modify this string to change the font that will be imported.
     -->
-    <FontName>Forte</FontName>
+    <FontName>Segoe Ui Mono</FontName>
 
     <!--
     Size is a float value, measured in points. Modify this value to change

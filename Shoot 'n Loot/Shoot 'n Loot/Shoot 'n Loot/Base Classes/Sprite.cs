@@ -125,6 +125,11 @@ namespace Shoot__n_Loot
             this.FrameSize = frameSize;
         }
 
+        public bool IsAtStartOfFrame(byte frame)
+        {
+            return frame == this.Frame && frameCounter < AnimationSpeed;
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             if(Frames >= 1)

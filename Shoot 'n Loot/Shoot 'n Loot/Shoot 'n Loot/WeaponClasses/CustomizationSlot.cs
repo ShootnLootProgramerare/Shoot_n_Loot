@@ -43,8 +43,8 @@ namespace Shoot__n_Loot.WeaponClasses
                 {
                     if (buttons.Count == 0)
                     {
-                        buttons.Add(new Button("Remove", WorldPosition, RemoveItem));
-                        buttons[0].Area = new Rectangle(WorldPosition.X, WorldPosition.Y + 100, WorldPosition.Width, WorldPosition.Height);
+                        buttons.Add(new Button("Remove", WorldPosition //make it higher and closer in general
+                            , RemoveItem));
                     }
                     else
                     {

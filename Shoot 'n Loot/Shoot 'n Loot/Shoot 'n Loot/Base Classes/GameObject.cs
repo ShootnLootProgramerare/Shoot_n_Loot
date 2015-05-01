@@ -28,13 +28,17 @@ namespace Shoot__n_Loot
         public bool Dead { get; set; }
         public float Health { get { return health; } set 
         {
-            OnTakeDamage(health - value);
-            health = value;
-            if (health > maxHealth) health = maxHealth; 
-            if (health <= 0 && CanDie) 
-            { 
-                Dead = true; OnDestroy(); 
-            } 
+            if (CanDie)
+            {
+                OnTakeDamage(health - value);
+                health = value;
+                if (health > maxHealth) health = maxHealth;
+                if (health <= 0)
+                {
+                    Dead = true; 
+                    OnDestroy();
+                }
+            }
         } }
         public float MaxHealth { get { return maxHealth; } set { maxHealth = health = value; } }
         public bool CanDie { get; set; }
