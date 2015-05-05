@@ -29,7 +29,7 @@ namespace Shoot__n_Loot.Enemies
             else if (DistanceSquared(SceneManager.gameScene.player.Center) < Math.Pow(range, 2))
             {
                 Velocity = Vector2.Zero;
-                attacking = true;
+                StartAttack();
             }
             else if (DistanceSquared(SceneManager.gameScene.player.Center) < 250000)
             {

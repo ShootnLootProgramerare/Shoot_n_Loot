@@ -212,8 +212,6 @@ namespace Shoot__n_Loot
         {
             if (Sprite.IsAtStartOfFrame(damageFrame))
             {
-                attacking = false;
-
                 if (DistanceSquared(SceneManager.gameScene.player.Center) <= range * range)
                 {
                     SoundManager.playerHurt.Play();
@@ -221,6 +219,7 @@ namespace Shoot__n_Loot
                     SceneManager.gameScene.player.bleeding += .001f; // maybe this should be different for different zombies
                 }
             }
+            else if (Sprite.EndOfAnim) attacking = false;
         }
 
         protected void Animate()
@@ -253,9 +252,18 @@ namespace Shoot__n_Loot
             }
             else
             {
-                Sprite.SetTexture(attackAnims[(int)direction], attackFrames, frameSize);
-                Sprite.AnimationSpeed = attackAnimSpeed;
+                //Sprite.SetTexture(attackAnims[(int)direction], attackFrames, frameSize);
+                //Sprite.AnimationSpeed = attackAnimSpeed;
             }
+        }
+
+        protected void StartAttack()
+        {
+            if (attacking) return;
+            attacking = true;
+            Sprite.Frame = 0;
+            Sprite.SetTexture(attackAnims[(int)direction], attackFrames, frameSize);
+            Sprite.AnimationSpeed = attackAnimSpeed;
         }
 
         protected override void OnDestroy()

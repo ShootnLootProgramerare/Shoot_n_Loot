@@ -1,8 +1,7 @@
-döda zombies är alltid ovanpå spelaren
-random damage ibland till zombies
 kollision funkar fortfarande inte
 fastnar i animation om man försöker använda vapen samtidigt som attackanimation
 gör båt-bränsle grejen mer tydlig
 gör fiender bättre på att komma runt hörn
 fisherman animspeed när stilla
 enemy attack animations verkar inte resetta sin frame när de avbryter mitt i
+man kan lägga i för tunga saker, antagligen pga stora stacks bara kollar ett item

@@ -30,7 +30,7 @@ namespace Shoot__n_Loot.Enemies
             }
             else
             {
-                attacking = true;
+                StartAttack();
                 Velocity = Vector2.Zero;
             }
             base.Update();
