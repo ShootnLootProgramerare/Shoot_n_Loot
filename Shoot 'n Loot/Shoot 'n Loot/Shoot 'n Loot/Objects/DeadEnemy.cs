@@ -30,7 +30,6 @@ namespace Shoot__n_Loot.Objects
 
         public void UpdateInventory()
         {
-            Debug.WriteLine("deadenemy inventory was updated");
             base.Update(); 
         }
 

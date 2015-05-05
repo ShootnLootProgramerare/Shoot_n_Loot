@@ -50,6 +50,8 @@ namespace Shoot__n_Loot
 
         float damageOverlayCounter;
 
+        bool attacking;
+
         private Point CUSTOMIZINGINVENTORYOFFSET { get { return new Point(0, 100); } }
 
         public Player()
@@ -240,8 +242,9 @@ namespace Shoot__n_Loot
                 Sprite.Frame = 0;
                 Sprite.AnimationSpeed = .2f;
                 meleeAttackTimer = -1;
+                attacking = true;
             }
-            else
+            else if (attacking)
             {
                 if (Sprite.IsAtStartOfFrame(MeleeWeapon.DamageFrame))
                 {
@@ -254,6 +257,7 @@ namespace Shoot__n_Loot
                 else if (Sprite.EndOfAnim)
                 {
                     meleeAttackTimer = MeleeWeapon.AttackSpeed;
+                    attacking = false;
                     SetRegularSprite();
                 }
             }

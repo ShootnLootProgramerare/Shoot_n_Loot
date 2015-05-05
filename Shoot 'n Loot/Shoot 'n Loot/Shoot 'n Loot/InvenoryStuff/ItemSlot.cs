@@ -74,16 +74,17 @@ namespace Shoot__n_Loot.InvenoryStuff
 
         public bool CanContain(Item i)
         {
-            Debug.Write("checking if itemSlot " + this.x + ", " + this.y + " can contain " + i.Properties.InfoText);
+            //Debug.Write("checking if itemSlot " + this.x + ", " + this.y + " can contain " + i.Properties.InfoText);
             //first check if this slot already contains that item
             if (parent.Weight + i.Properties.Weight > parent.MaxWeight)
             {
-                Debug.WriteLine("this inventory is too heavy");
+                //Debug.WriteLine("this inventory is too heavy");
                 return false;
             }
             if (Item != null)
             {
-                if (Item.Properties != i.Properties) { Debug.WriteLine("slot " + x + ", " + y + " contains a " + Item.Properties.InfoText + ". Stacksize = " + StackSize); return false; }
+                if (Item.Properties != i.Properties) { //Debug.WriteLine("slot " + x + ", " + y + " contains a " + Item.Properties.InfoText + ". Stacksize = " + StackSize); 
+                    return false; }
                 else if (StackSize < Item.Properties.MaxStack) return true; //if its the same and the stack is not maxed, the item fits
                 else return false;
             }
@@ -94,7 +95,8 @@ namespace Shoot__n_Loot.InvenoryStuff
                 {
                     for (int y = this.y; y < i.Properties.Height + this.y; y++)
                     {
-                        if (s.ExtendsTo(x, y)) { Debug.WriteLine("slot " + x + ", " + y + " is obstructed by " + s.Item.Properties.InfoText); return false; }
+                        if (s.ExtendsTo(x, y)) { //Debug.WriteLine("slot " + x + ", " + y + " is obstructed by " + s.Item.Properties.InfoText); 
+                            return false; }
                     }
                 }
             }
@@ -103,7 +105,8 @@ namespace Shoot__n_Loot.InvenoryStuff
             {
                 for (int y = 0; y < i.Properties.Height; y++)
                 {
-                    if (x + this.x >= parent.Width || y + this.y >= parent.Height || parent.Slots[x + this.x, y + this.y].Item != null) { Debug.WriteLine("adding to slot " + x + ", " + y + " would obstruct other slot"); return false; }
+                    if (x + this.x >= parent.Width || y + this.y >= parent.Height || parent.Slots[x + this.x, y + this.y].Item != null) { //Debug.WriteLine("adding to slot " + x + ", " + y + " would obstruct other slot"); 
+                        return false; }
                 }
             }
             //if none of the above is true, the item fits
@@ -127,7 +130,7 @@ namespace Shoot__n_Loot.InvenoryStuff
                 y >= this.y 
                     && 
                 x >= this.x;
-            Debug.WriteLine("slot at " + this.x + ", " + this.y + (b ? " does not" : "" ) + " obstructs the slot at " + x + ", " + y);
+            //Debug.WriteLine("slot at " + this.x + ", " + this.y + (b ? " does not" : "" ) + " obstructs the slot at " + x + ", " + y);
             return b;
         }
 
@@ -143,7 +146,7 @@ namespace Shoot__n_Loot.InvenoryStuff
 
                 if (StackSize == 0)
                 {
-                    Debug.WriteLine("no items in this slot");
+                    //Debug.WriteLine("no items in this slot");
                     Item = null;
                     break;
                 }
@@ -263,7 +266,7 @@ namespace Shoot__n_Loot.InvenoryStuff
                 {
                     if (buttons != null) foreach (Button b in buttons) b.Draw(spriteBatch);
                 }
-                Debug.WriteLine(hovering + ", " + ShowingOptions);
+                //Debug.WriteLine(hovering + ", " + ShowingOptions);
                 if (hovering || ShowingOptions)
                 {
                     spriteBatch.Draw(TextureManager.inventorySlot, infoPos, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000001f);

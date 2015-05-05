@@ -22,11 +22,11 @@ namespace Shoot__n_Loot
 
         public static void Submit(DeadEnemy e)
         {
-            Debug.WriteLine("enemy submitted");
+            //Debug.WriteLine("enemy submitted");
             float d = SceneManager.gameScene.player.DistanceSquared(e.Center);
             if (d < dist)
             {
-                Debug.WriteLine("it was best");
+                //Debug.WriteLine("it was best");
                 dist = d;
                 closest = e;
             }
@@ -36,7 +36,7 @@ namespace Shoot__n_Loot
         {
             if (closest != null)
             {
-                Debug.WriteLine("updating eir");
+                //Debug.WriteLine("updating eir");
                 closest.UpdateInventory();
             }
         }
