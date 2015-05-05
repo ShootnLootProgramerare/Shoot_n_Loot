@@ -260,9 +260,6 @@ namespace Shoot__n_Loot
 
         protected override void OnDestroy()
         {
-            //create particles, spawn dropped items etc
-            //SceneManager.gameScene.AddObject(new Enemy(new Vector2(400), EnemyType.Fisherman));
-            //SceneManager.CurrentScene.AddObject(new ItemContainer(Position));
             SoundManager.zombieHurt.Play();
             if (deadTexture != null) SceneManager.CurrentScene.AddObject(new DeadEnemy(deadTexture, Position));
         }

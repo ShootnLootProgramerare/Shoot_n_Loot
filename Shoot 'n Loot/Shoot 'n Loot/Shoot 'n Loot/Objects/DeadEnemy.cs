@@ -20,7 +20,11 @@ namespace Shoot__n_Loot.Objects
         {
             Sprite = new Sprite(texture, position, new Vector2(texture.Width, texture.Height));
             inventory = new Inventory(this, new Point(200, 0), 2, 2, 10);
-            for (int i = 0; i < 3; i++) inventory.Add(Items.RandomItem(Position));
+            for (int i = 0; i < 3; i++)
+            {
+                Item item = Items.RandomItem(Position);
+                if (inventory.Fits(item)) inventory.Add(item);
+            }
             FillStacks();
         }
 
@@ -33,13 +37,13 @@ namespace Shoot__n_Loot.Objects
         public override void Update()
         {
             lifeTime++;
-            if (lifeTime > MAX_LIFE) SceneManager.CurrentScene.RemoveObject(this);
+            if (lifeTime > MAX_LIFE && !Camera.AreaIsVisible(Sprite.Area)) SceneManager.CurrentScene.RemoveObject(this);
             if (Sprite.Area.Intersects(SceneManager.gameScene.player.Sprite.Area)) EnemyInvetoryRenderer.Submit(this);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Sprite.Draw(spriteBatch);
+            base.Draw(spriteBatch, false);
         }
     }
 }

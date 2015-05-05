@@ -34,10 +34,15 @@ namespace Shoot__n_Loot.Base_Classes
             if (!isPlayerInventory) Debug.WriteLine("iventory was updated");
         }
 
+        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, bool drawInventory)
+        {
+            if (inventoryVisible && SceneManager.gameScene.player.inventoryVisible && drawInventory) inventory.Draw(spriteBatch);
+            base.Draw(spriteBatch);
+        }
+
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
-            if (inventoryVisible && SceneManager.gameScene.player.inventoryVisible) inventory.Draw(spriteBatch);
-            base.Draw(spriteBatch);
+            this.Draw(spriteBatch, true);
         }
     }
 }

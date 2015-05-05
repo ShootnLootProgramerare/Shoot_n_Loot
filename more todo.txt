@@ -1,0 +1,3 @@
+döda zombies är alltid ovanpå spelaren
+random damage ibland till zombies
+kollision funkar fortfarande inte
