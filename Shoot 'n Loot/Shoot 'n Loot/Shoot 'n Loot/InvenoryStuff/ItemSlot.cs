@@ -22,7 +22,7 @@ namespace Shoot__n_Loot.InvenoryStuff
 
         Rectangle infoPos;
 
-        Inventory parent;
+        public Inventory parent;
 
         int x, y;
 
@@ -70,6 +70,17 @@ namespace Shoot__n_Loot.InvenoryStuff
             else StackSize++;
 
             Item = item;
+        }
+
+
+        /// <summary>
+        /// tries to add an item to this slot, if cant tries to add to parent inventory
+        /// </summary>
+        /// <param name="item"></param>
+        public void SoftAdd(Item item)
+        {
+            if (CanContain(item)) Add(item);
+            else parent.Add(item);
         }
 
         public bool CanContain(Item i)

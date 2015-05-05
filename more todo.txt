@@ -2,3 +2,4 @@ kollision funkar fortfarande inte
 gör båt-bränsle grejen mer tydlig
 gör fiender bättre på att komma runt hörn
 man kan lägga i för tunga saker, antagligen pga stora stacks bara kollar ett item
+saker försvinner om man försöker lägga dem där de inte får plats

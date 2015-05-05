@@ -201,7 +201,7 @@ namespace Shoot__n_Loot
                         {
                             for (byte j = 0; j < noOfItems; j++)
                             {
-                                i.Add(draggedItem);
+                                if (i.CanContain(draggedItem)) i.SoftAdd(draggedItem);
                             }
                         }
                         else
