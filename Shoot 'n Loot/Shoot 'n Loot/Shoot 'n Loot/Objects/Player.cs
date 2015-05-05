@@ -76,6 +76,14 @@ namespace Shoot__n_Loot
             FillStacks();
         }
 
+        public void StopUsingMelee()
+        {
+            attacking = false;
+            MeleeWeapon = null;
+            meleeAttackTimer = 0;
+            SetRegularSprite();
+        }
+
         void JohansSkitAkaAudioStuff()
         {
             tileX = (int)Center.X / Tile.size;
@@ -141,7 +149,7 @@ namespace Shoot__n_Loot
                 weapon.ShootingUpdate(inventory);
                 Animate();
             }
-            else if (inventoryVisible)
+            else
             {
                 inventory.Update(new Point(0, 0), true);
                 weapon.CustomizingUpdate();

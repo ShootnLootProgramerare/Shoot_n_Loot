@@ -330,7 +330,7 @@ namespace Shoot__n_Loot
 
         void StopUsingMelee()
         {
-            SceneManager.gameScene.player.MeleeWeapon = null;
+            SceneManager.gameScene.player.StopUsingMelee();
         }
 
         #endregion
