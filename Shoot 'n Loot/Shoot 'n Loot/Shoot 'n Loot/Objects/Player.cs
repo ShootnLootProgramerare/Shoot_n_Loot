@@ -260,8 +260,7 @@ namespace Shoot__n_Loot
             {
                 if (Sprite.IsAtStartOfFrame(MeleeWeapon.DamageFrame))
                 {
-                    const float WEAPON_RANGE = 80;
-                    foreach (GameObject g in SceneManager.gameScene.objects.Where(e => e.Type == "Enemy").Where(e => e.DistanceSquared(SceneManager.gameScene.player.Center) < WEAPON_RANGE * WEAPON_RANGE))
+                    foreach (GameObject g in SceneManager.gameScene.objects.Where(e => e is Enemy && e.BulletCollider.Intersects(BulletCollider)))
                     {
                         g.Health -= MeleeWeapon.Damage;
                     }

@@ -17,7 +17,7 @@ namespace Shoot__n_Loot.Enemies
         public Onelegged(Vector2 position)
             : base(position, TextureManager.oneleggedWalk, TextureManager.oneleggedAttack, TextureManager.deadOneLeg)
         {
-            SetGameplayVars(2, 1, .7f, 100);
+            SetGameplayVars(2, 1, .4f, 100);
             SetAnimVars(new Point(100, 150), 4, 9f / 60, 4, 6f / 60, 2);
         }
 

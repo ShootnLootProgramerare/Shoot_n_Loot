@@ -9,13 +9,24 @@ namespace Shoot__n_Loot.Enemies
 {
     class FatLady : Enemy
     {
-        List<Baby> baes;
+        public override Rectangle MapCollider
+        {
+            get
+            {
+                const float w = .2f, h = .2f;
+                return new Rectangle(
+                    (int)(base.MapCollider.X + base.MapCollider.Width * (1 - w) * .125f),
+                    (int)(base.MapCollider.Y + base.MapCollider.Height * (1 - h)),
+                    (int)(base.MapCollider.Width * w),
+                    (int)(base.MapCollider.Height * h));
+            }
+        }
+
         public FatLady(Vector2 position) 
             : base(position, TextureManager.fatLadyWalk, TextureManager.fatLadyAttack, TextureManager.deadLady)
         {
             SetGameplayVars(3, 1, 1, 100);
             SetAnimVars(new Point(100, 100), 4, .1f, 4, 4f / 60, 3);
-            baes = new List<Baby>();
         }
 
         public override void Update()
@@ -41,6 +52,12 @@ namespace Shoot__n_Loot.Enemies
             SceneManager.CurrentScene.AddObject(new Baby(Position));
             SceneManager.CurrentScene.AddObject(new Baby(Position));
             base.OnDestroy();
+        }
+
+        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(TextureManager.gameOverBackground, MapCollider, Color.White * .5f);
+            base.Draw(spriteBatch);
         }
     }
 }

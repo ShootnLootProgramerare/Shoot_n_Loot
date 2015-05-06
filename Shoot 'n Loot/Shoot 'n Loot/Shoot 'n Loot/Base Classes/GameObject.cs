@@ -192,33 +192,34 @@ namespace Shoot__n_Loot
 
             List<Tile> solidTiles = CloseSolidTiles;
 
-            const int steps = 5;
+            const int steps = 10;
             float x = Velocity.X / steps;
             float y = Velocity.Y / steps;
 
             for (int i = 0; i < steps; i++)
             {
-                Move(x, 0);
-
-                if (IsCollidingWithAny(solidTiles))
+                if (!CollidedOnX)
                 {
-                    Move(-x, 0);
-                    Velocity = new Vector2(0, Velocity.Y);
-                    CollidedOnX = true;
-                    break;
+                    Move(x, 0);
+
+                    if (IsCollidingWithAny(solidTiles) && !CollidedOnX)
+                    {
+                        Move(-x * 1.001f, 0);
+                        Velocity = new Vector2(0, Velocity.Y);
+                        CollidedOnX = true;
+                    }
                 }
-            }
 
-            for (int i = 0; i < steps; i++)
-            {
-                Move(0, y);
-
-                if (IsCollidingWithAny(solidTiles))
+                if (!CollidedOnY)
                 {
-                    Velocity = new Vector2(Velocity.X, 0);
-                    Move(0, -y);
-                    CollidedOnY = true;
-                    break;
+                    Move(0, y);
+
+                    if (IsCollidingWithAny(solidTiles))
+                    {
+                        Velocity = new Vector2(Velocity.X, 0);
+                        Move(0, -y * 1.001f);
+                        CollidedOnY = true;
+                    }
                 }
             }
         }

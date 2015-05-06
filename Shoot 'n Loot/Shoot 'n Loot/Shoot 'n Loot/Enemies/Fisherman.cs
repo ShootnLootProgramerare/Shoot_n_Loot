@@ -16,7 +16,7 @@ namespace Shoot__n_Loot.Enemies
             : base(position, TextureManager.fishermanWalk, TextureManager.fishermanAttack, TextureManager.deadFisherman)
         {
             SetGameplayVars(2.5f, 8, 1.2f, 90);
-            SetAnimVars(new Point(200, 100), 4, 9f / 60, 5, 3f / 60, 2);
+            SetAnimVars(new Point(200, 100), 4, 7f / 60, 5, 4f / 60, 2);
         }
 
         public override void Update()

@@ -198,7 +198,7 @@ namespace Shoot__n_Loot
                         Vector2 v = g.Position - Position;
                         if (v == Vector2.Zero) v = new Vector2((float)Game1.random.NextDouble() - .5f, (float)Game1.random.NextDouble()- .5f);
                         v.Normalize();
-                        Position += v * -1;
+                        MoveWithTileCollision(-v);
                         //Debug.WriteLine("moving zombie, distance = " + (g.Position - Position).Length());
                     }
                 }
@@ -212,7 +212,7 @@ namespace Shoot__n_Loot
         {
             if (Sprite.IsAtStartOfFrame(damageFrame))
             {
-                if (DistanceSquared(SceneManager.gameScene.player.Center) <= range * range)
+                if (BulletCollider.Intersects(SceneManager.gameScene.player.BulletCollider))
                 {
                     SoundManager.playerHurt.Play();
                     SceneManager.gameScene.player.Health -= Damage;

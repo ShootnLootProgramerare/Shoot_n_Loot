@@ -1,4 +1,4 @@
 kollision funkar fortfarande inte
 gör båtbränslegrejen mer tydlig
 gör fiender bättre på att komma runt hörn
-fixa skyltar
+z.sorting i vapeninfon
