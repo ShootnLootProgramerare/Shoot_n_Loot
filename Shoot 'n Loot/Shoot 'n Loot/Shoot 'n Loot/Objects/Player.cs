@@ -134,7 +134,7 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            drawHealth += (Health - drawHealth) / 10;
+            drawHealth += (Health - drawHealth) / 30;
 
             damageOverlayCounter = damageOverlayCounter / 1.1f;
 
