@@ -29,6 +29,21 @@ namespace Shoot__n_Loot
                     SceneManager.gameScene.RemoveObject(this);
                 }
             }
+
+            foreach (GameObject g in SceneManager.CurrentScene.objects)
+            {
+                if (g is Item && g != this)
+                {
+                    if (g.DistanceSquared(Position) < (((Item)g).Properties == Properties ? 70 : 200))
+                    {
+                        Vector2 v = g.Position - Position;
+                        if (v == Vector2.Zero) v = new Vector2((float)Game1.random.NextDouble() - .5f, (float)Game1.random.NextDouble() - .5f);
+                        v.Normalize();
+                        Position += v * -1;
+                        //Debug.WriteLine("moving zombie, distance = " + (g.Position - Position).Length());
+                    }
+                }
+            }
         }
 
         /// <summary>
