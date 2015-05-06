@@ -50,6 +50,8 @@ namespace Shoot__n_Loot
 
         float damageOverlayCounter;
 
+        float drawHealth;
+
         bool attacking;
 
         private Point CUSTOMIZINGINVENTORYOFFSET { get { return new Point(0, 100); } }
@@ -132,6 +134,8 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
+            drawHealth += (Health - drawHealth) / 10;
+
             damageOverlayCounter = damageOverlayCounter / 1.1f;
 
             Hunger += .0005f;
@@ -365,7 +369,7 @@ namespace Shoot__n_Loot
 
             //hpBar.Draw(spriteBatch, base.Health / base.MaxHealth);
 
-            healthBar.Draw(spriteBatch, Health / MaxHealth);
+            healthBar.Draw(spriteBatch, drawHealth / MaxHealth);
             hungerBar.Draw(spriteBatch, Hunger / 25f);
 
             if (damageOverlayCounter > .05f) spriteBatch.Draw(TextureManager.damageOverlay, new Rectangle((int)Camera.TotalOffset.X, (int)Camera.TotalOffset.Y, Game1.ScreenSize.X, Game1.ScreenSize.Y), Color.White * damageOverlayCounter);

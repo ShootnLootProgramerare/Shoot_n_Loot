@@ -40,7 +40,6 @@ namespace Shoot__n_Loot
                         if (v == Vector2.Zero) v = new Vector2((float)Game1.random.NextDouble() - .5f, (float)Game1.random.NextDouble() - .5f);
                         v.Normalize();
                         Position += v * -1;
-                        //Debug.WriteLine("moving zombie, distance = " + (g.Position - Position).Length());
                     }
                 }
             }
