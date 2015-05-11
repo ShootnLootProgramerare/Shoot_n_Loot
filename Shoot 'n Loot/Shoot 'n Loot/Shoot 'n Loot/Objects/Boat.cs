@@ -10,7 +10,7 @@ namespace Shoot__n_Loot.Objects
 {
     class Boat : GameObject
     {
-        const byte REQUIRED_FUEL = 3;
+        const byte REQUIRED_FUEL = 2;
         byte fuel;
         int time;
 
