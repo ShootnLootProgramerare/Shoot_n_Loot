@@ -1,4 +1,3 @@
-kollision funkar fortfarande inte
 gör båtbränslegrejen mer tydlig
 gör fiender bättre på att komma runt hörn
 z.sorting i vapeninfon
