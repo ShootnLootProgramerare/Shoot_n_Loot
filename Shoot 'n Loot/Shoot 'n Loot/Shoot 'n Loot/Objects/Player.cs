@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Shoot__n_Loot.Base_Classes;
+using Shoot__n_Loot.Enemies;
 using Shoot__n_Loot.InvenoryStuff;
 using Shoot__n_Loot.Objects;
 using Shoot__n_Loot.Scenes;
@@ -134,6 +135,12 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
+            //TODO: remove debug stuff here
+            if (Input.LeftClickWasJustPressed())
+            {
+                SceneManager.CurrentScene.AddObject(new Fisherman(Input.MousePosition));
+            }
+
             drawHealth += (Health - drawHealth) / 30;
 
             damageOverlayCounter = damageOverlayCounter / 1.1f;

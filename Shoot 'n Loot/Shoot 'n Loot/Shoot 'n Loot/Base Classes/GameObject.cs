@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Shoot__n_Loot.Scenes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -183,11 +185,34 @@ namespace Shoot__n_Loot
 
         protected virtual void OnTakeDamage(float amount) { }
 
+        private void GoToClosestTile()
+        {
+            List<Tile> tiles = new List<Tile>();
+            foreach (Chunk c in Map.chunks) foreach (Tile t in c.Tiles) if (DistanceSquared(t.Position) < 200 * 200 && t.Properties.IsWalkable) tiles.Add(t);
+            if (tiles.Count == 0) SceneManager.CurrentScene.RemoveObject(this);
+            else
+            {
+                Tile closest = null;
+                float dist = float.MaxValue;
+                foreach (Tile t in tiles)
+                {
+                    if (DistanceSquared(t.Position) < dist)
+                    {
+                        dist = DistanceSquared(t.Position);
+                        closest = t;
+                    }
+                }
+                Position = closest.Position + new Vector2(20, -10);
+            }
+        }
+
         /// <summary>
         /// moves the object on the map using this.Velocity, colliding with tiles and setting the velocity to 0 in the necessary axees if it hits something. Uses this.hitbox, which can be overridden.
         /// </summary>
         public void MoveWithTileCollision(Vector2 Velocity)
         {
+            bool wasStuck = CollidedOnX && CollidedOnY;
+
             CollidedOnX = CollidedOnY = false;
 
             List<Tile> solidTiles = CloseSolidTiles;
@@ -204,8 +229,11 @@ namespace Shoot__n_Loot
 
                     if (IsCollidingWithAny(solidTiles) && !CollidedOnX)
                     {
-                        Move(-x * 1.001f, 0);
+                        Move(-x * 1.01f, 0);
                         Velocity = new Vector2(0, Velocity.Y);
+
+                        if (wasStuck && IsCollidingWithAny(solidTiles)) GoToClosestTile();
+
                         CollidedOnX = true;
                     }
                 }
@@ -217,7 +245,10 @@ namespace Shoot__n_Loot
                     if (IsCollidingWithAny(solidTiles))
                     {
                         Velocity = new Vector2(Velocity.X, 0);
-                        Move(0, -y * 1.001f);
+                        Move(0, -y * 1.01f);
+
+                        if (wasStuck && IsCollidingWithAny(solidTiles)) GoToClosestTile();
+
                         CollidedOnY = true;
                     }
                 }
