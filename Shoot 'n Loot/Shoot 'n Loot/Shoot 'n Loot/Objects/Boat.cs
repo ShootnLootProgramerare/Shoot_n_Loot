@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Shoot__n_Loot.Scenes;
+using Shoot__n_Loot.WeaponClasses;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,9 +22,9 @@ namespace Shoot__n_Loot.Objects
 
         public override void Update()
         {
-            foreach (Item item in SceneManager.gameScene.objects.Where(item => item is Item)) //yo dawg, i heard you like items..
+            foreach (Item item in SceneManager.gameScene.objects.Where(item => item is Item && item.BulletCollider.Intersects(BulletCollider))) //yo dawg, i heard you like items..
             {
-                if (item.Properties.InfoText.Contains("Fuel"))
+                if (item.Properties == Items.properties[9])
                 {
                     SceneManager.gameScene.RemoveObject(item);
                     fuel++;

@@ -60,8 +60,9 @@ namespace Shoot__n_Loot
         {
             return Weight + item.Properties.Weight <= MaxWeight && SlotThatFits(item) != new Point(-1, -1);
         }
+        public
 
-        public bool Contains(ItemProperties item)
+        bool Contains(ItemProperties item)
         {
             foreach (ItemSlot s in Slots)
             {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Shoot__n_Loot.Objects;
 using Shoot__n_Loot.Scenes;
 using Shoot__n_Loot.UI;
 using Shoot__n_Loot.WeaponClasses;
@@ -208,6 +209,17 @@ namespace Shoot__n_Loot.InvenoryStuff
                 if (parent.Contains(Items.properties[16]) && isPlayerInventory) //2x4"
                 {
                     AddButton(buttons, new Button("Attach to 2x4\"", baseRect, AttachCanToWood));
+                }
+            }
+
+            if (Item.Properties == Items.properties[9] && isPlayerInventory) //its a fuel can
+            {
+                foreach (Boat b in SceneManager.CurrentScene.objects.Where(item => item is Boat)) 
+                {
+                    if (parent.parent.BulletCollider.Intersects(b.BulletCollider))
+                    {
+                        AddButton(buttons, new Button("Fuel Boat", baseRect, DropItem));
+                    }
                 }
             }
         }

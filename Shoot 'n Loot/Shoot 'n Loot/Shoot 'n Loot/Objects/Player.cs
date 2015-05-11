@@ -135,12 +135,6 @@ namespace Shoot__n_Loot
 
         public override void Update()
         {
-            //TODO: remove debug stuff here
-            if (Input.LeftClickWasJustPressed())
-            {
-                SceneManager.CurrentScene.AddObject(new Fisherman(Input.MousePosition));
-            }
-
             drawHealth += (Health - drawHealth) / 30;
 
             damageOverlayCounter = damageOverlayCounter / 1.1f;

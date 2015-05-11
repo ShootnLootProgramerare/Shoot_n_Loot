@@ -15,7 +15,7 @@ namespace Shoot__n_Loot.Enemies
             {
                 const float w = .2f, h = .2f;
                 return new Rectangle(
-                    (int)(base.MapCollider.X + base.MapCollider.Width * (1 - w) * .125f),
+                    (int)(base.MapCollider.X + base.MapCollider.Width * (1 - w) * .2f),
                     (int)(base.MapCollider.Y + base.MapCollider.Height * (1 - h)),
                     (int)(base.MapCollider.Width * w),
                     (int)(base.MapCollider.Height * h));
@@ -52,12 +52,6 @@ namespace Shoot__n_Loot.Enemies
             SceneManager.CurrentScene.AddObject(new Baby(Position));
             SceneManager.CurrentScene.AddObject(new Baby(Position));
             base.OnDestroy();
-        }
-
-        public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(TextureManager.gameOverBackground, MapCollider, Color.White * .5f);
-            base.Draw(spriteBatch);
         }
     }
 }
