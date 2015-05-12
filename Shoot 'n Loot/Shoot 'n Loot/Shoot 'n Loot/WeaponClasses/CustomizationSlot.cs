@@ -69,14 +69,17 @@ namespace Shoot__n_Loot.WeaponClasses
         {
             spriteBatch.Draw(TextureManager.inventorySlot, WorldPosition, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.0000004f);
             spriteBatch.DrawString(TextureManager.font, Type.ToString(), new Vector2(WorldPosition.X, WorldPosition.Y - 25), Color.Black);
-            if (thumbnail != null) spriteBatch.Draw(thumbnail, WorldPosition, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.00000035f);
-            //if mouseover and no buttons draw part text
-            if (Input.AreaIsHoveredOver(WorldPosition) && buttons.Count == 0)
+            if (thumbnail != null)
             {
-                const float padding = 15;
-                Vector2 size = TextureManager.font.MeasureString(partInfo);
-                spriteBatch.Draw(TextureManager.inventorySlot, new Rectangle(Input.newMs.X + (int)Camera.TotalOffset.X, Input.newMs.Y + (int)Camera.TotalOffset.Y, (int)(size.X + padding * 2), (int)(size.Y + padding * 2)), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.00000025f);
-                spriteBatch.DrawString(TextureManager.font, partInfo, new Vector2(Input.newMs.X + padding, Input.newMs.Y + padding) + Camera.TotalOffset, Color.Black);
+                spriteBatch.Draw(thumbnail, WorldPosition, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.00000035f);
+                //if mouseover and no buttons draw part text
+                if (Input.AreaIsHoveredOver(WorldPosition) && buttons.Count == 0)
+                {
+                    const float padding = 15;
+                    Vector2 size = TextureManager.font.MeasureString(partInfo);
+                    spriteBatch.Draw(TextureManager.inventorySlot, new Rectangle(Input.newMs.X + (int)Camera.TotalOffset.X, Input.newMs.Y + (int)Camera.TotalOffset.Y, (int)(size.X + padding * 2), (int)(size.Y + padding * 2)), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.00000025f);
+                    spriteBatch.DrawString(TextureManager.font, partInfo, new Vector2(Input.newMs.X + padding, Input.newMs.Y + padding) + Camera.TotalOffset, Color.Black);
+                }
             }
             foreach (Button b in buttons) b.Draw(spriteBatch);
         }

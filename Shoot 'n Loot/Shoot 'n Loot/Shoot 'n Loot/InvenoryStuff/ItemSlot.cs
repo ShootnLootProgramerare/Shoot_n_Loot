@@ -283,7 +283,7 @@ namespace Shoot__n_Loot.InvenoryStuff
             if (Item != null)
             {
                 Item.DrawInInventory(parent.PositionForItem(x, y), spriteBatch);
-                spriteBatch.DrawString(TextureManager.font, StackSize.ToString(), new Vector2(parent.PositionForItem(x, y).X, parent.PositionForItem(x, y).Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.0000002f);
+                spriteBatch.DrawString(TextureManager.font, StackSize.ToString(), new Vector2(parent.PositionForItem(x, y).X, parent.PositionForItem(x, y).Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.00000029f);
 
                 if (ShowingOptions)
                 {

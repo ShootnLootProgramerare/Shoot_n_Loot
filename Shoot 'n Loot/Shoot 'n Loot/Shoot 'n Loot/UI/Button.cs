@@ -123,8 +123,13 @@ namespace Shoot__n_Loot.UI
         
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Area, null, AdjustedColor, 0, Vector2.Zero, SpriteEffects.None, 0.0000001f);
-            spriteBatch.DrawString(TextureManager.font, Text, new Vector2(Area.X + Area.Width / 2, Area.Y + Area.Height / 2), Color.Black, 0, textSize / 2, 1, SpriteEffects.None, 0);
+            Draw(spriteBatch, 0);
+        }
+
+        public void Draw(SpriteBatch spriteBatch, float depth)
+        {
+            spriteBatch.Draw(Texture, Area, null, AdjustedColor, 0, Vector2.Zero, SpriteEffects.None, depth + .000000000001f);
+            spriteBatch.DrawString(TextureManager.font, Text, new Vector2(Area.X + Area.Width / 2, Area.Y + Area.Height / 2), Color.Black, 0, textSize / 2, 1, SpriteEffects.None, depth);
         }
     }
 }

@@ -1,3 +1,8 @@
 gör fiender bättre på att komma runt hörn
-z.sorting i vapeninfon
 fadea lighthouse, kanske träd?
+fixa gå på trä-ljudet
+väggar på hus?
+remove weapon part lägger den på marken
+lägga delar avaktiverar inte vapnet
+dubbelklickade på ett item och massa grejer hände med mitt inventory?
+titta på vapendelbeskrivningen
