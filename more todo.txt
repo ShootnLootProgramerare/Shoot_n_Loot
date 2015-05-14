@@ -1,8 +1,11 @@
 gör fiender bättre på att komma runt hörn
 fadea lighthouse, kanske träd?
-fixa gå på trä-ljudet
 väggar på hus?
+centrera labels över vapencustomization
+
+titta på vapendelbeskrivningen, balansera delar?
 remove weapon part lägger den på marken
-lägga delar avaktiverar inte vapnet
+fixa gå på trä-ljudet
+chunks större runt havet
+
 dubbelklickade på ett item och massa grejer hände med mitt inventory?
-titta på vapendelbeskrivningen

@@ -226,12 +226,15 @@ namespace Shoot__n_Loot
         public void TryShoot(Vector2 position, float angle, Scene scene)
         {
             //TODO: check if necessary parts are present
-            if (shootTimer == 0 && Ammo > 0)
+            if (ContainsType(WeaponPart.PartType.Base))
             {
-                scene.AddObject(new Bullet(angle, position, BulletProperties));
-                SoundManager.playerShoot.Play();
-                Ammo--;
-                shootTimer = 1;
+                if (shootTimer == 0 && Ammo > 0)
+                {
+                    scene.AddObject(new Bullet(angle, position, BulletProperties));
+                    SoundManager.playerShoot.Play();
+                    Ammo--;
+                    shootTimer = 1;
+                }
             }
         }
         #endregion
@@ -262,7 +265,7 @@ namespace Shoot__n_Loot
 
         Button useWeapon;
 
-        const int HUD_W = 400, HUD_H = 200, HUD_Y = 20;
+        const int HUD_W = 450, HUD_H = 200, HUD_Y = 20;
 
         private void MakeSlots()
         {
@@ -325,7 +328,7 @@ namespace Shoot__n_Loot
             foreach (CustomizationSlot s in partSlots) s.Draw(spriteBatch);
             if (useWeapon != null) useWeapon.Draw(spriteBatch, 0.0000003f);
             spriteBatch.DrawString(TextureManager.font, "Using Ammo: " + currentAmmoType.ToString(), Camera.Center - new Vector2(100, 200), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.0000004f);
-            if (!ContainsType(WeaponPart.PartType.Base)) spriteBatch.DrawString(TextureManager.font, "You need a base for your weapon!", Camera.Center - new Vector2(175, 220), Color.Red, 0, Vector2.Zero, 1, SpriteEffects.None, 0.0000004f);
+            if (!ContainsType(WeaponPart.PartType.Base)) spriteBatch.DrawString(TextureManager.font, "Your weapon needs a base!", Camera.Center - new Vector2(175, 220), Color.Red, 0, Vector2.Zero, 1, SpriteEffects.None, 0.0000004f);
         }
 
         void StopUsingMelee()

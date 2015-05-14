@@ -310,6 +310,7 @@ namespace Shoot__n_Loot.InvenoryStuff
             parent.Remove(Item, 1);
             parent.Remove(Items.properties[16], 1);
             parent.Add(new Item(Items.properties[18], Vector2.Zero));
+            SceneManager.gameScene.player.StopUsingMelee();
         }
 
         void DropAll()
