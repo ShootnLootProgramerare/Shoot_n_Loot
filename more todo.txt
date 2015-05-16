@@ -7,5 +7,3 @@ titta på vapendelbeskrivningen, balansera delar?
 remove weapon part lägger den på marken
 fixa gå på trä-ljudet
 chunks större runt havet
-
-dubbelklickade på ett item och massa grejer hände med mitt inventory?

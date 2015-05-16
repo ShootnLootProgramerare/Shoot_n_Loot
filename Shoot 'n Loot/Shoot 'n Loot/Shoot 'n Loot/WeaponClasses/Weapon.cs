@@ -89,6 +89,7 @@ namespace Shoot__n_Loot
         /// <returns></returns>
         public Item AddPart(Item part)
         {
+            Debug.WriteLine("some part was added");
             Item oldPart = RemovePart(part.Properties.WeaponPart.Type);
             parts.Add(part);
 

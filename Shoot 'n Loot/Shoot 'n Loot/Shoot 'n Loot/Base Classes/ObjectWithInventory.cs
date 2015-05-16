@@ -30,7 +30,7 @@ namespace Shoot__n_Loot.Base_Classes
 
         public override void Update()
         {
-            inventory.Update(new Point(0, 0), isPlayerInventory);
+            if (inventoryVisible || EnemyInvetoryRenderer.closest == this) inventory.Update(new Point(0, 0), isPlayerInventory);
         }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, bool drawInventory)
