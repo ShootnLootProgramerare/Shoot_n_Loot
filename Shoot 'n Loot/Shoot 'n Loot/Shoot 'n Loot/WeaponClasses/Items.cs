@@ -64,9 +64,9 @@ namespace Shoot__n_Loot.WeaponClasses
         public static float[] rarity = new float[] 
         {
             1,
-            .9f,
-            .8f,
-            1f,
+            .85f,
+            .7f,
+            .1f,
 
             .05f,
             .8f,
