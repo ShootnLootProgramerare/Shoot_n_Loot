@@ -302,6 +302,7 @@ namespace Shoot__n_Loot.InvenoryStuff
         void DropItem() 
         {
             SceneManager.gameScene.AddObject(new Item(Item.Properties, SceneManager.gameScene.player.Position));
+            if (Item.Properties.MeleeWeaponProperties == SceneManager.gameScene.player.MeleeWeapon) SceneManager.gameScene.player.StopUsingMelee();
             Remove(1);
         }
 

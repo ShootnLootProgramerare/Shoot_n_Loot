@@ -15,7 +15,7 @@ namespace Shoot__n_Loot
 {
     class Weapon
     {
-        const float baseDamage = 1;
+        const float baseDamage = 2;
         const float baseBulletDamage = 1;
         const float baseBulletSpeed = 10;
         const int baseRange = 300;

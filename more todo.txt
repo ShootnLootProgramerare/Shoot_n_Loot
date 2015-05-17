@@ -1,6 +1,5 @@
 gör fiender bättre på att komma runt hörn
-fadea lighthouse, kanske träd?
 väggar på hus?
 centrera labels över vapencustomization
 
-titta på vapendelbeskrivningen, balansera delar?
+båten ritas ovanpå inventory
