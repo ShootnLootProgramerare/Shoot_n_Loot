@@ -13,7 +13,7 @@ namespace Shoot__n_Loot
 {
     class Map
     {
-        public const byte width = 12, height = 12, maxZombies = 4; //number of chunks. width * Tile.size * chunk.size should equal the width of the map texture, same for height.
+        public const byte width = 14, height = 14, maxZombies = 4; //number of chunks. width * Tile.size * chunk.size should equal the width of the map texture, same for height.
 
         public static Chunk[,] chunks { get; set; }
 

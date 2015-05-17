@@ -4,6 +4,3 @@ väggar på hus?
 centrera labels över vapencustomization
 
 titta på vapendelbeskrivningen, balansera delar?
-remove weapon part lägger den på marken
-fixa gå på trä-ljudet
-chunks större runt havet
