@@ -54,7 +54,7 @@ namespace Shoot__n_Loot
             if (modifier == 0) return "";
             string sign = "";
             if (modifier > 0) sign = "+";
-            else if (modifier < 0) sign = "-";
+            else if (modifier < 0) sign = "";
             return name + " " + sign + (int)(modifier * 100) + "%\n";
         }
 
