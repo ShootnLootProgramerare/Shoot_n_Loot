@@ -19,11 +19,13 @@ namespace Shoot__n_Loot
         {
             if (MapCollider.Intersects(SceneManager.gameScene.player.MapCollider))
             {
-                if (Sprite.Alpha > 0) { Sprite.Alpha -= .05f; SoundManager.door.Play(); }
+                if (Sprite.Alpha >= 1) SoundManager.door.Play();
+                if (Sprite.Alpha > .4f) { Sprite.Alpha -= .05f; }
             }
             else
             {
-                if (Sprite.Alpha < 1) { Sprite.Alpha += .05f; SoundManager.door.Play(); }
+                if (Sprite.Alpha <= .4f) SoundManager.door.Play();
+                if (Sprite.Alpha < 1) { Sprite.Alpha += .05f; }
             }
         }
     }
