@@ -34,7 +34,7 @@ namespace Shoot__n_Loot.Scenes
         {
             spriteBatch.Draw(TextureManager.menuBackground, new Vector2(-TextureManager.menuBackground.Width / 2, -TextureManager.menuBackground.Height / 2), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, .01f);
             b.Draw(spriteBatch);
-            spriteBatch.Draw(TextureManager.pixel, new Rectangle(-280, -230, 560, 450), null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, .001f);
+            spriteBatch.Draw(TextureManager.pixel, new Rectangle(-350, -230, 700, 450), null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, .001f);
             spriteBatch.DrawString(TextureManager.font, text, -TextureManager.font.MeasureString(text) / 2, Microsoft.Xna.Framework.Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, .0001f);
             base.Draw(spriteBatch);
         }
